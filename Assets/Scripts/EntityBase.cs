@@ -8,12 +8,7 @@ public abstract class EntityBase : MonoBehaviour
     /// <summary>
     /// Riferimento allo script RaycastController dell'entità
     /// </summary>
-    protected RaycastPlayer myRayCon;
-
-    /// <summary>
-    /// Riferimento all'UIManager
-    /// </summary>
-    protected UIManager myUIM;
+    public RaycastPlayer myRayCon;
 
     [Header("Statistics")]
     [SerializeField]
@@ -26,7 +21,11 @@ public abstract class EntityBase : MonoBehaviour
     /// <summary>
     /// Proprietà della variabile "health"
     /// </summary>
-    public int Health { get { return health; } set { health = value; myUIM.ChangeHealthText(health); } }
+    public int Health
+    {
+        get { return health; }
+        set { health = value; }
+    }
 
     /// <summary>
     /// Vita massima dell'entità
@@ -74,13 +73,16 @@ public abstract class EntityBase : MonoBehaviour
     /// <summary>
     /// Proprietà della variabile "gravity"
     /// </summary>
-    public float Gravity { get { return gravity; }
-                           private set { gravity = value; myUIM.ChangeGravityText(gravity); } }
+    public float Gravity
+    {
+        get { return gravity; }
+        private set { gravity = value; }
+    }
 
     /// <summary>
     /// Vector3 che misura la velocità dell'entità in ogni direzione
     /// </summary>
-    protected Vector3 velocity;
+    public Vector3 velocity;
 
     [Header("Movement")]
     /// <summary>
@@ -126,8 +128,6 @@ public abstract class EntityBase : MonoBehaviour
     {
         myRayCon = GetComponent<RaycastPlayer>();
 
-        myUIM = FindObjectOfType<UIManager>();
-
         SetRespawnVariables();
 
         CalculateGravityAndJumpVelocity(ref jumpVelocity, JumpHeight, TimeToJumpApex);
@@ -155,14 +155,6 @@ public abstract class EntityBase : MonoBehaviour
         }
 
         transform.Translate(movingVelocity);
-    }
-
-    protected void Jump()
-    {
-        /// TODO:
-        /// Eliminare quando è finita la fase di testing
-        CalculateGravityAndJumpVelocity(ref jumpVelocity, JumpHeight, TimeToJumpApex);
-        velocity.y = jumpVelocity;
     }
 
     protected void CalculateGravityAndJumpVelocity(ref float currentJumpVelocity, float currentJumpHeight, float currentTimeToJumpApex)
