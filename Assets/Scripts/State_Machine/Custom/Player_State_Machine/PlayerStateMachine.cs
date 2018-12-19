@@ -13,25 +13,35 @@ public class PlayerStateMachine : StateMachineBase
         states = new List<StateBase>();
         context = new PlayerContext()
         {
-            myPlayer = myPlayer,
-            GoBackwardCallBack = GoBackward
+            myPlayer = myPlayer
         };
         FillStates();
     }
 
     private void Update()
     {
-        UpdateVerticalVelocityFloat();
+        UpdateVelocityFloats();
+        UpdateCollisionBools();
+        UpdateStandingStillBool();
     }
 
-    private void UpdateVerticalVelocityFloat()
+    private void UpdateVelocityFloats()
     {
+        myAnim.SetFloat("Velocity.x", myPlayer.GetVelocity().x);
         myAnim.SetFloat("Velocity.y", myPlayer.GetVelocity().y);
     }
 
-    private void GoBackward()
+    private void UpdateCollisionBools()
     {
-        myAnim.SetTrigger("GoBackward");
+        myAnim.SetBool("CollisionAbove", myPlayer.myRayCon.Collisions.above);
+        myAnim.SetBool("CollisionBelow", myPlayer.myRayCon.Collisions.below);
+        myAnim.SetBool("CollisionRight", myPlayer.myRayCon.Collisions.right);
+        myAnim.SetBool("CollisionLeft", myPlayer.myRayCon.Collisions.left);
+    }
+
+    private void UpdateStandingStillBool()
+    {
+        myAnim.SetBool("StandingStill", myPlayer.GetVelocity().x == 0 ? true : false);
     }
 
     protected override void FillStates()
