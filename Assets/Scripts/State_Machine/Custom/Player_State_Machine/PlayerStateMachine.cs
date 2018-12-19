@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class PlayerStateMachine : StateMachineBase
 {
-    private Player_Entity myPlayer;
+    private PlayerController myPlayer;
 
     private void Start()
     {
-        myPlayer = GetComponent<Player_Entity>();
+        myPlayer = GetComponent<PlayerController>();
         myAnim = GetComponent<Animator>();
         states = new List<StateBase>();
         context = new PlayerContext()
@@ -26,7 +26,7 @@ public class PlayerStateMachine : StateMachineBase
 
     private void UpdateVerticalVelocityFloat()
     {
-        myAnim.SetFloat("Velocity.y", myPlayer.velocity.y);
+        myAnim.SetFloat("Velocity.y", myPlayer.GetVelocity().y);
     }
 
     private void GoBackward()

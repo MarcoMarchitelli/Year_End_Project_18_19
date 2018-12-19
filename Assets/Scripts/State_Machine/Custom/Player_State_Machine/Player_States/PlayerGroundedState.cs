@@ -6,14 +6,14 @@ public class PlayerGroundedState : PlayerStateBase
 {
     protected override void Enter()
     {
-        myContext.myPlayer.velocity.y = 0f;
+        myContext.myPlayer.ResetVerticalVelocity();
     }
 
     protected override void Tick()
     {
-        if (myContext.myPlayer.myRayCon.Collisions.below || myContext.myPlayer.myRayCon.Collisions.above)
+        if (myContext.myPlayer.myRayCon.Collisions.below)
         {
-            myContext.myPlayer.velocity.y = 0f;
+            myContext.myPlayer.ResetVerticalVelocity();
         }
 
         if (Input.GetKeyDown(KeyCode.Space))

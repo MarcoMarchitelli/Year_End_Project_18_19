@@ -5,7 +5,7 @@ using System;
 
 public class PlayerContext : IStateMachineContext {
 
-    public Player_Entity myPlayer;
+    public PlayerController myPlayer;
     public Action GoBackwardCallBack;
 
 }

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player_Entity : EntityBase {
+public class PlayerController : EntityBase {
 
     [Header ("Multiple Jump")]
     /// <summary>
@@ -162,5 +162,15 @@ public class Player_Entity : EntityBase {
         base.Respawn();
         ResetJump();
         ResetJumpsCount();
+    }
+
+    public void ResetVerticalVelocity()
+    {
+        velocity.y = 0;
+    }
+
+    public Vector3 GetVelocity()
+    {
+        return velocity;
     }
 }

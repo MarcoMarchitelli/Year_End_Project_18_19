@@ -82,7 +82,7 @@ public abstract class EntityBase : MonoBehaviour
     /// <summary>
     /// Vector3 che misura la velocità dell'entità in ogni direzione
     /// </summary>
-    public Vector3 velocity;
+    protected Vector3 velocity;
 
     [Header("Movement")]
     /// <summary>
