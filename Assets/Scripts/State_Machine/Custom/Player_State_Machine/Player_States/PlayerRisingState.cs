@@ -6,9 +6,9 @@ public class PlayerRisingState : PlayerStateBase
 {
     protected override void Tick()
     {
-        if (myContext.myPlayer.myRayCon.Collisions.above)
+        if (myContext.myPlayer.myRayCon.Collisions.below)
         {
-            myContext.myPlayer.ResetVerticalVelocity();
+            myContext.GoBackwardCallBack();
         }
 
         if (Input.GetKeyDown(KeyCode.Space))

@@ -110,6 +110,10 @@ public class PlayerController : EntityBase {
             }
         }
 
+        Vector2 myInput = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+
+        velocity.x = myInput.x * MovementSpeed;
+
         //float targetVelocityX = myInput.x * MovementSpeed;
 
         //velocity.x = Mathf.SmoothDamp(velocity.x, targetVelocityX, ref VelocityXSmoothing, (myRayCon.Collisions.below) ? AccelerationTimeGrounded : AccelerationTimeAirborne);
@@ -160,11 +164,6 @@ public class PlayerController : EntityBase {
         ResetJumpsCount();
     }
 
-    public void ResetHorizontalVelocity()
-    {
-        velocity.x = 0;
-    }
-
     public void ResetVerticalVelocity()
     {
         velocity.y = 0;
@@ -173,10 +172,5 @@ public class PlayerController : EntityBase {
     public Vector3 GetVelocity()
     {
         return velocity;
-    }
-
-    public void SetHorizontalVelocity(float direction)
-    {
-        velocity.x = MovementSpeed * direction;
     }
 }
