@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : EntityBase {
+public class PlayerController : EntityBase
+{
 
-    [Header ("Multiple Jump")]
+    [Header("Multiple Jump")]
     /// <summary>
     /// Se attivato, il player può fare più salti consecutivi
     /// </summary>
@@ -110,9 +111,9 @@ public class PlayerController : EntityBase {
             }
         }
 
-        Vector2 myInput = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+        //Vector2 myInput = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
 
-        velocity.x = myInput.x * MovementSpeed;
+        //velocity.x = myInput.x * MovementSpeed;
 
         //float targetVelocityX = myInput.x * MovementSpeed;
 
@@ -164,6 +165,11 @@ public class PlayerController : EntityBase {
         ResetJumpsCount();
     }
 
+    public void ResetHorizontalVelocity()
+    {
+        velocity.x = 0;
+    }
+
     public void ResetVerticalVelocity()
     {
         velocity.y = 0;
@@ -172,5 +178,10 @@ public class PlayerController : EntityBase {
     public Vector3 GetVelocity()
     {
         return velocity;
+    }
+
+    public void SetHorizontalVelocity(float rawAxis)
+    {
+        velocity.x = MovementSpeed * rawAxis;
     }
 }

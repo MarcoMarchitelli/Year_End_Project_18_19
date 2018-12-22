@@ -6,6 +6,5 @@ using System;
 public class PlayerContext : IStateMachineContext {
 
     public PlayerController myPlayer;
-    public Action GoBackwardCallBack;
 
 }
