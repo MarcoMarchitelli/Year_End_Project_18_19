@@ -103,7 +103,7 @@ public abstract class RaycastController : MonoBehaviour
         }
     }
 
-    void CalculateRaySpacing()
+    void CalculateRaySpacing() // Funzione da chiamare ogni volta che si modifica la scala dell'oggetto che usa il raycast
     {
         Bounds myBounds = myCollider.bounds;
         myBounds.Expand(SkinWidth * -2);

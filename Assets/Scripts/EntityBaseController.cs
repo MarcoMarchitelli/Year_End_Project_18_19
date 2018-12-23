@@ -91,6 +91,17 @@ public abstract class EntityBaseController : MonoBehaviour
     [Tooltip("Velocità di movimento dell'entità")]
     public float MovementSpeed;
 
+    [Range(0f, 1f)]
+    private float AccelerationTime;
+
+    public AnimationCurve RunningCurve;
+
+    public float AccelerationValue;
+
+    public float MaxRunningValue;
+
+    protected float RunningValue;
+
     /// <summary>
     /// Tempo che ci mette a raggiungere il punto desiderato mentre si è a terra
     /// </summary>
@@ -255,5 +266,41 @@ public abstract class EntityBaseController : MonoBehaviour
     {
         /// TODO
         /// Mettere animazione di morte
+    }
+
+    public void ResetHorizontalVelocity()
+    {
+        velocity.x = 0;
+    }
+
+    public void ResetVerticalVelocity()
+    {
+        velocity.y = 0;
+    }
+
+    public Vector3 GetVelocity()
+    {
+        return velocity;
+    }
+
+    public void SetHorizontalVelocity(float rawAxis)
+    {
+        SetRunningValue(rawAxis);
+        velocity.x = MovementSpeed * rawAxis + RunningValue;
+    }
+
+    private void SetRunningValue(float direction)
+    {
+        RunningValue = RunningCurve.Evaluate(AccelerationTime) * MaxRunningValue * direction;
+    }
+
+    public void UpdateAccelerationTime ()
+    {
+        AccelerationTime += AccelerationValue * Time.deltaTime;
+    }
+
+    public void ResetAccelerationTime()
+    {
+        AccelerationTime = 0f;
     }
 }

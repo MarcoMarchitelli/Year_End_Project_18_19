@@ -249,7 +249,7 @@ Animator:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 523549588}
   m_Enabled: 1
-  m_Avatar: {fileID: 0}
+  m_Avatar: {fileID: 9000000, guid: 9010a3b0732228843ad44e503ec03b05, type: 3}
   m_Controller: {fileID: 9100000, guid: 2b4a1cabbe5dfcf40b72a6d105f4ad12, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
@@ -329,6 +329,32 @@ MonoBehaviour:
   AttackDamage: 0
   AttackSpeed: 0
   MovementSpeed: 10
+  RunningCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  AccelerationValue: 0.2
+  MaxRunningValue: 15
   JumpHeight: 4
   TimeToJumpApex: 0.5
   canMultipleJump: 1
@@ -675,7 +701,12 @@ Prefab:
       propertyPath: m_Layer
       value: 8
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 9500000, guid: 9010a3b0732228843ad44e503ec03b05, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 9500000, guid: 9010a3b0732228843ad44e503ec03b05, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 9010a3b0732228843ad44e503ec03b05, type: 3}
   m_IsPrefabAsset: 0
 --- !u!4 &998242222 stripped
@@ -876,7 +907,7 @@ Transform:
   m_GameObject: {fileID: 2053577028}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 3.67, y: 1.11, z: 0}
-  m_LocalScale: {x: 1.1808563, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 5

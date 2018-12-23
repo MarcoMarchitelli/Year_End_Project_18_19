@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class PlayerController : EntityBaseController
 {
-
     [Header("Multiple Jump")]
     /// <summary>
     /// Se attivato, il player può fare più salti consecutivi
@@ -153,25 +152,5 @@ public class PlayerController : EntityBaseController
         base.Respawn();
         ResetJump();
         ResetJumpsCount();
-    }
-
-    public void ResetHorizontalVelocity()
-    {
-        velocity.x = 0;
-    }
-
-    public void ResetVerticalVelocity()
-    {
-        velocity.y = 0;
-    }
-
-    public Vector3 GetVelocity()
-    {
-        return velocity;
-    }
-
-    public void SetHorizontalVelocity(float rawAxis)
-    {
-        velocity.x = MovementSpeed * rawAxis;
     }
 }
