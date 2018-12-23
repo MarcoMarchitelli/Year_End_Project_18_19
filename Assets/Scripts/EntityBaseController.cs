@@ -91,16 +91,40 @@ public abstract class EntityBaseController : MonoBehaviour
     [Tooltip("Velocità di movimento dell'entità")]
     public float MovementSpeed;
 
+    /// <summary>
+    /// Tempo raggiunto ogni secondo
+    /// </summary>
     [Range(0f, 1f)]
     private float AccelerationTime;
 
+    /// <summary>
+    /// Curva che dimostra con che velocità deve accelerare l'entità
+    /// </summary>
+    [Tooltip("Curva che dimostra con che velocità deve accelerare l'entità")]
     public AnimationCurve RunningCurve;
 
+    /// <summary>
+    /// Valore che ottiene l'accelerazione al secondo
+    /// </summary>
+    [Tooltip("Valore che ottiene l'accelerazione al secondo")]
     public float AccelerationValue;
 
+    /// <summary>
+    /// Valore massimo che può raggiungere la corsa (Oltre alla velocità di movimento)
+    /// </summary>
+    [Tooltip("Valore massimo che può raggiungere la corsa (Oltre alla velocità di movimento)")]
     public float MaxRunningValue;
 
+    /// <summary>
+    /// Valore attuale della corsa
+    /// </summary>
     protected float RunningValue;
+
+    /// <summary>
+    /// Se true può correre
+    /// </summary>
+    [Tooltip("Se true può correre")]
+    public bool CanRun;
 
     /// <summary>
     /// Tempo che ci mette a raggiungere il punto desiderato mentre si è a terra
@@ -285,7 +309,10 @@ public abstract class EntityBaseController : MonoBehaviour
 
     public void SetHorizontalVelocity(float rawAxis)
     {
-        SetRunningValue(rawAxis);
+        if (CanRun)
+        {
+            SetRunningValue(rawAxis);
+        }
         velocity.x = MovementSpeed * rawAxis + RunningValue;
     }
 
