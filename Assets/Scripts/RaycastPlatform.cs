@@ -93,10 +93,11 @@ public class RaycastPlatform : RaycastController
                     if (!movedPassengers.Contains(hit.transform))
                     {
                         movedPassengers.Add(hit.transform);
+                        bool collisionBelowCheck = hit.transform.GetComponent<EntityBaseController>().myRayCon.Collisions.below; // Viene chiamato ad ogni Update, fixare in caso di lag
                         float pushX = velocity.x - (hit.distance - SkinWidth) * directionX;
                         float pushY = 0;
 
-                        passengerMovementList.Add(new PassengerMovement(hit.transform, new Vector3(pushX, pushY), true, true));
+                        passengerMovementList.Add(new PassengerMovement(hit.transform, new Vector3(pushX, pushY), collisionBelowCheck, true));
                     }
                 }
             }
