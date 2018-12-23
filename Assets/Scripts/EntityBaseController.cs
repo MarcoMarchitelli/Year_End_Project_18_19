@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(RaycastPlayer))]
-public abstract class EntityBase : MonoBehaviour
+[RequireComponent(typeof(RaycastController))]
+public abstract class EntityBaseController : MonoBehaviour
 {
     /// <summary>
     /// Riferimento allo script RaycastController dell'entità
     /// </summary>
-    public RaycastPlayer myRayCon;
+    public RaycastController myRayCon;
 
     [Header("Statistics")]
     [SerializeField]
@@ -126,8 +126,6 @@ public abstract class EntityBase : MonoBehaviour
 
     protected virtual void Start()
     {
-        myRayCon = GetComponent<RaycastPlayer>();
-
         SetRespawnVariables();
 
         CalculateGravityAndJumpVelocity(ref jumpVelocity, JumpHeight, TimeToJumpApex);
@@ -138,7 +136,7 @@ public abstract class EntityBase : MonoBehaviour
         velocity.y += Gravity * Time.deltaTime;
     }
 
-    protected virtual void Move(Vector3 movingVelocity)
+    public void Move(Vector3 movingVelocity, bool isStandingOnMovingPlatform = false)
     {
         myRayCon.UpdateRaycastOrigins();
 
@@ -155,6 +153,11 @@ public abstract class EntityBase : MonoBehaviour
         }
 
         transform.Translate(movingVelocity);
+
+        if (isStandingOnMovingPlatform)
+        {
+            myRayCon.Collisions.below = true;
+        }
     }
 
     protected void CalculateGravityAndJumpVelocity(ref float currentJumpVelocity, float currentJumpHeight, float currentTimeToJumpApex)

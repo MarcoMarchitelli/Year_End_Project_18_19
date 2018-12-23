@@ -2,7 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(RaycastPlatform))]
 public class PlatformController : MonoBehaviour {
+
+    /// <summary>
+    /// Riferimento allo script RaycastController della piattaforma
+    /// </summary>
+    public RaycastPlatform myRayCon;
 
     /// <summary>
     /// Velocità con cui si muove la piattaforma
@@ -57,11 +63,20 @@ public class PlatformController : MonoBehaviour {
     /// </summary>
     private float nextMoveTime;
 
+    private void Start()
+    {
+        myRayCon = GetComponent<RaycastPlatform>();
+    }
+
     private void Update()
     {
         Vector3 velocity = Move();
 
+        myRayCon.CalculatePassengerMovement(velocity);
+
+        myRayCon.MovePassenger(true);
         transform.Translate(velocity);
+        myRayCon.MovePassenger(false);
     }
 
     private float Ease(float x)

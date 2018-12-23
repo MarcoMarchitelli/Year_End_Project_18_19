@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : EntityBase
+public class PlayerController : EntityBaseController
 {
 
     [Header("Multiple Jump")]
@@ -59,6 +59,8 @@ public class PlayerController : EntityBase
 
     protected override void Start()
     {
+        myRayCon = GetComponent<RaycastPlayer>();
+
         base.Start();
 
         resetMultipleJumpsCount = MultipleJumpsCount;
@@ -92,23 +94,11 @@ public class PlayerController : EntityBase
 
         #endregion
 
-        if (myRayCon.Collisions.below)
+        /// TODO
+        /// Eliminare questo if quando è finita la fase di testing
+        if (!testing)
         {
-            if (!canMultipleJump)
-            {
-                ResetJump();
-            }
-            else
-            {
-                /// TODO
-                /// Eliminare questo if quando è finita la fase di testing
-                if (!testing)
-                {
-                    resetMultipleJumpsCount = MultipleJumpsCount;
-                }
-                ResetJump();
-                ResetJumpsCount();
-            }
+            resetMultipleJumpsCount = MultipleJumpsCount;
         }
 
         //Vector2 myInput = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
@@ -143,12 +133,12 @@ public class PlayerController : EntityBase
         }
     }
 
-    private void ResetJump()
+    public void ResetJump()
     {
         canJump = true;
     }
 
-    private void ResetJumpsCount()
+    public void ResetJumpsCount()
     {
         /// TODO
         /// Eliminare questo if quando è finita la fase di testing
