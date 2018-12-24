@@ -56,11 +56,13 @@ public class PlayerStateMachine : StateMachineBase
         if (myPlayer.GetVelocity().x > 0 && myAnim.GetBool("FacingLeft"))
         {
             myAnim.SetBool("FacingRight", true);
+            myPlayer.RotateEntity(Vector3.up, 180f);
             myAnim.SetBool("FacingLeft", false);
         }
         if (myPlayer.GetVelocity().x < 0 && myAnim.GetBool("FacingRight"))
         {
             myAnim.SetBool("FacingLeft", true);
+            myPlayer.RotateEntity(Vector3.up, 180f);
             myAnim.SetBool("FacingRight", false);
         }
     }

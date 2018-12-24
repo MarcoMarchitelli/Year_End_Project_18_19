@@ -6,6 +6,11 @@ using UnityEngine;
 public abstract class EntityBaseController : MonoBehaviour
 {
     /// <summary>
+    /// Riferimento alla grafica dell'entità
+    /// </summary>
+    private Transform graphic;
+
+    /// <summary>
     /// Riferimento allo script RaycastController dell'entità
     /// </summary>
     public RaycastController myRayCon;
@@ -159,6 +164,8 @@ public abstract class EntityBaseController : MonoBehaviour
 
     protected virtual void Start()
     {
+        graphic = GetComponentsInChildren<Transform>()[1];
+
         attackTimer = new Timer();
 
         SetRespawnVariables();
@@ -329,5 +336,10 @@ public abstract class EntityBaseController : MonoBehaviour
     public void ResetAccelerationTime()
     {
         AccelerationTime = 0f;
+    }
+
+    public void RotateEntity(Vector3 direction, float rotationDegrees)
+    {
+        graphic.Rotate(direction * rotationDegrees);
     }
 }

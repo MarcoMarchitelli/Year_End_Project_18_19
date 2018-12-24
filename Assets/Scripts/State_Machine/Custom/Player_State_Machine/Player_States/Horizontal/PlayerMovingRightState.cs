@@ -7,6 +7,7 @@ public class PlayerMovingRightState : PlayerStateBase
     protected override void Tick()
     {
         myContext.myPlayer.SetHorizontalVelocity(Input.GetAxisRaw("Horizontal"));
+
         if (Input.GetKey(KeyCode.LeftShift))
         {
             myContext.myPlayer.UpdateAccelerationTime();
