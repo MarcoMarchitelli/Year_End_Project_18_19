@@ -10,6 +10,11 @@ public abstract class EntityBaseController : MonoBehaviour
     /// </summary>
     public RaycastController myRayCon;
 
+    /// <summary>
+    /// variabile utile per utilizzare funzioni di tipo Timer per l'attacco
+    /// </summary>
+    private Timer attackTimer;
+
     [Header("Statistics")]
     [SerializeField]
     /// <summary>
@@ -154,6 +159,8 @@ public abstract class EntityBaseController : MonoBehaviour
 
     protected virtual void Start()
     {
+        attackTimer = new Timer();
+
         SetRespawnVariables();
 
         CalculateGravityAndJumpVelocity(ref jumpVelocity, JumpHeight, TimeToJumpApex);
@@ -247,16 +254,16 @@ public abstract class EntityBaseController : MonoBehaviour
 
     protected IEnumerator Reload()
     {
-        float timer = 0;
-        while (timer <= AttackSpeed)
+        while (!attackTimer.CheckTimer(AttackSpeed))
         {
-            timer += Time.deltaTime;
+            attackTimer.TickTimer();
             yield return null;
         }
 
-        if (timer >= AttackSpeed)
+        if (attackTimer.CheckTimer(AttackSpeed))
         {
             canHit = true;
+            attackTimer.StopTimer();
         }
     }
 

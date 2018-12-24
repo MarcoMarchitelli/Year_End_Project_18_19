@@ -61,6 +61,7 @@ public class PlayerController : EntityBaseController
     protected override void Update()
     {
         base.Update();
+
         #region DebugInput
 
         if (Input.GetKeyDown(KeyCode.Alpha1))

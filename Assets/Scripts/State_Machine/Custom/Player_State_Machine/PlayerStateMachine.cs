@@ -25,6 +25,7 @@ public class PlayerStateMachine : StateMachineBase
         UpdateVerticalVelocityFloat();
         UpdateCollsionBools();
         UpdateStandingStillBool();
+        UpdateFacingDirectionBool();
     }
 
     private void UpdateCollsionBools()
@@ -48,6 +49,20 @@ public class PlayerStateMachine : StateMachineBase
     private void UpdateStandingStillBool()
     {
         myAnim.SetBool("StandingStill", myPlayer.GetVelocity().x == 0 ? true : false);
+    }
+
+    private void UpdateFacingDirectionBool()                                                         // <---------- ATTENZIONE!!! DI DEFAULT DEVE ESSERE CHECKATO UNO DEI DUE PARAMETRI NELL'ANIMATOR
+    {
+        if (myPlayer.GetVelocity().x > 0 && myAnim.GetBool("FacingLeft"))
+        {
+            myAnim.SetBool("FacingRight", true);
+            myAnim.SetBool("FacingLeft", false);
+        }
+        if (myPlayer.GetVelocity().x < 0 && myAnim.GetBool("FacingRight"))
+        {
+            myAnim.SetBool("FacingLeft", true);
+            myAnim.SetBool("FacingRight", false);
+        }
     }
 
     protected override void FillStates()

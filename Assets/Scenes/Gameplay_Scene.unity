@@ -324,11 +324,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myRayCon: {fileID: 0}
-  health: 0
+  health: 1000
   MaxHealth: 0
-  AttackDamage: 0
-  AttackSpeed: 0
+  AttackDamage: 1
+  AttackSpeed: 1
+  CanRun: 0
   MovementSpeed: 10
+  ExtraMovementSpeed: 0
   RunningCurve:
     serializedVersion: 2
     m_Curve:
@@ -353,14 +355,11 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  AccelerationValue: 0.2
-  MaxRunningValue: 15
   JumpHeight: 4
   TimeToJumpApex: 0.5
   canMultipleJump: 1
   MultipleJumpsCount: 2
   MultipleJumpHeight: 3
-  testing: 1
   DamageToTake: 0
   HealthToReceive: 0
 --- !u!1 &534669902
