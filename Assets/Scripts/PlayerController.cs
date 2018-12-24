@@ -29,19 +29,14 @@ public class PlayerController : EntityBaseController
     private int resetMultipleJumpsCount;
 
     /// <summary>
+    /// Salto consecutivo a cui è il player
+    /// </summary>
+    private int currentMultipleJumpsCount;
+
+    /// <summary>
     /// Se attivo, il player può fare il primo salto
     /// </summary>
     private bool canJump;
-
-    /// TODO
-    /// Eliminare questa variabile quando è finita la fase di testing
-    /// <summary>
-    /// Quando è true vengono salvati i dati di MultipleJumpsCount quando si è a terra e si può testare il salto multiplo,
-    /// Quando è false possono essere settati i valori di MultipleJumpsCount senza che vengano sovrascritti all'istante
-    /// </summary>
-    [Tooltip("Quando è true viene salvato il valore di MultipleJumpsCount attuale e si può testare il salto multiplo, " +
-              "Quando è false può essere settato il valore di MultipleJumpsCount senza che venga sovrascritto all'istante")]
-    public bool testing;
 
     [Header("Debug Values")]
     /// <summary>
@@ -61,8 +56,6 @@ public class PlayerController : EntityBaseController
         myRayCon = GetComponent<RaycastPlayer>();
 
         base.Start();
-
-        resetMultipleJumpsCount = MultipleJumpsCount;
     }
 
     protected override void Update()
@@ -93,16 +86,9 @@ public class PlayerController : EntityBaseController
 
         #endregion
 
-        /// TODO
-        /// Eliminare questo if quando è finita la fase di testing
-        if (!testing)
-        {
-            resetMultipleJumpsCount = MultipleJumpsCount;
-        }
-
-        //Vector2 myInput = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
-
-        //velocity.x = myInput.x * MovementSpeed;
+        ///TODO
+        ///Rimuovere finita la fase di debug
+        resetMultipleJumpsCount = MultipleJumpsCount;
 
         //float targetVelocityX = myInput.x * MovementSpeed;
 
@@ -125,10 +111,10 @@ public class PlayerController : EntityBaseController
 
     public void MultipleJump()
     {
-        if (canMultipleJump && MultipleJumpsCount > 0)
+        if (canMultipleJump && currentMultipleJumpsCount > 0)
         {
             velocity.y = ((2 * MultipleJumpHeight) / Mathf.Pow(TimeToJumpApex, 2)) * TimeToJumpApex;
-            MultipleJumpsCount--;
+            currentMultipleJumpsCount--;
         }
     }
 
@@ -139,12 +125,7 @@ public class PlayerController : EntityBaseController
 
     public void ResetJumpsCount()
     {
-        /// TODO
-        /// Eliminare questo if quando è finita la fase di testing
-        if (testing)
-        {
-            MultipleJumpsCount = resetMultipleJumpsCount;
-        }
+        currentMultipleJumpsCount = resetMultipleJumpsCount;
     }
 
     protected override void Respawn()

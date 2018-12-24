@@ -86,45 +86,38 @@ public abstract class EntityBaseController : MonoBehaviour
 
     [Header("Movement")]
     /// <summary>
+    /// Se true può correre
+    /// </summary>
+    [Tooltip("Se true può correre")]
+    public bool CanRun;
+
+    /// <summary>
     /// Velocità di movimento dell'entità
     /// </summary>
     [Tooltip("Velocità di movimento dell'entità")]
     public float MovementSpeed;
 
     /// <summary>
-    /// Tempo raggiunto ogni secondo
-    /// </summary>
-    [Range(0f, 1f)]
-    private float AccelerationTime;
-
-    /// <summary>
-    /// Curva che dimostra con che velocità deve accelerare l'entità
-    /// </summary>
-    [Tooltip("Curva che dimostra con che velocità deve accelerare l'entità")]
-    public AnimationCurve RunningCurve;
-
-    /// <summary>
-    /// Valore che ottiene l'accelerazione al secondo
-    /// </summary>
-    [Tooltip("Valore che ottiene l'accelerazione al secondo")]
-    public float AccelerationValue;
-
-    /// <summary>
     /// Valore massimo che può raggiungere la corsa (Oltre alla velocità di movimento)
     /// </summary>
     [Tooltip("Valore massimo che può raggiungere la corsa (Oltre alla velocità di movimento)")]
-    public float MaxRunningValue;
+    public float ExtraMovementSpeed;
+
+    /// <summary>
+    /// Curva che indica con che velocità deve accelerare l'entità
+    /// </summary>
+    [Tooltip("Curva che indica con che velocità deve accelerare l'entità")]
+    public AnimationCurve RunningCurve;
+
+    /// <summary>
+    /// Tempo raggiunto ogni secondo
+    /// </summary>
+    private float AccelerationTime;
 
     /// <summary>
     /// Valore attuale della corsa
     /// </summary>
     protected float RunningValue;
-
-    /// <summary>
-    /// Se true può correre
-    /// </summary>
-    [Tooltip("Se true può correre")]
-    public bool CanRun;
 
     /// <summary>
     /// Tempo che ci mette a raggiungere il punto desiderato mentre si è a terra
@@ -318,12 +311,12 @@ public abstract class EntityBaseController : MonoBehaviour
 
     private void SetRunningValue(float direction)
     {
-        RunningValue = RunningCurve.Evaluate(AccelerationTime) * MaxRunningValue * direction;
+        RunningValue = RunningCurve.Evaluate(AccelerationTime) * ExtraMovementSpeed * direction;
     }
 
     public void UpdateAccelerationTime ()
     {
-        AccelerationTime += AccelerationValue * Time.deltaTime;
+        AccelerationTime += Time.deltaTime;
     }
 
     public void ResetAccelerationTime()
