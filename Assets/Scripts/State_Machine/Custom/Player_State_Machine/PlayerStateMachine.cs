@@ -26,6 +26,7 @@ public class PlayerStateMachine : StateMachineBase
         UpdateCollsionBools();
         UpdateStandingStillBool();
         UpdateFacingDirectionBool();
+        UpdateDashBools();
     }
 
     private void UpdateCollsionBools()
@@ -51,20 +52,16 @@ public class PlayerStateMachine : StateMachineBase
         myAnim.SetBool("StandingStill", myPlayer.GetVelocity().x == 0 ? true : false);
     }
 
-    private void UpdateFacingDirectionBool()                                                         // <---------- ATTENZIONE!!! DI DEFAULT DEVE ESSERE CHECKATO UNO DEI DUE PARAMETRI NELL'ANIMATOR
+    private void UpdateFacingDirectionBool()
     {
-        if (myPlayer.GetVelocity().x > 0 && myAnim.GetBool("FacingLeft"))
-        {
-            myAnim.SetBool("FacingRight", true);
-            myPlayer.RotateEntity(Vector3.up, 180f);
-            myAnim.SetBool("FacingLeft", false);
-        }
-        if (myPlayer.GetVelocity().x < 0 && myAnim.GetBool("FacingRight"))
-        {
-            myAnim.SetBool("FacingLeft", true);
-            myPlayer.RotateEntity(Vector3.up, 180f);
-            myAnim.SetBool("FacingRight", false);
-        }
+        myAnim.SetBool("FacingRight", myPlayer.CheckFacingRightAndRotate() ? true : false);
+        myAnim.SetBool("FacingLeft", myPlayer.CheckFacingRightAndRotate() ? false : true);
+    }
+
+    private void UpdateDashBools()
+    {
+        myAnim.SetBool("Dashing", false); // Mettere valore vero
+        myAnim.SetBool("DashRecharging", false); // Mettere valore vero
     }
 
     protected override void FillStates()

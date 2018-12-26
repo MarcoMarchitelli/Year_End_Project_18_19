@@ -20,6 +20,11 @@ public abstract class EntityBaseController : MonoBehaviour
     /// </summary>
     private Timer attackTimer;
 
+    /// <summary>
+    /// variabile utile per utilizzare funzioni di tipo Timer per il dash
+    /// </summary>
+    private Timer dashTimer;
+
     [Header("Statistics")]
     [SerializeField]
     /// <summary>
@@ -127,7 +132,54 @@ public abstract class EntityBaseController : MonoBehaviour
     /// <summary>
     /// Valore attuale della corsa
     /// </summary>
-    protected float RunningValue;
+    protected float runningValue;
+
+    /// <summary>
+    /// Se true, l'entità sta guardando a destra
+    /// </summary>
+    [Tooltip("Se true, l'entità sta guardando a destra")]
+    public bool isFacingRight = true;
+
+    /// <summary>
+    /// Se true, l'entità sta guardando a sinistra
+    /// </summary>
+    [Tooltip("Se true, l'entità sta guardando a sinistra")]
+    public bool isFacingLeft;
+
+    [Header("Dash")]
+    /// <summary>
+    /// Se true, il player può fare il dash
+    /// </summary>
+    [Tooltip("Se true, il player può fare il dash")]
+    public bool canDash = true;
+
+    /// <summary>
+    /// Distanza percorsa dal dash
+    /// </summary>
+    [Tooltip("Distanza percorsa dal dash")]
+    public float DashDistance;
+
+    /// <summary>
+    /// Tempo che ci mette il dash ad essere concluso (in secondi)
+    /// </summary>
+    [Tooltip("Tempo che ci mette il dash ad essere concluso (in secondi)")]
+    public float DashTime;
+
+    /// <summary>
+    /// Tempo di ricarica del dash
+    /// </summary>
+    [Tooltip("Tempo di ricarica del dash")]
+    public float DashRechargeTime;
+
+    /// <summary>
+    /// Valore attuale del dash
+    /// </summary>
+    protected float dashingValue;
+
+    /// <summary>
+    /// Se true, l'entità sta eseguendo un dash
+    /// </summary>
+    protected bool isDashing = false;
 
     /// <summary>
     /// Tempo che ci mette a raggiungere il punto desiderato mentre si è a terra
@@ -144,7 +196,7 @@ public abstract class EntityBaseController : MonoBehaviour
     /// </summary>
     protected float VelocityXSmoothing;
 
-    [Header ("Jump")]
+    [Header("Jump")]
     /// <summary>
     /// Altezza massima che raggiunge il salto
     /// </summary>
@@ -167,6 +219,7 @@ public abstract class EntityBaseController : MonoBehaviour
         graphic = GetComponentsInChildren<Transform>()[1];
 
         attackTimer = new Timer();
+        dashTimer = new Timer();
 
         SetRespawnVariables();
 
@@ -175,7 +228,15 @@ public abstract class EntityBaseController : MonoBehaviour
 
     protected virtual void Update()
     {
-        velocity.y += Gravity * Time.deltaTime;
+        SufferGravity();
+    }
+
+    public void SufferGravity()
+    {
+        if (!isDashing)
+        {
+            velocity.y += Gravity * Time.deltaTime;
+        }
     }
 
     public void Move(Vector3 movingVelocity, bool isStandingOnMovingPlatform = false)
@@ -245,11 +306,11 @@ public abstract class EntityBaseController : MonoBehaviour
         }
     }
 
-    protected virtual void Attack()
+    protected void Attack()
     {
         if (canHit)
         {
-            TakeDamage(AttackDamage);
+            Debug.Log("Hai attaccato");
             canHit = false;
             StartCoroutine(Reload());
         }
@@ -316,19 +377,112 @@ public abstract class EntityBaseController : MonoBehaviour
 
     public void SetHorizontalVelocity(float rawAxis)
     {
-        if (CanRun)
+        if (!isDashing)
         {
-            SetRunningValue(rawAxis);
+            if (CanRun)
+            {
+                SetRunningValue(rawAxis);
+            }
+            velocity.x = MovementSpeed * rawAxis + runningValue;
         }
-        velocity.x = MovementSpeed * rawAxis + RunningValue;
+    }
+
+    public void Dash()
+    {
+        float arrivePoint;
+
+        if (isFacingRight)
+        {
+            arrivePoint = transform.localPosition.x + DashDistance;
+        }
+        else
+        {
+            arrivePoint = transform.localPosition.x - DashDistance;
+        }
+
+        if (canDash)
+        {
+            ResetVerticalVelocity();
+            SetDashingValue();
+            velocity.x = dashingValue;
+            isDashing = true;
+            canDash = false;
+            StartCoroutine(CheckIsDashing(arrivePoint));
+        }
+        else
+        {
+            Debug.Log("Stai ricaricando il dash");
+        }
+    }
+
+    private IEnumerator CheckIsDashing(float arrivePoint)
+    {
+        if (isFacingRight)
+        {
+            while (transform.localPosition.x <= arrivePoint && isDashing)
+            {
+                if (myRayCon.Collisions.right)
+                {
+                    isDashing = false;
+                    StartCoroutine(RechargeDash());
+                }
+                yield return null;
+            }
+        }
+        else
+        {
+            while (transform.localPosition.x >= arrivePoint)
+            {
+                if (myRayCon.Collisions.left)
+                {
+                    isDashing = false;
+                    StartCoroutine(RechargeDash());
+                }
+                yield return null;
+            }
+        }
+        isDashing = false;
+        StartCoroutine(RechargeDash());
+    }
+
+    private IEnumerator RechargeDash()
+    {
+        while (!dashTimer.CheckTimer(DashRechargeTime))
+        {
+            dashTimer.TickTimer();
+            yield return null;
+        }
+
+        while (dashTimer.CheckTimer(DashRechargeTime))
+        {
+            dashTimer.PauseTimer();
+            yield return null;
+            if (myRayCon.Collisions.below)
+            {
+                canDash = true;
+                dashTimer.StopTimer();
+            }
+        }
+    }
+
+    private void SetDashingValue()
+    {
+        if (isFacingRight)
+        {
+            dashingValue = DashDistance / DashTime;
+        }
+        else
+        {
+            dashingValue = -DashDistance / DashTime;
+        }
     }
 
     private void SetRunningValue(float direction)
     {
-        RunningValue = RunningCurve.Evaluate(AccelerationTime) * ExtraMovementSpeed * direction;
+        runningValue = RunningCurve.Evaluate(AccelerationTime) * ExtraMovementSpeed * direction;
     }
 
-    public void UpdateAccelerationTime ()
+    public void UpdateAccelerationTime()
     {
         AccelerationTime += Time.deltaTime;
     }
@@ -341,5 +495,24 @@ public abstract class EntityBaseController : MonoBehaviour
     public void RotateEntity(Vector3 direction, float rotationDegrees)
     {
         graphic.Rotate(direction * rotationDegrees);
+    }
+
+    public bool CheckFacingRightAndRotate()   // <------------- ATTENZIONE!!! DEVE ESSERE A TRUE IL PARAMETRO INIZIALE GIUSTO NELL'INSPECTOR
+    {
+        if (velocity.x > 0 && isFacingLeft)
+        {
+            isFacingRight = true;
+            isFacingLeft = false;
+            RotateEntity(Vector3.up, 180f);
+            return isFacingRight;
+        }
+        if (velocity.x < 0 && isFacingRight)
+        {
+            isFacingLeft = true;
+            isFacingRight = false;
+            RotateEntity(Vector3.up, 180f);
+            return isFacingRight;
+        }
+        return isFacingRight;
     }
 }

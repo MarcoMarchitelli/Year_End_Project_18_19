@@ -100,22 +100,28 @@ public class PlayerController : EntityBaseController
 
     public void Jump()
     {
-        /// TODO:
-        /// Eliminare quando è finita la fase di testing
-        CalculateGravityAndJumpVelocity(ref jumpVelocity, JumpHeight, TimeToJumpApex);
-        if (canJump)
+        if (!isDashing)
         {
-            velocity.y = jumpVelocity;
-            canJump = false;
+            /// TODO:
+            /// Eliminare quando è finita la fase di testing
+            CalculateGravityAndJumpVelocity(ref jumpVelocity, JumpHeight, TimeToJumpApex);
+            if (canJump)
+            {
+                velocity.y = jumpVelocity;
+                canJump = false;
+            }
         }
     }
 
     public void MultipleJump()
     {
-        if (canMultipleJump && currentMultipleJumpsCount > 0)
+        if (!isDashing)
         {
-            velocity.y = ((2 * MultipleJumpHeight) / Mathf.Pow(TimeToJumpApex, 2)) * TimeToJumpApex;
-            currentMultipleJumpsCount--;
+            if (canMultipleJump && currentMultipleJumpsCount > 0)
+            {
+                velocity.y = ((2 * MultipleJumpHeight) / Mathf.Pow(TimeToJumpApex, 2)) * TimeToJumpApex;
+                currentMultipleJumpsCount--;
+            }
         }
     }
 

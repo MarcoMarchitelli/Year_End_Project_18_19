@@ -328,9 +328,9 @@ MonoBehaviour:
   MaxHealth: 0
   AttackDamage: 1
   AttackSpeed: 1
-  CanRun: 0
+  CanRun: 1
   MovementSpeed: 10
-  ExtraMovementSpeed: 0
+  ExtraMovementSpeed: 5
   RunningCurve:
     serializedVersion: 2
     m_Curve:
@@ -355,6 +355,12 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  isFacingRight: 1
+  isFacingLeft: 0
+  canDash: 1
+  DashDistance: 5
+  DashTime: 0.1
+  DashRechargeTime: 0
   JumpHeight: 4
   TimeToJumpApex: 0.5
   canMultipleJump: 1
