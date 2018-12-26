@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class PlayerRechargingDashState : PlayerStateBase
 {
-
-
-
+    protected override void Tick()
+    {
+        myContext.myPlayer.RechargeDash();
+    }
 }

@@ -60,8 +60,8 @@ public class PlayerStateMachine : StateMachineBase
 
     private void UpdateDashBools()
     {
-        myAnim.SetBool("Dashing", false); // Mettere valore vero
-        myAnim.SetBool("DashRecharging", false); // Mettere valore vero
+        myAnim.SetBool("Dashing", myPlayer.GetIsDashing());
+        myAnim.SetBool("DashRecharging", myPlayer.GetIsDashRecharging());
     }
 
     protected override void FillStates()

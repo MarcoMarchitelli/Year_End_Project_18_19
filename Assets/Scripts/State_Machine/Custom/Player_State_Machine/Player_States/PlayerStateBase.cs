@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerStateBase : StateBase {
-
+public class PlayerStateBase : StateBase
+{
     protected PlayerContext myContext;
 
     public StateBase Setup(IStateMachineContext stateContext)
@@ -11,5 +11,4 @@ public class PlayerStateBase : StateBase {
         myContext = (stateContext as PlayerContext);
         return this;
     }
-
 }

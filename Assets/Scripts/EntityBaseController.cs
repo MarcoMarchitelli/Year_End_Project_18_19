@@ -148,10 +148,16 @@ public abstract class EntityBaseController : MonoBehaviour
 
     [Header("Dash")]
     /// <summary>
+    /// Se true, il player ha sbloccato il dash
+    /// </summary>
+    [Tooltip("Se true, il player può fare il dash")]
+    public bool isDashUnlocked;
+
+    /// <summary>
     /// Se true, il player può fare il dash
     /// </summary>
     [Tooltip("Se true, il player può fare il dash")]
-    public bool canDash = true;
+    protected bool canDash = true;
 
     /// <summary>
     /// Distanza percorsa dal dash
@@ -172,6 +178,11 @@ public abstract class EntityBaseController : MonoBehaviour
     public float DashRechargeTime;
 
     /// <summary>
+    /// Punto in cui il dash ha raggiunto la massima distanza
+    /// </summary>
+    private float dashArrivePoint;
+
+    /// <summary>
     /// Valore attuale del dash
     /// </summary>
     protected float dashingValue;
@@ -180,6 +191,11 @@ public abstract class EntityBaseController : MonoBehaviour
     /// Se true, l'entità sta eseguendo un dash
     /// </summary>
     protected bool isDashing = false;
+
+    /// <summary>
+    /// Se true, l'entità sta ricaricando il dash
+    /// </summary>
+    protected bool isDashRecharging;
 
     /// <summary>
     /// Tempo che ci mette a raggiungere il punto desiderato mentre si è a terra
@@ -346,6 +362,7 @@ public abstract class EntityBaseController : MonoBehaviour
         transform.position = respawnPosition;
         isAlive = true;
         canHit = true;
+        canDash = true;
     }
 
     public void SetRespawnVariables()
@@ -389,78 +406,46 @@ public abstract class EntityBaseController : MonoBehaviour
 
     public void Dash()
     {
-        float arrivePoint;
-
         if (isFacingRight)
         {
-            arrivePoint = transform.localPosition.x + DashDistance;
+            dashArrivePoint = transform.localPosition.x + DashDistance;
         }
         else
         {
-            arrivePoint = transform.localPosition.x - DashDistance;
+            dashArrivePoint = transform.localPosition.x - DashDistance;
         }
 
-        if (canDash)
+        if (isDashUnlocked)
         {
-            ResetVerticalVelocity();
-            SetDashingValue();
-            velocity.x = dashingValue;
-            isDashing = true;
-            canDash = false;
-            StartCoroutine(CheckIsDashing(arrivePoint));
-        }
-        else
-        {
-            Debug.Log("Stai ricaricando il dash");
+            if (canDash)
+            {
+                ResetVerticalVelocity();
+                SetDashingValue();
+                velocity.x = dashingValue;
+                isDashing = true;
+                canDash = false;
+            }
+            else
+            {
+                Debug.Log("Stai ricaricando il dash");
+            }
         }
     }
 
-    private IEnumerator CheckIsDashing(float arrivePoint)
+    public void RechargeDash()
     {
-        if (isFacingRight)
-        {
-            while (transform.localPosition.x <= arrivePoint && isDashing)
-            {
-                if (myRayCon.Collisions.right)
-                {
-                    isDashing = false;
-                    StartCoroutine(RechargeDash());
-                }
-                yield return null;
-            }
-        }
-        else
-        {
-            while (transform.localPosition.x >= arrivePoint)
-            {
-                if (myRayCon.Collisions.left)
-                {
-                    isDashing = false;
-                    StartCoroutine(RechargeDash());
-                }
-                yield return null;
-            }
-        }
-        isDashing = false;
-        StartCoroutine(RechargeDash());
-    }
-
-    private IEnumerator RechargeDash()
-    {
-        while (!dashTimer.CheckTimer(DashRechargeTime))
+        if (!dashTimer.CheckTimer(DashRechargeTime))
         {
             dashTimer.TickTimer();
-            yield return null;
         }
-
-        while (dashTimer.CheckTimer(DashRechargeTime))
+        else
         {
             dashTimer.PauseTimer();
-            yield return null;
             if (myRayCon.Collisions.below)
             {
-                canDash = true;
                 dashTimer.StopTimer();
+                canDash = true;
+                isDashRecharging = false;
             }
         }
     }
@@ -514,5 +499,48 @@ public abstract class EntityBaseController : MonoBehaviour
             return isFacingRight;
         }
         return isFacingRight;
+    }
+
+    public void SetIsDashing()
+    {
+        if (isFacingRight)
+        {
+            if (transform.localPosition.x >= dashArrivePoint || myRayCon.Collisions.right)
+            {
+                isDashing = false;
+                isDashRecharging = true;
+            }
+            else
+            {
+                isDashing = true;
+            }
+        }
+        else
+        {
+            if (transform.localPosition.x <= dashArrivePoint || myRayCon.Collisions.left)
+            {
+                isDashing = false;
+                isDashRecharging = true;
+            }
+            else
+            {
+                isDashing = true;
+            }
+        }
+    }
+
+    public bool GetIsDashing()
+    {
+        return isDashing;
+    }
+
+    public bool GetCanDash()
+    {
+        return canDash;
+    }
+
+    public bool GetIsDashRecharging()
+    {
+        return isDashRecharging;
     }
 }

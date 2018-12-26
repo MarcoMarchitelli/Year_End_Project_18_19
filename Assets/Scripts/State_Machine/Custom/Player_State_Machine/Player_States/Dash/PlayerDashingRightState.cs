@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class PlayerDashingRightState : PlayerStateBase
 {
-
-
-
+    protected override void Tick()
+    {
+        myContext.myPlayer.SetIsDashing();
+    }
 }

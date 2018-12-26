@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class PlayerWaitingForDashState : PlayerStateBase
 {
-
     protected override void Tick()
     {
         if (Input.GetKeyDown(KeyCode.Z))
@@ -12,5 +11,4 @@ public class PlayerWaitingForDashState : PlayerStateBase
             myContext.myPlayer.Dash();
         }
     }
-
 }
