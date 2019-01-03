@@ -25,6 +25,11 @@ public abstract class EntityBaseController : MonoBehaviour
     /// </summary>
     private Timer dashTimer;
 
+    /// <summary>
+    /// variabile utile per utilizzare funzioni di tipo Timer per l'invulnerabilità
+    /// </summary>
+    private Timer invulnerabilityTimer;
+
     [Header("Statistics")]
     [SerializeField]
     /// <summary>
@@ -61,9 +66,20 @@ public abstract class EntityBaseController : MonoBehaviour
     public float AttackSpeed;
 
     /// <summary>
+    /// Tempo che l'entità rimane invulnerabile in secondi
+    /// </summary>
+    [Tooltip("Tempo che l'entità rimane invulnerabile in secondi")]
+    public float InvulnerabiltyTime;
+
+    /// <summary>
     /// Se true, l'entità è considerata viva, altrimenti morta
     /// </summary>
     private bool isAlive = true;
+
+    /// <summary>
+    /// Se true, l'entità è invulnerabile
+    /// </summary>
+    private bool isInvulnerable = false;
 
     /// <summary>
     /// Serve a salvare la vita iniziale dell'entità
@@ -236,6 +252,7 @@ public abstract class EntityBaseController : MonoBehaviour
 
         attackTimer = new Timer();
         dashTimer = new Timer();
+        invulnerabilityTimer = new Timer();
 
         SetRespawnVariables();
 
@@ -287,22 +304,47 @@ public abstract class EntityBaseController : MonoBehaviour
 
     public void TakeDamage(int _takenDamage)
     {
-        if (_takenDamage < 0)
+        if (!isInvulnerable)
         {
-            Heal(_takenDamage);
-        }
-        if (Health - _takenDamage <= 0)
-        {
-            Health = 0;
-        }
-        if (Health <= 0)
-        {
-            Die();
-            Respawn();
+            if (_takenDamage < 0)
+            {
+                Heal(_takenDamage);
+            }
+            if (Health - _takenDamage <= 0)
+            {
+                Health = 0;
+            }
+            if (Health <= 0)
+            {
+                Die();
+                Respawn();
+            }
+            else
+            {
+                Health -= _takenDamage;
+            }
+
+            isInvulnerable = true;
+            StartCoroutine(StartInvulnerability());
         }
         else
         {
-            Health -= _takenDamage;
+            Debug.Log("Sei invulnerabile");
+        }
+    }
+
+    private IEnumerator StartInvulnerability()
+    {
+        while (!invulnerabilityTimer.CheckTimer(InvulnerabiltyTime))
+        {
+            invulnerabilityTimer.TickTimer();
+            yield return null;
+        }
+
+        if (invulnerabilityTimer.CheckTimer(InvulnerabiltyTime))
+        {
+            isInvulnerable = false;
+            invulnerabilityTimer.StopTimer();
         }
     }
 
@@ -363,6 +405,7 @@ public abstract class EntityBaseController : MonoBehaviour
         isAlive = true;
         canHit = true;
         canDash = true;
+        isInvulnerable = false;
     }
 
     public void SetRespawnVariables()
