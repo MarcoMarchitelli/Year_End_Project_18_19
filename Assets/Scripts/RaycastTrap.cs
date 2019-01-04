@@ -3,20 +3,34 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class RaycastTrap : RaycastController
-{ 
+{
     [SerializeField]
     /// <summary>
-    /// Lunghezza del raycast verticale
+    /// Lunghezza del raycast superiore
     /// </summary>
-    [Tooltip("Lunghezza del raycast verticale")]
-    private float verticalRayLength;
+    [Tooltip("Lunghezza del raycast superiore")]
+    private float topRayLength;
 
     [SerializeField]
     /// <summary>
-    /// Lunghezza del raycast orizzontale
+    /// Lunghezza del raycast inferiore
     /// </summary>
-    [Tooltip("Lunghezza del raycast orizzontale")]
-    private float horizontalRayLength;
+    [Tooltip("Lunghezza del raycast inferiore")]
+    private float bottomRayLength;
+
+    [SerializeField]
+    /// <summary>
+    /// Lunghezza del raycast sinistro
+    /// </summary>
+    [Tooltip("Lunghezza del raycast sinistro")]
+    private float leftRayLength;
+
+    [SerializeField]
+    /// <summary>
+    /// Lunghezza del raycast destro
+    /// </summary>
+    [Tooltip("Lunghezza del raycast destro")]
+    private float rightRayLength;
 
     [SerializeField]
     /// <summary>
@@ -25,32 +39,70 @@ public class RaycastTrap : RaycastController
     [Tooltip("Layer delle entità che possono venire danneggiate")]
     private LayerMask victimMask;
 
+    /// <summary>
+    /// Entità colpita dalla trappola
+    /// </summary>
+    private RaycastHit2D hit;
+
+    protected override void Start()
+    {
+        base.Start();
+        UpdateRaycastOrigins();
+    }
+
     private void Update()
     {
-        UpdateRaycastOrigins();
+        hit = ShowRaycasts(leftRayLength, rightRayLength, topRayLength, bottomRayLength, victimMask);
     }
 
     public void DamageVictim(int damageToDo)
     {
         HashSet<Transform> hitVictim = new HashSet<Transform>();
 
-        for (int i = 0; i < VerticalRayCount; i++)
+        if (Collisions.above)
         {
-            Vector2 rayOrigin = myRaycastOrigins.TopLeft;
-            rayOrigin += Vector2.right * (verticalRaySpacing * i);
-            RaycastHit2D hit = Physics2D.Raycast(rayOrigin, Vector2.up, verticalRayLength, victimMask);
-
-            Debug.DrawRay(rayOrigin, Vector2.up * verticalRayLength, Color.red);
-
-            if (hit)
+            if (!hitVictim.Contains(hit.transform))
             {
-                if (!hitVictim.Contains(hit.transform))
+                hitVictim.Add(hit.transform);
+                if (hit.collider.GetComponent<PlayerController>() != null)
                 {
-                    hitVictim.Add(hit.transform);
-                    if (hit.collider.GetComponent<PlayerController>() != null)
-                    {
-                        hit.collider.GetComponent<PlayerController>().TakeDamage(damageToDo); // Viene chiamato ad ogni Update, fixare in caso di lag
-                    }
+                    hit.collider.GetComponent<PlayerController>().TakeDamage(damageToDo); // Viene chiamato ad ogni Update, fixare in caso di lag
+                }
+            }
+        }
+
+        if (Collisions.below)
+        {
+            if (!hitVictim.Contains(hit.transform))
+            {
+                hitVictim.Add(hit.transform);
+                if (hit.collider.GetComponent<PlayerController>() != null)
+                {
+                    hit.collider.GetComponent<PlayerController>().TakeDamage(damageToDo); // Viene chiamato ad ogni Update, fixare in caso di lag
+                }
+            }
+        }
+
+        if (Collisions.right)
+        {
+            if (!hitVictim.Contains(hit.transform))
+            {
+                hitVictim.Add(hit.transform);
+                if (hit.collider.GetComponent<PlayerController>() != null)
+                {
+                    hit.collider.GetComponent<PlayerController>().TakeDamage(damageToDo); // Viene chiamato ad ogni Update, fixare in caso di lag
+                }
+            }
+        }
+
+        if (Collisions.left)
+        {
+            if (!hitVictim.Contains(hit.transform))
+            {
+                hitVictim.Add(hit.transform);
+                if (hit.collider.GetComponent<PlayerController>() != null)
+                {
+                    hit.collider.GetComponent<PlayerController>().TakeDamage(damageToDo); // Viene chiamato ad ogni Update, fixare in caso di lag
                 }
             }
         }

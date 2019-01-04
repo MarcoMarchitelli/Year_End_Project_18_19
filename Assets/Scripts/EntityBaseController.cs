@@ -335,13 +335,13 @@ public abstract class EntityBaseController : MonoBehaviour
 
     private IEnumerator StartInvulnerability()
     {
-        while (!invulnerabilityTimer.CheckTimer(InvulnerabiltyTime))
+        while (!invulnerabilityTimer.CheckTimer(InvulnerabiltyTime) && isInvulnerable)
         {
             invulnerabilityTimer.TickTimer();
             yield return null;
         }
 
-        if (invulnerabilityTimer.CheckTimer(InvulnerabiltyTime))
+        if (invulnerabilityTimer.CheckTimer(InvulnerabiltyTime) || !isInvulnerable)
         {
             isInvulnerable = false;
             invulnerabilityTimer.StopTimer();
@@ -380,13 +380,13 @@ public abstract class EntityBaseController : MonoBehaviour
 
     protected IEnumerator Reload()
     {
-        while (!attackTimer.CheckTimer(AttackSpeed))
+        while (!attackTimer.CheckTimer(AttackSpeed) && !canHit)
         {
             attackTimer.TickTimer();
             yield return null;
         }
 
-        if (attackTimer.CheckTimer(AttackSpeed))
+        if (attackTimer.CheckTimer(AttackSpeed) || canHit)
         {
             canHit = true;
             attackTimer.StopTimer();
@@ -406,6 +406,7 @@ public abstract class EntityBaseController : MonoBehaviour
         canHit = true;
         canDash = true;
         isInvulnerable = false;
+
     }
 
     public void SetRespawnVariables()

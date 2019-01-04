@@ -38,7 +38,7 @@ public abstract class RaycastController : MonoBehaviour
         }
     }
 
-    void Start()
+    protected virtual void Start()
     {
         myCollider = GetComponent<BoxCollider2D>();
         CalculateRaySpacing();
@@ -103,13 +103,78 @@ public abstract class RaycastController : MonoBehaviour
         }
     }
 
+    public RaycastHit2D ShowRaycasts(float leftRayLength, float rightRayLength, float topRayLength, float bottomRayLength, LayerMask collisionMask)
+    {
+        for (int i = 0; i < HorizontalRayCount; i++)
+        {
+            Vector2 rayOrigin = myRaycastOrigins.BottomLeft;
+            rayOrigin += Vector2.up * (horizontalRaySpacing * i);
+            RaycastHit2D hit = Physics2D.Raycast(rayOrigin, Vector2.left, leftRayLength, collisionMask);
+
+            Debug.DrawRay(rayOrigin, Vector2.left * leftRayLength, Color.red);
+
+            if (hit) // Mentre colpisco qualcosa
+            {
+                Collisions.left = true;
+                return hit;
+            }
+        }
+
+        for (int i = 0; i < HorizontalRayCount; i++)
+        {
+            Vector2 rayOrigin = myRaycastOrigins.BottomRight;
+            rayOrigin += Vector2.up * (horizontalRaySpacing * i);
+            RaycastHit2D hit = Physics2D.Raycast(rayOrigin, Vector2.right, rightRayLength, collisionMask);
+
+            Debug.DrawRay(rayOrigin, Vector2.right * rightRayLength, Color.red);
+
+            if (hit) // Mentre colpisco qualcosa
+            {
+                Collisions.right = true;
+                return hit;
+            }
+        }
+
+        for (int i = 0; i < VerticalRayCount; i++)
+        {
+            Vector2 rayOrigin = myRaycastOrigins.TopLeft;
+            rayOrigin += Vector2.right * (verticalRaySpacing * i);
+            RaycastHit2D hit = Physics2D.Raycast(rayOrigin, Vector2.up, topRayLength, collisionMask);
+
+            Debug.DrawRay(rayOrigin, Vector2.up * topRayLength, Color.red);
+
+            if (hit) // Mentre colpisco qualcosa
+            {
+                Collisions.above = true;
+                return hit;
+            }
+        }
+
+        for (int i = 0; i < VerticalRayCount; i++)
+        {
+            Vector2 rayOrigin = myRaycastOrigins.BottomLeft;
+            rayOrigin += Vector2.right * (verticalRaySpacing * i);
+            RaycastHit2D hit = Physics2D.Raycast(rayOrigin, Vector2.down, bottomRayLength, collisionMask);
+
+            Debug.DrawRay(rayOrigin, Vector2.down * bottomRayLength, Color.red);
+
+            if (hit) // Mentre colpisco qualcosa
+            {
+                Collisions.below = true;
+                return hit;
+            }
+        }
+
+        return Physics2D.Raycast(Vector2.zero, Vector2.zero, 0f);
+    }
+
     void CalculateRaySpacing() // Funzione da chiamare ogni volta che si modifica la scala dell'oggetto che usa il raycast
     {
         Bounds myBounds = myCollider.bounds;
         myBounds.Expand(SkinWidth * -2);
 
-        HorizontalRayCount = Mathf.Clamp(HorizontalRayCount, 2, int.MaxValue);
-        VerticalRayCount = Mathf.Clamp(VerticalRayCount, 2, int.MaxValue);
+        HorizontalRayCount = Mathf.Clamp(HorizontalRayCount, (int)((myBounds.size.y + 10) * 2), int.MaxValue);
+        VerticalRayCount = Mathf.Clamp(VerticalRayCount, (int)((myBounds.size.x + 10) * 2), int.MaxValue);
 
         horizontalRaySpacing = myBounds.size.y / (HorizontalRayCount - 1);
         verticalRaySpacing = myBounds.size.x / (VerticalRayCount - 1);

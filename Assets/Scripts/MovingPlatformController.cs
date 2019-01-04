@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(RaycastPlatform))]
-public class PlatformController : MonoBehaviour {
-
+public class MovingPlatformController : MonoBehaviour
+{
     /// <summary>
     /// Riferimento allo script RaycastController della piattaforma
     /// </summary>
@@ -21,7 +21,7 @@ public class PlatformController : MonoBehaviour {
     /// Valore di prova per simulare vari platform
     /// </summary>
     [Tooltip("Valore di prova per simulare vari platform")]
-    [Range (0,2)]
+    [Range(0, 2)]
     public float easeAmount;
 
     /// <summary>
