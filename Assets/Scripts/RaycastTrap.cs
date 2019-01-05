@@ -6,43 +6,10 @@ public class RaycastTrap : RaycastController
 {
     [SerializeField]
     /// <summary>
-    /// Lunghezza del raycast superiore
-    /// </summary>
-    [Tooltip("Lunghezza del raycast superiore")]
-    private float topRayLength;
-
-    [SerializeField]
-    /// <summary>
-    /// Lunghezza del raycast inferiore
-    /// </summary>
-    [Tooltip("Lunghezza del raycast inferiore")]
-    private float bottomRayLength;
-
-    [SerializeField]
-    /// <summary>
-    /// Lunghezza del raycast sinistro
-    /// </summary>
-    [Tooltip("Lunghezza del raycast sinistro")]
-    private float leftRayLength;
-
-    [SerializeField]
-    /// <summary>
-    /// Lunghezza del raycast destro
-    /// </summary>
-    [Tooltip("Lunghezza del raycast destro")]
-    private float rightRayLength;
-
-    [SerializeField]
-    /// <summary>
     /// Layer delle entità che possono venire danneggiate
     /// </summary>
     [Tooltip("Layer delle entità che possono venire danneggiate")]
     private LayerMask victimMask;
-
-    /// <summary>
-    /// Entità colpita dalla trappola
-    /// </summary>
-    private RaycastHit2D hit;
 
     protected override void Start()
     {
@@ -52,7 +19,7 @@ public class RaycastTrap : RaycastController
 
     private void Update()
     {
-        hit = ShowRaycasts(leftRayLength, rightRayLength, topRayLength, bottomRayLength, victimMask);
+        CheckRaycastsBools(leftRayLength, rightRayLength, topRayLength, bottomRayLength, victimMask);
     }
 
     public void DamageVictim(int damageToDo)
@@ -61,48 +28,96 @@ public class RaycastTrap : RaycastController
 
         if (Collisions.above)
         {
-            if (!hitVictim.Contains(hit.transform))
+            for (int i = 0; i < VerticalRayCount; i++)
             {
-                hitVictim.Add(hit.transform);
-                if (hit.collider.GetComponent<PlayerController>() != null)
+                Vector2 rayOrigin = myRaycastOrigins.TopLeft;
+                rayOrigin += Vector2.right * (verticalRaySpacing * i);
+                RaycastHit2D hit = Physics2D.Raycast(rayOrigin, Vector2.up, topRayLength, victimMask);
+
+                Debug.DrawRay(rayOrigin, Vector2.up * topRayLength, Color.red);
+
+                if (hit)
                 {
-                    hit.collider.GetComponent<PlayerController>().TakeDamage(damageToDo); // Viene chiamato ad ogni Update, fixare in caso di lag
+                    if (!hitVictim.Contains(hit.transform))
+                    {
+                        hitVictim.Add(hit.transform);
+                        if (hit.collider.GetComponent<PlayerController>() != null)
+                        {
+                            hit.collider.GetComponent<PlayerController>().TakeDamage(damageToDo); // Viene chiamato ad ogni Update, fixare in caso di lag
+                        }
+                    }
                 }
             }
-        }
 
-        if (Collisions.below)
-        {
-            if (!hitVictim.Contains(hit.transform))
+            if (Collisions.below)
             {
-                hitVictim.Add(hit.transform);
-                if (hit.collider.GetComponent<PlayerController>() != null)
+                for (int i = 0; i < VerticalRayCount; i++)
                 {
-                    hit.collider.GetComponent<PlayerController>().TakeDamage(damageToDo); // Viene chiamato ad ogni Update, fixare in caso di lag
+                    Vector2 rayOrigin = myRaycastOrigins.BottomLeft;
+                    rayOrigin += Vector2.right * (verticalRaySpacing * i);
+                    RaycastHit2D hit = Physics2D.Raycast(rayOrigin, Vector2.down, bottomRayLength, victimMask);
+
+                    Debug.DrawRay(rayOrigin, Vector2.down * bottomRayLength, Color.red);
+
+                    if (hit)
+                    {
+                        if (!hitVictim.Contains(hit.transform))
+                        {
+                            hitVictim.Add(hit.transform);
+                            if (hit.collider.GetComponent<PlayerController>() != null)
+                            {
+                                hit.collider.GetComponent<PlayerController>().TakeDamage(damageToDo); // Viene chiamato ad ogni Update, fixare in caso di lag
+                            }
+                        }
+                    }
                 }
             }
-        }
 
-        if (Collisions.right)
-        {
-            if (!hitVictim.Contains(hit.transform))
+            if (Collisions.right)
             {
-                hitVictim.Add(hit.transform);
-                if (hit.collider.GetComponent<PlayerController>() != null)
+                for (int i = 0; i < HorizontalRayCount; i++)
                 {
-                    hit.collider.GetComponent<PlayerController>().TakeDamage(damageToDo); // Viene chiamato ad ogni Update, fixare in caso di lag
+                    Vector2 rayOrigin = myRaycastOrigins.BottomRight;
+                    rayOrigin += Vector2.up * (horizontalRaySpacing * i);
+                    RaycastHit2D hit = Physics2D.Raycast(rayOrigin, Vector2.right, rightRayLength, victimMask);
+
+                    Debug.DrawRay(rayOrigin, Vector2.right * rightRayLength, Color.red);
+
+                    if (hit)
+                    {
+                        if (!hitVictim.Contains(hit.transform))
+                        {
+                            hitVictim.Add(hit.transform);
+                            if (hit.collider.GetComponent<PlayerController>() != null)
+                            {
+                                hit.collider.GetComponent<PlayerController>().TakeDamage(damageToDo); // Viene chiamato ad ogni Update, fixare in caso di lag
+                            }
+                        }
+                    }
                 }
             }
-        }
 
-        if (Collisions.left)
-        {
-            if (!hitVictim.Contains(hit.transform))
+            if (Collisions.left)
             {
-                hitVictim.Add(hit.transform);
-                if (hit.collider.GetComponent<PlayerController>() != null)
+                for (int i = 0; i < HorizontalRayCount; i++)
                 {
-                    hit.collider.GetComponent<PlayerController>().TakeDamage(damageToDo); // Viene chiamato ad ogni Update, fixare in caso di lag
+                    Vector2 rayOrigin = myRaycastOrigins.BottomLeft;
+                    rayOrigin += Vector2.up * (horizontalRaySpacing * i);
+                    RaycastHit2D hit = Physics2D.Raycast(rayOrigin, Vector2.left, leftRayLength, victimMask);
+
+                    Debug.DrawRay(rayOrigin, Vector2.left * leftRayLength, Color.red);
+
+                    if (hit)
+                    {
+                        if (!hitVictim.Contains(hit.transform))
+                        {
+                            hitVictim.Add(hit.transform);
+                            if (hit.collider.GetComponent<PlayerController>() != null)
+                            {
+                                hit.collider.GetComponent<PlayerController>().TakeDamage(damageToDo); // Viene chiamato ad ogni Update, fixare in caso di lag
+                            }
+                        }
+                    }
                 }
             }
         }

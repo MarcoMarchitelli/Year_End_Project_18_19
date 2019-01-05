@@ -5,9 +5,15 @@ using UnityEngine;
 public class RaycastPlatform : RaycastController
 {
     public LayerMask passengerMask;
+    public LayerMask faderMask;
 
     private List<PassengerMovement> passengerMovementList;
     private Dictionary<Transform, EntityBaseController> passengerDictionary = new Dictionary<Transform, EntityBaseController>();
+
+    /// <summary>
+    /// Entità colpita dalla piattaforma
+    /// </summary>
+    protected RaycastHit2D hitEntity;
 
     private struct PassengerMovement
     {
@@ -27,6 +33,7 @@ public class RaycastPlatform : RaycastController
 
     private void Update()
     {
+        CheckRaycastsBools(leftRayLength, rightRayLength, topRayLength, bottomRayLength, faderMask);
         UpdateRaycastOrigins();
     }
 
@@ -130,6 +137,39 @@ public class RaycastPlatform : RaycastController
                     }
                 }
             }
+        }
+    }
+
+    public IEnumerator FadePlatform(Timer fadeTimer, float fadingTime, Timer returnTimer, float returningTime)
+    {
+        if (Collisions.above)
+        {
+            while (!fadeTimer.CheckTimer(fadingTime))
+            {
+                fadeTimer.TickTimer();
+                yield return null;
+            }
+
+            if (fadeTimer.CheckTimer(fadingTime))
+            {
+                fadeTimer.StopTimer();
+                myCollider.enabled = false;
+            }
+        }
+    }
+
+    private IEnumerator ReturnPlatform(Timer returnTimer, float returningTime)
+    {
+        while (!returnTimer.CheckTimer(returningTime))
+        {
+            returnTimer.TickTimer();
+            yield return null;
+        }
+
+        if (returnTimer.CheckTimer(returningTime))
+        {
+            returnTimer.StopTimer();
+            myCollider.enabled = true;
         }
     }
 }

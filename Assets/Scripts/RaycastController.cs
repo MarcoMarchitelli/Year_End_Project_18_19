@@ -14,8 +14,37 @@ public abstract class RaycastController : MonoBehaviour
     protected float horizontalRaySpacing;
     protected float verticalRaySpacing;
 
-    protected BoxCollider2D myCollider;
+    [HideInInspector]
+    public BoxCollider2D myCollider;
     protected RaycastOrigins myRaycastOrigins;
+
+    [SerializeField]
+    /// <summary>
+    /// Lunghezza del raycast superiore
+    /// </summary>
+    [Tooltip("Lunghezza del raycast superiore")]
+    protected float topRayLength;
+
+    [SerializeField]
+    /// <summary>
+    /// Lunghezza del raycast inferiore
+    /// </summary>
+    [Tooltip("Lunghezza del raycast inferiore")]
+    protected float bottomRayLength;
+
+    [SerializeField]
+    /// <summary>
+    /// Lunghezza del raycast sinistro
+    /// </summary>
+    [Tooltip("Lunghezza del raycast sinistro")]
+    protected float leftRayLength;
+
+    [SerializeField]
+    /// <summary>
+    /// Lunghezza del raycast destro
+    /// </summary>
+    [Tooltip("Lunghezza del raycast destro")]
+    protected float rightRayLength;
 
     public CollisionInfo Collisions;
 
@@ -103,7 +132,7 @@ public abstract class RaycastController : MonoBehaviour
         }
     }
 
-    public RaycastHit2D ShowRaycasts(float leftRayLength, float rightRayLength, float topRayLength, float bottomRayLength, LayerMask collisionMask)
+    public void CheckRaycastsBools(float leftRayLength, float rightRayLength, float topRayLength, float bottomRayLength, LayerMask collisionMask)
     {
         for (int i = 0; i < HorizontalRayCount; i++)
         {
@@ -116,7 +145,6 @@ public abstract class RaycastController : MonoBehaviour
             if (hit) // Mentre colpisco qualcosa
             {
                 Collisions.left = true;
-                return hit;
             }
         }
 
@@ -131,7 +159,6 @@ public abstract class RaycastController : MonoBehaviour
             if (hit) // Mentre colpisco qualcosa
             {
                 Collisions.right = true;
-                return hit;
             }
         }
 
@@ -146,7 +173,6 @@ public abstract class RaycastController : MonoBehaviour
             if (hit) // Mentre colpisco qualcosa
             {
                 Collisions.above = true;
-                return hit;
             }
         }
 
@@ -161,14 +187,11 @@ public abstract class RaycastController : MonoBehaviour
             if (hit) // Mentre colpisco qualcosa
             {
                 Collisions.below = true;
-                return hit;
             }
         }
-
-        return Physics2D.Raycast(Vector2.zero, Vector2.zero, 0f);
     }
 
-    void CalculateRaySpacing() // Funzione da chiamare ogni volta che si modifica la scala dell'oggetto che usa il raycast
+    protected void CalculateRaySpacing() // Funzione da chiamare ogni volta che si modifica la scala dell'oggetto che usa il raycast
     {
         Bounds myBounds = myCollider.bounds;
         myBounds.Expand(SkinWidth * -2);

@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class PlayerStateBase : StateBase
+public abstract class PlatformStateBase : StateBase
 {
-    protected PlayerContext myContext;
+    protected PlatformContext myContext;
 
     public StateBase Setup(IStateMachineContext stateContext)
     {
-        myContext = (stateContext as PlayerContext);
+        myContext = (stateContext as PlatformContext);
         return this;
     }
 }
