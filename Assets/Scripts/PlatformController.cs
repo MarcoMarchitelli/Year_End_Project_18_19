@@ -135,8 +135,6 @@ public class PlatformController : MonoBehaviour
         myRayCon.MovePassenger(true);
         transform.Translate(velocity);
         myRayCon.MovePassenger(false);
-
-        myRayCon.Collisions.ResetCollisionInfo();
     }
 
     public void ShakePlatform()

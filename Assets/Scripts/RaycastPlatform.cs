@@ -33,7 +33,6 @@ public class RaycastPlatform : RaycastController
 
     private void Update()
     {
-        CheckRaycastsBools(leftRayLength, rightRayLength, topRayLength, bottomRayLength, faderMask);
         UpdateRaycastOrigins();
     }
 

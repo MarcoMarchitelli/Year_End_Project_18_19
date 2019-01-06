@@ -132,7 +132,7 @@ public abstract class RaycastController : MonoBehaviour
         }
     }
 
-    public void CheckRaycastsBools(float leftRayLength, float rightRayLength, float topRayLength, float bottomRayLength, LayerMask collisionMask)
+    public void CheckRaycastsBools(LayerMask collisionMask)
     {
         for (int i = 0; i < HorizontalRayCount; i++)
         {

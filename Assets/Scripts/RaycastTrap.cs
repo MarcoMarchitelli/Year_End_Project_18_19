@@ -19,7 +19,7 @@ public class RaycastTrap : RaycastController
 
     private void Update()
     {
-        CheckRaycastsBools(leftRayLength, rightRayLength, topRayLength, bottomRayLength, victimMask);
+        CheckRaycastsBools(victimMask);
     }
 
     public void DamageVictim(int damageToDo)
