@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class PlatformStateMachine : StateMachineBase {
 
-    private FadingPlatformController myPlatform;
+    private PlatformController myPlatform;
 
     private void Start()
     {
-        myPlatform = GetComponent<FadingPlatformController>();
+        myPlatform = GetComponent<PlatformController>();
         myAnim = GetComponent<Animator>();
         states = new List<StateBase>();
         context = new PlatformContext()
@@ -33,6 +33,7 @@ public class PlatformStateMachine : StateMachineBase {
     private void UpdateFadingBool()
     {
         myAnim.SetBool("Fading", myPlatform.isFading);
+        myAnim.SetBool("CanFade", myPlatform.GetCanFade());
     }
 
     private void UpdateReturningBool()

@@ -5,5 +5,5 @@ using System;
 
 public class PlatformContext : IStateMachineContext
 {
-    public FadingPlatformController myPlatform;
+    public PlatformController myPlatform;
 }
