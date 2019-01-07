@@ -5,18 +5,44 @@ using UnityEngine;
 [RequireComponent(typeof(RaycastPlatform))]
 public class PlatformController : MonoBehaviour
 {
+    [HideInInspector]
     /// <summary>
     /// Riferimento allo script RaycastController della piattaforma
     /// </summary>
     public RaycastPlatform myRayCon;
 
     /// <summary>
+    /// <summary>
+    /// variabile utile per utilizzare funzioni di tipo Timer per lo shake della piattaforma
+    /// </summary>
+    private Timer shakeTimer;
+
+    /// <summary>
+    /// variabile utile per utilizzare funzioni di tipo Timer per il fade della piattaforma
+    /// </summary>
+    private Timer fadeTimer;
+
+    /// <summary>
+    /// variabile utile per utilizzare funzioni di tipo Timer per il ritorno della piattaforma
+    /// </summary>
+    private Timer returnTimer;
+
+    /// <summary>
+    /// variabile utile per utilizzare funzioni di tipo Timer per il tremolio della piattaforma
+    /// </summary>
+    private Timer trembleTimer;
+
+    /// <summary>
+    /// variabile utile per utilizzare funzioni di tipo Timer per la caduta della piattaforma
+    /// </summary>
+    private Timer fallTimer;
+
+    [Header("Moving Platform")]
     /// Velocità con cui si muove la piattaforma
     /// </summary>
     [Tooltip("Velocità con cui si muove la piattaforma")]
     public float MovementSpeed;
 
-    [Header("Moving Platform")]
     /// <summary>
     /// Valore di prova per simulare vari platform
     /// </summary>
@@ -63,26 +89,12 @@ public class PlatformController : MonoBehaviour
     /// </summary>
     private float nextMoveTime;
 
-    /// <summary>
-    /// variabile utile per utilizzare funzioni di tipo Timer per lo shake della piattaforma
-    /// </summary>
-    private Timer shakeTimer;
-
-    /// <summary>
-    /// variabile utile per utilizzare funzioni di tipo Timer per il fade della piattaforma
-    /// </summary>
-    private Timer fadeTimer;
-
-    /// <summary>
-    /// variabile utile per utilizzare funzioni di tipo Timer per il ritorno della piattaforma
-    /// </summary>
-    private Timer returnTimer;
-
     [Header("Fading platform")]
     [SerializeField]
     /// <summary>
     /// Se true, la piattaforma può svanire
     /// </summary>
+    [Tooltip("Se true, la piattaforma può svanire")]
     private bool canFade;
 
     [SerializeField]
@@ -109,14 +121,63 @@ public class PlatformController : MonoBehaviour
     /// <summary>
     /// Se true, la piattaforma sta scomparendo
     /// </summary>
-    [Tooltip("Se true, la piattaforma sta scomparendo")]
-    public bool isFading;
+    private bool isFading;
 
     /// <summary>
     /// Se true, la piattaforma sta ritornando utilizzabile
     /// </summary>
     [Tooltip("Se true, la piattaforma sta ritornando utilizzabile")]
-    public bool isReturning;
+    private bool isReturning;
+
+    [Header("Falling Platform")]
+    [SerializeField]
+    /// <summary>
+    /// Se true, la piattaforma può cadere se colpita un numero necessario di volte
+    /// </summary>
+    private bool canFall;
+
+    [SerializeField]
+    /// <summary>
+    /// Colpi che deve subire la piattaforma prima di iniziare a tremare
+    /// </summary>
+    [Tooltip("Colpi che deve subire la piattaforma prima di iniziare a tremare")]
+    private int hitsNeeded;
+
+    /// <summary>
+    /// Colpi inflitti alla piattaforma
+    /// </summary>
+    private int currentHits;
+
+    [SerializeField]
+    /// <summary>
+    /// Danno che fa la piattaforma quando cade
+    /// </summary>
+    [Tooltip("Danno che fa la piattaforma quando cade")]
+    private int FallingDamage;
+
+    [SerializeField]
+    /// <summary>
+    /// Tempo che ci mette la piattaforma a staccarsi dal soffitto
+    /// </summary>
+    [Tooltip("Tempo che ci mette la piattaforma a staccarsi dal soffitto")]
+    private float tremblingTime;
+
+    [SerializeField]
+    /// <summary>
+    /// Tempo che ci mette la piattaforma a cadere
+    /// </summary>
+    [Tooltip("Tempo che ci mette la piattaforma a cadere")]
+    private float fallingTime;
+
+    /// <summary>
+    /// Se true, la piattaforma sta tremando
+    /// </summary>
+    private bool isTrembling;
+
+    /// <summary>
+    /// Se true, la piattaforma sta cadendo
+    /// </summary>
+    private bool isFalling;
 
     private void Start()
     {
@@ -124,6 +185,8 @@ public class PlatformController : MonoBehaviour
         shakeTimer = new Timer();
         fadeTimer = new Timer();
         returnTimer = new Timer();
+        trembleTimer = new Timer();
+        fallTimer = new Timer();
     }
 
     private void Update()
@@ -179,9 +242,85 @@ public class PlatformController : MonoBehaviour
         }
     }
 
+    public void TremblePlatform()
+    {
+        if (!trembleTimer.CheckTimer(tremblingTime))
+        {
+            trembleTimer.TickTimer();
+        }
+        else
+        {
+            trembleTimer.StopTimer();
+            isFalling = true;
+        }
+    }
+
+    public void FallPlatform()
+    {
+        if (!fallTimer.CheckTimer(fallingTime))
+        {
+            fallTimer.TickTimer();
+        }
+        else
+        {
+            fallTimer.StopTimer();
+            isFalling = false;
+        }
+    }
+
+    public void TakeDamage(int _takenDamage)
+    {
+        if (_takenDamage < 0)
+        {
+            return;
+        }
+        if (currentHits - _takenDamage <= 0)
+        {
+            currentHits = 0;
+        }
+        if (currentHits <= 0)
+        {
+            isTrembling = true;
+        }
+        else
+        {
+            currentHits -= _takenDamage;
+        }
+    }
+
     public bool GetCanFade()
     {
         return canFade;
+    }
+
+    public bool GetIsFading()
+    {
+        return isFading;
+    }
+
+    public bool GetIsReturning()
+    {
+        return isReturning;
+    }
+
+    public bool GetCanFall()
+    {
+        return canFall;
+    }
+
+    public bool GetIsFalling()
+    {
+        return isFalling;
+    }
+
+    public bool GetIsTrembling()
+    {
+        return isTrembling;
+    }
+
+    public void ResetCurrentHits()
+    {
+        currentHits = hitsNeeded;
     }
 
     private float Ease(float x)

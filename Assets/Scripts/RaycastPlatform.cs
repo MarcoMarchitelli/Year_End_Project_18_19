@@ -6,6 +6,7 @@ public class RaycastPlatform : RaycastController
 {
     public LayerMask passengerMask;
     public LayerMask faderMask;
+    public LayerMask fallingMask;
 
     private List<PassengerMovement> passengerMovementList;
     private Dictionary<Transform, EntityBaseController> passengerDictionary = new Dictionary<Transform, EntityBaseController>();

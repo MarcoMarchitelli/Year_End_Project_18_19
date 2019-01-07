@@ -23,6 +23,8 @@ public class PlatformStateMachine : StateMachineBase {
         UpdateCollsionBools();
         UpdateFadingBool();
         UpdateReturningBool();
+        UpdateFallingBool();
+        UpdateTremblingBool();
     }
 
     private void UpdateCollsionBools()
@@ -32,13 +34,24 @@ public class PlatformStateMachine : StateMachineBase {
 
     private void UpdateFadingBool()
     {
-        myAnim.SetBool("Fading", myPlatform.isFading);
+        myAnim.SetBool("Fading", myPlatform.GetIsFading());
         myAnim.SetBool("CanFade", myPlatform.GetCanFade());
     }
 
     private void UpdateReturningBool()
     {
-        myAnim.SetBool("Returning", myPlatform.isReturning);
+        myAnim.SetBool("Returning", myPlatform.GetIsReturning());
+    }
+
+    private void UpdateFallingBool()
+    {
+        myAnim.SetBool("Falling", myPlatform.GetIsFalling());
+        myAnim.SetBool("CanFall", myPlatform.GetCanFall());
+    }
+
+    private void UpdateTremblingBool()
+    {
+        myAnim.SetBool("Trembling", myPlatform.GetIsTrembling());
     }
 
     protected override void FillStates()

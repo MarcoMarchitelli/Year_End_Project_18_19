@@ -2,13 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlatformWaitingState : PlatformStateBase
-{
+public class PlatformFallingState : PlatformStateBase {
+
     protected override void Tick()
     {
-        if (myContext.myPlatform.GetCanFade())
+        myContext.myPlatform.FallPlatform();
+
+        if (myContext.myPlatform.GetCanFall())
         {
-            myContext.myPlatform.myRayCon.CheckRaycastsBools(myContext.myPlatform.myRayCon.faderMask);
+            myContext.myPlatform.myRayCon.CheckRaycastsBools(myContext.myPlatform.myRayCon.fallingMask);
         }
     }
 
