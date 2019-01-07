@@ -252,6 +252,7 @@ public class PlatformController : MonoBehaviour
         {
             trembleTimer.StopTimer();
             isFalling = true;
+            isTrembling = false;
         }
     }
 
@@ -286,6 +287,26 @@ public class PlatformController : MonoBehaviour
         {
             currentHits -= _takenDamage;
         }
+    }
+
+    public void ResetFadingPlatform()
+    {
+        shakeTimer.StopTimer();
+        fadeTimer.StopTimer();
+        returnTimer.StopTimer();
+        myRayCon.myCollider.enabled = true;
+        myRayCon.Collisions.above = false;
+        isFading = false;
+        isReturning = false;
+    }
+
+    public void ResetFallingPlatform()
+    {
+        trembleTimer.StopTimer();
+        fallTimer.StopTimer();
+        currentHits = hitsNeeded;
+        isTrembling = false;
+        isFalling = false;
     }
 
     public bool GetCanFade()

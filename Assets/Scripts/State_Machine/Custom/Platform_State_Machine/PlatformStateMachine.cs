@@ -25,6 +25,23 @@ public class PlatformStateMachine : StateMachineBase {
         UpdateReturningBool();
         UpdateFallingBool();
         UpdateTremblingBool();
+
+        // Rimuovere collegamenti animator verso vulnerable e waiting, region e tutto ciò che c'è dentro a fine fase di debug!!!
+        #region DebugInputs
+
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            myPlatform.ResetFadingPlatform();
+            myAnim.SetTrigger("ResetFadingSM");
+        }
+
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            myPlatform.ResetFallingPlatform();
+            myAnim.SetTrigger("ResetFallingSM");
+        }
+
+        #endregion
     }
 
     private void UpdateCollsionBools()
