@@ -32,4 +32,9 @@ public class Timer {
             return false;
         }
     }
+
+    public float GetTimer()
+    {
+        return timer;
+    }
 }

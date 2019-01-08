@@ -46,6 +46,11 @@ public abstract class RaycastController : MonoBehaviour
     [Tooltip("Lunghezza del raycast destro")]
     protected float rightRayLength;
 
+    /// <summary>
+    /// Densità minima dei raycasts
+    /// </summary>
+    private int raycastsDensity = 5;
+
     public CollisionInfo Collisions;
 
     protected struct RaycastOrigins
@@ -196,8 +201,8 @@ public abstract class RaycastController : MonoBehaviour
         Bounds myBounds = myCollider.bounds;
         myBounds.Expand(SkinWidth * -2);
 
-        HorizontalRayCount = Mathf.Clamp(HorizontalRayCount, (int)((myBounds.size.y + 10) * 2), int.MaxValue);
-        VerticalRayCount = Mathf.Clamp(VerticalRayCount, (int)((myBounds.size.x + 10) * 2), int.MaxValue);
+        HorizontalRayCount = Mathf.Clamp(HorizontalRayCount, (int)((myBounds.size.y + 1) * raycastsDensity), int.MaxValue);
+        VerticalRayCount = Mathf.Clamp(VerticalRayCount, (int)((myBounds.size.x + 1) * raycastsDensity), int.MaxValue);
 
         horizontalRaySpacing = myBounds.size.y / (HorizontalRayCount - 1);
         verticalRaySpacing = myBounds.size.x / (VerticalRayCount - 1);

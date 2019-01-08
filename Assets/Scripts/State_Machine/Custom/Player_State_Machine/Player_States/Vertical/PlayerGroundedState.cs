@@ -7,6 +7,7 @@ public class PlayerGroundedState : PlayerStateBase
     protected override void Enter()
     {
         myContext.myPlayer.ResetVerticalVelocity();
+        myContext.myPlayer.ResetJump();
     }
 
     protected override void Tick()
@@ -24,7 +25,6 @@ public class PlayerGroundedState : PlayerStateBase
 
     protected override void Exit()
     {
-        myContext.myPlayer.ResetJump();
         myContext.myPlayer.ResetJumpsCount();
     }
 }

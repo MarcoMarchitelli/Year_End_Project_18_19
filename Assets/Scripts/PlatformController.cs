@@ -12,6 +12,11 @@ public class PlatformController : MonoBehaviour
     public RaycastPlatform myRayCon;
 
     /// <summary>
+    /// Riferimento al component MeshRenderer della piattaforma
+    /// </summary>
+    private MeshRenderer myMeshRenderer;
+
+    /// <summary>
     /// <summary>
     /// variabile utile per utilizzare funzioni di tipo Timer per lo shake della piattaforma
     /// </summary>
@@ -106,6 +111,13 @@ public class PlatformController : MonoBehaviour
 
     [SerializeField]
     /// <summary>
+    /// Curva dello shake della piattaforma
+    /// </summary>
+    [Tooltip("Curva dello shake della piattaforma")]
+    private AnimationCurve shakingVisualCurve;
+
+    [SerializeField]
+    /// <summary>
     /// Tempo che ci mette la piattaforma a scomparire da quando è diventata inutilizzabile
     /// </summary>
     [Tooltip("Tempo che ci mette la piattaforma a scomparire da quando è diventata inutilizzabile")]
@@ -113,10 +125,24 @@ public class PlatformController : MonoBehaviour
 
     [SerializeField]
     /// <summary>
+    /// Curva del fade della piattaforma
+    /// </summary>
+    [Tooltip("Curva del fade della piattaforma")]
+    private AnimationCurve fadingVisualCurve;
+
+    [SerializeField]
+    /// <summary>
     /// Tempo che ci mette la piattaforma a ritornare utilizzabile
     /// </summary>
     [Tooltip("Tempo che ci mette la piattaforma a ritornare utilizzabile")]
     private float returningTime;
+
+    [SerializeField]
+    /// <summary>
+    /// Curva del ritorno della piattaforma
+    /// </summary>
+    [Tooltip("Curva del ritorno della piattaforma")]
+    private AnimationCurve returningVisualCurve;
 
     /// <summary>
     /// Se true, la piattaforma sta scomparendo
@@ -164,10 +190,24 @@ public class PlatformController : MonoBehaviour
 
     [SerializeField]
     /// <summary>
+    /// Curva del tremolio della piattaforma
+    /// </summary>
+    [Tooltip("Curva del tremolio della piattaforma")]
+    private AnimationCurve tremblingVisualCurve;
+
+    [SerializeField]
+    /// <summary>
     /// Tempo che ci mette la piattaforma a cadere
     /// </summary>
     [Tooltip("Tempo che ci mette la piattaforma a cadere")]
     private float fallingTime;
+
+    [SerializeField]
+    /// <summary>
+    /// Curva della caduta della piattaforma
+    /// </summary>
+    [Tooltip("Curva della caduta della piattaforma")]
+    private AnimationCurve fallingVisualCurve;
 
     /// <summary>
     /// Se true, la piattaforma sta tremando
@@ -182,6 +222,7 @@ public class PlatformController : MonoBehaviour
     private void Start()
     {
         myRayCon = GetComponent<RaycastPlatform>();
+        myMeshRenderer = GetComponentInChildren<MeshRenderer>();
         shakeTimer = new Timer();
         fadeTimer = new Timer();
         returnTimer = new Timer();
@@ -205,6 +246,7 @@ public class PlatformController : MonoBehaviour
         if (!shakeTimer.CheckTimer(shakingTime))
         {
             shakeTimer.TickTimer();
+            myMeshRenderer.material.color =  new Color(myMeshRenderer.material.color.r, myMeshRenderer.material.color.g, myMeshRenderer.material.color.b, shakingVisualCurve.Evaluate(shakeTimer.GetTimer()));
         }
         else
         {
@@ -216,6 +258,7 @@ public class PlatformController : MonoBehaviour
 
     public void FadePlatform()
     {
+        myMeshRenderer.material.color = new Color(myMeshRenderer.material.color.r, myMeshRenderer.material.color.g, myMeshRenderer.material.color.b, fadingVisualCurve.Evaluate(fadeTimer.GetTimer()));
         if (!fadeTimer.CheckTimer(fadingTime))
         {
             fadeTimer.TickTimer();
@@ -230,6 +273,7 @@ public class PlatformController : MonoBehaviour
 
     public void ReturnPlatform() // Da decidere se la piattaforma è già utilizzabile mentre sta per tornare oppure all'intera comparsa di essa
     {
+        myMeshRenderer.material.color = new Color(myMeshRenderer.material.color.r, myMeshRenderer.material.color.g, myMeshRenderer.material.color.b, returningVisualCurve.Evaluate(returnTimer.GetTimer()));
         if (!returnTimer.CheckTimer(returningTime))
         {
             returnTimer.TickTimer();
@@ -244,6 +288,7 @@ public class PlatformController : MonoBehaviour
 
     public void TremblePlatform()
     {
+        myMeshRenderer.material.color = new Color(myMeshRenderer.material.color.r, myMeshRenderer.material.color.g, myMeshRenderer.material.color.b, tremblingVisualCurve.Evaluate(trembleTimer.GetTimer()));
         if (!trembleTimer.CheckTimer(tremblingTime))
         {
             trembleTimer.TickTimer();
@@ -258,6 +303,7 @@ public class PlatformController : MonoBehaviour
 
     public void FallPlatform()
     {
+        myMeshRenderer.material.color = new Color(myMeshRenderer.material.color.r, myMeshRenderer.material.color.g, myMeshRenderer.material.color.b, fallingVisualCurve.Evaluate(fallTimer.GetTimer()));
         if (!fallTimer.CheckTimer(fallingTime))
         {
             fallTimer.TickTimer();
@@ -294,6 +340,7 @@ public class PlatformController : MonoBehaviour
         shakeTimer.StopTimer();
         fadeTimer.StopTimer();
         returnTimer.StopTimer();
+        myMeshRenderer.material.color = new Color(myMeshRenderer.material.color.r, myMeshRenderer.material.color.g, myMeshRenderer.material.color.b, 1);
         myRayCon.myCollider.enabled = true;
         myRayCon.Collisions.above = false;
         isFading = false;
@@ -304,6 +351,7 @@ public class PlatformController : MonoBehaviour
     {
         trembleTimer.StopTimer();
         fallTimer.StopTimer();
+        myMeshRenderer.material.color = new Color(myMeshRenderer.material.color.r, myMeshRenderer.material.color.g, myMeshRenderer.material.color.b, 1);
         currentHits = hitsNeeded;
         isTrembling = false;
         isFalling = false;
