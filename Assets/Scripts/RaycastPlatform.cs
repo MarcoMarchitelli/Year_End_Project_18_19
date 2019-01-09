@@ -139,37 +139,4 @@ public class RaycastPlatform : RaycastController
             }
         }
     }
-
-    public IEnumerator FadePlatform(Timer fadeTimer, float fadingTime, Timer returnTimer, float returningTime)
-    {
-        if (Collisions.above)
-        {
-            while (!fadeTimer.CheckTimer(fadingTime))
-            {
-                fadeTimer.TickTimer();
-                yield return null;
-            }
-
-            if (fadeTimer.CheckTimer(fadingTime))
-            {
-                fadeTimer.StopTimer();
-                myCollider.enabled = false;
-            }
-        }
-    }
-
-    private IEnumerator ReturnPlatform(Timer returnTimer, float returningTime)
-    {
-        while (!returnTimer.CheckTimer(returningTime))
-        {
-            returnTimer.TickTimer();
-            yield return null;
-        }
-
-        if (returnTimer.CheckTimer(returningTime))
-        {
-            returnTimer.StopTimer();
-            myCollider.enabled = true;
-        }
-    }
 }
