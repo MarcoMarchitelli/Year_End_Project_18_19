@@ -160,6 +160,7 @@ public class PlatformController : MonoBehaviour
     /// <summary>
     /// Se true, la piattaforma può cadere se colpita un numero necessario di volte
     /// </summary>
+    [Tooltip("Se true, la piattaforma può cadere se colpita un numero necessario di volte")]
     private bool canFall;
 
     [SerializeField]

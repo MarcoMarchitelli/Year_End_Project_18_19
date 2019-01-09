@@ -10,6 +10,7 @@ public abstract class EntityBaseController : MonoBehaviour
     /// </summary>
     private Transform graphic;
 
+    [HideInInspector]
     /// <summary>
     /// Riferimento allo script RaycastController dell'entità
     /// </summary>
@@ -154,13 +155,13 @@ public abstract class EntityBaseController : MonoBehaviour
     /// Se true, l'entità sta guardando a destra
     /// </summary>
     [Tooltip("Se true, l'entità sta guardando a destra")]
-    public bool isFacingRight = true;
+    private bool isFacingRight = true;
 
     /// <summary>
     /// Se true, l'entità sta guardando a sinistra
     /// </summary>
     [Tooltip("Se true, l'entità sta guardando a sinistra")]
-    public bool isFacingLeft;
+    private bool isFacingLeft;
 
     [Header("Dash")]
     /// <summary>
