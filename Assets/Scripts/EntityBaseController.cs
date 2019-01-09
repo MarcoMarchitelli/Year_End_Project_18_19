@@ -141,9 +141,9 @@ public abstract class EntityBaseController : MonoBehaviour
     public float MaxRunValue;
 
     /// <summary>
-    /// Curva che indica con che velocità deve accelerare l'entità
+    /// Curva di corsa - X: Secondi dall'inizio della corsa, Y: Velocità di corsa sommata alla velocità base di movimento
     /// </summary>
-    [Tooltip("Curva che indica con che velocità deve accelerare l'entità")]
+    [Tooltip("Curva di corsa - X: Secondi dall'inizio della corsa, Y: Velocità di corsa sommata alla velocità base di movimento")]
     public AnimationCurve RunningCurve;
 
     /// <summary>
@@ -226,9 +226,9 @@ public abstract class EntityBaseController : MonoBehaviour
 
     [Header("Jump")]
     /// <summary>
-    /// Gravità da sommare all'entità oltre a quella di base
+    /// Curva di gravità - X: Secondi dall'inizio della caduta, Y: Gravità da sommare alla normale gravità di caduta
     /// </summary>
-    [Tooltip("Gravità da sommare all'entità oltre a quella di base")]
+    [Tooltip("Curva di gravità - X: Secondi dall'inizio della caduta, Y: Gravità da sommare alla normale gravità di caduta")]
     public AnimationCurve gravityCurve;
 
     /// <summary>

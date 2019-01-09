@@ -111,9 +111,9 @@ public class PlatformController : MonoBehaviour
 
     [SerializeField]
     /// <summary>
-    /// Curva dello shake della piattaforma
+    /// Curva dello shake della piattaforma - X: Secondi da quando ci sali sopra, Y: Trasparenza della piattaforma
     /// </summary>
-    [Tooltip("Curva dello shake della piattaforma")]
+    [Tooltip("Curva dello shake della piattaforma - X: Secondi da quando ci sali sopra, Y: Trasparenza della piattaforma")]
     private AnimationCurve shakingVisualCurve;
 
     [SerializeField]
@@ -125,9 +125,9 @@ public class PlatformController : MonoBehaviour
 
     [SerializeField]
     /// <summary>
-    /// Curva del fade della piattaforma
+    /// Curva del fade della piattaforma - X: Secondi da quando inizia a scomparire, Y: Trasparenza della piattaforma
     /// </summary>
-    [Tooltip("Curva del fade della piattaforma")]
+    [Tooltip("Curva del fade della piattaforma - X: Secondi da quando inizia a scomparire, Y: Trasparenza della piattaforma")]
     private AnimationCurve fadingVisualCurve;
 
     [SerializeField]
@@ -139,9 +139,9 @@ public class PlatformController : MonoBehaviour
 
     [SerializeField]
     /// <summary>
-    /// Curva del ritorno della piattaforma
+    /// Curva del ritorno della piattaforma - X: Secondi da quando inizia a ritornare, Y: Trasparenza della piattaforma
     /// </summary>
-    [Tooltip("Curva del ritorno della piattaforma")]
+    [Tooltip("Curva del ritorno della piattaforma - X: Secondi da quando inizia a ritornare, Y: Trasparenza della piattaforma")]
     private AnimationCurve returningVisualCurve;
 
     /// <summary>
@@ -191,9 +191,9 @@ public class PlatformController : MonoBehaviour
 
     [SerializeField]
     /// <summary>
-    /// Curva del tremolio della piattaforma
+    /// Curva del tremolio della piattaforma - X: Secondi da quando l'hai colpita il numero necessario di volte, Y: Trasparenza della piattaforma
     /// </summary>
-    [Tooltip("Curva del tremolio della piattaforma")]
+    [Tooltip("Curva del tremolio della piattaforma - X: Secondi da quando l'hai colpita il numero necessario di volte, Y: Trasparenza della piattaforma")]
     private AnimationCurve tremblingVisualCurve;
 
     [SerializeField]
@@ -205,9 +205,9 @@ public class PlatformController : MonoBehaviour
 
     [SerializeField]
     /// <summary>
-    /// Curva della caduta della piattaforma
+    /// Curva della caduta della piattaforma - X: Secondi da quando inizia a cadere, Y: Velocità di caduta
     /// </summary>
-    [Tooltip("Curva della caduta della piattaforma")]
+    [Tooltip("Curva della caduta della piattaforma - X: Secondi da quando inizia a cadere, Y: Velocità di caduta")]
     private AnimationCurve fallingVisualCurve;
 
     /// <summary>
