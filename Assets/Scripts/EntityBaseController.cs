@@ -412,7 +412,17 @@ public abstract class EntityBaseController : MonoBehaviour
 
     public void SetRespawnVariables()
     {
+        SetRespawnHealth();
+        SetRespawnPosition();
+    }
+
+    public void SetRespawnHealth()
+    {
         respawnHealth = Health;
+    }
+
+    public void SetRespawnPosition()
+    {
         respawnPosition = transform.position;
     }
 

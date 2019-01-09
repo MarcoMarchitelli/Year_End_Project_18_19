@@ -80,6 +80,10 @@ public class PlayerController : EntityBaseController
         {
             Respawn();
         }
+        if (Input.GetKeyDown(KeyCode.Alpha5))
+        {
+            SetRespawnPosition();
+        }
         if (Input.GetKeyDown(KeyCode.X))
         {
             Attack();
