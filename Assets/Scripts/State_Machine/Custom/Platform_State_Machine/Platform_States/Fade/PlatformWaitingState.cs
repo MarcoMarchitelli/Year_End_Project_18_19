@@ -8,7 +8,7 @@ public class PlatformWaitingState : PlatformStateBase
     {
         if (myContext.myPlatform.GetCanFade())
         {
-            myContext.myPlatform.myRayCon.CheckRaycastsBools(myContext.myPlatform.myRayCon.faderMask);
+            myContext.myPlatform.myRayCon.CheckFadingCollision(myContext.myPlatform.myRayCon.faderMask);
         }
     }
 

@@ -95,10 +95,6 @@ public class PlayerController : EntityBaseController
         ///Rimuovere finita la fase di debug
         resetMultipleJumpsCount = MultipleJumpsCount;
 
-        //float targetVelocityX = myInput.x * MovementSpeed;
-
-        //velocity.x = Mathf.SmoothDamp(velocity.x, targetVelocityX, ref VelocityXSmoothing, (myRayCon.Collisions.below) ? AccelerationTimeGrounded : AccelerationTimeAirborne);
-
         Move(velocity * Time.deltaTime);
     }
 

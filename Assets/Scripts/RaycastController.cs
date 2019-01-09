@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 [RequireComponent(typeof(BoxCollider2D))]
 public abstract class RaycastController : MonoBehaviour
@@ -144,7 +145,7 @@ public abstract class RaycastController : MonoBehaviour
         }
     }
 
-    public void CheckRaycastsBools(LayerMask collisionMask)
+    public virtual void CheckRaycastsBools(LayerMask collisionMask)
     {
         for (int i = 0; i < HorizontalRayCount; i++)
         {
@@ -157,6 +158,7 @@ public abstract class RaycastController : MonoBehaviour
             if (hit) // Mentre colpisco qualcosa
             {
                 Collisions.left = true;
+
             }
         }
 

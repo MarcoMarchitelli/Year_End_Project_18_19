@@ -11,11 +11,6 @@ public class RaycastPlatform : RaycastController
     private List<PassengerMovement> passengerMovementList;
     private Dictionary<Transform, EntityBaseController> passengerDictionary = new Dictionary<Transform, EntityBaseController>();
 
-    /// <summary>
-    /// Entità colpita dalla piattaforma
-    /// </summary>
-    protected RaycastHit2D hitEntity;
-
     private struct PassengerMovement
     {
         public Transform transform;
@@ -136,6 +131,96 @@ public class RaycastPlatform : RaycastController
                         passengerMovementList.Add(new PassengerMovement(hit.transform, new Vector3(pushX, pushY), true, false));
                     }
                 }
+            }
+        }
+    }
+
+    public void CheckFadingCollision (LayerMask collisionMask)
+    {
+        HashSet<Transform> hitPlatform = new HashSet<Transform>();
+
+        for (int i = 0; i < HorizontalRayCount; i++)
+        {
+            Vector2 rayOrigin = myRaycastOrigins.BottomLeft + Vector2.up * horizontalRaySpacing;
+            rayOrigin += Vector2.up * (horizontalRaySpacing * i);
+            RaycastHit2D hit = Physics2D.Raycast(rayOrigin, Vector2.left, leftRayLength, collisionMask);
+
+            Debug.DrawRay(rayOrigin, Vector2.left * leftRayLength, Color.red);
+
+            if (hit) // Mentre colpisco qualcosa
+            {
+                if (!hitPlatform.Contains(hit.transform))
+                {
+                    hitPlatform.Add(hit.transform);
+                    if (hit.collider.GetComponent<PlayerController>() != null && hit.collider.GetComponent<PlayerController>().myRayCon.Collisions.right)
+                    {
+                        Collisions.left = true;
+                    }
+                }
+                //Collisions.left = true;
+            }
+        }
+
+        for (int i = 0; i < HorizontalRayCount; i++)
+        {
+            Vector2 rayOrigin = myRaycastOrigins.BottomRight + Vector2.up * horizontalRaySpacing;
+            rayOrigin += Vector2.up * (horizontalRaySpacing * i);
+            RaycastHit2D hit = Physics2D.Raycast(rayOrigin, Vector2.right, rightRayLength, collisionMask);
+
+            Debug.DrawRay(rayOrigin, Vector2.right * rightRayLength, Color.red);
+
+            if (hit) // Mentre colpisco qualcosa
+            {
+                if (!hitPlatform.Contains(hit.transform))
+                {
+                    hitPlatform.Add(hit.transform);
+                    if (hit.collider.GetComponent<PlayerController>() != null && hit.collider.GetComponent<PlayerController>().myRayCon.Collisions.left)
+                    {
+                        Collisions.right = true;
+                    }
+                }
+                //Collisions.right = true;
+            }
+        }
+
+        for (int i = 0; i < VerticalRayCount; i++)
+        {
+            Vector2 rayOrigin = myRaycastOrigins.TopLeft + Vector2.right * verticalRaySpacing;
+            rayOrigin += Vector2.right * (verticalRaySpacing * i);
+            RaycastHit2D hit = Physics2D.Raycast(rayOrigin, Vector2.up, topRayLength, collisionMask);
+
+            Debug.DrawRay(rayOrigin, Vector2.up * topRayLength, Color.red);
+
+            if (hit) // Mentre colpisco qualcosa
+            {
+                if (!hitPlatform.Contains(hit.transform))
+                {
+                    hitPlatform.Add(hit.transform);
+                    if (hit.collider.GetComponent<PlayerController>() != null && hit.collider.GetComponent<PlayerController>().myRayCon.Collisions.below)
+                    {
+                        Collisions.above = true;
+                    }
+                }
+                //Collisions.above = true;
+            }
+        }
+
+        for (int i = 0; i < VerticalRayCount; i++)
+        {
+            Vector2 rayOrigin = myRaycastOrigins.BottomLeft + Vector2.right * verticalRaySpacing;
+            rayOrigin += Vector2.right * (verticalRaySpacing * i);
+            RaycastHit2D hit = Physics2D.Raycast(rayOrigin, Vector2.down, bottomRayLength, collisionMask);
+
+            Debug.DrawRay(rayOrigin, Vector2.down * bottomRayLength, Color.red);
+
+            if (hit) // Mentre colpisco qualcosa
+            {
+                hitPlatform.Add(hit.transform);
+                if (hit.collider.GetComponent<PlayerController>() != null && hit.collider.GetComponent<PlayerController>().myRayCon.Collisions.above)
+                {
+                    Collisions.below = true;
+                }
+                //Collisions.below = true;
             }
         }
     }
