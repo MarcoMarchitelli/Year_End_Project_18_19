@@ -17,6 +17,11 @@ public abstract class EntityBaseController : MonoBehaviour
     public RaycastController myRayCon;
 
     /// <summary>
+    /// Tempo che scandisce la curva di gravità
+    /// </summary>
+    private Timer gravityTimer;
+
+    /// <summary>
     /// variabile utile per utilizzare funzioni di tipo Timer per l'attacco
     /// </summary>
     private Timer attackTimer;
@@ -133,7 +138,7 @@ public abstract class EntityBaseController : MonoBehaviour
     /// Valore massimo che può raggiungere la corsa (Oltre alla velocità di movimento)
     /// </summary>
     [Tooltip("Valore massimo che può raggiungere la corsa (Oltre alla velocità di movimento)")]
-    public float ExtraMovementSpeed;
+    public float MaxRunValue;
 
     /// <summary>
     /// Curva che indica con che velocità deve accelerare l'entità
@@ -215,21 +220,17 @@ public abstract class EntityBaseController : MonoBehaviour
     protected bool isDashRecharging;
 
     /// <summary>
-    /// Tempo che ci mette a raggiungere il punto desiderato mentre si è a terra
-    /// </summary>
-    //public float AccelerationTimeGrounded;
-
-    /// <summary>
-    /// Tempo che ci mette a raggiungere il punto desiderato mentre si è in aria
-    /// </summary>
-    //public float AccelerationTimeAirborne;
-
-    /// <summary>
     /// Variabile utile alla funzione di Smoothing del movimento
     /// </summary>
     protected float VelocityXSmoothing;
 
     [Header("Jump")]
+    /// <summary>
+    /// Gravità da sommare all'entità oltre a quella di base
+    /// </summary>
+    [Tooltip("Gravità da sommare all'entità oltre a quella di base")]
+    public AnimationCurve gravityCurve;
+
     /// <summary>
     /// Altezza massima che raggiunge il salto
     /// </summary>
@@ -251,6 +252,7 @@ public abstract class EntityBaseController : MonoBehaviour
     {
         graphic = GetComponentsInChildren<Transform>()[1];
 
+        gravityTimer = new Timer();
         attackTimer = new Timer();
         dashTimer = new Timer();
         invulnerabilityTimer = new Timer();
@@ -271,6 +273,17 @@ public abstract class EntityBaseController : MonoBehaviour
         {
             velocity.y += Gravity * Time.deltaTime;
         }
+    }
+
+    public void AddGravity()
+    {
+        gravityTimer.TickTimer();
+        velocity.y += gravityCurve.Evaluate(gravityTimer.GetTimer() * Time.deltaTime);
+    }
+
+    public void ResetGravityTimer()
+    {
+        gravityTimer.StopTimer();
     }
 
     public void Move(Vector3 movingVelocity, bool isStandingOnMovingPlatform = false)
@@ -519,7 +532,7 @@ public abstract class EntityBaseController : MonoBehaviour
 
     private void SetRunningValue(float direction)
     {
-        runningValue = RunningCurve.Evaluate(AccelerationTime) * ExtraMovementSpeed * direction;
+        runningValue = RunningCurve.Evaluate(AccelerationTime) * MaxRunValue * direction;
     }
 
     public void UpdateAccelerationTime()
