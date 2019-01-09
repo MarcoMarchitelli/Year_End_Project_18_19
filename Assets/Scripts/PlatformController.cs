@@ -220,6 +220,11 @@ public class PlatformController : MonoBehaviour
     /// </summary>
     private bool isFalling;
 
+    /// <summary>
+    /// Posizione iniziale della piattaforma stalattite
+    /// </summary>
+    private Vector3 startingFallingPlatformPosition;
+
     private void Start()
     {
         myRayCon = GetComponent<RaycastPlatform>();
@@ -229,6 +234,7 @@ public class PlatformController : MonoBehaviour
         returnTimer = new Timer();
         trembleTimer = new Timer();
         fallTimer = new Timer();
+        startingFallingPlatformPosition = transform.position;
     }
 
     private void Update()
@@ -304,7 +310,7 @@ public class PlatformController : MonoBehaviour
 
     public void FallPlatform()
     {
-        myMeshRenderer.material.color = new Color(myMeshRenderer.material.color.r, myMeshRenderer.material.color.g, myMeshRenderer.material.color.b, fallingVisualCurve.Evaluate(fallTimer.GetTimer()));
+        transform.position = new Vector3(transform.position.x, transform.position.y - fallingVisualCurve.Evaluate(fallTimer.GetTimer()) * Time.deltaTime, transform.position.z);
         if (!fallTimer.CheckTimer(fallingTime))
         {
             fallTimer.TickTimer();
@@ -338,24 +344,40 @@ public class PlatformController : MonoBehaviour
 
     public void ResetFadingPlatform()
     {
-        shakeTimer.StopTimer();
-        fadeTimer.StopTimer();
-        returnTimer.StopTimer();
-        myMeshRenderer.material.color = new Color(myMeshRenderer.material.color.r, myMeshRenderer.material.color.g, myMeshRenderer.material.color.b, 1);
-        myRayCon.myCollider.enabled = true;
-        myRayCon.Collisions.above = false;
-        isFading = false;
-        isReturning = false;
+        if (canFade)
+        {
+            shakeTimer.StopTimer();
+            fadeTimer.StopTimer();
+            returnTimer.StopTimer();
+            ResetPlatformStartingAlphaColor();
+            myRayCon.myCollider.enabled = true;
+            myRayCon.Collisions.above = false;
+            isFading = false;
+            isReturning = false;
+        }
     }
 
     public void ResetFallingPlatform()
     {
-        trembleTimer.StopTimer();
-        fallTimer.StopTimer();
+        if (canFall)
+        {
+            trembleTimer.StopTimer();
+            fallTimer.StopTimer();
+            ResetPlatformStartingPosition();
+            currentHits = hitsNeeded;
+            isTrembling = false;
+            isFalling = false;
+        }
+    }
+
+    private void ResetPlatformStartingPosition()
+    {
+        transform.position = startingFallingPlatformPosition;
+    }
+
+    private void ResetPlatformStartingAlphaColor()
+    {
         myMeshRenderer.material.color = new Color(myMeshRenderer.material.color.r, myMeshRenderer.material.color.g, myMeshRenderer.material.color.b, 1);
-        currentHits = hitsNeeded;
-        isTrembling = false;
-        isFalling = false;
     }
 
     public bool GetCanFade()
