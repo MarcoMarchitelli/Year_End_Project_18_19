@@ -8,11 +8,11 @@ public class PlayerMovingRightState : PlayerStateBase
     {
         myContext.myPlayer.SetHorizontalVelocity(Input.GetAxisRaw("Horizontal"));
 
-        if (Input.GetKey(KeyCode.LeftShift))
+        if (Input.GetKey(KeyCode.LeftShift) && !myContext.myPlayer.myRayCon.Collisions.right)
         {
             myContext.myPlayer.UpdateAccelerationTime();
         }
-        else if (Input.GetKeyUp(KeyCode.LeftShift))
+        else if (Input.GetKeyUp(KeyCode.LeftShift) || myContext.myPlayer.myRayCon.Collisions.right)
         {
             myContext.myPlayer.ResetAccelerationTime();
         }
