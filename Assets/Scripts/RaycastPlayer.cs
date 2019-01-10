@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class RaycastPlayer : RaycastController
 {
-
     public override void HorizontalCollisions(ref Vector3 velocity)
     {
         float directionX = Mathf.Sign(velocity.x);
@@ -20,7 +19,7 @@ public class RaycastPlayer : RaycastController
 
             if (hit) // Mentre colpisco qualcosa
             {
-                if (hit.distance == 0)
+                if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Platform") && hit.distance == 0)
                 {
                     continue;
                 }
@@ -50,7 +49,10 @@ public class RaycastPlayer : RaycastController
             {
                 if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Platform") && directionY == 1)
                 {
-                    Collisions.above = false;
+                    if (hit.distance == 0)
+                    {
+                        continue;
+                    }
                 }
                 else if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Platform") && Input.GetAxisRaw("Vertical") == -1)
                 {

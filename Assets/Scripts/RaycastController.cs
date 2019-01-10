@@ -19,13 +19,6 @@ public abstract class RaycastController : MonoBehaviour
     public BoxCollider2D myCollider;
     protected RaycastOrigins myRaycastOrigins;
 
-    [SerializeField]
-    /// <summary>
-    /// Valore che riduce la distanza tra i raycast
-    /// </summary>
-    [Tooltip("Valore che riduce la distanza tra i raycast")]
-    protected int shrinkValue;
-
     /// <summary>
     /// Densità minima dei raycasts
     /// </summary>
@@ -149,7 +142,7 @@ public abstract class RaycastController : MonoBehaviour
     {
         for (int i = 0; i < HorizontalRayCount; i++)
         {
-            Vector2 rayOrigin = myRaycastOrigins.BottomLeft + Vector2.up * horizontalRaySpacing;
+            Vector2 rayOrigin = myRaycastOrigins.BottomLeft;
             rayOrigin += Vector2.up * (horizontalRaySpacing * i);
             RaycastHit2D hit = Physics2D.Raycast(rayOrigin, Vector2.left, leftRayLength, collisionMask);
 
@@ -158,13 +151,12 @@ public abstract class RaycastController : MonoBehaviour
             if (hit) // Mentre colpisco qualcosa
             {
                 Collisions.left = true;
-
             }
         }
 
         for (int i = 0; i < HorizontalRayCount; i++)
         {
-            Vector2 rayOrigin = myRaycastOrigins.BottomRight + Vector2.up * horizontalRaySpacing;
+            Vector2 rayOrigin = myRaycastOrigins.BottomRight;
             rayOrigin += Vector2.up * (horizontalRaySpacing * i);
             RaycastHit2D hit = Physics2D.Raycast(rayOrigin, Vector2.right, rightRayLength, collisionMask);
 
@@ -178,7 +170,7 @@ public abstract class RaycastController : MonoBehaviour
 
         for (int i = 0; i < VerticalRayCount; i++)
         {
-            Vector2 rayOrigin = myRaycastOrigins.TopLeft + Vector2.right * verticalRaySpacing;
+            Vector2 rayOrigin = myRaycastOrigins.TopLeft;
             rayOrigin += Vector2.right * (verticalRaySpacing * i);
             RaycastHit2D hit = Physics2D.Raycast(rayOrigin, Vector2.up, topRayLength, collisionMask);
 
@@ -192,7 +184,7 @@ public abstract class RaycastController : MonoBehaviour
 
         for (int i = 0; i < VerticalRayCount; i++)
         {
-            Vector2 rayOrigin = myRaycastOrigins.BottomLeft + Vector2.right * verticalRaySpacing;
+            Vector2 rayOrigin = myRaycastOrigins.BottomLeft;
             rayOrigin += Vector2.right * (verticalRaySpacing * i);
             RaycastHit2D hit = Physics2D.Raycast(rayOrigin, Vector2.down, bottomRayLength, collisionMask);
 
@@ -213,7 +205,7 @@ public abstract class RaycastController : MonoBehaviour
         HorizontalRayCount = Mathf.Clamp(HorizontalRayCount, (int)((myBounds.size.y + 1) * raycastsDensity), int.MaxValue);
         VerticalRayCount = Mathf.Clamp(VerticalRayCount, (int)((myBounds.size.x + 1) * raycastsDensity), int.MaxValue);
 
-        horizontalRaySpacing = myBounds.size.y / (HorizontalRayCount - 1 + shrinkValue);
-        verticalRaySpacing = myBounds.size.x / (VerticalRayCount - 1 + shrinkValue);
+        horizontalRaySpacing = myBounds.size.y / (HorizontalRayCount - 1);
+        verticalRaySpacing = myBounds.size.x / (VerticalRayCount - 1);
     }
 }

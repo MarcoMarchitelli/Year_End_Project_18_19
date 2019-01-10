@@ -141,7 +141,7 @@ public class RaycastPlatform : RaycastController
 
         for (int i = 0; i < HorizontalRayCount; i++)
         {
-            Vector2 rayOrigin = myRaycastOrigins.BottomLeft + Vector2.up * horizontalRaySpacing;
+            Vector2 rayOrigin = myRaycastOrigins.BottomLeft;
             rayOrigin += Vector2.up * (horizontalRaySpacing * i);
             RaycastHit2D hit = Physics2D.Raycast(rayOrigin, Vector2.left, leftRayLength, collisionMask);
 
@@ -163,7 +163,7 @@ public class RaycastPlatform : RaycastController
 
         for (int i = 0; i < HorizontalRayCount; i++)
         {
-            Vector2 rayOrigin = myRaycastOrigins.BottomRight + Vector2.up * horizontalRaySpacing;
+            Vector2 rayOrigin = myRaycastOrigins.BottomRight;
             rayOrigin += Vector2.up * (horizontalRaySpacing * i);
             RaycastHit2D hit = Physics2D.Raycast(rayOrigin, Vector2.right, rightRayLength, collisionMask);
 
@@ -185,7 +185,7 @@ public class RaycastPlatform : RaycastController
 
         for (int i = 0; i < VerticalRayCount; i++)
         {
-            Vector2 rayOrigin = myRaycastOrigins.TopLeft + Vector2.right * verticalRaySpacing;
+            Vector2 rayOrigin = myRaycastOrigins.TopLeft;
             rayOrigin += Vector2.right * (verticalRaySpacing * i);
             RaycastHit2D hit = Physics2D.Raycast(rayOrigin, Vector2.up, topRayLength, collisionMask);
 
@@ -207,7 +207,7 @@ public class RaycastPlatform : RaycastController
 
         for (int i = 0; i < VerticalRayCount; i++)
         {
-            Vector2 rayOrigin = myRaycastOrigins.BottomLeft + Vector2.right * verticalRaySpacing;
+            Vector2 rayOrigin = myRaycastOrigins.BottomLeft;
             rayOrigin += Vector2.right * (verticalRaySpacing * i);
             RaycastHit2D hit = Physics2D.Raycast(rayOrigin, Vector2.down, bottomRayLength, collisionMask);
 

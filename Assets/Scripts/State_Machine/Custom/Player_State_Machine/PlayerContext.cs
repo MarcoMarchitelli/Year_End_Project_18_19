@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class PlayerContext : IStateMachineContext {
-
+public class PlayerContext : IStateMachineContext
+{
     public PlayerController myPlayer;
-
 }
