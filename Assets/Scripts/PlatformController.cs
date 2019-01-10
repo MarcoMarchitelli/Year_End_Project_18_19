@@ -461,6 +461,7 @@ public class PlatformController : MonoBehaviour
             }
             nextMoveTime = Time.time + WaitTime;
         }
+
         return newPos - transform.position;
     }
 }

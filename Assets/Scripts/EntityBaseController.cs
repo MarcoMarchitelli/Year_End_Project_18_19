@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(RaycastController))]
 public abstract class EntityBaseController : MonoBehaviour
 {
     /// <summary>
@@ -248,6 +247,11 @@ public abstract class EntityBaseController : MonoBehaviour
     /// </summary>
     protected float jumpVelocity;
 
+    /// <summary>
+    /// Se attivo, l'entità può fare il primo salto
+    /// </summary>
+    private bool canJump;
+
     protected virtual void Start()
     {
         graphic = GetComponentsInChildren<Transform>()[1];
@@ -405,6 +409,26 @@ public abstract class EntityBaseController : MonoBehaviour
             canHit = true;
             attackTimer.StopTimer();
         }
+    }
+
+    public void Jump()
+    {
+        if (!isDashing)
+        {
+            /// TODO:
+            /// Eliminare quando è finita la fase di testing
+            CalculateGravityAndJumpVelocity(ref jumpVelocity, JumpHeight, TimeToJumpApex);
+            if (canJump)
+            {
+                velocity.y = jumpVelocity;
+                canJump = false;
+            }
+        }
+    }
+
+    public void ResetJump()
+    {
+        canJump = true;
     }
 
     protected void Die()

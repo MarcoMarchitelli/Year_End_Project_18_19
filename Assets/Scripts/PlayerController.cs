@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(RaycastPlayer))]
 public class PlayerController : EntityBaseController
 {
     [Header("Multiple Jump")]
@@ -32,11 +33,6 @@ public class PlayerController : EntityBaseController
     /// Salto consecutivo a cui è il player
     /// </summary>
     private int currentMultipleJumpsCount;
-
-    /// <summary>
-    /// Se attivo, il player può fare il primo salto
-    /// </summary>
-    private bool canJump;
 
     [Header("Debug Values")]
     /// <summary>
@@ -98,21 +94,6 @@ public class PlayerController : EntityBaseController
         Move(velocity * Time.deltaTime);
     }
 
-    public void Jump()
-    {
-        if (!isDashing)
-        {
-            /// TODO:
-            /// Eliminare quando è finita la fase di testing
-            CalculateGravityAndJumpVelocity(ref jumpVelocity, JumpHeight, TimeToJumpApex);
-            if (canJump)
-            {
-                velocity.y = jumpVelocity;
-                canJump = false;
-            }
-        }
-    }
-
     public void MultipleJump()
     {
         if (!isDashing)
@@ -123,11 +104,6 @@ public class PlayerController : EntityBaseController
                 currentMultipleJumpsCount--;
             }
         }
-    }
-
-    public void ResetJump()
-    {
-        canJump = true;
     }
 
     public void ResetJumpsCount()

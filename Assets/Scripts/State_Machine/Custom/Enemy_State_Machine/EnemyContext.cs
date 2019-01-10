@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class PlayerContext : IStateMachineContext
+public class EnemyContext : IStateMachineContext
 {
-    public PlayerController myPlayer;
+    public EnemyController myEnemy;
 }
