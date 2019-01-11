@@ -115,7 +115,8 @@ public class RaycastPlatform : RaycastController
 
             for (int i = 0; i < VerticalRayCount; i++)
             {
-                Vector2 rayOrigin = myRaycastOrigins.TopLeft + Vector2.right * (verticalRaySpacing * i);
+                Vector2 rayOrigin = myRaycastOrigins.TopLeft;
+                rayOrigin += Vector2.right * (verticalRaySpacing * i);
                 RaycastHit2D hit = Physics2D.Raycast(rayOrigin, Vector2.up, rayLength, passengerMask);
 
                 Debug.DrawRay(rayOrigin, Vector2.up * rayLength, Color.red);
