@@ -136,10 +136,8 @@ public class RaycastPlatform : RaycastController
         }
     }
 
-    public void CheckFadingCollision (LayerMask collisionMask)
+    public void CheckFadingCollision(LayerMask collisionMask)
     {
-        HashSet<Transform> hitPlatform = new HashSet<Transform>();
-
         for (int i = 0; i < HorizontalRayCount; i++)
         {
             Vector2 rayOrigin = myRaycastOrigins.BottomLeft;
@@ -150,15 +148,10 @@ public class RaycastPlatform : RaycastController
 
             if (hit) // Mentre colpisco qualcosa
             {
-                if (!hitPlatform.Contains(hit.transform))
+                if (hit.collider.GetComponent<PlayerController>() != null && hit.collider.GetComponent<PlayerController>().myRayCon.Collisions.right)
                 {
-                    hitPlatform.Add(hit.transform);
-                    if (hit.collider.GetComponent<PlayerController>() != null && hit.collider.GetComponent<PlayerController>().myRayCon.Collisions.right)
-                    {
-                        Collisions.left = true;
-                    }
+                    Collisions.left = true;
                 }
-                //Collisions.left = true;
             }
         }
 
@@ -172,17 +165,13 @@ public class RaycastPlatform : RaycastController
 
             if (hit) // Mentre colpisco qualcosa
             {
-                if (!hitPlatform.Contains(hit.transform))
+                if (hit.collider.GetComponent<PlayerController>() != null && hit.collider.GetComponent<PlayerController>().myRayCon.Collisions.left)
                 {
-                    hitPlatform.Add(hit.transform);
-                    if (hit.collider.GetComponent<PlayerController>() != null && hit.collider.GetComponent<PlayerController>().myRayCon.Collisions.left)
-                    {
-                        Collisions.right = true;
-                    }
+                    Collisions.right = true;
                 }
-                //Collisions.right = true;
             }
         }
+
 
         for (int i = 0; i < VerticalRayCount; i++)
         {
@@ -194,15 +183,10 @@ public class RaycastPlatform : RaycastController
 
             if (hit) // Mentre colpisco qualcosa
             {
-                if (!hitPlatform.Contains(hit.transform))
+                if (hit.collider.GetComponent<PlayerController>() != null && hit.collider.GetComponent<PlayerController>().myRayCon.Collisions.below)
                 {
-                    hitPlatform.Add(hit.transform);
-                    if (hit.collider.GetComponent<PlayerController>() != null && hit.collider.GetComponent<PlayerController>().myRayCon.Collisions.below)
-                    {
-                        Collisions.above = true;
-                    }
+                    Collisions.above = true;
                 }
-                //Collisions.above = true;
             }
         }
 
@@ -216,12 +200,10 @@ public class RaycastPlatform : RaycastController
 
             if (hit) // Mentre colpisco qualcosa
             {
-                hitPlatform.Add(hit.transform);
                 if (hit.collider.GetComponent<PlayerController>() != null && hit.collider.GetComponent<PlayerController>().myRayCon.Collisions.above)
                 {
                     Collisions.below = true;
                 }
-                //Collisions.below = true;
             }
         }
     }
