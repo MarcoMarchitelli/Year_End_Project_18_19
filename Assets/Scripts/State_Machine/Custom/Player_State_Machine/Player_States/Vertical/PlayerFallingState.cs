@@ -8,7 +8,7 @@ public class PlayerFallingState : PlayerStateBase
     {
         myContext.myPlayer.AddGravity();
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetButtonDown("Jump"))
         {
             myContext.myPlayer.MultipleJump();
         }

@@ -17,7 +17,7 @@ public class PlayerGroundedState : PlayerStateBase
             myContext.myPlayer.ResetVerticalVelocity();
         }
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetButtonDown("Jump"))
         {
             myContext.myPlayer.Jump();
         }

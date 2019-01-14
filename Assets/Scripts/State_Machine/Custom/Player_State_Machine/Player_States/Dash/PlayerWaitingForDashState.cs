@@ -6,7 +6,7 @@ public class PlayerWaitingForDashState : PlayerStateBase
 {
     protected override void Tick()
     {
-        if (Input.GetKeyDown(KeyCode.Z))
+        if (Input.GetButtonDown("Dash"))
         {
             myContext.myPlayer.Dash();
         }
