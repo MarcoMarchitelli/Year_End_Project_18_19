@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class EntityBaseController : MonoBehaviour
+public abstract class EntityBaseController : MonoBehaviour, IDamageable
 {
+    [SerializeField]
     /// <summary>
     /// Riferimento alla grafica dell'entità
     /// </summary>
+    [Tooltip("Riferimento alla grafica dell'entità")]
     private Transform graphic;
 
     [HideInInspector]
@@ -254,8 +256,6 @@ public abstract class EntityBaseController : MonoBehaviour
 
     protected virtual void Start()
     {
-        graphic = GetComponentsInChildren<Transform>()[1];
-
         gravityTimer = new Timer();
         attackTimer = new Timer();
         dashTimer = new Timer();
@@ -359,7 +359,7 @@ public abstract class EntityBaseController : MonoBehaviour
             yield return null;
         }
 
-        if (invulnerabilityTimer.CheckTimer(InvulnerabiltyTime) || !isInvulnerable)
+        if (invulnerabilityTimer.CheckTimer(InvulnerabiltyTime) || !isInvulnerable || InvulnerabiltyTime <= 0f)
         {
             isInvulnerable = false;
             invulnerabilityTimer.StopTimer();
@@ -382,13 +382,18 @@ public abstract class EntityBaseController : MonoBehaviour
         }
     }
 
-    protected void Attack()
+    protected void Attack(bool attackRight = false, bool attackLeft = false, bool attackAbove = false, bool attackBelow = false)
     {
         if (canHit)
         {
+            List<IDamageable> hitDamageableList = myRayCon.TriggerAttackRaycasts(attackRight, attackLeft, attackAbove, attackBelow);
             Debug.Log("Hai attaccato");
             canHit = false;
             StartCoroutine(Reload());
+            foreach (IDamageable damageable in hitDamageableList)
+            {
+                damageable.TakeDamage(AttackDamage);
+            }
         }
         else
         {
@@ -461,12 +466,6 @@ public abstract class EntityBaseController : MonoBehaviour
     public void SetRespawnPosition()
     {
         respawnPosition = transform.position;
-    }
-
-    public virtual void DeathAnimation()
-    {
-        /// TODO
-        /// Mettere animazione di morte
     }
 
     public void ResetHorizontalVelocity()

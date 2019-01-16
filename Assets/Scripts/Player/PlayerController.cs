@@ -80,9 +80,9 @@ public class PlayerController : EntityBaseController
         {
             SetRespawnPosition();
         }
-        if (Input.GetKeyDown(KeyCode.X))
+        if (Input.GetButtonDown("Attack"))
         {
-            Attack();
+            Attack(true);
         }
 
         #endregion

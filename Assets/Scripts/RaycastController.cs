@@ -7,6 +7,12 @@ public abstract class RaycastController : MonoBehaviour
 {
     public LayerMask myCollisionMask;
 
+    /// <summary>
+    /// I layer inseriti qui verranno colpiti dall'entità
+    /// </summary>
+    [Tooltip("I layer inseriti qui verranno colpiti dall'entità")]
+    public LayerMask attackMask;
+
     public float SkinWidth;
 
     public int HorizontalRayCount;
@@ -51,6 +57,34 @@ public abstract class RaycastController : MonoBehaviour
     /// </summary>
     [Tooltip("Lunghezza del raycast destro")]
     protected float rightRayLength;
+
+    [SerializeField]
+    /// <summary>
+    /// Lunghezza del raycast superiore
+    /// </summary>
+    [Tooltip("Lunghezza del raycast superiore")]
+    protected float topAttackRayLength;
+
+    [SerializeField]
+    /// <summary>
+    /// Lunghezza del raycast inferiore
+    /// </summary>
+    [Tooltip("Lunghezza del raycast inferiore")]
+    protected float bottomAttackRayLength;
+
+    [SerializeField]
+    /// <summary>
+    /// Lunghezza del raycast sinistro
+    /// </summary>
+    [Tooltip("Lunghezza del raycast sinistro")]
+    protected float leftAttackRayLength;
+
+    [SerializeField]
+    /// <summary>
+    /// Lunghezza del raycast destro
+    /// </summary>
+    [Tooltip("Lunghezza del raycast destro")]
+    protected float rightAttackRayLength;
 
     public CollisionInfo Collisions;
 
@@ -136,6 +170,111 @@ public abstract class RaycastController : MonoBehaviour
                 Collisions.above = directionY == 1; // Se la direzione (velocità) è 1, allora Collisions.above = true
             }
         }
+    }
+
+    public List<IDamageable> TriggerAttackRaycasts(bool attackRight = false, bool attackLeft = false, bool attackAbove = false, bool attackBelow = false)
+    {
+        List<IDamageable> hitDamageableList = new List<IDamageable>();
+
+        HashSet<Transform> hitVictim = new HashSet<Transform>();
+
+        if (attackLeft)
+        {
+            for (int i = 0; i < HorizontalRayCount; i++)
+            {
+                Vector2 rayOrigin = myRaycastOrigins.BottomLeft;
+                rayOrigin += Vector2.up * (horizontalRaySpacing * i);
+                RaycastHit2D hit = Physics2D.Raycast(rayOrigin, Vector2.left, leftAttackRayLength, attackMask);
+
+                Debug.DrawRay(rayOrigin, Vector2.left * leftAttackRayLength, Color.red);
+
+                if (hit) // Mentre colpisco qualcosa
+                {
+                    if (!hitVictim.Contains(hit.transform))
+                    {
+                        hitVictim.Add(hit.transform);
+                        if (hit.collider.GetComponent<IDamageable>() != null)
+                        {
+                            hitDamageableList.Add(hit.collider.GetComponent<IDamageable>());
+                        }
+                    }
+                }
+            }
+        }
+
+        if (attackRight)
+        {
+            for (int i = 0; i < HorizontalRayCount; i++)
+            {
+                Vector2 rayOrigin = myRaycastOrigins.BottomRight;
+                rayOrigin += Vector2.up * (horizontalRaySpacing * i);
+                RaycastHit2D hit = Physics2D.Raycast(rayOrigin, Vector2.right, rightAttackRayLength, attackMask);
+
+                Debug.DrawRay(rayOrigin, Vector2.right * rightAttackRayLength, Color.red);
+
+                if (hit) // Mentre colpisco qualcosa
+                {
+                    if (!hitVictim.Contains(hit.transform))
+                    {
+                        hitVictim.Add(hit.transform);
+                        if (hit.collider.GetComponent<IDamageable>() != null)
+                        {
+                            hitDamageableList.Add(hit.collider.GetComponent<IDamageable>());
+                        }
+                    }
+                }
+            }
+        }
+
+        if (attackAbove)
+        {
+            for (int i = 0; i < VerticalRayCount; i++)
+            {
+                Vector2 rayOrigin = myRaycastOrigins.TopLeft;
+                rayOrigin += Vector2.right * (verticalRaySpacing * i);
+                RaycastHit2D hit = Physics2D.Raycast(rayOrigin, Vector2.up, topAttackRayLength, attackMask);
+
+                Debug.DrawRay(rayOrigin, Vector2.up * topAttackRayLength, Color.red);
+
+                if (hit) // Mentre colpisco qualcosa
+                {
+                    if (!hitVictim.Contains(hit.transform))
+                    {
+                        hitVictim.Add(hit.transform);
+                        if (hit.collider.GetComponent<IDamageable>() != null)
+                        {
+                            hitDamageableList.Add(hit.collider.GetComponent<IDamageable>());
+                        }
+                    }
+                }
+            }
+        }
+
+        if (attackBelow)
+        {
+            for (int i = 0; i < VerticalRayCount; i++)
+            {
+                Vector2 rayOrigin = myRaycastOrigins.BottomLeft;
+                rayOrigin += Vector2.right * (verticalRaySpacing * i);
+                RaycastHit2D hit = Physics2D.Raycast(rayOrigin, Vector2.down, bottomAttackRayLength, attackMask);
+
+                Debug.DrawRay(rayOrigin, Vector2.down * bottomAttackRayLength, Color.red);
+
+                if (hit) // Mentre colpisco qualcosa
+                {
+                    if (!hitVictim.Contains(hit.transform))
+                    {
+                        hitVictim.Add(hit.transform);
+                        if (hit.collider.GetComponent<IDamageable>() != null)
+                        {
+                            hitDamageableList.Add(hit.collider.GetComponent<IDamageable>());
+                        }
+                    }
+                }
+            }
+        }
+
+        return hitDamageableList;
     }
 
     public virtual void CheckRaycastsBools(LayerMask collisionMask)

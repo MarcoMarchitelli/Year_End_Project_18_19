@@ -10,12 +10,6 @@ public class RaycastEnemy : RaycastController
     [Tooltip("I layer inseriti qui verranno spinti dal nemico")]
     public LayerMask pushMask;
 
-    /// <summary>
-    /// I layer inseriti qui verranno colpiti dal nemico
-    /// </summary>
-    [Tooltip("I layer inseriti qui verranno colpiti dal nemico")]
-    public LayerMask killMask;
-
     private List<PassengerMovement> passengerMovementList;
     private Dictionary<Transform, EntityBaseController> passengerDictionary = new Dictionary<Transform, EntityBaseController>();
 
@@ -62,7 +56,7 @@ public class RaycastEnemy : RaycastController
         {
             Vector2 rayOrigin = myRaycastOrigins.BottomLeft;
             rayOrigin += Vector2.up * (horizontalRaySpacing * i);
-            RaycastHit2D hit = Physics2D.Raycast(rayOrigin, Vector2.left, leftRayLength, killMask);
+            RaycastHit2D hit = Physics2D.Raycast(rayOrigin, Vector2.left, leftRayLength, attackMask);
 
             Debug.DrawRay(rayOrigin, Vector2.left * leftRayLength, Color.red);
 
@@ -85,7 +79,7 @@ public class RaycastEnemy : RaycastController
         {
             Vector2 rayOrigin = myRaycastOrigins.BottomRight;
             rayOrigin += Vector2.up * (horizontalRaySpacing * i);
-            RaycastHit2D hit = Physics2D.Raycast(rayOrigin, Vector2.right, rightRayLength, killMask);
+            RaycastHit2D hit = Physics2D.Raycast(rayOrigin, Vector2.right, rightRayLength, attackMask);
 
             Debug.DrawRay(rayOrigin, Vector2.right * rightRayLength, Color.red);
 
@@ -108,7 +102,7 @@ public class RaycastEnemy : RaycastController
         {
             Vector2 rayOrigin = myRaycastOrigins.TopLeft;
             rayOrigin += Vector2.right * (verticalRaySpacing * i);
-            RaycastHit2D hit = Physics2D.Raycast(rayOrigin, Vector2.up, topRayLength, killMask);
+            RaycastHit2D hit = Physics2D.Raycast(rayOrigin, Vector2.up, topRayLength, attackMask);
 
             Debug.DrawRay(rayOrigin, Vector2.up * topRayLength, Color.red);
 
@@ -131,7 +125,7 @@ public class RaycastEnemy : RaycastController
         {
             Vector2 rayOrigin = myRaycastOrigins.BottomLeft;
             rayOrigin += Vector2.right * (verticalRaySpacing * i);
-            RaycastHit2D hit = Physics2D.Raycast(rayOrigin, Vector2.down, bottomRayLength, killMask);
+            RaycastHit2D hit = Physics2D.Raycast(rayOrigin, Vector2.down, bottomRayLength, attackMask);
 
             Debug.DrawRay(rayOrigin, Vector2.down * bottomRayLength, Color.red);
 

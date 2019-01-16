@@ -4,13 +4,11 @@ using UnityEngine;
 
 public class CoinController : MonoBehaviour
 {
-    private Rigidbody2D myRb;
     private CoinManager myCoinManager;
 
     // Use this for initialization
     void Start()
     {
-        myRb = GetComponent<Rigidbody2D>();
         myCoinManager = FindObjectOfType<CoinManager>();
     }
 
