@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class EnemyMovingLeftState : EnemyStateBase
 {
+    protected override void Enter()
+    {
+        myContext.myEnemy.RotateEntity(Vector3.up, 180f);
+    }
+
     protected override void Tick()
     {
         if (myContext.myEnemy.myRayCon.Collisions.below)
