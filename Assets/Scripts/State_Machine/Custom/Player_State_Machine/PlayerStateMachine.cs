@@ -23,10 +23,11 @@ public class PlayerStateMachine : StateMachineBase
     {
         UpdateHorizontalVelocityFloat();
         UpdateVerticalVelocityFloat();
+        UdateDirectionalBools();
         UpdateCollsionBools();
         UpdateStandingStillBool();
-        UpdateFacingDirectionBool();
         UpdateDashBools();
+        UpdateAttackBools();
     }
 
     private void UpdateCollsionBools()
@@ -47,21 +48,29 @@ public class PlayerStateMachine : StateMachineBase
         myAnim.SetFloat("Velocity.y", myPlayer.GetVelocity().y);
     }
 
+    private void UdateDirectionalBools()
+    {
+        myAnim.SetBool("FacingLeft", myPlayer.GetIsFacingLeft());
+        myAnim.SetBool("FacingRight", myPlayer.GetIsFacingRight());
+        myAnim.SetBool("FacingUp", myPlayer.GetIsFacingUp());
+        myAnim.SetBool("FacingDown", myPlayer.GetIsFacingDown());
+    }
+
     private void UpdateStandingStillBool()
     {
         myAnim.SetBool("StandingStill", myPlayer.GetVelocity().x == 0 ? true : false);
-    }
-
-    private void UpdateFacingDirectionBool()
-    {
-        myAnim.SetBool("FacingRight", myPlayer.CheckFacingRightAndRotate() ? true : false);
-        myAnim.SetBool("FacingLeft", myPlayer.CheckFacingRightAndRotate() ? false : true);
     }
 
     private void UpdateDashBools()
     {
         myAnim.SetBool("Dashing", myPlayer.GetIsDashing());
         myAnim.SetBool("DashRecharging", myPlayer.GetIsDashRecharging());
+    }
+
+    private void UpdateAttackBools()
+    {
+        myAnim.SetBool("Attacking", myPlayer.GetIsAttacking());
+        myAnim.SetBool("AttackRecharging", myPlayer.GetIsAttackRecharging());
     }
 
     protected override void FillStates()

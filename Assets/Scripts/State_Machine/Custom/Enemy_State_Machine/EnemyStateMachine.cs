@@ -22,7 +22,6 @@ public class EnemyStateMachine : StateMachineBase
     {
         UpdateHorizontalVelocityFloat();
         UpdateCollsionBools();
-        UpdateFacingDirectionBool();
     }
 
     private void UpdateCollsionBools()
@@ -36,12 +35,6 @@ public class EnemyStateMachine : StateMachineBase
     private void UpdateHorizontalVelocityFloat()
     {
         myAnim.SetFloat("Velocity.x", myEnemy.GetVelocity().x);
-    }
-
-    private void UpdateFacingDirectionBool()
-    {
-        myAnim.SetBool("FacingRight", myEnemy.CheckFacingRightAndRotate() ? true : false);
-        myAnim.SetBool("FacingLeft", myEnemy.CheckFacingRightAndRotate() ? false : true);
     }
 
     protected override void FillStates()

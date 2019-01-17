@@ -67,10 +67,31 @@ public abstract class EntityBaseController : MonoBehaviour, IDamageable
     public int AttackDamage;
 
     /// <summary>
+    /// Tempo che ci mette l'attacco ad essere concluso (in secondi)
+    /// </summary>
+    [Tooltip("Tempo che ci mette l'attacco ad essere concluso (in secondi)")]
+    public float AttackTime;
+
+    /// <summary>
     /// Velocità con cui l'entità infligge danno
     /// </summary>
     [Tooltip("Velocità con cui l'entità infligge danno")]
     public float AttackSpeed;
+
+    /// <summary>
+    /// Se true, l'entità può sferrare l'attacco
+    /// </summary>
+    protected bool canAttack = true;
+
+    /// <summary>
+    /// Se true, l'entità sta ricaricando l'attacco
+    /// </summary>
+    protected bool isAttackRecharging;
+
+    /// <summary>
+    /// Se true, l'entità sta eseguendo un attacco
+    /// </summary>
+    protected bool isAttacking;
 
     /// <summary>
     /// Tempo che l'entità rimane invulnerabile in secondi
@@ -97,11 +118,6 @@ public abstract class EntityBaseController : MonoBehaviour, IDamageable
     /// Serve a salvare la posizione iniziale dell'entità
     /// </summary>
     private Vector3 respawnPosition;
-
-    /// <summary>
-    /// Se true, l'entità può sferrare l'attacco
-    /// </summary>
-    protected bool canHit = true;
 
     /// <summary>
     /// Gravità subita dall'entità
@@ -161,13 +177,25 @@ public abstract class EntityBaseController : MonoBehaviour, IDamageable
     /// Se true, l'entità sta guardando a destra
     /// </summary>
     [Tooltip("Se true, l'entità sta guardando a destra")]
-    private bool isFacingRight = true;
+    private bool isFacingRight;
 
     /// <summary>
     /// Se true, l'entità sta guardando a sinistra
     /// </summary>
     [Tooltip("Se true, l'entità sta guardando a sinistra")]
     private bool isFacingLeft;
+
+    /// <summary>
+    /// Se true, l'entità sta guardando sopra
+    /// </summary>
+    [Tooltip("Se true, l'entità sta guardando sopra")]
+    private bool isFacingUp;
+
+    /// <summary>
+    /// Se true, l'entità sta guardando sotto
+    /// </summary>
+    [Tooltip("Se true, l'entità sta guardando sotto")]
+    private bool isFacingDown;
 
     [Header("Dash")]
     /// <summary>
@@ -213,7 +241,7 @@ public abstract class EntityBaseController : MonoBehaviour, IDamageable
     /// <summary>
     /// Se true, l'entità sta eseguendo un dash
     /// </summary>
-    protected bool isDashing = false;
+    protected bool isDashing;
 
     /// <summary>
     /// Se true, l'entità sta ricaricando il dash
@@ -382,38 +410,96 @@ public abstract class EntityBaseController : MonoBehaviour, IDamageable
         }
     }
 
-    protected void Attack(bool attackRight = false, bool attackLeft = false, bool attackAbove = false, bool attackBelow = false)
+    public void BasicAttack()
     {
-        if (canHit)
+        if (canAttack)
         {
-            List<IDamageable> hitDamageableList = myRayCon.TriggerAttackRaycasts(attackRight, attackLeft, attackAbove, attackBelow);
-            Debug.Log("Hai attaccato");
-            canHit = false;
-            StartCoroutine(Reload());
-            foreach (IDamageable damageable in hitDamageableList)
+            if (isFacingRight && !(isFacingUp || isFacingDown))
             {
-                damageable.TakeDamage(AttackDamage);
+                List<IDamageable> hitDamageableList = myRayCon.TriggerAttackRaycasts(true);
+                Debug.Log("Hai attaccato a destra");
+                canAttack = false;
+                isAttacking = true;
+                foreach (IDamageable damageable in hitDamageableList)
+                {
+                    damageable.TakeDamage(AttackDamage);
+                }
             }
-        }
-        else
-        {
-            Debug.Log("Stai ricaricando l'attacco");
+
+            if (isFacingLeft && !(isFacingUp || isFacingDown))
+            {
+                List<IDamageable> hitDamageableList = myRayCon.TriggerAttackRaycasts(false, true);
+                Debug.Log("Hai attaccato a sinistra");
+                canAttack = false;
+                isAttacking = true;
+                foreach (IDamageable damageable in hitDamageableList)
+                {
+                    damageable.TakeDamage(AttackDamage);
+                }
+            }
+
+            if (isFacingUp)
+            {
+                List<IDamageable> hitDamageableList = myRayCon.TriggerAttackRaycasts(false, false, true);
+                Debug.Log("Hai attaccato in alto");
+                canAttack = false;
+                isAttacking = true;
+                foreach (IDamageable damageable in hitDamageableList)
+                {
+                    damageable.TakeDamage(AttackDamage);
+                }
+            }
+
+            if (isFacingDown && !myRayCon.Collisions.below)
+            {
+                List<IDamageable> hitDamageableList = myRayCon.TriggerAttackRaycasts(false, false, false, true);
+                Debug.Log("Hai attaccato in basso");
+                canAttack = false;
+                isAttacking = true;
+                foreach (IDamageable damageable in hitDamageableList)
+                {
+                    damageable.TakeDamage(AttackDamage);
+                }
+            }
         }
     }
 
-    protected IEnumerator Reload()
+    public void SetIsAttacking()
     {
-        while (!attackTimer.CheckTimer(AttackSpeed) && !canHit)
+        if (!attackTimer.CheckTimer(AttackTime))
         {
             attackTimer.TickTimer();
-            yield return null;
         }
-
-        if (attackTimer.CheckTimer(AttackSpeed) || canHit)
+        else
         {
-            canHit = true;
             attackTimer.StopTimer();
+            isAttacking = false;
+            isAttackRecharging = true;
         }
+    }
+
+    public void RechargeAttack()
+    {
+        if (!attackTimer.CheckTimer(AttackSpeed))
+        {
+            attackTimer.TickTimer();
+        }
+        else
+        {
+            attackTimer.StopTimer();
+            canAttack = true;
+            isAttackRecharging = false;
+        }
+    }
+
+    public bool GetIsAttacking()
+    {
+        return isAttacking;
+    }
+
+    public bool GetIsAttackRecharging()
+    {
+        return isAttackRecharging;
     }
 
     public void Jump()
@@ -446,7 +532,7 @@ public abstract class EntityBaseController : MonoBehaviour, IDamageable
         Health = respawnHealth;
         transform.position = respawnPosition;
         isAlive = true;
-        canHit = true;
+        canAttack = true;
         canDash = true;
         isInvulnerable = false;
 
@@ -568,28 +654,57 @@ public abstract class EntityBaseController : MonoBehaviour, IDamageable
         AccelerationTime = 0f;
     }
 
-    public void RotateEntity(Vector3 direction, float rotationDegrees)
+    public void RotateEntity(Vector3 axes, float rotationDegrees)
     {
-        graphic.Rotate(direction * rotationDegrees);
+        graphic.Rotate(axes * rotationDegrees);
     }
 
-    public bool CheckFacingRightAndRotate()   // <------------- ATTENZIONE!!! DEVE ESSERE A TRUE IL PARAMETRO INIZIALE GIUSTO NELL'INSPECTOR
+    public void ResetFacingDirections()
     {
-        if (velocity.x > 0 && isFacingLeft)
-        {
-            isFacingRight = true;
-            isFacingLeft = false;
-            RotateEntity(Vector3.up, 180f);
-            return isFacingRight;
-        }
-        if (velocity.x < 0 && isFacingRight)
-        {
-            isFacingLeft = true;
-            isFacingRight = false;
-            RotateEntity(Vector3.up, 180f);
-            return isFacingRight;
-        }
+        SetIsFacingLeft(false);
+        SetIsFacingRight(false);
+        SetIsFacingUp(false);
+        SetIsFacingDown(false);
+    }
+
+    public void SetIsFacingLeft(bool value)
+    {
+        isFacingLeft = value;
+    }
+
+    public bool GetIsFacingLeft()
+    {
+        return isFacingLeft;
+    }
+
+    public void SetIsFacingRight(bool value)
+    {
+        isFacingRight = value;
+    }
+
+    public bool GetIsFacingRight()
+    {
         return isFacingRight;
+    }
+
+    public void SetIsFacingUp(bool value)
+    {
+        isFacingUp = value;
+    }
+
+    public bool GetIsFacingUp()
+    {
+        return isFacingUp;
+    }
+
+    public void SetIsFacingDown(bool value)
+    {
+        isFacingDown = value;
+    }
+
+    public bool GetIsFacingDown()
+    {
+        return isFacingDown;
     }
 
     public void SetIsDashing()

@@ -80,10 +80,6 @@ public class PlayerController : EntityBaseController
         {
             SetRespawnPosition();
         }
-        if (Input.GetButtonDown("Attack"))
-        {
-            Attack(true);
-        }
 
         #endregion
 
