@@ -336,8 +336,8 @@ public abstract class RaycastController : MonoBehaviour
         Bounds myBounds = myCollider.bounds;
         myBounds.Expand(SkinWidth * -2);
 
-        HorizontalRayCount = Mathf.Clamp(HorizontalRayCount, 0, int.MaxValue);
-        VerticalRayCount = Mathf.Clamp(VerticalRayCount, 0, int.MaxValue);
+        HorizontalRayCount = Mathf.Clamp(HorizontalRayCount, 10, int.MaxValue);
+        VerticalRayCount = Mathf.Clamp(VerticalRayCount, 10, int.MaxValue);
 
         horizontalRaySpacing = myBounds.size.y / (HorizontalRayCount - 1);
         verticalRaySpacing = myBounds.size.x / (VerticalRayCount - 1);
