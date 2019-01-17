@@ -6,6 +6,9 @@ public class PlayerStandingStillState : PlayerStateBase
 {
     protected override void Tick()
     {
-        myContext.myPlayer.SetHorizontalVelocity(Input.GetAxisRaw("Horizontal"));
+        if (Input.GetAxisRaw("Horizontal") != 0)
+        {
+            myContext.myPlayer.SetHorizontalVelocity(Mathf.Sign(Input.GetAxisRaw("Horizontal")));
+        }
     }
 }

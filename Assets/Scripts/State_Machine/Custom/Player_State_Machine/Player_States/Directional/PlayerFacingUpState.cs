@@ -14,7 +14,10 @@ public class PlayerFacingUpState : PlayerStateBase
     {
         if (myContext.myPlayer.GetIsFacingLeft())
         {
-            myContext.myPlayer.SetIsFacingRight(Input.GetAxisRaw("Horizontal") == 1);
+            if (Input.GetAxisRaw("Horizontal") != 0)
+            {
+                myContext.myPlayer.SetIsFacingRight(Mathf.Sign(Input.GetAxisRaw("Horizontal")) == 1);
+            }
 
             if (myContext.myPlayer.GetIsFacingRight())
             {
@@ -23,7 +26,7 @@ public class PlayerFacingUpState : PlayerStateBase
         }
         if (myContext.myPlayer.GetIsFacingRight())
         {
-            myContext.myPlayer.SetIsFacingLeft(Input.GetAxisRaw("Horizontal") == -1);
+            myContext.myPlayer.SetIsFacingLeft(Mathf.Sign(Input.GetAxisRaw("Horizontal")) == -1);
 
             if (myContext.myPlayer.GetIsFacingLeft())
             {
@@ -31,7 +34,7 @@ public class PlayerFacingUpState : PlayerStateBase
             }
         }
 
-        myContext.myPlayer.SetIsFacingDown(Input.GetAxisRaw("Vertical") == -1);
+        myContext.myPlayer.SetIsFacingDown(Mathf.Sign(Input.GetAxisRaw("Vertical")) == -1);
         myContext.myPlayer.SetIsFacingUp(!(Input.GetAxisRaw("Vertical") <= 0));
     }
 }

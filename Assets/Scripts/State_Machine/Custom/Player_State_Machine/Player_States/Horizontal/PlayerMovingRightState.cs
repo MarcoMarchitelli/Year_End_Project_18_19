@@ -6,13 +6,20 @@ public class PlayerMovingRightState : PlayerStateBase
 {
     protected override void Tick()
     {
-        myContext.myPlayer.SetHorizontalVelocity(Input.GetAxisRaw("Horizontal"));
+        if (Input.GetAxisRaw("Horizontal") != 0)
+        {
+            myContext.myPlayer.SetHorizontalVelocity(Mathf.Sign(Input.GetAxisRaw("Horizontal")));
+        }
+        else
+        {
+            myContext.myPlayer.SetHorizontalVelocity(0f);
+        }
 
-        if (Input.GetKey(KeyCode.LeftShift) && !myContext.myPlayer.myRayCon.Collisions.right)
+        if (Input.GetButton("Run") && !myContext.myPlayer.myRayCon.Collisions.right)
         {
             myContext.myPlayer.UpdateAccelerationTime();
         }
-        else if (Input.GetKeyUp(KeyCode.LeftShift) || myContext.myPlayer.myRayCon.Collisions.right)
+        else if (Input.GetButtonUp("Run") || myContext.myPlayer.myRayCon.Collisions.right)
         {
             myContext.myPlayer.ResetAccelerationTime();
         }

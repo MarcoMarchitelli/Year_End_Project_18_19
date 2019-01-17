@@ -25,11 +25,6 @@ public abstract class RaycastController : MonoBehaviour
     public BoxCollider2D myCollider;
     protected RaycastOrigins myRaycastOrigins;
 
-    /// <summary>
-    /// Densità minima dei raycasts
-    /// </summary>
-    private int raycastsDensity = 5;
-
     [SerializeField]
     /// <summary>
     /// Lunghezza del raycast superiore
@@ -341,8 +336,8 @@ public abstract class RaycastController : MonoBehaviour
         Bounds myBounds = myCollider.bounds;
         myBounds.Expand(SkinWidth * -2);
 
-        HorizontalRayCount = Mathf.Clamp(HorizontalRayCount, (int)((myBounds.size.y + 1) * raycastsDensity), int.MaxValue);
-        VerticalRayCount = Mathf.Clamp(VerticalRayCount, (int)((myBounds.size.x + 1) * raycastsDensity), int.MaxValue);
+        HorizontalRayCount = Mathf.Clamp(HorizontalRayCount, 0, int.MaxValue);
+        VerticalRayCount = Mathf.Clamp(VerticalRayCount, 0, int.MaxValue);
 
         horizontalRaySpacing = myBounds.size.y / (HorizontalRayCount - 1);
         verticalRaySpacing = myBounds.size.x / (VerticalRayCount - 1);

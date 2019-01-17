@@ -9,6 +9,8 @@ public class DebugController : MonoBehaviour
     private void Start()
     {
         myCanvas = GetComponentInChildren<Canvas>();
+
+        Application.targetFrameRate = 60;
     }
 
     private void Update()

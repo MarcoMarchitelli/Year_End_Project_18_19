@@ -54,7 +54,7 @@ public class RaycastPlayer : RaycastController
                         continue;
                     }
                 }
-                else if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Platform") && Input.GetAxisRaw("Vertical") == -1)
+                else if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Platform") && (Mathf.Sign(Input.GetAxisRaw("Vertical")) == -1))
                 {
                     Collisions.below = false;
                 }
