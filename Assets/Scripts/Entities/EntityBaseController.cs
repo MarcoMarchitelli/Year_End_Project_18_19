@@ -535,7 +535,8 @@ public abstract class EntityBaseController : MonoBehaviour, IDamageable
         canAttack = true;
         canDash = true;
         isInvulnerable = false;
-
+        ResetHorizontalVelocity();
+        ResetVerticalVelocity();
     }
 
     public void SetRespawnVariables()

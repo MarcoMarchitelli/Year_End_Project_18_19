@@ -20,7 +20,7 @@ public class PlatformStateMachine : StateMachineBase {
 
     private void Update()
     {
-        UpdateCollsionBools();
+        UpdateCollisionBools();
         UpdateFadingBool();
         UpdateReturningBool();
         UpdateFallingBool();
@@ -44,7 +44,7 @@ public class PlatformStateMachine : StateMachineBase {
         #endregion
     }
 
-    private void UpdateCollsionBools()
+    private void UpdateCollisionBools()
     {
         myAnim.SetBool("CollisionAbove", myPlatform.myRayCon.Collisions.above);
     }

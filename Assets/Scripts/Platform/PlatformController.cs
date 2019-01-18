@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(RaycastPlatform))]
-public class PlatformController : MonoBehaviour
+public class PlatformController : MonoBehaviour, IDamageable
 {
     [HideInInspector]
     /// <summary>
@@ -168,12 +168,13 @@ public class PlatformController : MonoBehaviour
     /// Colpi che deve subire la piattaforma prima di iniziare a tremare
     /// </summary>
     [Tooltip("Colpi che deve subire la piattaforma prima di iniziare a tremare")]
-    private int hitsNeeded;
+    public int HitsNeeded;
 
+    [HideInInspector]
     /// <summary>
     /// Colpi inflitti alla piattaforma
     /// </summary>
-    private int currentHits;
+    public int CurrentHits;
 
     [SerializeField]
     /// <summary>
@@ -328,18 +329,21 @@ public class PlatformController : MonoBehaviour
         {
             return;
         }
-        if (currentHits - _takenDamage <= 0)
+        if (CurrentHits + _takenDamage >= HitsNeeded)
         {
-            currentHits = 0;
+            CurrentHits = HitsNeeded;
         }
-        if (currentHits <= 0)
+        if (CurrentHits >= HitsNeeded)
         {
+            ResetCurrentHits();
             isTrembling = true;
         }
         else
         {
-            currentHits -= _takenDamage;
+            CurrentHits += _takenDamage;
+            CurrentHits++;
         }
+        Debug.Log("Piattaforma colpita");
     }
 
     public void ResetFadingPlatform()
@@ -364,7 +368,7 @@ public class PlatformController : MonoBehaviour
             trembleTimer.StopTimer();
             fallTimer.StopTimer();
             ResetPlatformStartingPosition();
-            currentHits = hitsNeeded;
+            CurrentHits = HitsNeeded;
             isTrembling = false;
             isFalling = false;
         }
@@ -412,7 +416,7 @@ public class PlatformController : MonoBehaviour
 
     public void ResetCurrentHits()
     {
-        currentHits = hitsNeeded;
+        CurrentHits = HitsNeeded;
     }
 
     private float Ease(float x)

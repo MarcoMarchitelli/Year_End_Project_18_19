@@ -24,13 +24,13 @@ public class PlayerStateMachine : StateMachineBase
         UpdateHorizontalVelocityFloat();
         UpdateVerticalVelocityFloat();
         UdateDirectionalBools();
-        UpdateCollsionBools();
+        UpdateCollisionBools();
         UpdateStandingStillBool();
         UpdateDashBools();
         UpdateAttackBools();
     }
 
-    private void UpdateCollsionBools()
+    private void UpdateCollisionBools()
     {
         myAnim.SetBool("CollisionAbove", myPlayer.myRayCon.Collisions.above);
         myAnim.SetBool("CollisionBelow", myPlayer.myRayCon.Collisions.below);

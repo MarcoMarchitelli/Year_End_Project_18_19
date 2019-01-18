@@ -21,10 +21,10 @@ public class EnemyStateMachine : StateMachineBase
     private void Update()
     {
         UpdateHorizontalVelocityFloat();
-        UpdateCollsionBools();
+        UpdateCollisionBools();
     }
 
-    private void UpdateCollsionBools()
+    private void UpdateCollisionBools()
     {
         myAnim.SetBool("CollisionAbove", myEnemy.myRayCon.Collisions.above);
         myAnim.SetBool("CollisionBelow", myEnemy.myRayCon.Collisions.below);
