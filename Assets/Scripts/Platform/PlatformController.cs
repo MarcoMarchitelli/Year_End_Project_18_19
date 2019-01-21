@@ -176,12 +176,11 @@ public class PlatformController : MonoBehaviour, IDamageable
     /// </summary>
     public int CurrentHits;
 
-    [SerializeField]
     /// <summary>
     /// Danno che fa la piattaforma quando cade
     /// </summary>
     [Tooltip("Danno che fa la piattaforma quando cade")]
-    private int FallingDamage;
+    public int FallingDamage;
 
     [SerializeField]
     /// <summary>
@@ -317,6 +316,10 @@ public class PlatformController : MonoBehaviour, IDamageable
             fallTimer.TickTimer();
         }
         else
+        {
+            fallTimer.PauseTimer();
+        }
+        if (myRayCon.Collisions.below)
         {
             fallTimer.StopTimer();
             isFalling = false;

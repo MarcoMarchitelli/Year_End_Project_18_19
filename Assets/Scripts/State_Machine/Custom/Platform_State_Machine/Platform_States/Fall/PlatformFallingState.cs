@@ -6,12 +6,12 @@ public class PlatformFallingState : PlatformStateBase {
 
     protected override void Tick()
     {
-        myContext.myPlatform.FallPlatform();
-
         if (myContext.myPlatform.GetCanFall())
         {
-            myContext.myPlatform.myRayCon.CheckRaycastsBools(myContext.myPlatform.myRayCon.fallingMask);
+            myContext.myPlatform.myRayCon.CheckFallingCollision(myContext.myPlatform.myRayCon.fallingMask, myContext.myPlatform.FallingDamage);
         }
+
+        myContext.myPlatform.FallPlatform();
     }
 
     protected override void Exit()
