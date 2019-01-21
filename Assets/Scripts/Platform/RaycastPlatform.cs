@@ -8,6 +8,15 @@ public class RaycastPlatform : RaycastController
     public LayerMask faderMask;
     public LayerMask fallingMask;
 
+    [SerializeField]
+    /// <summary>
+    /// Quanto la piattaforma penetra nel terreno prima di fermarsi (Unità sconosciuta)
+    /// </summary>
+    [Tooltip("Quanto la piattaforma penetra nel terreno prima di fermarsi (Unità sconosciuta)")]
+    private float fallingPenetration;
+
+    private float currentPenetration;
+
     private List<PassengerMovement> passengerMovementList;
     private Dictionary<Transform, EntityBaseController> passengerDictionary = new Dictionary<Transform, EntityBaseController>();
 
@@ -203,6 +212,40 @@ public class RaycastPlatform : RaycastController
                 if (hit.collider.GetComponent<PlayerController>() != null && hit.collider.GetComponent<PlayerController>().myRayCon.Collisions.above)
                 {
                     Collisions.below = true;
+                }
+            }
+        }
+    }
+
+    public void CheckFallingCollision(LayerMask collisionMask, int damageToDo)
+    {
+        HashSet<Transform> hitEntity = new HashSet<Transform>();
+
+        for (int i = 0; i < VerticalRayCount; i++)
+        {
+            Vector2 rayOrigin = myRaycastOrigins.BottomLeft;
+            rayOrigin += Vector2.right * (verticalRaySpacing * i);
+            RaycastHit2D hit = Physics2D.Raycast(rayOrigin, Vector2.down, bottomRayLength, collisionMask);
+
+            Debug.DrawRay(rayOrigin, Vector2.down * bottomRayLength, Color.red);
+
+            if (hit) // Mentre colpisco qualcosa
+            {
+                if (!hitEntity.Contains(hit.transform))
+                {
+                    if (hit.distance == 0 && hit.collider.GetComponent<PlayerController>() != null)
+                    {
+                        hit.collider.GetComponent<PlayerController>().TakeDamage(damageToDo);
+                    }
+                }
+                if (hit.distance == 0 && hit.collider.GetComponent<PlayerController>() == null)
+                {
+                    currentPenetration += Time.deltaTime;
+                    if (currentPenetration >= fallingPenetration)
+                    {
+                        Collisions.below = true;
+                        currentPenetration = 0f;
+                    }
                 }
             }
         }
