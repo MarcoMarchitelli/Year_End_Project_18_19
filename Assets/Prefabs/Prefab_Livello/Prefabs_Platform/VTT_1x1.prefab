@@ -10,6 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 7511858312213426548}
   - component: {fileID: 2536290194481492858}
+  - component: {fileID: 5412077235036771970}
+  - component: {fileID: 81233913315285461}
   m_Layer: 10
   m_Name: VTT_1x1
   m_TagString: Untagged
@@ -28,7 +30,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 2316832052420957528}
+  - {fileID: 6394116899888550910}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -58,13 +60,65 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!1001 &3062678698998078883
+--- !u!114 &5412077235036771970
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5316077438705582459}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84949e73241b84d4dab486e07fbd977e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myCollisionMask:
+    serializedVersion: 2
+    m_Bits: 4352
+  attackMask:
+    serializedVersion: 2
+    m_Bits: 0
+  SkinWidth: 0
+  HorizontalRayCount: 10
+  VerticalRayCount: 10
+  myCollider: {fileID: 0}
+  topRayLength: 0
+  bottomRayLength: 0
+  leftRayLength: 0
+  rightRayLength: 0.1
+  topAttackRayLength: 0
+  bottomAttackRayLength: 0
+  leftAttackRayLength: 0
+  rightAttackRayLength: 0
+  victimMask:
+    serializedVersion: 2
+    m_Bits: 4352
+--- !u!114 &81233913315285461
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5316077438705582459}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21a292afa5f5db84097dfdbd85c5d2b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myRayCon: {fileID: 5412077235036771970}
+  trapDamage: 500
+--- !u!1001 &5916514982967122693
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 7511858312213426548}
     m_Modifications:
+    - target: {fileID: 7852003537300794999, guid: 304f1663b6315bc4297057c1e7162798,
+        type: 3}
+      propertyPath: m_Name
+      value: Vertical_Trap_Tile
+      objectReference: {fileID: 0}
     - target: {fileID: 767820266199173371, guid: 304f1663b6315bc4297057c1e7162798,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -93,12 +147,12 @@ PrefabInstance:
     - target: {fileID: 767820266199173371, guid: 304f1663b6315bc4297057c1e7162798,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 767820266199173371, guid: 304f1663b6315bc4297057c1e7162798,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 767820266199173371, guid: 304f1663b6315bc4297057c1e7162798,
         type: 3}
@@ -118,18 +172,13 @@ PrefabInstance:
     - target: {fileID: 767820266199173371, guid: 304f1663b6315bc4297057c1e7162798,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7852003537300794999, guid: 304f1663b6315bc4297057c1e7162798,
-        type: 3}
-      propertyPath: m_Name
-      value: Vertical_Trap_Tile
+      value: -90
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 304f1663b6315bc4297057c1e7162798, type: 3}
---- !u!4 &2316832052420957528 stripped
+--- !u!4 &6394116899888550910 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 767820266199173371, guid: 304f1663b6315bc4297057c1e7162798,
     type: 3}
-  m_PrefabInstance: {fileID: 3062678698998078883}
+  m_PrefabInstance: {fileID: 5916514982967122693}
   m_PrefabAsset: {fileID: 0}
