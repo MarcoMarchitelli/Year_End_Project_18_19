@@ -11,6 +11,9 @@ GameObject:
   - component: {fileID: 6315112536569385673}
   - component: {fileID: 1802023003627310228}
   - component: {fileID: 1830949712633875758}
+  - component: {fileID: 2163006738569014365}
+  - component: {fileID: 7769534961529565952}
+  - component: {fileID: 4725721345592603309}
   m_Layer: 10
   m_Name: Moving_Platform
   m_TagString: Untagged
@@ -77,3 +80,128 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!61 &2163006738569014365
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5885457269319008180}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
+--- !u!114 &7769534961529565952
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5885457269319008180}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 001697206dea3324d870f3b38726546c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myCollisionMask:
+    serializedVersion: 2
+    m_Bits: 0
+  attackMask:
+    serializedVersion: 2
+    m_Bits: 0
+  SkinWidth: 0
+  HorizontalRayCount: 0
+  VerticalRayCount: 0
+  myCollider: {fileID: 0}
+  topRayLength: 0
+  bottomRayLength: 0
+  leftRayLength: 0
+  rightRayLength: 0
+  topAttackRayLength: 0
+  bottomAttackRayLength: 0
+  leftAttackRayLength: 0
+  rightAttackRayLength: 0
+  passengerMask:
+    serializedVersion: 2
+    m_Bits: 0
+  faderMask:
+    serializedVersion: 2
+    m_Bits: 0
+  fallingMask:
+    serializedVersion: 2
+    m_Bits: 0
+  fallingPenetration: 0
+--- !u!114 &4725721345592603309
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5885457269319008180}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b030fa9c604e85e499dd9b3e477fe6a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myRayCon: {fileID: 0}
+  MovementSpeed: 0
+  easeAmount: 0
+  WaitTime: 0
+  Cyclic: 0
+  Backward: 0
+  TravelPoints: []
+  canFade: 0
+  shakingTime: 0
+  shakingVisualCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  fadingTime: 0
+  fadingVisualCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  returningTime: 0
+  returningVisualCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  canFall: 0
+  HitsNeeded: 0
+  CurrentHits: 0
+  FallingDamage: 0
+  tremblingTime: 0
+  tremblingVisualCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  fallingTime: 0
+  fallingVisualCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
