@@ -6,14 +6,20 @@ public class RoomActiveState : RoomStateBase
 {
     protected override void Tick()
     {
-        foreach (EnterRaycastRoom raycast in myContext.myRoom.myEnterRaycasts)
+        if (myContext.myRoom.myEnterRaycasts != null)
         {
-            raycast.CheckEnterTrigger();
+            foreach (EnterRaycastRoom raycast in myContext.myRoom.myEnterRaycasts)
+            {
+                raycast.CheckEnterTrigger();
+            }
         }
 
-        foreach (ExitRaycastRoom raycast in myContext.myRoom.myExitRaycasts)
+        if (myContext.myRoom.myExitRaycasts != null)
         {
-            raycast.CheckExitTrigger();
+            foreach (ExitRaycastRoom raycast in myContext.myRoom.myExitRaycasts)
+            {
+                raycast.CheckExitTrigger();
+            }
         }
     }
 }
