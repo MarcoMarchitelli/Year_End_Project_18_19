@@ -45,6 +45,8 @@ public class ExitRaycastRoom : RaycastController
                     {
                         room.DisableRoom();
                     }
+
+                    IsPlayerPassedThrough = true;
                 }
             }
         }
@@ -64,6 +66,8 @@ public class ExitRaycastRoom : RaycastController
                     {
                         room.DisableRoom();
                     }
+
+                    IsPlayerPassedThrough = true;
                 }
             }
         }

@@ -24,12 +24,6 @@ public class EnterRaycastRoom : RaycastController
     [Tooltip("Stanze che bisogna attivare al sorpasso di questo trigger")]
     private List<RoomController> roomsToEnable;
 
-    protected override void Start()
-    {
-        base.Start();
-        UpdateRaycastOrigins();
-    }
-
     /// <summary>
     /// Funzione che lancia dei raycasts, serve a capire quando il player esce o entra da una stanza
     /// </summary>
