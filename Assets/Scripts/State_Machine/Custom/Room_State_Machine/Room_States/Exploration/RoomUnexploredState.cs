@@ -6,14 +6,20 @@ public class RoomUnexploredState : RoomStateBase
 {
     protected override void Enter()
     {
-        foreach (EnterRaycastRoom raycast in myContext.myRoom.myEnterRaycasts)
+        if (myContext.myRoom.myEnterRaycasts != null)
         {
-            raycast.UpdateRaycastOrigins();
+            foreach (EnterRaycastRoom raycast in myContext.myRoom.myEnterRaycasts)
+            {
+                raycast.UpdateRaycastOrigins();
+            }
         }
 
-        foreach (ExitRaycastRoom raycast in myContext.myRoom.myExitRaycasts)
+        if (myContext.myRoom.myExitRaycasts != null)
         {
-            raycast.UpdateRaycastOrigins();
+            foreach (ExitRaycastRoom raycast in myContext.myRoom.myExitRaycasts)
+            {
+                raycast.UpdateRaycastOrigins();
+            }
         }
     }
 }
