@@ -5,6 +5,11 @@ using UnityEngine;
 [RequireComponent(typeof(RaycastPlayer))]
 public class PlayerController : EntityBaseController
 {
+    /// <summary>
+    /// Riferimento al CanvasManager
+    /// </summary>
+    private CanvasManager cm;
+
     [Header("Multiple Jump")]
     /// <summary>
     /// Se attivato, il player può fare più salti consecutivi
@@ -50,6 +55,7 @@ public class PlayerController : EntityBaseController
     protected override void Start()
     {
         myRayCon = GetComponent<RaycastPlayer>();
+        cm = FindObjectOfType<CanvasManager>();
 
         base.Start();
     }
@@ -112,5 +118,11 @@ public class PlayerController : EntityBaseController
         base.Respawn();
         ResetJump();
         ResetJumpsCount();
+    }
+
+    public override void TakeDamage(int _takenDamage)
+    {
+        base.TakeDamage(_takenDamage);
+        cm.UpdateLifeBar(Health);
     }
 }
