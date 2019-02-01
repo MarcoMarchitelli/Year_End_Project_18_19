@@ -348,7 +348,7 @@ public abstract class EntityBaseController : MonoBehaviour, IDamageable
         currentJumpVelocity = Mathf.Abs(Gravity) * currentTimeToJumpApex;
     }
 
-    public void TakeDamage(int _takenDamage)
+    public virtual void TakeDamage(int _takenDamage)
     {
         if (!isInvulnerable)
         {

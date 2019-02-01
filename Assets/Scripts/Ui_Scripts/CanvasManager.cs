@@ -21,6 +21,8 @@ public class CanvasManager : MonoBehaviour
     [Tooltip("Schermata InPlay")]
     public GameObject InPlayScreen;
 
+    public List<GameObject> LifePoints;
+
     private EventSystem m_EventSystem;
 
     // Start is called before the first frame update
@@ -76,6 +78,7 @@ public class CanvasManager : MonoBehaviour
     /// </summary>
     public void OpenInventory()
     {
+        Time.timeScale = 0f;
         isOpenInventory = !isOpenInventory;
         InPlayScreen.SetActive(false);//deactivate/activate the inplay screen
         InvenvotryScreen.SetActive(true);
@@ -87,9 +90,28 @@ public class CanvasManager : MonoBehaviour
     /// </summary>
     public void CloseInventory()
     {
+        Time.timeScale = 1f;
         isOpenInventory = !isOpenInventory;
         InPlayScreen.SetActive(true);//deactivate/activate the inplay screen
         InvenvotryScreen.SetActive(false);
         m_EventSystem.SetSelectedGameObject(null); //Set selection to the first button in the inventory screen
+    }
+
+    public void UpdateLifeBar(int currentLife)
+    {
+        ResetLifeBar();
+
+        for (int i = 0; i < currentLife; i++)
+        {
+            LifePoints[i].SetActive(true);
+        }
+    }
+
+    private void ResetLifeBar()
+    {
+        foreach (GameObject lifePoint in LifePoints)
+        {
+            lifePoint.SetActive(false);
+        }
     }
 }
