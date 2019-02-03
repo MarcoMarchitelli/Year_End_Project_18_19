@@ -138,7 +138,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: f43d524c0f0b6cb43961807ffe5b5e2e, type: 3}
+  - {fileID: 2100000, guid: da2ca273ea50d754b9a6a18e3fed3b49, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -227,7 +227,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100002, guid: f43d524c0f0b6cb43961807ffe5b5e2e, type: 3}
+  - {fileID: 2100000, guid: da2ca273ea50d754b9a6a18e3fed3b49, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -715,7 +715,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: f43d524c0f0b6cb43961807ffe5b5e2e, type: 3}
+  - {fileID: 2100000, guid: da2ca273ea50d754b9a6a18e3fed3b49, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1239,7 +1239,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: f43d524c0f0b6cb43961807ffe5b5e2e, type: 3}
+  - {fileID: 2100000, guid: da2ca273ea50d754b9a6a18e3fed3b49, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2156,10 +2156,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 961140420814056721}
-  - component: {fileID: 4264865517974634890}
-  - component: {fileID: 7711725813432043857}
-  - component: {fileID: 3467711786916640488}
-  - component: {fileID: 2140682972379013236}
   m_Layer: 12
   m_Name: Enemy_Useless 1
   m_TagString: Untagged
@@ -2208,128 +2204,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!95 &4264865517974634890
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6761854626296641527}
-  m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: f43d524c0f0b6cb43961807ffe5b5e2e, type: 3}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 1
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
---- !u!61 &7711725813432043857
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6761854626296641527}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0.15752435, y: 0.49147534}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1.4662719, y: 1.0252042}
-  m_EdgeRadius: 0
---- !u!114 &3467711786916640488
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6761854626296641527}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e81f47adbab47894294ead768cb20252, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  GeneralMask:
-    serializedVersion: 2
-    m_Bits: 0
-  attackMask:
-    serializedVersion: 2
-    m_Bits: 0
-  SkinWidth: 0
-  HorizontalRayCount: 5
-  VerticalRayCount: 8
-  myCollider: {fileID: 0}
-  topRayLength: 0.1
-  bottomRayLength: 0.1
-  leftRayLength: 0.1
-  rightRayLength: 0.1
-  topAttackRayLength: 0
-  bottomAttackRayLength: 0
-  leftAttackRayLength: 0
-  rightAttackRayLength: 0
-  pushMask:
-    serializedVersion: 2
-    m_Bits: 4096
---- !u!114 &2140682972379013236
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6761854626296641527}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 41f56a3bb0d3af746b61f5e37586dd80, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  graphic: {fileID: 0}
-  myRayCon: {fileID: 0}
-  health: 2
-  MaxHealth: 2
-  AttackDamage: 100
-  AttackTime: 0
-  AttackSpeed: 0
-  InvulnerabiltyTime: 0
-  CanRun: 0
-  MovementSpeed: 0
-  MaxRunValue: 0
-  RunningCurve:
-    serializedVersion: 2
-    m_Curve: []
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  isDashUnlocked: 0
-  DashDistance: 0
-  DashTime: 0
-  DashRechargeTime: 0
-  gravityCurve:
-    serializedVersion: 2
-    m_Curve: []
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  JumpHeight: 0
-  TimeToJumpApex: 0
-  TravelPoints:
-  - {fileID: 0}
-  - {fileID: 0}
 --- !u!1 &6775167550621898532
 GameObject:
   m_ObjectHideFlags: 0
@@ -2851,7 +2725,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: f43d524c0f0b6cb43961807ffe5b5e2e, type: 3}
+  - {fileID: 2100000, guid: da2ca273ea50d754b9a6a18e3fed3b49, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
