@@ -208,6 +208,80 @@ AnimatorController:
     m_IKPass: 0
     m_SyncedLayerAffectsTiming: 0
     m_Controller: {fileID: 9100000}
+--- !u!114 &114037839816721526
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8486c9f81b287174d818b00f4dda6b7b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  transitionAnimation:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 3
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  yPosition: 2.83
+--- !u!114 &114125066209598342
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8486c9f81b287174d818b00f4dda6b7b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  transitionAnimation:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  yPosition: -1.17
 --- !u!114 &114135271397051376
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -486,6 +560,43 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 003642f9e99eb834db44cc5c3cd99477, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114897372995903432
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8486c9f81b287174d818b00f4dda6b7b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  transitionAnimation:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.15
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  yPosition: 0.83
 --- !u!206 &206833663289043848
 BlendTree:
   m_ObjectHideFlags: 1
@@ -611,6 +722,9 @@ AnimatorStateTransition:
   - m_ConditionMode: 3
     m_ConditionEvent: Velocity.y
     m_EventTreshold: -3
+  - m_ConditionMode: 1
+    m_ConditionEvent: CollisionBelow
+    m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 1102442512528710432}
   m_Solo: 0
@@ -757,7 +871,10 @@ AnimatorStateTransition:
   m_Conditions:
   - m_ConditionMode: 4
     m_ConditionEvent: Velocity.y
-    m_EventTreshold: -3
+    m_EventTreshold: -10
+  - m_ConditionMode: 2
+    m_ConditionEvent: CollisionBelow
+    m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 1102504733902381008}
   m_Solo: 0
@@ -1179,6 +1296,9 @@ AnimatorStateTransition:
   - m_ConditionMode: 4
     m_ConditionEvent: Velocity.y
     m_EventTreshold: 3
+  - m_ConditionMode: 1
+    m_ConditionEvent: CollisionBelow
+    m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 1102442512528710432}
   m_Solo: 0
@@ -1724,7 +1844,10 @@ AnimatorStateTransition:
   m_Conditions:
   - m_ConditionMode: 3
     m_ConditionEvent: Velocity.y
-    m_EventTreshold: 3
+    m_EventTreshold: 10
+  - m_ConditionMode: 2
+    m_ConditionEvent: CollisionBelow
+    m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 1102111033962418790}
   m_Solo: 0
@@ -1855,7 +1978,7 @@ AnimatorStateTransition:
   m_Conditions:
   - m_ConditionMode: 4
     m_ConditionEvent: Velocity.y
-    m_EventTreshold: -3
+    m_EventTreshold: -10
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 1102504733902381008}
   m_Solo: 0
@@ -2294,7 +2417,7 @@ AnimatorStateTransition:
   m_Conditions:
   - m_ConditionMode: 3
     m_ConditionEvent: Velocity.y
-    m_EventTreshold: 3
+    m_EventTreshold: 10
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 1102111033962418790}
   m_Solo: 0
@@ -2540,7 +2663,8 @@ AnimatorState:
   m_Transitions:
   - {fileID: 1101316657953979122}
   - {fileID: 1101748351421078788}
-  m_StateMachineBehaviours: []
+  m_StateMachineBehaviours:
+  - {fileID: 114037839816721526}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -3082,7 +3206,8 @@ AnimatorState:
   m_Transitions:
   - {fileID: 1101677754561149666}
   - {fileID: 1101106585525494228}
-  m_StateMachineBehaviours: []
+  m_StateMachineBehaviours:
+  - {fileID: 114897372995903432}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -3110,7 +3235,8 @@ AnimatorState:
   m_Transitions:
   - {fileID: 1101050625370271584}
   - {fileID: 1101898605576553514}
-  m_StateMachineBehaviours: []
+  m_StateMachineBehaviours:
+  - {fileID: 114125066209598342}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
