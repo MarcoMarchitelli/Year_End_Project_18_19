@@ -9,11 +9,12 @@ public class CameraHorizontalFacingState : CameraState
 	public AnimationCurve transitionAnimation;
 	public float xPosition;
 
+	protected float xStarting;
 	protected Transform cameraTarget;
 	protected float timer;
 	protected Vector3 actCameraTargetPosition;
 
-	private float maxEvaluationTimer = 5f;
+	private float maxEvaluationTimer = 60f;
 
 	protected override void Awake()
 	{
@@ -25,6 +26,7 @@ public class CameraHorizontalFacingState : CameraState
 	{
 		timer = 0;
 		actCameraTargetPosition = cameraTarget.localPosition;
+		xStarting = cameraTarget.localPosition.x;
 	}
 
 	protected override void Tick()
@@ -32,7 +34,7 @@ public class CameraHorizontalFacingState : CameraState
 		if (timer < maxEvaluationTimer)
 		{
 			timer += Time.deltaTime;
-			actCameraTargetPosition.x = Mathf.Lerp(cameraTarget.localPosition.x, xPosition, transitionAnimation.Evaluate(timer));
+			actCameraTargetPosition.x = Mathf.Lerp(xStarting, xPosition, transitionAnimation.Evaluate(timer));
 			actCameraTargetPosition.y = cameraTarget.localPosition.y;
 			actCameraTargetPosition.z = cameraTarget.localPosition.z;
 			cameraTarget.localPosition = actCameraTargetPosition;

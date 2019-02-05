@@ -7,6 +7,7 @@ public class CameraVerticalFacingState : CameraState
 	public AnimationCurve transitionAnimation;
 	public float yPosition;
 
+	protected float yStarting;
 	protected Transform cameraTarget;
 	protected float timer;
 	protected Vector3 actCameraTargetPosition;
@@ -23,6 +24,7 @@ public class CameraVerticalFacingState : CameraState
 	{
 		timer = 0;
 		actCameraTargetPosition = cameraTarget.localPosition;
+		yStarting = cameraTarget.localPosition.y;
 	}
 
 	protected override void Tick()
@@ -31,7 +33,7 @@ public class CameraVerticalFacingState : CameraState
 		{
 			timer += Time.deltaTime;
 			actCameraTargetPosition.x = cameraTarget.localPosition.x;
-			actCameraTargetPosition.y = Mathf.Lerp(cameraTarget.localPosition.y, yPosition, transitionAnimation.Evaluate(timer));
+			actCameraTargetPosition.y = Mathf.Lerp(yStarting, yPosition, transitionAnimation.Evaluate(timer));
 			actCameraTargetPosition.z = cameraTarget.localPosition.z;
 			cameraTarget.localPosition = actCameraTargetPosition;
 		}
