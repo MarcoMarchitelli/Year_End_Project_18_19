@@ -10,9 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 7511858312213426548}
   - component: {fileID: 2536290194481492858}
-  - component: {fileID: 5412077235036771970}
   - component: {fileID: 81233913315285461}
-  m_Layer: 10
+  m_Layer: 13
   m_Name: VTT_1x1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -60,39 +59,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &5412077235036771970
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5316077438705582459}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 84949e73241b84d4dab486e07fbd977e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  myCollisionMask:
-    serializedVersion: 2
-    m_Bits: 4352
-  attackMask:
-    serializedVersion: 2
-    m_Bits: 0
-  SkinWidth: 0
-  HorizontalRayCount: 10
-  VerticalRayCount: 10
-  myCollider: {fileID: 0}
-  topRayLength: 0
-  bottomRayLength: 0
-  leftRayLength: 0
-  rightRayLength: 0.1
-  topAttackRayLength: 0
-  bottomAttackRayLength: 0
-  leftAttackRayLength: 0
-  rightAttackRayLength: 0
-  victimMask:
-    serializedVersion: 2
-    m_Bits: 4352
 --- !u!114 &81233913315285461
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -105,7 +71,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21a292afa5f5db84097dfdbd85c5d2b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myRayCon: {fileID: 5412077235036771970}
   trapDamage: 500
 --- !u!1001 &5916514982967122693
 PrefabInstance:

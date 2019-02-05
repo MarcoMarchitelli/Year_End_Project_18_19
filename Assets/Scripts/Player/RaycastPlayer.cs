@@ -19,6 +19,10 @@ public class RaycastPlayer : RaycastController
 
             if (hit) // Mentre colpisco qualcosa
             {
+                if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Trap"))
+                {
+                    GetComponent<PlayerController>().TakeDamage(hit.collider.GetComponent<TrapController>().trapDamage);
+                }
                 if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Platform") && hit.distance == 0)
                 {
                     continue;
@@ -47,6 +51,10 @@ public class RaycastPlayer : RaycastController
 
             if (hit) // Mentre colpisco qualcosa
             {
+                if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Trap"))
+                {
+                    GetComponent<PlayerController>().TakeDamage(hit.collider.GetComponent<TrapController>().trapDamage);
+                }
                 if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Platform") && directionY == 1)
                 {
                     if (hit.distance == 0)
