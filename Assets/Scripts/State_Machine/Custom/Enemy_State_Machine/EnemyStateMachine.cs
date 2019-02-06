@@ -22,6 +22,7 @@ public class EnemyStateMachine : StateMachineBase
     {
         UpdateHorizontalVelocityFloat();
         UpdateCollisionBools();
+        UpdateAliveBool();
     }
 
     private void UpdateCollisionBools()
@@ -35,6 +36,11 @@ public class EnemyStateMachine : StateMachineBase
     private void UpdateHorizontalVelocityFloat()
     {
         myAnim.SetFloat("Velocity.x", myEnemy.GetVelocity().x);
+    }
+
+    private void UpdateAliveBool()
+    {
+        myAnim.SetBool("Alive", myEnemy.GetIsAlive());
     }
 
     protected override void FillStates()

@@ -23,12 +23,15 @@ public class EnemyController : EntityBaseController
     {
         base.Update();
 
-        (myRayCon as RaycastEnemy).DamagePlayer(AttackDamage);
-        (myRayCon as RaycastEnemy).CalculatePassengerMovement(velocity);
+        if (isAlive)
+        {
+            (myRayCon as RaycastEnemy).DamagePlayer(AttackDamage);
+            (myRayCon as RaycastEnemy).CalculatePassengerMovement(velocity);
 
-        (myRayCon as RaycastEnemy).MovePassenger(true);
-        Move(velocity * Time.deltaTime);
-        (myRayCon as RaycastEnemy).MovePassenger(false);
+            (myRayCon as RaycastEnemy).MovePassenger(true);
+            Move(velocity * Time.deltaTime);
+            (myRayCon as RaycastEnemy).MovePassenger(false);
+        }
 
     }
 

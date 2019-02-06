@@ -6,6 +6,8 @@ public class RaycastPlayer : RaycastController
 {
     public override void HorizontalCollisions(ref Vector3 velocity)
     {
+        HashSet<Transform> playerHit = new HashSet<Transform>();
+
         float directionX = Mathf.Sign(velocity.x);
         float rayLength = Mathf.Abs(velocity.x) + SkinWidth;
 
@@ -19,11 +21,16 @@ public class RaycastPlayer : RaycastController
 
             if (hit) // Mentre colpisco qualcosa
             {
-                if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Trap"))
+                if (!playerHit.Contains(hit.transform))
                 {
-                    GetComponent<PlayerController>().TakeDamage(hit.collider.GetComponent<TrapController>().trapDamage);
+                    playerHit.Add(hit.transform);
+                    if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Trap"))
+                    {
+                        GetComponent<PlayerController>().TakeDamage(hit.collider.GetComponent<TrapController>().trapDamage);
+                        continue;
+                    }
                 }
-                if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Platform") && hit.distance == 0)
+                if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Platform"))
                 {
                     continue;
                 }
@@ -38,6 +45,7 @@ public class RaycastPlayer : RaycastController
 
     public override void VerticalCollisions(ref Vector3 velocity)
     {
+        HashSet<Transform> playerHit = new HashSet<Transform>();
         float directionY = Mathf.Sign(velocity.y);
         float rayLength = Mathf.Abs(velocity.y) + SkinWidth;
 
@@ -51,9 +59,14 @@ public class RaycastPlayer : RaycastController
 
             if (hit) // Mentre colpisco qualcosa
             {
-                if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Trap"))
+                if (!playerHit.Contains(hit.transform))
                 {
-                    GetComponent<PlayerController>().TakeDamage(hit.collider.GetComponent<TrapController>().trapDamage);
+                    playerHit.Add(hit.transform);
+                    if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Trap"))
+                    {
+                        GetComponent<PlayerController>().TakeDamage(hit.collider.GetComponent<TrapController>().trapDamage);
+                        continue;
+                    }
                 }
                 if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Platform") && directionY == 1)
                 {

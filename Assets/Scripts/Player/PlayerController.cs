@@ -64,41 +64,19 @@ public class PlayerController : EntityBaseController
     {
         base.Update();
 
-        #region DebugInput
-
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            TakeDamage(DamageToTake);
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            Heal(HealthToReceive);
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha0))
-        {
-            Die();
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha4))
-        {
-            Respawn();
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha5))
-        {
-            SetRespawnPosition();
-        }
-
-        #endregion
-
         ///TODO
         ///Rimuovere finita la fase di debug
         resetMultipleJumpsCount = MultipleJumpsCount;
 
-        Move(velocity * Time.deltaTime);
+        if (isAlive)
+        {
+            Move(velocity * Time.deltaTime);
+        }
     }
 
     public void MultipleJump()
     {
-        if (!isDashing)
+        if (!isDashing && isAlive)
         {
             if (canMultipleJump && currentMultipleJumpsCount > 0)
             {
@@ -118,11 +96,16 @@ public class PlayerController : EntityBaseController
         base.Respawn();
         ResetJump();
         ResetJumpsCount();
+        cm.UpdateLifeBar(Health);
     }
 
     public override void TakeDamage(int _takenDamage)
     {
         base.TakeDamage(_takenDamage);
+        if (Health <= 0)
+        {
+            StartCoroutine(StartRespawn());
+        }
         cm.UpdateLifeBar(Health);
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public abstract class EntityBaseController : MonoBehaviour, IDamageable
 {
@@ -37,8 +38,11 @@ public abstract class EntityBaseController : MonoBehaviour, IDamageable
     /// </summary>
     private Timer invulnerabilityTimer;
 
-    [Header("Statistics")]
-    [SerializeField]
+    /// <summary>
+    /// variabile utile per utilizzare funzioni di tipo Timer per la morte
+    /// </summary>
+    private Timer deathTimer;
+
     /// <summary>
     /// Vita attuale dell'entità
     /// </summary>
@@ -54,6 +58,7 @@ public abstract class EntityBaseController : MonoBehaviour, IDamageable
         set { health = value; }
     }
 
+    [Header("Statistics")]
     /// <summary>
     /// Vita massima dell'entità
     /// </summary>
@@ -100,9 +105,15 @@ public abstract class EntityBaseController : MonoBehaviour, IDamageable
     public float InvulnerabiltyTime;
 
     /// <summary>
+    /// Tempo che l'entità ci mette a respawnare in secondi
+    /// </summary>
+    [Tooltip("Tempo che l'entità ci mette a respawnare in secondi")]
+    public float RespawnTime;
+
+    /// <summary>
     /// Se true, l'entità è considerata viva, altrimenti morta
     /// </summary>
-    private bool isAlive = true;
+    protected bool isAlive = true;
 
     /// <summary>
     /// Se true, l'entità è invulnerabile
@@ -288,8 +299,10 @@ public abstract class EntityBaseController : MonoBehaviour, IDamageable
         attackTimer = new Timer();
         dashTimer = new Timer();
         invulnerabilityTimer = new Timer();
+        deathTimer = new Timer();
 
         SetRespawnVariables();
+        Health = respawnHealth;
 
         CalculateGravityAndJumpVelocity(ref jumpVelocity, JumpHeight, TimeToJumpApex);
     }
@@ -363,19 +376,13 @@ public abstract class EntityBaseController : MonoBehaviour, IDamageable
             if (Health <= 0)
             {
                 Die();
-                Respawn();
             }
             else
             {
                 Health -= _takenDamage;
+                isInvulnerable = true;
+                StartCoroutine(StartInvulnerability());
             }
-
-            isInvulnerable = true;
-            StartCoroutine(StartInvulnerability());
-        }
-        else
-        {
-            Debug.Log("Sei invulnerabile");
         }
     }
 
@@ -394,6 +401,21 @@ public abstract class EntityBaseController : MonoBehaviour, IDamageable
         }
     }
 
+    protected IEnumerator StartRespawn()
+    {
+        while (!deathTimer.CheckTimer(RespawnTime))
+        {
+            deathTimer.TickTimer();
+            yield return null;
+        }
+
+        if (deathTimer.CheckTimer(RespawnTime))
+        {
+            Respawn();
+            deathTimer.StopTimer();
+        }
+    }
+
     public void Heal(int _takenHealth)
     {
         if (_takenHealth < 0)
@@ -404,6 +426,10 @@ public abstract class EntityBaseController : MonoBehaviour, IDamageable
         {
             Health = MaxHealth;
         }
+        if (Health <= 0)
+        {
+            Die();
+        }
         else
         {
             Health += _takenHealth;
@@ -412,12 +438,11 @@ public abstract class EntityBaseController : MonoBehaviour, IDamageable
 
     public void BasicAttack()
     {
-        if (canAttack)
+        if (canAttack && isAlive)
         {
             if (isFacingRight && !(isFacingUp || isFacingDown))
             {
                 List<IDamageable> hitDamageableList = myRayCon.TriggerAttackRaycasts(true);
-                Debug.Log("Hai attaccato a destra");
                 canAttack = false;
                 isAttacking = true;
                 foreach (IDamageable damageable in hitDamageableList)
@@ -429,7 +454,6 @@ public abstract class EntityBaseController : MonoBehaviour, IDamageable
             if (isFacingLeft && !(isFacingUp || isFacingDown))
             {
                 List<IDamageable> hitDamageableList = myRayCon.TriggerAttackRaycasts(false, true);
-                Debug.Log("Hai attaccato a sinistra");
                 canAttack = false;
                 isAttacking = true;
                 foreach (IDamageable damageable in hitDamageableList)
@@ -441,7 +465,6 @@ public abstract class EntityBaseController : MonoBehaviour, IDamageable
             if (isFacingUp)
             {
                 List<IDamageable> hitDamageableList = myRayCon.TriggerAttackRaycasts(false, false, true);
-                Debug.Log("Hai attaccato in alto");
                 canAttack = false;
                 isAttacking = true;
                 foreach (IDamageable damageable in hitDamageableList)
@@ -453,7 +476,6 @@ public abstract class EntityBaseController : MonoBehaviour, IDamageable
             if (isFacingDown && !myRayCon.Collisions.below)
             {
                 List<IDamageable> hitDamageableList = myRayCon.TriggerAttackRaycasts(false, false, false, true);
-                Debug.Log("Hai attaccato in basso");
                 canAttack = false;
                 isAttacking = true;
                 foreach (IDamageable damageable in hitDamageableList)
@@ -504,7 +526,7 @@ public abstract class EntityBaseController : MonoBehaviour, IDamageable
 
     public void Jump()
     {
-        if (!isDashing)
+        if (!isDashing && isAlive)
         {
             /// TODO:
             /// Eliminare quando è finita la fase di testing
@@ -527,16 +549,23 @@ public abstract class EntityBaseController : MonoBehaviour, IDamageable
         isAlive = false;
     }
 
+    public bool GetIsAlive()
+    {
+        return isAlive;
+    }
+
     protected virtual void Respawn()
     {
+        isAlive = true;
         Health = respawnHealth;
         transform.position = respawnPosition;
-        isAlive = true;
         canAttack = true;
         canDash = true;
         isInvulnerable = false;
         ResetHorizontalVelocity();
         ResetVerticalVelocity();
+        isDashing = false;
+        isAttacking = false;
     }
 
     public void SetRespawnVariables()
@@ -547,7 +576,7 @@ public abstract class EntityBaseController : MonoBehaviour, IDamageable
 
     public void SetRespawnHealth()
     {
-        respawnHealth = Health;
+        respawnHealth = MaxHealth;
     }
 
     public void SetRespawnPosition()
@@ -657,7 +686,10 @@ public abstract class EntityBaseController : MonoBehaviour, IDamageable
 
     public void RotateEntity(Vector3 axes, float rotationDegrees)
     {
-        graphic.Rotate(axes * rotationDegrees);
+        if (isAlive)
+        {
+            graphic.Rotate(axes * rotationDegrees);
+        }
     }
 
     public void ResetFacingDirections()
@@ -670,7 +702,10 @@ public abstract class EntityBaseController : MonoBehaviour, IDamageable
 
     public void SetIsFacingLeft(bool value)
     {
-        isFacingLeft = value;
+        if (isAlive && !isDashing)
+        {
+            isFacingLeft = value;
+        }
     }
 
     public bool GetIsFacingLeft()
@@ -680,7 +715,10 @@ public abstract class EntityBaseController : MonoBehaviour, IDamageable
 
     public void SetIsFacingRight(bool value)
     {
-        isFacingRight = value;
+        if (isAlive && !isDashing)
+        {
+            isFacingRight = value;
+        }
     }
 
     public bool GetIsFacingRight()

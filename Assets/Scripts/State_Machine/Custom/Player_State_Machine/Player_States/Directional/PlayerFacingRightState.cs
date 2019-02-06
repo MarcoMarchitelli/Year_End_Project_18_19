@@ -12,6 +12,7 @@ public class PlayerFacingRightState : PlayerStateBase
         }
         myContext.myPlayer.ResetFacingDirections();
         myContext.myPlayer.SetIsFacingRight(true);
+        
     }
 
     protected override void Tick()

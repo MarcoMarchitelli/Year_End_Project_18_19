@@ -28,6 +28,7 @@ public class PlayerStateMachine : StateMachineBase
         UpdateStandingStillBool();
         UpdateDashBools();
         UpdateAttackBools();
+        UpdateAliveBool();
     }
 
     private void UpdateCollisionBools()
@@ -71,6 +72,11 @@ public class PlayerStateMachine : StateMachineBase
     {
         myAnim.SetBool("Attacking", myPlayer.GetIsAttacking());
         myAnim.SetBool("AttackRecharging", myPlayer.GetIsAttackRecharging());
+    }
+
+    private void UpdateAliveBool()
+    {
+        myAnim.SetBool("Alive", myPlayer.GetIsAlive());
     }
 
     protected override void FillStates()
