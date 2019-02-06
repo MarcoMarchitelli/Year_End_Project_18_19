@@ -4,7 +4,7 @@ using UnityEngine;
 
 [RequireComponent(typeof(RaycastEnemy))]
 public class EnemyController : EntityBaseController
-{
+{ 
     [Header("Patrol")]
     /// <summary>
     /// Punti da cui passerà il nemico

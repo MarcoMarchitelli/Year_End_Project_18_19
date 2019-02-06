@@ -554,7 +554,7 @@ public abstract class EntityBaseController : MonoBehaviour, IDamageable
         return isAlive;
     }
 
-    protected virtual void Respawn()
+    public virtual void Respawn()
     {
         isAlive = true;
         Health = respawnHealth;

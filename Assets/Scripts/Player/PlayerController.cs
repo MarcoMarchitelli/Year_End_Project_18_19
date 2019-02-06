@@ -91,7 +91,7 @@ public class PlayerController : EntityBaseController
         currentMultipleJumpsCount = resetMultipleJumpsCount;
     }
 
-    protected override void Respawn()
+    public override void Respawn()
     {
         base.Respawn();
         ResetJump();
