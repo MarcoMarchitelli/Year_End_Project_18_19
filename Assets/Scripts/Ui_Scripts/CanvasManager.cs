@@ -34,11 +34,11 @@ public class CanvasManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.Joystick1Button7) && !isPaused && isOpenInventory == false)
+        if ((Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.Joystick1Button7)) && !isPaused && isOpenInventory == false)
         {
             PauseGame();
         }
-        else if (Input.GetKeyUp(KeyCode.Escape) || Input.GetKeyDown(KeyCode.Joystick1Button7) && isPaused)
+        else if ((Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.Joystick1Button7)) && isPaused)
         {
             UnpauseGame();
         }
