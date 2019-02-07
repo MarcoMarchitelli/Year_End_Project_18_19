@@ -438,7 +438,7 @@ public abstract class EntityBaseController : MonoBehaviour, IDamageable
 
     public void BasicAttack()
     {
-        if (canAttack && isAlive)
+        if (canAttack && isAlive && !CanvasManager.isPaused)
         {
             if (isFacingRight && !(isFacingUp || isFacingDown))
             {
@@ -526,7 +526,7 @@ public abstract class EntityBaseController : MonoBehaviour, IDamageable
 
     public void Jump()
     {
-        if (!isDashing && isAlive)
+        if (!isDashing && isAlive && !CanvasManager.isPaused)
         {
             /// TODO:
             /// Eliminare quando è finita la fase di testing
@@ -686,7 +686,7 @@ public abstract class EntityBaseController : MonoBehaviour, IDamageable
 
     public void RotateEntity(Vector3 axes, float rotationDegrees)
     {
-        if (isAlive)
+        if (isAlive && !CanvasManager.isPaused)
         {
             graphic.Rotate(axes * rotationDegrees);
         }
@@ -702,7 +702,7 @@ public abstract class EntityBaseController : MonoBehaviour, IDamageable
 
     public void SetIsFacingLeft(bool value)
     {
-        if (isAlive && !isDashing)
+        if (isAlive && !isDashing && !CanvasManager.isPaused)
         {
             isFacingLeft = value;
         }
@@ -715,7 +715,7 @@ public abstract class EntityBaseController : MonoBehaviour, IDamageable
 
     public void SetIsFacingRight(bool value)
     {
-        if (isAlive && !isDashing)
+        if (isAlive && !isDashing && !CanvasManager.isPaused)
         {
             isFacingRight = value;
         }

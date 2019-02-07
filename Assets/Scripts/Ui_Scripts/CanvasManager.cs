@@ -10,13 +10,13 @@ public class CanvasManager : MonoBehaviour
     public GameObject PauseScreen;
     [Tooltip("Pulsante di resume per selezione all'apertura della schermata")]
     public GameObject ResumeButton;//Holds the first selected item
-    private bool isPaused = false;
+    public static bool isPaused = false;
 
     [Tooltip("Schermata dell'invetario")]
     public GameObject InvenvotryScreen;
     [Tooltip("Pulsante desiderato come selezionato all'apertura della schermata")]
     public GameObject FirstInventory;//Holds the first selected item
-    private bool isOpenInventory = false;
+    public static bool isOpenInventory = false;
 
     [Tooltip("Schermata InPlay")]
     public GameObject InPlayScreen;
@@ -34,20 +34,20 @@ public class CanvasManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyUp(KeyCode.Escape) && !isPaused && isOpenInventory == false)
+        if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.Joystick1Button7) && !isPaused && isOpenInventory == false)
         {
             PauseGame();
         }
-        else if (Input.GetKeyUp(KeyCode.Escape) && isPaused)
+        else if (Input.GetKeyUp(KeyCode.Escape) || Input.GetKeyDown(KeyCode.Joystick1Button7) && isPaused)
         {
             UnpauseGame();
         }
         
-        if (Input.GetButtonUp("Inventory") && !isOpenInventory && isPaused == false)
+        if (Input.GetButtonDown("Inventory") && !isOpenInventory && isPaused == false)
         {
             OpenInventory();
         }
-        else if (Input.GetButtonUp("Inventory") && isOpenInventory)
+        else if (Input.GetButtonDown("Inventory") && isOpenInventory)
         {
             CloseInventory();
         }
@@ -95,6 +95,11 @@ public class CanvasManager : MonoBehaviour
         InPlayScreen.SetActive(true);//deactivate/activate the inplay screen
         InvenvotryScreen.SetActive(false);
         m_EventSystem.SetSelectedGameObject(null); //Set selection to the first button in the inventory screen
+    }
+
+    public void QuitGame()
+    {
+        Application.Quit();
     }
 
     public void UpdateLifeBar(int currentLife)

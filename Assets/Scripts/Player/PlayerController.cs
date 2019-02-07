@@ -68,7 +68,7 @@ public class PlayerController : EntityBaseController
         ///Rimuovere finita la fase di debug
         resetMultipleJumpsCount = MultipleJumpsCount;
 
-        if (isAlive)
+        if (isAlive && !CanvasManager.isPaused)
         {
             Move(velocity * Time.deltaTime);
         }
@@ -76,7 +76,7 @@ public class PlayerController : EntityBaseController
 
     public void MultipleJump()
     {
-        if (!isDashing && isAlive)
+        if (!isDashing && isAlive && !CanvasManager.isPaused)
         {
             if (canMultipleJump && currentMultipleJumpsCount > 0)
             {

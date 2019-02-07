@@ -253,7 +253,6 @@ public class PlatformController : MonoBehaviour, IDamageable
         if (!shakeTimer.CheckTimer(shakingTime))
         {
             shakeTimer.TickTimer();
-            myMeshRenderer.material.color =  new Color(myMeshRenderer.material.color.r, myMeshRenderer.material.color.g, myMeshRenderer.material.color.b, shakingVisualCurve.Evaluate(shakeTimer.GetTimer()));
         }
         else
         {
@@ -265,7 +264,7 @@ public class PlatformController : MonoBehaviour, IDamageable
 
     public void FadePlatform()
     {
-        myMeshRenderer.material.color = new Color(myMeshRenderer.material.color.r, myMeshRenderer.material.color.g, myMeshRenderer.material.color.b, fadingVisualCurve.Evaluate(fadeTimer.GetTimer()));
+        myMeshRenderer.gameObject.SetActive(false);
         if (!fadeTimer.CheckTimer(fadingTime))
         {
             fadeTimer.TickTimer();
@@ -280,7 +279,7 @@ public class PlatformController : MonoBehaviour, IDamageable
 
     public void ReturnPlatform() // Da decidere se la piattaforma è già utilizzabile mentre sta per tornare oppure all'intera comparsa di essa
     {
-        myMeshRenderer.material.color = new Color(myMeshRenderer.material.color.r, myMeshRenderer.material.color.g, myMeshRenderer.material.color.b, returningVisualCurve.Evaluate(returnTimer.GetTimer()));
+        myMeshRenderer.gameObject.SetActive(true);
         if (!returnTimer.CheckTimer(returningTime))
         {
             returnTimer.TickTimer();
@@ -346,7 +345,6 @@ public class PlatformController : MonoBehaviour, IDamageable
             CurrentHits += _takenDamage;
             CurrentHits++;
         }
-        Debug.Log("Piattaforma colpita");
     }
 
     public void ResetFadingPlatform()

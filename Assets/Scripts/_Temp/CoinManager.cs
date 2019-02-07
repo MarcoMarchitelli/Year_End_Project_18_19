@@ -24,12 +24,17 @@ public class CoinManager : MonoBehaviour
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
+
+        if (Input.GetButtonDown("Restart"))
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
     }
 
     public void AddScore(int scoreToAdd)
     {
         Score += scoreToAdd;
-        if (Score >= 2)
+        if (Score >= TotalCoins)
         {
             VictoryCanvas.enabled = true;
             hasWin = true;

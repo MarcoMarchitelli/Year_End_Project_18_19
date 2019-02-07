@@ -23,7 +23,7 @@ public class EnemyController : EntityBaseController
     {
         base.Update();
 
-        if (isAlive)
+        if (isAlive && !CanvasManager.isPaused)
         {
             (myRayCon as RaycastEnemy).DamagePlayer(AttackDamage);
             (myRayCon as RaycastEnemy).CalculatePassengerMovement(velocity);
