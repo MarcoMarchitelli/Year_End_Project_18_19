@@ -10,7 +10,8 @@ public class FIX_MaterialEnemy : MonoBehaviour
 
     private void Awake()
     {
-        foreach(MeshRenderer mr in graphic.GetComponentsInChildren<MeshRenderer>(){
+        foreach(MeshRenderer mr in graphic.GetComponentsInChildren<MeshRenderer>())
+        {
             mr.material = mat;
         }
     }
