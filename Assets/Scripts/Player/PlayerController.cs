@@ -97,6 +97,7 @@ public class PlayerController : EntityBaseController
         ResetJump();
         ResetJumpsCount();
         cm.UpdateLifeBar(Health);
+        StopAllCoroutines();
     }
 
     public override void TakeDamage(int _takenDamage)
