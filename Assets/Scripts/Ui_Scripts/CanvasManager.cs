@@ -11,12 +11,20 @@ public class CanvasManager : MonoBehaviour
     [Tooltip("Pulsante di resume per selezione all'apertura della schermata")]
     public GameObject ResumeButton;//Holds the first selected item
     public static bool isPaused = false;
+    [Tooltip("Immagine del controller")]
+    public GameObject Controller;
+    [Tooltip("Immagine della tastiera")]
+    public GameObject Keyboard;
 
     [Tooltip("Schermata dell'invetario")]
     public GameObject InvenvotryScreen;
-    [Tooltip("Pulsante desiderato come selezionato all'apertura della schermata")]
-    public GameObject FirstInventory;//Holds the first selected item
     public static bool isOpenInventory = false;
+    public GameObject FirstInventory;
+    [Tooltip("Schermata della mappa")]
+    public GameObject MapScreen;
+    public static bool isOpenMap = false;
+
+    private bool isActiveController = false;
 
     [Tooltip("Schermata InPlay")]
     public GameObject InPlayScreen;
@@ -50,6 +58,15 @@ public class CanvasManager : MonoBehaviour
         else if (Input.GetButtonDown("Inventory") && isOpenInventory)
         {
             CloseInventory();
+        }
+
+        if (Input.GetButtonDown("Map") && !isOpenMap && isPaused == false)
+        {
+            OpenMap();
+        }
+        else if (Input.GetButtonDown("Map") && isOpenMap)
+        {
+            CloseMap();
         }
     }
 
@@ -97,6 +114,28 @@ public class CanvasManager : MonoBehaviour
         m_EventSystem.SetSelectedGameObject(null); //Set selection to the first button in the inventory screen
     }
 
+    /// <summary>
+    /// Apre la schermata di invetario
+    /// </summary>
+    public void OpenMap()
+    {
+        Time.timeScale = 0f;
+        isOpenMap = !isOpenMap;
+        InPlayScreen.SetActive(false);//deactivate/activate the inplay screen
+        MapScreen.SetActive(true);
+    }
+
+    /// <summary>
+    /// Chiude la schermata di invetario
+    /// </summary>
+    public void CloseMap()
+    {
+        Time.timeScale = 1f;
+        isOpenMap = !isOpenMap;
+        InPlayScreen.SetActive(true);//deactivate/activate the inplay screen
+        MapScreen.SetActive(false);
+    }
+
     public void QuitGame()
     {
         Application.Quit();
@@ -118,5 +157,12 @@ public class CanvasManager : MonoBehaviour
         {
             lifePoint.SetActive(false);
         }
+    }
+
+    public void Swap() {
+        Controller.SetActive(isActiveController);
+        isActiveController = !isActiveController;
+        Keyboard.SetActive(isActiveController);
+
     }
 }
