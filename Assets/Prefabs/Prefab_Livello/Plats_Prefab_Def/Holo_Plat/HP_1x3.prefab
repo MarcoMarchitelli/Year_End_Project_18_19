@@ -122,7 +122,7 @@ MonoBehaviour:
   Backward: 0
   TravelPoints: []
   canFade: 1
-  shakingTime: 1
+  shakingTime: 0.5
   shakingVisualCurve:
     serializedVersion: 2
     m_Curve:
@@ -147,7 +147,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 0
     m_RotationOrder: 4
-  fadingTime: 1
+  fadingTime: 0.5
   fadingVisualCurve:
     serializedVersion: 2
     m_Curve:
@@ -172,7 +172,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  returningTime: 1
+  returningTime: 0.5
   returningVisualCurve:
     serializedVersion: 2
     m_Curve:
@@ -484,16 +484,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3304747661480968334}
     m_Modifications:
-    - target: {fileID: 7998751986723720952, guid: ba3abb9fca8c2964db9c0e58cf084ceb,
-        type: 3}
-      propertyPath: m_Name
-      value: HoloPlat_Front
-      objectReference: {fileID: 0}
-    - target: {fileID: 7998751986723720952, guid: ba3abb9fca8c2964db9c0e58cf084ceb,
-        type: 3}
-      propertyPath: m_Layer
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 3273498721303853281, guid: ba3abb9fca8c2964db9c0e58cf084ceb,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -547,6 +537,16 @@ PrefabInstance:
     - target: {fileID: 3273498721303853281, guid: ba3abb9fca8c2964db9c0e58cf084ceb,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7998751986723720952, guid: ba3abb9fca8c2964db9c0e58cf084ceb,
+        type: 3}
+      propertyPath: m_Name
+      value: HoloPlat_Front
+      objectReference: {fileID: 0}
+    - target: {fileID: 7998751986723720952, guid: ba3abb9fca8c2964db9c0e58cf084ceb,
+        type: 3}
+      propertyPath: m_Layer
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
