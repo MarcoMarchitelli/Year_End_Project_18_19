@@ -613,28 +613,31 @@ public abstract class EntityBaseController : MonoBehaviour, IDamageable
 
     public void Dash()
     {
-        if (isFacingRight)
+        if (isAlive && !CanvasManager.isPaused)
         {
-            dashArrivePoint = transform.localPosition.x + DashDistance;
-        }
-        else
-        {
-            dashArrivePoint = transform.localPosition.x - DashDistance;
-        }
-
-        if (isDashUnlocked)
-        {
-            if (canDash)
+            if (isFacingRight)
             {
-                ResetVerticalVelocity();
-                SetDashingValue();
-                velocity.x = dashingValue;
-                isDashing = true;
-                canDash = false;
+                dashArrivePoint = transform.localPosition.x + DashDistance;
             }
             else
             {
-                Debug.Log("Stai ricaricando il dash");
+                dashArrivePoint = transform.localPosition.x - DashDistance;
+            }
+
+            if (isDashUnlocked)
+            {
+                if (canDash)
+                {
+                    ResetVerticalVelocity();
+                    SetDashingValue();
+                    velocity.x = dashingValue;
+                    isDashing = true;
+                    canDash = false;
+                }
+                else
+                {
+                    Debug.Log("Stai ricaricando il dash");
+                }
             }
         }
     }
