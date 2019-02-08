@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 [RequireComponent(typeof(RaycastPlatform))]
@@ -14,7 +15,7 @@ public class PlatformController : MonoBehaviour, IDamageable
     /// <summary>
     /// Riferimento al component MeshRenderer della piattaforma
     /// </summary>
-    private MeshRenderer myMeshRenderer;
+    private List<MeshRenderer> myMeshRenderers;
 
     /// <summary>
     /// <summary>
@@ -228,7 +229,7 @@ public class PlatformController : MonoBehaviour, IDamageable
     private void Start()
     {
         myRayCon = GetComponent<RaycastPlatform>();
-        myMeshRenderer = GetComponentInChildren<MeshRenderer>();
+        myMeshRenderers = GetComponentsInChildren<MeshRenderer>().ToList();
         shakeTimer = new Timer();
         fadeTimer = new Timer();
         returnTimer = new Timer();
@@ -250,6 +251,10 @@ public class PlatformController : MonoBehaviour, IDamageable
 
     public void ShakePlatform()
     {
+        foreach (MeshRenderer mr in myMeshRenderers)
+        {
+            mr.material.color = new Color(mr.material.color.r, mr.material.color.g, mr.material.color.b, tremblingVisualCurve.Evaluate(trembleTimer.GetTimer()));
+        }
         if (!shakeTimer.CheckTimer(shakingTime))
         {
             shakeTimer.TickTimer();
@@ -264,7 +269,10 @@ public class PlatformController : MonoBehaviour, IDamageable
 
     public void FadePlatform()
     {
-        myMeshRenderer.gameObject.SetActive(false);
+        foreach (MeshRenderer mr in myMeshRenderers)
+        {
+            mr.material.color = new Color(mr.material.color.r, mr.material.color.g, mr.material.color.b, tremblingVisualCurve.Evaluate(trembleTimer.GetTimer()));
+        }
         if (!fadeTimer.CheckTimer(fadingTime))
         {
             fadeTimer.TickTimer();
@@ -279,7 +287,10 @@ public class PlatformController : MonoBehaviour, IDamageable
 
     public void ReturnPlatform() // Da decidere se la piattaforma è già utilizzabile mentre sta per tornare oppure all'intera comparsa di essa
     {
-        myMeshRenderer.gameObject.SetActive(true);
+        foreach (MeshRenderer mr in myMeshRenderers)
+        {
+            mr.material.color = new Color(mr.material.color.r, mr.material.color.g, mr.material.color.b, tremblingVisualCurve.Evaluate(trembleTimer.GetTimer()));
+        }
         if (!returnTimer.CheckTimer(returningTime))
         {
             returnTimer.TickTimer();
@@ -294,7 +305,10 @@ public class PlatformController : MonoBehaviour, IDamageable
 
     public void TremblePlatform()
     {
-        myMeshRenderer.material.color = new Color(myMeshRenderer.material.color.r, myMeshRenderer.material.color.g, myMeshRenderer.material.color.b, tremblingVisualCurve.Evaluate(trembleTimer.GetTimer()));
+        foreach (MeshRenderer mr in myMeshRenderers)
+        {
+            mr.material.color = new Color(mr.material.color.r, mr.material.color.g, mr.material.color.b, tremblingVisualCurve.Evaluate(trembleTimer.GetTimer()));
+        }
         if (!trembleTimer.CheckTimer(tremblingTime))
         {
             trembleTimer.TickTimer();
@@ -382,7 +396,10 @@ public class PlatformController : MonoBehaviour, IDamageable
 
     private void ResetPlatformStartingAlphaColor()
     {
-        myMeshRenderer.material.color = new Color(myMeshRenderer.material.color.r, myMeshRenderer.material.color.g, myMeshRenderer.material.color.b, 1);
+        foreach (MeshRenderer mr in myMeshRenderers)
+        {
+            mr.material.color = new Color(mr.material.color.r, mr.material.color.g, mr.material.color.b, 1);
+        }
     }
 
     public bool GetCanFade()

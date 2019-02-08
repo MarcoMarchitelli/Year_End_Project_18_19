@@ -687,11 +687,18 @@ public abstract class EntityBaseController : MonoBehaviour, IDamageable
         AccelerationTime = 0f;
     }
 
-    public void RotateEntity(Vector3 axes, float rotationDegrees)
+    public void RotateEntity()
     {
         if (isAlive && !CanvasManager.isPaused)
         {
-            graphic.Rotate(axes * rotationDegrees);
+            if (isFacingLeft)
+            {
+                graphic.transform.rotation = Quaternion.Euler(0f, 180f, 0f);
+            }
+            else if (isFacingRight)
+            {
+                graphic.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
+            }
         }
     }
 

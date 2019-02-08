@@ -6,7 +6,9 @@ public class EnemyMovingLeftState : EnemyStateBase
 {
     protected override void Enter()
     {
-        myContext.myEnemy.RotateEntity(Vector3.up, 180f);
+        myContext.myEnemy.ResetFacingDirections();
+        myContext.myEnemy.SetIsFacingLeft(true);
+        myContext.myEnemy.RotateEntity();
     }
 
     protected override void Tick()

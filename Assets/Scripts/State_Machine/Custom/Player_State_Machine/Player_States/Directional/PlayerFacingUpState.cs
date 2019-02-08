@@ -21,7 +21,7 @@ public class PlayerFacingUpState : PlayerStateBase
 
             if (myContext.myPlayer.GetIsFacingRight())
             {
-                myContext.myPlayer.RotateEntity(Vector3.up, 180f);
+                myContext.myPlayer.RotateEntity();
             }
         }
         if (myContext.myPlayer.GetIsFacingRight())
@@ -30,7 +30,7 @@ public class PlayerFacingUpState : PlayerStateBase
 
             if (myContext.myPlayer.GetIsFacingLeft())
             {
-                myContext.myPlayer.RotateEntity(Vector3.up, 180f);
+                myContext.myPlayer.RotateEntity();
             }
         }
 

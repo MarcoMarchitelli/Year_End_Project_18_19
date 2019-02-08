@@ -6,12 +6,9 @@ public class PlayerFacingLeftState : PlayerStateBase
 {
     protected override void Enter()
     {
-        if (myContext.myPlayer.GetIsFacingRight())
-        {
-            myContext.myPlayer.RotateEntity(Vector3.up, 180f);
-        }
         myContext.myPlayer.ResetFacingDirections();
         myContext.myPlayer.SetIsFacingLeft(true);
+        myContext.myPlayer.RotateEntity();
     }
 
     protected override void Tick()

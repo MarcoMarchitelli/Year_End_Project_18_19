@@ -18,5 +18,6 @@ public class CoinController : MonoBehaviour
     {
         myCoinManager.AddScore(1);
         myAnim.Play("Open");
+        Destroy(this);
     }
 }
