@@ -97,6 +97,11 @@ public class PlayerController : EntityBaseController
         ResetJump();
         ResetJumpsCount();
         cm.UpdateLifeBar(Health);
+        StopAllCoroutines();
+        foreach (EnemyController enemy in FindObjectsOfType<EnemyController>())
+        {
+            enemy.Respawn();
+        }
     }
 
     public override void TakeDamage(int _takenDamage)

@@ -82,7 +82,7 @@ MonoBehaviour:
     m_Bits: 0
   SkinWidth: 0.02
   HorizontalRayCount: 0
-  VerticalRayCount: 0
+  VerticalRayCount: 20
   myCollider: {fileID: 0}
   topRayLength: 0.1
   bottomRayLength: 0
@@ -129,17 +129,17 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 0
       value: 0
-      inSlope: 5
-      outSlope: 5
+      inSlope: 10
+      outSlope: 10
       tangentMode: 34
       weightedMode: 0
       inWeight: 0
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 0.2
+      time: 0.1
       value: 1
-      inSlope: 5
-      outSlope: 5
+      inSlope: 10
+      outSlope: 10
       tangentMode: 34
       weightedMode: 0
       inWeight: 0.33333334
@@ -154,17 +154,17 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 0
       value: 1
-      inSlope: -1
-      outSlope: -1
+      inSlope: -2
+      outSlope: -2
       tangentMode: 34
       weightedMode: 0
       inWeight: 0
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 1
+      time: 0.5
       value: 0
-      inSlope: -1
-      outSlope: -1
+      inSlope: -2
+      outSlope: -2
       tangentMode: 34
       weightedMode: 0
       inWeight: 0.33333334
@@ -179,20 +179,20 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 0
       value: 0
-      inSlope: 1
-      outSlope: 1
+      inSlope: 2
+      outSlope: 2
       tangentMode: 34
       weightedMode: 0
       inWeight: 0
-      outWeight: 0
+      outWeight: 0.33333334
     - serializedVersion: 3
-      time: 1
+      time: 0.5
       value: 1
-      inSlope: 1
-      outSlope: 1
+      inSlope: 2
+      outSlope: 2
       tangentMode: 34
       weightedMode: 0
-      inWeight: 0
+      inWeight: 0.33333334
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
@@ -255,7 +255,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3304747661480968334}
-  - component: {fileID: 4262694905259516579}
   m_Layer: 0
   m_Name: Graphic
   m_TagString: Untagged
@@ -280,43 +279,6 @@ Transform:
   m_Father: {fileID: 5146636949682895302}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!23 &4262694905259516579
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8709648553169294102}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 0}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 0
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
 --- !u!1001 &348318859866030621
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -404,16 +366,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3304747661480968334}
     m_Modifications:
-    - target: {fileID: 6775597286845158665, guid: e496936e716baa5438ec8a5e53f2161d,
-        type: 3}
-      propertyPath: m_Name
-      value: HoloPlat_SideFront
-      objectReference: {fileID: 0}
-    - target: {fileID: 6775597286845158665, guid: e496936e716baa5438ec8a5e53f2161d,
-        type: 3}
-      propertyPath: m_Layer
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5815773966946152064, guid: e496936e716baa5438ec8a5e53f2161d,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -467,6 +419,16 @@ PrefabInstance:
     - target: {fileID: 5815773966946152064, guid: e496936e716baa5438ec8a5e53f2161d,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6775597286845158665, guid: e496936e716baa5438ec8a5e53f2161d,
+        type: 3}
+      propertyPath: m_Name
+      value: HoloPlat_SideFront
+      objectReference: {fileID: 0}
+    - target: {fileID: 6775597286845158665, guid: e496936e716baa5438ec8a5e53f2161d,
+        type: 3}
+      propertyPath: m_Layer
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
