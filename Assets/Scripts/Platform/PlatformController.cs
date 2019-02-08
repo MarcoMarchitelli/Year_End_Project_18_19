@@ -253,7 +253,7 @@ public class PlatformController : MonoBehaviour, IDamageable
     {
         foreach (MeshRenderer mr in myMeshRenderers)
         {
-            mr.material.color = new Color(mr.material.color.r, mr.material.color.g, mr.material.color.b, tremblingVisualCurve.Evaluate(trembleTimer.GetTimer()));
+            mr.material.color = new Color(mr.material.color.r, mr.material.color.g, mr.material.color.b, shakingVisualCurve.Evaluate(shakeTimer.GetTimer()));
         }
         if (!shakeTimer.CheckTimer(shakingTime))
         {
@@ -271,7 +271,7 @@ public class PlatformController : MonoBehaviour, IDamageable
     {
         foreach (MeshRenderer mr in myMeshRenderers)
         {
-            mr.material.color = new Color(mr.material.color.r, mr.material.color.g, mr.material.color.b, tremblingVisualCurve.Evaluate(trembleTimer.GetTimer()));
+            mr.material.color = new Color(mr.material.color.r, mr.material.color.g, mr.material.color.b, fadingVisualCurve.Evaluate(fadeTimer.GetTimer()));
         }
         if (!fadeTimer.CheckTimer(fadingTime))
         {
@@ -289,7 +289,7 @@ public class PlatformController : MonoBehaviour, IDamageable
     {
         foreach (MeshRenderer mr in myMeshRenderers)
         {
-            mr.material.color = new Color(mr.material.color.r, mr.material.color.g, mr.material.color.b, tremblingVisualCurve.Evaluate(trembleTimer.GetTimer()));
+            mr.material.color = new Color(mr.material.color.r, mr.material.color.g, mr.material.color.b, returningVisualCurve.Evaluate(returnTimer.GetTimer()));
         }
         if (!returnTimer.CheckTimer(returningTime))
         {
