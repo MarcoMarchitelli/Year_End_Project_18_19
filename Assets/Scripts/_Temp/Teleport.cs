@@ -6,11 +6,11 @@ public class Teleport : MonoBehaviour
 {
     public Teleport TeleportToMoveTo;
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D other)
     {
         if (TeleportToMoveTo != null)
         {
-            collision.transform.position = TeleportToMoveTo.transform.position;
+            other.transform.position = TeleportToMoveTo.transform.position;
         }
     }
 }
