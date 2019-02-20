@@ -528,9 +528,9 @@ public abstract class EntityBaseController : MonoBehaviour, IDamageable
     {
         if (!isDashing && isAlive && !CanvasManager.isPaused)
         {
-            /// TODO:
-            /// Eliminare quando è finita la fase di testing
-            CalculateGravityAndJumpVelocity(ref jumpVelocity, JumpHeight, TimeToJumpApex);
+            ///// TODO:
+            ///// Eliminare quando è finita la fase di testing
+            //CalculateGravityAndJumpVelocity(ref jumpVelocity, JumpHeight, TimeToJumpApex);
             if (canJump)
             {
                 velocity.y = jumpVelocity;

@@ -1,18 +1,12 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class PlayerEntity : MonoBehaviour
+public class PlayerEntity : BaseEntity
 {
-    // Start is called before the first frame update
+    [SerializeField] bool setupOnStart = false;
+
     void Start()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        if(setupOnStart)
+            SetUpEntity();
     }
 }

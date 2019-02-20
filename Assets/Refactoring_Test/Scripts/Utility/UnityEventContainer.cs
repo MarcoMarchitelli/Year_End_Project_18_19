@@ -26,6 +26,12 @@ public class UnityVector2Event : UnityEvent<Vector2> { }
 public class UnityVector3Event : UnityEvent<Vector3> { }
 
 /// <summary>
+/// Evento di unity che porta un bool
+/// </summary>
+[System.Serializable]
+public class UnityBoolEvent : UnityEvent<bool> { }
+
+/// <summary>
 /// Unity Event passing a Transform
 /// </summary>
 [System.Serializable]

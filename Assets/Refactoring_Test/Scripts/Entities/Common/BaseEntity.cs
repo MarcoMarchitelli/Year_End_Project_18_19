@@ -57,7 +57,10 @@ public abstract class BaseEntity : MonoBehaviour, IEntity
     /// </summary>
     public virtual void OnFixedUpdate()
     {
-        throw new System.NotImplementedException();
+        for (int i = 0; i < Behaviours.Count; i++)
+        {
+            Behaviours[i].OnFixedUpdate();
+        }
     }
 
     /// <summary>
@@ -65,7 +68,10 @@ public abstract class BaseEntity : MonoBehaviour, IEntity
     /// </summary>
     public virtual void OnLateUpdate()
     {
-        throw new System.NotImplementedException();
+        for (int i = 0; i < Behaviours.Count; i++)
+        {
+            Behaviours[i].OnLateUpdate();
+        }
     }
 
     protected void Update()
