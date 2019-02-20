@@ -29,10 +29,12 @@ public class PlayerMovementBehaviour : BaseBehaviour
     float moveVelocityX;
     float targetMoveVelocityX;
     float velocityXSmoothing;
+    DashBehaviour dashBehaviour;
 
     protected override void CustomSetup()
     {
         rb = GetComponent<Rigidbody>();
+        dashBehaviour = Entity.gameObject.GetComponentInChildren<DashBehaviour>();
     }
 
     public override void OnFixedUpdate()
@@ -40,11 +42,29 @@ public class PlayerMovementBehaviour : BaseBehaviour
         if (IsSetupped)
         {
             Move();
+            FaceMoveDirection();
             CheckMoveVelocity();
         }
     }
 
     #region Behaviour's Methods
+
+    /// <summary>
+    /// Makes the player face right or left based on move direction.
+    /// </summary>
+    void FaceMoveDirection()
+    {
+        if (moveVelocityX > 0)
+        {
+            transform.rotation = Quaternion.Euler(Vector3.zero);
+            dashBehaviour.SetDashDirection(Vector3.right);
+        }
+        else if (moveVelocityX < 0)
+        {
+            transform.rotation = Quaternion.Euler(new Vector3(0, 180, 0));
+            dashBehaviour.SetDashDirection(Vector3.left);
+        }
+    }
 
     /// <summary>
     /// Funzione che gestisce il movimento
@@ -59,7 +79,7 @@ public class PlayerMovementBehaviour : BaseBehaviour
 
     void CheckMoveVelocity()
     {
-        if (moveVelocityX == 0)
+        if (targetMoveVelocityX == 0)
             OnMovementStop.Invoke();
         else
             OnMovementStart.Invoke();

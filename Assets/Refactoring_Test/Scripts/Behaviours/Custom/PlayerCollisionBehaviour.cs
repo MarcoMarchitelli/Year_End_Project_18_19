@@ -23,18 +23,36 @@ public class PlayerCollisionBehaviour : BaseBehaviour
             {
                 _below = value;
                 OnCollisionBelowStateChange.Invoke(_below);
+                print(_below);
             }
         }
     }
 
+    GameObject objectBelow;
+
+    /// <summary>
+    /// Checks the firs contact point and if its normal is faceing up it registers the object hit as the object below.
+    /// </summary>
+    /// <param name="collision"></param>
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.contacts[0].normal == Vector3.up)
         {
+            objectBelow = collision.collider.gameObject;
             Below = true;
         }
-        else
+    }
+
+    /// <summary>
+    /// Every time we exit a collision it checks if it was the object below and sets the collision state accordingly.
+    /// </summary>
+    /// <param name="collision"></param>
+    private void OnCollisionExit(Collision collision)
+    {
+        if (collision.collider.gameObject == objectBelow)
+        {
             Below = false;
+        }
     }
 
     public void ResetCollisionValues()
