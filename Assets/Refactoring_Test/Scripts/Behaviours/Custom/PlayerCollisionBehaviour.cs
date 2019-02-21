@@ -23,7 +23,6 @@ public class PlayerCollisionBehaviour : BaseBehaviour
             {
                 _below = value;
                 OnCollisionBelowStateChange.Invoke(_below);
-                print(_below);
             }
         }
     }

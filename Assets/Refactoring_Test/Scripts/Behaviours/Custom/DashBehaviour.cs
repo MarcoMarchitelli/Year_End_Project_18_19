@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 
 /// <summary>
 /// Behaviour che si occupa di eseguire il dash
@@ -32,6 +31,30 @@ public class DashBehaviour : BaseBehaviour
     /// </summary>
     Rigidbody rBody;
     Vector3 dashDirection;
+    float dashTime;
+    bool isVelocityDecreasing;
+    float velocityX;
+    float oldVelocityX;
+    bool _isDashing;
+    bool IsDashing
+    {
+        get { return _isDashing; }
+        set
+        {
+            if(_isDashing != value)
+            {
+                _isDashing = value;
+                if (!_isDashing)
+                {
+                    OnDashEnd.Invoke(dashCooldown);
+                }
+                else
+                {
+                    OnDashStart.Invoke();
+                }
+            }
+        }
+    }
 
     protected override void CustomSetup()
     {
@@ -40,11 +63,29 @@ public class DashBehaviour : BaseBehaviour
 
     public override void OnUpdate()
     {
-        if(rBody.velocity.x == 0)
+        if (dashDirection.x > 0)
         {
-            //rBody.useGravity = true;
-            OnDashEnd.Invoke(dashCooldown);
+            velocityX = rBody.velocity.x;
+            if (velocityX < oldVelocityX)
+                isVelocityDecreasing = true;
+            else
+                isVelocityDecreasing = false;
         }
+        else if(dashDirection.x < 0)
+        {
+            velocityX = rBody.velocity.x;
+            if (velocityX > oldVelocityX)
+                isVelocityDecreasing = true;
+            else
+                isVelocityDecreasing = false;
+        }
+
+        if (isVelocityDecreasing && rBody.velocity.x == 0)
+        {
+            IsDashing = false;
+        }
+
+        oldVelocityX = velocityX;
     }
 
     #region API
@@ -69,9 +110,7 @@ public class DashBehaviour : BaseBehaviour
 
     void StartDash()
     {
-        OnDashStart.Invoke();
-        //rBody.useGravity = false;
+        IsDashing = true;
         rBody.AddForce(dashDirection * dashForce, ForceMode.Impulse);
     }
-
 }
