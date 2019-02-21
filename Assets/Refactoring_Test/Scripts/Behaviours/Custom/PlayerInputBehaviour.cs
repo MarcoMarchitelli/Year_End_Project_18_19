@@ -65,11 +65,12 @@ public class PlayerInputBehaviour : BaseBehaviour
     {
         if (canJump)
         {
-            if(Input.GetKeyDown(JumpKey))
+            if (Input.GetKeyDown(JumpKey))
                 OnJumpPressed.Invoke();
-            if (Input.GetKeyUp(JumpKey))
-                OnJumpReleased.Invoke();
         }
+
+        if (Input.GetKeyUp(JumpKey))
+            OnJumpReleased.Invoke();
 
         if (canDash && Input.GetKeyDown(DashKey))
         {
