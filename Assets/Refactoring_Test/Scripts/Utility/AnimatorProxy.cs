@@ -4,6 +4,20 @@ public class AnimatorProxy : MonoBehaviour
 {
     [SerializeField] Animator animator;
 
+    bool _isGrounded;
+    public bool IsGrounded
+    {
+        get { return _isGrounded; }
+        set
+        {
+            if (value != _isGrounded)
+            {
+                _isGrounded = value;
+                animator.SetBool("isGrounded", _isGrounded);
+            }
+        }
+    }
+
     bool _isDashing;
     public bool IsDashing
     {
@@ -18,16 +32,16 @@ public class AnimatorProxy : MonoBehaviour
         }
     }
 
-    bool _isJumping;
-    public bool IsJumping
+    bool _isRising;
+    public bool IsRising
     {
-        get { return _isJumping; }
+        get { return _isRising; }
         set
         {
-            if (value != _isJumping)
+            if (value != _isRising)
             {
-                _isJumping = value;
-                animator.SetBool("isJumping", _isJumping);
+                _isRising = value;
+                animator.SetBool("isRising", _isRising);
             }
         }
     }

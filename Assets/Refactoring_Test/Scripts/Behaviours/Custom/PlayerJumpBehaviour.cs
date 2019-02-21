@@ -18,8 +18,8 @@ public class PlayerJumpBehaviour : BaseBehaviour
     /// </summary>
     [SerializeField] float timeToReachJumpApex;
 
-    [SerializeField] UnityVoidEvent OnJumpStart;
-    [SerializeField] UnityVoidEvent OnJumpEnd;
+    [SerializeField] UnityVoidEvent OnEntityRising;
+    [SerializeField] UnityVoidEvent OnEntityFalling;
 
     #endregion
 
@@ -27,22 +27,6 @@ public class PlayerJumpBehaviour : BaseBehaviour
     float gravity;
     float maxJumpVelocity;
     float minJumpVelocity;
-    float _currentJumpVelocity;
-    float CurrentJumpVelocity
-    {
-        get { return _currentJumpVelocity; }
-        set
-        {
-            if(value != _currentJumpVelocity)
-            {
-                _currentJumpVelocity = value;
-                if (_currentJumpVelocity > 0)
-                    OnJumpStart.Invoke();
-                else if (_currentJumpVelocity == 0)
-                    OnJumpEnd.Invoke();
-            }
-        }
-    }
 
     protected override void CustomSetup()
     {
@@ -54,21 +38,18 @@ public class PlayerJumpBehaviour : BaseBehaviour
         Physics.gravity = new Vector2(0, gravity);
     }
 
-    public override void OnUpdate()
-    {
-        CurrentJumpVelocity = rb.velocity.y;
-    }
-
     #region API
 
     public void HandleJumpPress()
     {
+        OnEntityRising.Invoke();
         rb.velocity = new Vector2(0, maxJumpVelocity);
     }
 
     public void HandleJumpRelease()
     {
-        if(rb.velocity.y > minJumpVelocity)
+        OnEntityFalling.Invoke();
+        if (rb.velocity.y > minJumpVelocity)
             rb.velocity = new Vector2(0, minJumpVelocity);
     }
 

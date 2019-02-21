@@ -31,7 +31,6 @@ public class DashBehaviour : BaseBehaviour
     /// </summary>
     Rigidbody rBody;
     Vector3 dashDirection;
-    float dashTime;
     bool isVelocityDecreasing;
     float velocityX;
     float oldVelocityX;
