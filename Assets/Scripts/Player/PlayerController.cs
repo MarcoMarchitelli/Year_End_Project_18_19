@@ -30,6 +30,11 @@ public class PlayerController : EntityBaseController
     public float MultipleJumpHeight;
 
     /// <summary>
+    /// Minimum jump velocity.
+    /// </summary>
+    protected float doubleJumpVelocity;
+
+    /// <summary>
     /// Serve a salvare il numero di salti consecutivi che può fare il player
     /// </summary>
     private int resetMultipleJumpsCount;
@@ -58,6 +63,8 @@ public class PlayerController : EntityBaseController
         cm = FindObjectOfType<CanvasManager>();
 
         base.Start();
+
+        doubleJumpVelocity = Mathf.Sqrt(2 * Mathf.Abs(gravity)) * MultipleJumpHeight;
     }
 
     protected override void Update()
@@ -80,7 +87,7 @@ public class PlayerController : EntityBaseController
         {
             if (canMultipleJump && currentMultipleJumpsCount > 0)
             {
-                velocity.y = ((2 * MultipleJumpHeight) / Mathf.Pow(TimeToJumpApex, 2)) * TimeToJumpApex;
+                velocity.y = doubleJumpVelocity;
                 currentMultipleJumpsCount--;
             }
         }

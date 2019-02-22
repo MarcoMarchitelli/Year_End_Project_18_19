@@ -133,7 +133,7 @@ public abstract class EntityBaseController : MonoBehaviour, IDamageable
     /// <summary>
     /// Gravità subita dall'entità
     /// </summary>
-    private float gravity;
+    protected float gravity;
 
     /// <summary>
     /// Proprietà della variabile "gravity"
@@ -275,7 +275,13 @@ public abstract class EntityBaseController : MonoBehaviour, IDamageable
     /// Altezza massima che raggiunge il salto
     /// </summary>
     [Tooltip("Altezza massima che raggiunge il salto")]
-    public float JumpHeight;
+    public float MaxJumpHeight;
+
+    /// <summary>
+    /// Altezza minima che raggiunge il salto
+    /// </summary>
+    [Tooltip("Altezza minima che raggiunge il salto")]
+    public float MinJumpHeight;
 
     /// <summary>
     /// Tempo che ci mette il salto a raggiungere il punto più alto
@@ -286,7 +292,12 @@ public abstract class EntityBaseController : MonoBehaviour, IDamageable
     /// <summary>
     /// Velocità calcolata tramite JumpHeight e TimeToJumpApex
     /// </summary>
-    protected float jumpVelocity;
+    protected float maxJumpVelocity;
+
+    /// <summary>
+    /// Minimum jump velocity.
+    /// </summary>
+    protected float minJumpVelocity;
 
     /// <summary>
     /// Se attivo, l'entità può fare il primo salto
@@ -304,7 +315,8 @@ public abstract class EntityBaseController : MonoBehaviour, IDamageable
         SetRespawnVariables();
         Health = respawnHealth;
 
-        CalculateGravityAndJumpVelocity(ref jumpVelocity, JumpHeight, TimeToJumpApex);
+        CalculateGravityAndJumpVelocity(ref maxJumpVelocity, MaxJumpHeight, TimeToJumpApex);
+        minJumpVelocity = Mathf.Sqrt(2 * Mathf.Abs(gravity)) * MinJumpHeight;
     }
 
     protected virtual void Update()
@@ -524,18 +536,24 @@ public abstract class EntityBaseController : MonoBehaviour, IDamageable
         return isAttackRecharging;
     }
 
-    public void Jump()
+    public void JumpMax()
     {
         if (!isDashing && isAlive && !CanvasManager.isPaused)
         {
-            ///// TODO:
-            ///// Eliminare quando è finita la fase di testing
-            //CalculateGravityAndJumpVelocity(ref jumpVelocity, JumpHeight, TimeToJumpApex);
             if (canJump)
             {
-                velocity.y = jumpVelocity;
+                velocity.y = maxJumpVelocity;
                 canJump = false;
             }
+        }
+    }
+
+    public void JumpMin()
+    {
+        if (!isDashing && isAlive && !CanvasManager.isPaused)
+        {
+            velocity.y = minJumpVelocity;
+            canJump = false;
         }
     }
 

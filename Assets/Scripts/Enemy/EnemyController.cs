@@ -43,7 +43,7 @@ public class EnemyController : EntityBaseController
             if (myRayCon.Collisions.below)
             {
                 ResetJump();
-                Jump();
+                JumpMax();
             }
             return;
         }
@@ -64,7 +64,7 @@ public class EnemyController : EntityBaseController
             if (myRayCon.Collisions.below)
             {
                 ResetJump();
-                Jump();
+                JumpMax();
             }
             return;
         }

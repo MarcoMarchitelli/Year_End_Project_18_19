@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PlayerRisingState : PlayerStateBase
 {
@@ -9,6 +7,11 @@ public class PlayerRisingState : PlayerStateBase
         if (myContext.myPlayer.myRayCon.Collisions.above)
         {
             myContext.myPlayer.ResetVerticalVelocity();
+        }
+
+        if (Input.GetButtonUp("Jump"))
+        {
+            myContext.myPlayer.JumpMin();
         }
 
         if (Input.GetButtonDown("Jump"))
