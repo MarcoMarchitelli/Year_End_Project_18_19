@@ -21,6 +21,14 @@ public class PlayerMovementBehaviour : BaseBehaviour
     /// Evento lanciato alla fine del movimento
     /// </summary>
     [SerializeField] UnityVoidEvent OnMovementStop;
+    /// <summary>
+    /// Event called when entity rigidbody velocity y is increasing.
+    /// </summary>
+    [SerializeField] UnityVoidEvent OnEntityRising;
+    /// <summary>
+    /// Event called when entity rigidbody velocity y is decreading.
+    /// </summary>
+    [SerializeField] UnityVoidEvent OnEntityFalling;
 
     #endregion
 
@@ -31,10 +39,33 @@ public class PlayerMovementBehaviour : BaseBehaviour
     float velocityXSmoothing;
     DashBehaviour dashBehaviour;
 
+    bool _isRising;
+    bool IsRising
+    {
+        get { return _isRising; }
+        set
+        {
+            if (value != _isRising)
+            {
+                _isRising = value;
+                if (_isRising)
+                {
+                    OnEntityRising.Invoke();
+                }
+                else
+                {
+                    OnEntityFalling.Invoke();
+                }
+            }
+        }
+    }
+
     protected override void CustomSetup()
     {
         rb = GetComponent<Rigidbody>();
         dashBehaviour = Entity.gameObject.GetComponentInChildren<DashBehaviour>();
+        //WTFF
+        dashBehaviour.SetDashDirection(Vector3.right);
     }
 
     public override void OnFixedUpdate()
@@ -45,6 +76,15 @@ public class PlayerMovementBehaviour : BaseBehaviour
             FaceMoveDirection();
             CheckMoveVelocity();
         }
+    }
+
+    public override void OnUpdate()
+    {
+        if (rb.velocity.y > 0)
+            IsRising = true;
+        else
+        if (rb.velocity.y < 0)
+            IsRising = false;
     }
 
     #region Behaviour's Methods

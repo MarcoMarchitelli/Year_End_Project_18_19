@@ -18,39 +18,56 @@ public class PlayerJumpBehaviour : BaseBehaviour
     /// </summary>
     [SerializeField] float timeToReachJumpApex;
 
-    [SerializeField] UnityVoidEvent OnEntityRising;
-    [SerializeField] UnityVoidEvent OnEntityFalling;
-
     #endregion
 
     Rigidbody rb;
     float gravity;
     float maxJumpVelocity;
     float minJumpVelocity;
+    const int airJumps = 1;
+    int airJumpsCount;
+
+    PlayerEntityData data;
 
     protected override void CustomSetup()
     {
+        rb = Entity.gameObject.GetComponentInChildren<Rigidbody>();
+
+        data = Entity.Data as PlayerEntityData;
         gravity = -(2 * maxJumpHeight) / Mathf.Pow(timeToReachJumpApex, 2);
         maxJumpVelocity = Mathf.Abs(gravity) * timeToReachJumpApex;
         minJumpVelocity = Mathf.Sqrt(2 * Mathf.Abs(gravity)) * minJumpHeight;
-
-        rb = Entity.gameObject.GetComponentInChildren<Rigidbody>();
         Physics.gravity = new Vector2(0, gravity);
+        airJumpsCount = 0;
     }
 
     #region API
 
     public void HandleJumpPress()
     {
-        OnEntityRising.Invoke();
-        rb.velocity = new Vector2(0, maxJumpVelocity);
+        if (IsSetupped)
+        {
+            if (data.playerCollisionBehaviour.Below)
+            {
+                rb.velocity = new Vector2(0, maxJumpVelocity);
+            }
+            else if(airJumpsCount < 1)
+            {
+                rb.velocity = new Vector2(0, maxJumpVelocity);
+                airJumpsCount++;
+            }
+        }
     }
 
     public void HandleJumpRelease()
     {
-        OnEntityFalling.Invoke();
         if (rb.velocity.y > minJumpVelocity)
             rb.velocity = new Vector2(0, minJumpVelocity);
+    }
+
+    public void ResetAirJumpsCount()
+    {
+        airJumpsCount = 0;
     }
 
     #endregion

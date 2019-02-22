@@ -6,7 +6,8 @@ public class PlayerCollisionBehaviour : BaseBehaviour
 
     #region Serialized Fields
 
-    [SerializeField] UnityBoolEvent OnCollisionBelowStateChange;
+    [SerializeField] UnityVoidEvent OnCollisionBelowTrue;
+    [SerializeField] UnityVoidEvent OnCollisionBelowFalse;
 
     #endregion
 
@@ -22,7 +23,14 @@ public class PlayerCollisionBehaviour : BaseBehaviour
             if (value != _below)
             {
                 _below = value;
-                OnCollisionBelowStateChange.Invoke(_below);
+                if (_below)
+                {
+                    OnCollisionBelowTrue.Invoke();
+                }
+                else
+                {
+                    OnCollisionBelowFalse.Invoke();
+                }
             }
         }
     }

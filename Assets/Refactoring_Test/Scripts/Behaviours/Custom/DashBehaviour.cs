@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Collections;
 
 /// <summary>
 /// Behaviour che si occupa di eseguire il dash
@@ -6,7 +7,14 @@
 [RequireComponent(typeof(Rigidbody))]
 public class DashBehaviour : BaseBehaviour
 {
-    #region Events
+    #region Serialized Fields
+
+    /// <summary>
+    /// The force applyed to the entity.
+    /// </summary>
+    [SerializeField] float dashDistance = 5f;
+    [SerializeField] float dashDuration;
+
     /// <summary>
     /// Evento lanciato all'inizio del dash
     /// </summary>
@@ -14,27 +22,22 @@ public class DashBehaviour : BaseBehaviour
     /// <summary>
     /// Evento lanciato alla fine del dash, passa il cooldown del dash
     /// </summary>
-    [SerializeField] UnityFloatEvent OnDashEnd;
+    [SerializeField] UnityVoidEvent OnDashEnd;
+
     #endregion
 
-    /// <summary>
-    /// The force applyed to the entity.
-    /// </summary>
-    [SerializeField] float dashForce = 5f;
-    /// <summary>
-    /// dash cooldown.
-    /// </summary>
-    [SerializeField] float dashCooldown = 3f;
+    PlayerEntityData data;
 
     /// <summary>
     /// Riferimento al Rigidbody
     /// </summary>
     Rigidbody rBody;
     Vector3 dashDirection;
-    bool isVelocityDecreasing;
-    float velocityX;
-    float oldVelocityX;
-    bool _isDashing;
+    float dashSpeed;
+    const int airDashes = 1;
+    int airDashesCount;
+
+    bool _isDashing = false;
     bool IsDashing
     {
         get { return _isDashing; }
@@ -45,7 +48,7 @@ public class DashBehaviour : BaseBehaviour
                 _isDashing = value;
                 if (!_isDashing)
                 {
-                    OnDashEnd.Invoke(dashCooldown);
+                    OnDashEnd.Invoke();
                 }
                 else
                 {
@@ -57,34 +60,13 @@ public class DashBehaviour : BaseBehaviour
 
     protected override void CustomSetup()
     {
+        data = Entity.Data as PlayerEntityData;
         rBody = GetComponent<Rigidbody>();
-    }
 
-    public override void OnUpdate()
-    {
-        if (dashDirection.x > 0)
-        {
-            velocityX = rBody.velocity.x;
-            if (velocityX < oldVelocityX)
-                isVelocityDecreasing = true;
-            else
-                isVelocityDecreasing = false;
-        }
-        else if(dashDirection.x < 0)
-        {
-            velocityX = rBody.velocity.x;
-            if (velocityX > oldVelocityX)
-                isVelocityDecreasing = true;
-            else
-                isVelocityDecreasing = false;
-        }
-
-        if (isVelocityDecreasing && rBody.velocity.x == 0)
-        {
-            IsDashing = false;
-        }
-
-        oldVelocityX = velocityX;
+        OnDashStart.AddListener(DashStartHandler);
+        OnDashEnd.AddListener(DashEndHandler);
+        dashSpeed = dashDistance / dashDuration;
+        airDashesCount = 0;
     }
 
     #region API
@@ -94,9 +76,12 @@ public class DashBehaviour : BaseBehaviour
     /// </summary>
     public void Dash()
     {
-        if (IsSetupped && dashDirection != Vector3.zero)
+        if (IsSetupped && !IsDashing)
         {
-            StartDash();
+            if (data.playerCollisionBehaviour.Below)
+                StartDash();
+            else if (airDashesCount < 1)
+                StartDash(true);
         }
     }
 
@@ -105,11 +90,50 @@ public class DashBehaviour : BaseBehaviour
         dashDirection = _dashDirection;
     }
 
+    public void ResetAirDashesCount()
+    {
+        airDashesCount = 0;
+    }
+
     #endregion
 
-    void StartDash()
+    void StartDash(bool _isAirDash = false)
+    {
+        if (_isAirDash)
+            airDashesCount++;
+        StartCoroutine(DashRoutine());
+    }
+
+    void DashEndHandler()
+    {
+        rBody.useGravity = true;
+    }
+
+    void DashStartHandler()
+    {
+        rBody.useGravity = false;
+    }
+
+    IEnumerator DashRoutine()
     {
         IsDashing = true;
-        rBody.AddForce(dashDirection * dashForce, ForceMode.Impulse);
+
+        float timer = 0;
+        float tempDashSpeed = dashSpeed * dashDirection.x;
+
+        while (timer <= dashDuration)
+        {
+            timer += Time.fixedDeltaTime;
+
+            rBody.velocity = new Vector2(tempDashSpeed, 0);
+
+            yield return new WaitForFixedUpdate();
+        }
+
+        rBody.velocity = Vector2.zero;
+
+        IsDashing = false;
+
     }
+
 }

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using System;
 
 public abstract class BaseEntity : MonoBehaviour, IEntity
 {
@@ -16,8 +17,8 @@ public abstract class BaseEntity : MonoBehaviour, IEntity
     /// </summary>
     public void SetUpEntity()
     {
-        CustomSetup();
         Behaviours = GetComponentsInChildren<IBehaviour>().ToList();
+        CustomSetup();
         foreach (IBehaviour behaviour in Behaviours)
         {
             behaviour.Setup(this);
@@ -39,6 +40,19 @@ public abstract class BaseEntity : MonoBehaviour, IEntity
         {
             behaviour.Enable(_value);
         }
+    }
+
+    public T GetBehaviour<T>() where T : IBehaviour
+    {
+        foreach (IBehaviour b in Behaviours)
+        {
+            if (b.GetType().IsAssignableFrom(typeof(T)))
+            {
+                return (T)b;
+            }
+        }
+
+        return default(T);
     }
 
     /// <summary>
