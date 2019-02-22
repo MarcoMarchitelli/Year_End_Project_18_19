@@ -76,13 +76,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GeneralMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 1024
   attackMask:
     serializedVersion: 2
     m_Bits: 0
   SkinWidth: 0.05
   HorizontalRayCount: 0
-  VerticalRayCount: 10
+  VerticalRayCount: 20
   myCollider: {fileID: 0}
   topRayLength: 0
   bottomRayLength: 0
@@ -250,11 +250,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3453232986200420981}
     m_Modifications:
-    - target: {fileID: 114150919632467274, guid: dfb86705a6ebf4441959249bb4c338f6,
-        type: 3}
-      propertyPath: m_Name
-      value: PlatA2_Front
-      objectReference: {fileID: 0}
     - target: {fileID: 1384813248877303009, guid: dfb86705a6ebf4441959249bb4c338f6,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -309,6 +304,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114150919632467274, guid: dfb86705a6ebf4441959249bb4c338f6,
+        type: 3}
+      propertyPath: m_Name
+      value: PlatA2_Front
       objectReference: {fileID: 0}
     - target: {fileID: 6936501774800071694, guid: dfb86705a6ebf4441959249bb4c338f6,
         type: 3}
