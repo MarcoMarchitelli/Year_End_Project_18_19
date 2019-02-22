@@ -8,11 +8,14 @@ public class PlayerInputBehaviour : BaseBehaviour
     [SerializeField] KeyCode JumpKey;
     [SerializeField] KeyCode DashKey;
     [SerializeField] KeyCode AttackKey;
+    [SerializeField] KeyCode RunKey;
 
     [SerializeField] UnityVoidEvent OnJumpPressed;
     [SerializeField] UnityVoidEvent OnJumpReleased;
     [SerializeField] UnityVoidEvent OnDashPressed;
     [SerializeField] UnityVoidEvent OnAttackPressed;
+    [SerializeField] UnityVoidEvent OnRunPressed;
+    [SerializeField] UnityVoidEvent OnRunReleased;
     /// <summary>
     /// Evento lanciato al cambio di direzione dell'asse di input
     /// </summary>
@@ -44,6 +47,7 @@ public class PlayerInputBehaviour : BaseBehaviour
     bool canDash;
     bool canJump;
     bool canAttack;
+    bool canRun;
 
     protected override void CustomSetup()
     {
@@ -86,6 +90,15 @@ public class PlayerInputBehaviour : BaseBehaviour
         {
             MoveDirection = new Vector3(Input.GetAxisRaw("Horizontal"), 0, 0);
         }
+
+        if (canRun)
+        {
+            if (Input.GetKeyDown(RunKey))
+                OnRunPressed.Invoke();
+        }
+
+        if (Input.GetKeyUp(RunKey))
+            OnRunReleased.Invoke();
     }
 
     #region API
@@ -104,6 +117,11 @@ public class PlayerInputBehaviour : BaseBehaviour
     public void ToggleDashInput(bool _value)
     {
         canDash = _value;
+    }
+
+    public void ToggleRunInput(bool _value)
+    {
+        canRun = _value;
     }
 
     #endregion

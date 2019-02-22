@@ -1,8 +1,12 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class TestEntity : BaseEntity
 {
-    
+    [SerializeField] bool setupOnStart = false;
+
+    void Start()
+    {
+        if (setupOnStart)
+            SetUpEntity();
+    }
 }

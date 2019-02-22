@@ -6,13 +6,35 @@ public class PlayerMovementBehaviour : BaseBehaviour
     #region Serialized Fields
 
     /// <summary>
-    /// Behaviour's movement speed;
+    /// Behaviour's movement speed.
     /// </summary>
-    [SerializeField] float moveSpeed;
+    [Tooltip("Behaviour's movement speed.")]
+    [SerializeField]
+    float moveSpeed;
     /// <summary>
-    /// Behaviour's movement smoothing time;
+    /// Behaviour's running speed.
     /// </summary>
-    [SerializeField] float moveSmoothingTime = .1f;
+    [Tooltip("Behaviour's running speed.")]
+    [SerializeField]
+    float runMoveSpeed;
+    /// <summary>
+    /// Time the entity takes to reach the end of the run acceleration curve.
+    /// </summary>
+    [Tooltip("Time the entity takes to reach the end of the run acceleration curve.")]
+    [SerializeField]
+    float timeToReachRunSpeed;
+    /// <summary>
+    /// Describes how the move speed interpolates to run speed.
+    /// </summary>
+    [Tooltip("Describes how the move speed interpolates to run speed.")]
+    [SerializeField]
+    AnimationCurve runAccelerationCurve;
+    /// <summary>
+    /// Behaviour's movement smoothing time.
+    /// </summary>
+    [Tooltip("Behaviour's movement smoothing time.")]
+    [SerializeField]
+    float moveSmoothingTime = .1f;
     /// <summary>
     /// Evento lanciato all'inzio del movimento
     /// </summary>
@@ -32,12 +54,32 @@ public class PlayerMovementBehaviour : BaseBehaviour
 
     #endregion
 
+    #region Variables
+
+    #region References
+
     Rigidbody rb;
-    Vector3 moveVelocityVector;
+    DashBehaviour dashBehaviour;
+
+    #endregion
+
+    #region Move
+
+    Vector3 moveVelocity;
+    Vector2 moveDirection;
+    float currentMoveSpeed;
     float moveVelocityX;
     float targetMoveVelocityX;
     float velocityXSmoothing;
-    DashBehaviour dashBehaviour;
+
+    #endregion
+
+    #region Run
+
+    bool countRunTimer;
+    float runTimer;
+
+    #endregion
 
     bool _isRising;
     bool IsRising
@@ -60,12 +102,16 @@ public class PlayerMovementBehaviour : BaseBehaviour
         }
     }
 
+    #endregion
+
     protected override void CustomSetup()
     {
         rb = GetComponent<Rigidbody>();
         dashBehaviour = Entity.gameObject.GetComponentInChildren<DashBehaviour>();
         //WTFF
         dashBehaviour.SetDashDirection(Vector3.right);
+        //---
+        currentMoveSpeed = moveSpeed;
     }
 
     public override void OnFixedUpdate()
@@ -74,17 +120,21 @@ public class PlayerMovementBehaviour : BaseBehaviour
         {
             Move();
             FaceMoveDirection();
-            CheckMoveVelocity();
         }
     }
 
     public override void OnUpdate()
     {
-        if (rb.velocity.y > 0)
-            IsRising = true;
-        else
-        if (rb.velocity.y < 0)
-            IsRising = false;
+        if (countRunTimer)
+        {
+            runTimer += Time.deltaTime;
+            if (runTimer > timeToReachRunSpeed)
+                runTimer = timeToReachRunSpeed;
+            EvaluateRunCurve();
+        }
+
+        CheckMoveVelocityX();
+        CheckMoveVelocityY();
     }
 
     #region Behaviour's Methods
@@ -112,17 +162,34 @@ public class PlayerMovementBehaviour : BaseBehaviour
     /// <param name="_moveDirection"></param>
     void Move()
     {
+        targetMoveVelocityX = moveDirection.x * currentMoveSpeed;
         moveVelocityX = Mathf.SmoothDamp(moveVelocityX, targetMoveVelocityX, ref velocityXSmoothing, moveSmoothingTime);
-        moveVelocityVector = new Vector2(moveVelocityX, 0);
-        rb.MovePosition(rb.position + moveVelocityVector * Time.fixedDeltaTime);
+        moveVelocity = new Vector2(moveVelocityX, 0);
+        rb.MovePosition(rb.position + moveVelocity * Time.fixedDeltaTime);
     }
 
-    void CheckMoveVelocity()
+    void CheckMoveVelocityX()
     {
         if (targetMoveVelocityX == 0)
             OnMovementStop.Invoke();
         else
             OnMovementStart.Invoke();
+    }
+
+    void CheckMoveVelocityY()
+    {
+        if (rb.velocity.y > 0)
+            IsRising = true;
+        else
+        if (rb.velocity.y < 0)
+            IsRising = false;
+    }
+
+    float interpolationValue;
+    void EvaluateRunCurve()
+    {
+        interpolationValue = runAccelerationCurve.Evaluate(runTimer / timeToReachRunSpeed);
+        currentMoveSpeed = Mathf.Lerp(moveSpeed, runMoveSpeed, interpolationValue);
     }
 
     #endregion
@@ -133,9 +200,21 @@ public class PlayerMovementBehaviour : BaseBehaviour
     /// Funzione che setta la direzione di movimento
     /// </summary>
     /// <param name="_moveDirection"></param>
-    public void SetMoveVelocity(Vector3 _moveDirection)
+    public void SetMoveDirection(Vector3 _moveDirection)
     {
-        targetMoveVelocityX = _moveDirection.x * moveSpeed;
+        moveDirection = _moveDirection;
+    }
+
+    public void HandleRunPress()
+    {
+        countRunTimer = true;
+    }
+
+    public void HandleRunRelease()
+    {
+        countRunTimer = false;
+        runTimer = 0;
+        currentMoveSpeed = moveSpeed;
     }
 
     #endregion
