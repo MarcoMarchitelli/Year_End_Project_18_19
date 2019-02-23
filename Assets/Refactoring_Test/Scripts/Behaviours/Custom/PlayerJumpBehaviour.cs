@@ -17,11 +17,16 @@ public class PlayerJumpBehaviour : BaseBehaviour
     /// Time in which the jumping entity reaches the max jump height.
     /// </summary>
     [SerializeField] float timeToReachJumpApex;
+    /// <summary>
+    /// Gravity multiplier applyed when falling.
+    /// </summary>
+    [SerializeField] float fallGravityMultiplier;
 
     #endregion
 
-    Rigidbody rb;
-    float gravity;
+    float normalGravity;
+    float fallGravity;
+    float currentGravity;
     float maxJumpVelocity;
     float minJumpVelocity;
     const int airJumps = 1;
@@ -31,13 +36,13 @@ public class PlayerJumpBehaviour : BaseBehaviour
 
     protected override void CustomSetup()
     {
-        rb = Entity.gameObject.GetComponentInChildren<Rigidbody>();
-
         data = Entity.Data as PlayerEntityData;
-        gravity = -(2 * maxJumpHeight) / Mathf.Pow(timeToReachJumpApex, 2);
-        maxJumpVelocity = Mathf.Abs(gravity) * timeToReachJumpApex;
-        minJumpVelocity = Mathf.Sqrt(2 * Mathf.Abs(gravity)) * minJumpHeight;
-        Physics.gravity = new Vector2(0, gravity);
+        normalGravity = -(2 * maxJumpHeight) / Mathf.Pow(timeToReachJumpApex, 2);
+        fallGravity = normalGravity * fallGravityMultiplier;
+        currentGravity = normalGravity;
+        maxJumpVelocity = Mathf.Abs(normalGravity) * timeToReachJumpApex;
+        minJumpVelocity = Mathf.Sqrt(2 * Mathf.Abs(normalGravity)) * minJumpHeight;
+        Physics.gravity = new Vector2(0, currentGravity);
         airJumpsCount = 0;
     }
 
@@ -49,11 +54,11 @@ public class PlayerJumpBehaviour : BaseBehaviour
         {
             if (data.playerCollisionBehaviour.Below)
             {
-                rb.velocity = new Vector2(0, maxJumpVelocity);
+                data.playerRB.velocity = new Vector2(0, maxJumpVelocity);
             }
             else if(airJumpsCount < 1)
             {
-                rb.velocity = new Vector2(0, maxJumpVelocity);
+                data.playerRB.velocity = new Vector2(0, maxJumpVelocity);
                 airJumpsCount++;
             }
         }
@@ -61,13 +66,26 @@ public class PlayerJumpBehaviour : BaseBehaviour
 
     public void HandleJumpRelease()
     {
-        if (rb.velocity.y > minJumpVelocity)
-            rb.velocity = new Vector2(0, minJumpVelocity);
+        if (data.playerRB.velocity.y > minJumpVelocity)
+            data.playerRB.velocity = new Vector2(0, minJumpVelocity);
     }
 
     public void ResetAirJumpsCount()
     {
         airJumpsCount = 0;
+    }
+
+    public void ToggleFallingGravity(bool _value)
+    {
+        if (_value)
+        {
+            currentGravity = fallGravity;
+        }
+        else
+        {
+            currentGravity = normalGravity;
+        }
+        Physics.gravity = new Vector2(0, currentGravity);
     }
 
     #endregion

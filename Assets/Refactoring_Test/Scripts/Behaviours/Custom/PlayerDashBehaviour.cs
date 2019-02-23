@@ -5,7 +5,7 @@ using System.Collections;
 /// Behaviour che si occupa di eseguire il dash
 /// </summary>
 [RequireComponent(typeof(Rigidbody))]
-public class DashBehaviour : BaseBehaviour
+public class PlayerDashBehaviour : BaseBehaviour
 {
     #region Serialized Fields
 
@@ -28,10 +28,6 @@ public class DashBehaviour : BaseBehaviour
 
     PlayerEntityData data;
 
-    /// <summary>
-    /// Riferimento al Rigidbody
-    /// </summary>
-    Rigidbody rBody;
     Vector3 dashDirection;
     float dashSpeed;
     const int airDashes = 1;
@@ -61,7 +57,6 @@ public class DashBehaviour : BaseBehaviour
     protected override void CustomSetup()
     {
         data = Entity.Data as PlayerEntityData;
-        rBody = GetComponent<Rigidbody>();
 
         OnDashStart.AddListener(DashStartHandler);
         OnDashEnd.AddListener(DashEndHandler);
@@ -106,12 +101,12 @@ public class DashBehaviour : BaseBehaviour
 
     void DashEndHandler()
     {
-        rBody.useGravity = true;
+        data.playerRB.useGravity = true;
     }
 
     void DashStartHandler()
     {
-        rBody.useGravity = false;
+        data.playerRB.useGravity = false;
     }
 
     IEnumerator DashRoutine()
@@ -125,12 +120,12 @@ public class DashBehaviour : BaseBehaviour
         {
             timer += Time.fixedDeltaTime;
 
-            rBody.velocity = new Vector2(tempDashSpeed, 0);
+            data.playerRB.velocity = new Vector2(tempDashSpeed, 0);
 
             yield return new WaitForFixedUpdate();
         }
 
-        rBody.velocity = Vector2.zero;
+        data.playerRB.velocity = Vector2.zero;
 
         IsDashing = false;
 

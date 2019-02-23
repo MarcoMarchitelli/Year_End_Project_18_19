@@ -70,8 +70,6 @@ public class PlayerMovementBehaviour : BaseBehaviour
 
     #region References
 
-    Rigidbody rb;
-    DashBehaviour dashBehaviour;
     PlayerEntityData data;
 
     #endregion
@@ -109,10 +107,12 @@ public class PlayerMovementBehaviour : BaseBehaviour
                 if (_isRising)
                 {
                     OnEntityRising.Invoke();
+                    data.playerJumpBehaviour.ToggleFallingGravity(false);
                 }
                 else
                 {
                     OnEntityFalling.Invoke();
+                    data.playerJumpBehaviour.ToggleFallingGravity(true);
                 }
             }
         }
@@ -122,11 +122,9 @@ public class PlayerMovementBehaviour : BaseBehaviour
 
     protected override void CustomSetup()
     {
-        rb = GetComponent<Rigidbody>();
-        dashBehaviour = Entity.gameObject.GetComponentInChildren<DashBehaviour>();
         data = Entity.Data as PlayerEntityData;
         //WTFF
-        dashBehaviour.SetDashDirection(Vector3.right);
+        data.playerDashBehaviour.SetDashDirection(Vector3.right);
         //---
         currentMoveSpeed = moveSpeed;
     }
@@ -172,12 +170,12 @@ public class PlayerMovementBehaviour : BaseBehaviour
         if (moveVelocityX > 0)
         {
             transform.rotation = Quaternion.Euler(Vector3.zero);
-            dashBehaviour.SetDashDirection(Vector3.right);
+            data.playerDashBehaviour.SetDashDirection(Vector3.right);
         }
         else if (moveVelocityX < 0)
         {
             transform.rotation = Quaternion.Euler(new Vector3(0, 180, 0));
-            dashBehaviour.SetDashDirection(Vector3.left);
+            data.playerDashBehaviour.SetDashDirection(Vector3.left);
         }
     }
 
@@ -190,7 +188,7 @@ public class PlayerMovementBehaviour : BaseBehaviour
         targetMoveVelocityX = moveDirection.x * currentMoveSpeed;
         moveVelocityX = Mathf.SmoothDamp(moveVelocityX, targetMoveVelocityX, ref velocityXSmoothing, moveSmoothingTime);
         moveVelocity = new Vector2(moveVelocityX, 0);
-        rb.MovePosition(rb.position + moveVelocity * Time.fixedDeltaTime);
+        data.playerRB.MovePosition(data.playerRB.position + moveVelocity * Time.fixedDeltaTime);
     }
 
     void CheckMoveVelocityX()
@@ -203,10 +201,10 @@ public class PlayerMovementBehaviour : BaseBehaviour
 
     void CheckMoveVelocityY()
     {
-        if (rb.velocity.y > 0)
+        if (data.playerRB.velocity.y > 0)
             IsRising = true;
         else
-        if (rb.velocity.y < 0)
+        if (data.playerRB.velocity.y < 0)
             IsRising = false;
     }
 
