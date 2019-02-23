@@ -12,6 +12,12 @@ public class PlayerMovementBehaviour : BaseBehaviour
     [SerializeField]
     float moveSpeed;
     /// <summary>
+    /// Behaviour's movement smoothing time when not running.
+    /// </summary>
+    [Tooltip("Behaviour's movement smoothing time when not running.")]
+    [SerializeField]
+    float moveSmoothingTime = .1f;
+    /// <summary>
     /// Behaviour's running speed.
     /// </summary>
     [Tooltip("Behaviour's running speed.")]
@@ -22,7 +28,7 @@ public class PlayerMovementBehaviour : BaseBehaviour
     /// </summary>
     [Tooltip("Time the entity takes to reach the end of the run acceleration curve.")]
     [SerializeField]
-    float timeToReachRunSpeed;
+    float accelerationTime;
     /// <summary>
     /// Describes how the move speed interpolates to run speed.
     /// </summary>
@@ -30,11 +36,17 @@ public class PlayerMovementBehaviour : BaseBehaviour
     [SerializeField]
     AnimationCurve runAccelerationCurve;
     /// <summary>
-    /// Behaviour's movement smoothing time.
+    /// Time the entity takes to reach the end of the run deceleration curve.
     /// </summary>
-    [Tooltip("Behaviour's movement smoothing time.")]
+    [Tooltip("Time the entity takes to reach the end of the run deceleration curve.")]
     [SerializeField]
-    float moveSmoothingTime = .1f;
+    float decelerationTime;
+    /// <summary>
+    /// Describes how the run speed interpolates back to move speed.
+    /// </summary>
+    [Tooltip("Describes how the run speed interpolates back to move speed.")]
+    [SerializeField]
+    AnimationCurve runDecelerationCurve;
     /// <summary>
     /// Evento lanciato all'inzio del movimento
     /// </summary>
@@ -60,6 +72,7 @@ public class PlayerMovementBehaviour : BaseBehaviour
 
     Rigidbody rb;
     DashBehaviour dashBehaviour;
+    PlayerEntityData data;
 
     #endregion
 
@@ -76,8 +89,11 @@ public class PlayerMovementBehaviour : BaseBehaviour
 
     #region Run
 
-    bool countRunTimer;
-    float runTimer;
+    bool accelerating;
+    float accelTimer;
+    bool decelerating;
+    float decelTimer;
+    bool runReleasedInAir;
 
     #endregion
 
@@ -108,6 +124,7 @@ public class PlayerMovementBehaviour : BaseBehaviour
     {
         rb = GetComponent<Rigidbody>();
         dashBehaviour = Entity.gameObject.GetComponentInChildren<DashBehaviour>();
+        data = Entity.Data as PlayerEntityData;
         //WTFF
         dashBehaviour.SetDashDirection(Vector3.right);
         //---
@@ -125,12 +142,20 @@ public class PlayerMovementBehaviour : BaseBehaviour
 
     public override void OnUpdate()
     {
-        if (countRunTimer)
+        if (accelerating)
         {
-            runTimer += Time.deltaTime;
-            if (runTimer > timeToReachRunSpeed)
-                runTimer = timeToReachRunSpeed;
-            EvaluateRunCurve();
+            accelTimer += Time.deltaTime;
+            if (accelTimer > accelerationTime)
+                accelTimer = accelerationTime;
+            EvaluateRunCurve(accelerating);
+        }
+
+        if (decelerating)
+        {
+            decelTimer += Time.deltaTime;
+            if (decelTimer > decelerationTime)
+                decelTimer = decelerationTime;
+            EvaluateRunCurve(accelerating);
         }
 
         CheckMoveVelocityX();
@@ -186,10 +211,18 @@ public class PlayerMovementBehaviour : BaseBehaviour
     }
 
     float interpolationValue;
-    void EvaluateRunCurve()
+    void EvaluateRunCurve(bool _isAccelerating)
     {
-        interpolationValue = runAccelerationCurve.Evaluate(runTimer / timeToReachRunSpeed);
-        currentMoveSpeed = Mathf.Lerp(moveSpeed, runMoveSpeed, interpolationValue);
+        if (_isAccelerating)
+        {
+            interpolationValue = runAccelerationCurve.Evaluate(accelTimer / accelerationTime);
+            currentMoveSpeed = Mathf.Lerp(moveSpeed, runMoveSpeed, interpolationValue);
+        }
+        else
+        {
+            interpolationValue = runDecelerationCurve.Evaluate(decelTimer / decelerationTime);
+            currentMoveSpeed = Mathf.Lerp(moveSpeed, runMoveSpeed, interpolationValue);
+        }
     }
 
     #endregion
@@ -207,14 +240,41 @@ public class PlayerMovementBehaviour : BaseBehaviour
 
     public void HandleRunPress()
     {
-        countRunTimer = true;
+        accelerating = true;
+        decelerating = false;
+        decelTimer = 0;
     }
 
     public void HandleRunRelease()
     {
-        countRunTimer = false;
-        runTimer = 0;
-        currentMoveSpeed = moveSpeed;
+        //Reset accel timer.
+        accelerating = false;
+        accelTimer = 0;
+
+        //check ground collision
+        if (data.playerCollisionBehaviour.Below)
+        {
+            decelerating = true;
+            runReleasedInAir = false;
+        }
+        else
+        {
+            runReleasedInAir = true;
+        }
+
+    }
+
+    /// <summary>
+    /// Checks needed to see wether we have momentum to take in account when touching the ground.
+    /// </summary>
+    /// <param name="_value"></param>
+    public void HandleGroundCollision(bool _value)
+    {
+        if (_value && runReleasedInAir)
+        {
+            decelerating = true;
+            decelTimer = 0;
+        }
     }
 
     #endregion
