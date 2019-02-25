@@ -92,6 +92,7 @@ public class PlayerMovementBehaviour : BaseBehaviour
     bool decelerating;
     float decelTimer;
     bool runReleasedInAir;
+    bool groundCollisionDecelHandled;
 
     #endregion
 
@@ -258,6 +259,7 @@ public class PlayerMovementBehaviour : BaseBehaviour
         else
         {
             runReleasedInAir = true;
+            groundCollisionDecelHandled = false;
         }
 
     }
@@ -268,10 +270,11 @@ public class PlayerMovementBehaviour : BaseBehaviour
     /// <param name="_value"></param>
     public void HandleGroundCollision(bool _value)
     {
-        if (_value && runReleasedInAir)
+        if (_value && runReleasedInAir && !groundCollisionDecelHandled)
         {
             decelerating = true;
             decelTimer = 0;
+            groundCollisionDecelHandled = true;
         }
     }
 

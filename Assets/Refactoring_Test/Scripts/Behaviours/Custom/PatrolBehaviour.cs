@@ -86,7 +86,6 @@ public class PatrolBehaviour : BaseBehaviour
         transform.position = wayPoints[0];
         int nextPointIndex = 1;
         Vector3 nextPoint = wayPoints[nextPointIndex];
-        transform.LookAt(nextPoint);
 
         while (true)
         {
@@ -116,7 +115,7 @@ public class PatrolBehaviour : BaseBehaviour
     IEnumerator RotateTo(Vector3 _rotationTarget)
     {
         Vector3 directionToTarget = (_rotationTarget - transform.position).normalized;
-        float targetAngle = 90 - Mathf.Atan2(directionToTarget.z, directionToTarget.x) * Mathf.Rad2Deg;
+        float targetAngle = Mathf.Atan2(directionToTarget.z, directionToTarget.x) * Mathf.Rad2Deg;
 
         while (Mathf.DeltaAngle(transform.eulerAngles.y, targetAngle) > 0.05f || Mathf.DeltaAngle(transform.eulerAngles.y, targetAngle) < -0.05f)
         {

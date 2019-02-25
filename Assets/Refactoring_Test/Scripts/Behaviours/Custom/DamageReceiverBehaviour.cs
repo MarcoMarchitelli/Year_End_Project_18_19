@@ -23,6 +23,7 @@ public class DamageReceiverBehaviour : BaseBehaviour
             {
                 _currentHealth = value;
                 OnHealthChanged.Invoke(_currentHealth);
+                print(name + " has taken damage!");
             }
         }
     }
@@ -48,8 +49,8 @@ public class DamageReceiverBehaviour : BaseBehaviour
         CurrentHealth = tempHealth;
     }
 
-    public float GetHealth()
+    public int GetHealth()
     {
-        return maxHealth;
+        return CurrentHealth;
     }
 }

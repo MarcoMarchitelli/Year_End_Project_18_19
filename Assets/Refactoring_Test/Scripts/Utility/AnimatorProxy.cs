@@ -60,4 +60,9 @@ public class AnimatorProxy : MonoBehaviour
         }
     }
 
+    public void Attack()
+    {
+        animator.SetTrigger("Attack");
+    }
+
 }

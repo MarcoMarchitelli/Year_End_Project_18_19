@@ -2,16 +2,15 @@
 
 public class DamageDealerBehaviour : BaseBehaviour
 {
+
+    [SerializeField] protected bool dealsOnCollision = false;
+    [SerializeField] protected bool dealsOnTrigger = false;
+    [SerializeField] protected bool depleatesHealth = false;
+    [SerializeField] protected int damage;
+
     #region Events
     [SerializeField] UnityFloatEvent OnDamageDealt;
     #endregion
-
-    /// <summary>
-    /// The amount of damage to inflict
-    /// </summary>
-    [SerializeField] protected int damage;
-    [SerializeField] protected bool dealsOnCollision = false;
-    [SerializeField] protected bool dealsOnTrigger = false;
 
     /// <summary>
     /// Funzione che infligge danno al receiver rilevato
@@ -19,8 +18,15 @@ public class DamageDealerBehaviour : BaseBehaviour
     /// <param name="_receiver"></param>
     public void DealDamage(DamageReceiverBehaviour _receiver)
     {
-        _receiver.SetHealth(-damage);
-        OnDamageDealt.Invoke(damage);
+        if (!depleatesHealth)
+        {
+            _receiver.SetHealth(-damage);
+            OnDamageDealt.Invoke(damage);
+        }
+        else
+        {
+            _receiver.SetHealth(-_receiver.GetHealth());
+        }
     }
 
     protected virtual void OnTriggerEnter(Collider other)
