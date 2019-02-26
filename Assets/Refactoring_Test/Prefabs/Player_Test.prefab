@@ -25,12 +25,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1961211922}
-  m_LocalRotation: {x: -0.0000000011189826, y: 0.11433695, z: -8.105137e-10, w: 0.99344206}
-  m_LocalPosition: {x: 0.01028, y: 0.01767, z: 0.00849}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0.25277147, y: 0.6921444, z: 0.6194744, w: 0.27072895}
+  m_LocalPosition: {x: -0.00030369076, y: 0.015303513, z: -0.0014523617}
+  m_LocalScale: {x: 11.487936, y: 11.487938, z: 11.487935}
   m_Children: []
-  m_Father: {fileID: 4229811705016965608}
-  m_RootOrder: 5
+  m_Father: {fileID: 8580332644518255789}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 13.1310005, z: 0}
 --- !u!114 &1961211925
 MonoBehaviour:
@@ -44,14 +44,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0eb23ce6b7858d54fa16dadb806acf53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dealsOnCollision: 0
+  dealsOnTrigger: 1
+  depleatesHealth: 0
+  damage: 1
   OnDamageDealt:
     m_PersistentCalls:
       m_Calls: []
     m_TypeName: UnityFloatEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
-  damage: 1
-  dealsOnCollision: 0
-  dealsOnTrigger: 1
 --- !u!65 &1961211924
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -704,6 +705,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8457867537246811746}
     m_Modifications:
+    - target: {fileID: 7528233461468792905, guid: b7ea6ea354c695844b92e05a7636bf42,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 8.3644934e-17
+      objectReference: {fileID: 0}
+    - target: {fileID: 7528233461468792905, guid: b7ea6ea354c695844b92e05a7636bf42,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.8660254
+      objectReference: {fileID: 0}
+    - target: {fileID: 7528233461468792905, guid: b7ea6ea354c695844b92e05a7636bf42,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -8.3644934e-17
+      objectReference: {fileID: 0}
+    - target: {fileID: 7528233461468792905, guid: b7ea6ea354c695844b92e05a7636bf42,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 3347559691232039874, guid: b7ea6ea354c695844b92e05a7636bf42,
         type: 3}
       propertyPath: m_Name
@@ -763,26 +784,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7528233461468792905, guid: b7ea6ea354c695844b92e05a7636bf42,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 8.3644934e-17
-      objectReference: {fileID: 0}
-    - target: {fileID: 7528233461468792905, guid: b7ea6ea354c695844b92e05a7636bf42,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0.8660254
-      objectReference: {fileID: 0}
-    - target: {fileID: 7528233461468792905, guid: b7ea6ea354c695844b92e05a7636bf42,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -8.3644934e-17
-      objectReference: {fileID: 0}
-    - target: {fileID: 7528233461468792905, guid: b7ea6ea354c695844b92e05a7636bf42,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 8662843244983338129, guid: b7ea6ea354c695844b92e05a7636bf42,
         type: 3}
@@ -1848,9 +1849,9 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 5965834814205317537}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &4229811705016965608 stripped
+--- !u!4 &8580332644518255789 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: 7528233461468792905, guid: b7ea6ea354c695844b92e05a7636bf42,
+  m_CorrespondingSourceObject: {fileID: 2727369601731988748, guid: b7ea6ea354c695844b92e05a7636bf42,
     type: 3}
   m_PrefabInstance: {fileID: 5965834814205317537}
   m_PrefabAsset: {fileID: 0}

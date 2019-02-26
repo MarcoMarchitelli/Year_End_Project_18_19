@@ -6,7 +6,7 @@ public class PlayerEntity : BaseEntity
 
     void Start()
     {
-        if(setupOnStart)
+        if (setupOnStart)
             SetUpEntity();
     }
 
