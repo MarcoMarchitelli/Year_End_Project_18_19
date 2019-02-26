@@ -4,8 +4,6 @@ namespace Refactoring
 {
     public class MovingPlatformEntity : BoxColliderEntity
     {
-        [SerializeField] bool setupOnStart = false;
-
         public override void Start()
         {
             base.Start();

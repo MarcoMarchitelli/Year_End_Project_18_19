@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.Events;
 using System.Collections;
 
 namespace Refactoring
@@ -45,7 +46,7 @@ namespace Refactoring
         public override void OnUpdate()
         {
             CalculateVelocity();
-            HandleWallSliding();
+            //HandleWallSliding();
 
             data.controller3D.Move(velocity * Time.deltaTime, directionalInput);
 
@@ -53,6 +54,22 @@ namespace Refactoring
             {
                 velocity.y = 0;
             }
+
+            if (data.controller3D.collisions.below)
+                data.animatorProxy.IsGrounded = true;
+            else
+                data.animatorProxy.IsGrounded = false;
+
+            if (velocity.y > 0)
+                data.animatorProxy.IsRising = true;
+            else
+                data.animatorProxy.IsRising = false;
+
+            if (velocity.x == 0)
+                data.animatorProxy.IsWalking = false;
+            else
+                data.animatorProxy.IsWalking = true;
+
         }
 
         public void SetDirectionalInput(Vector2 input)
