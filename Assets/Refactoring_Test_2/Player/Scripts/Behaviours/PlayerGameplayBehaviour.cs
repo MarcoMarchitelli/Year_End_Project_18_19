@@ -1,6 +1,4 @@
 ﻿using UnityEngine;
-using UnityEngine.Events;
-using System.Collections;
 
 namespace Refactoring
 {
@@ -37,6 +35,7 @@ namespace Refactoring
         [Header("Jumping")]
         public float maxJumpHeight = 4;
         public float minJumpHeight = 1;
+        public float doubleJumpHeight = 2;
         public float timeToJumpApex = .4f;
 
         #endregion
@@ -61,12 +60,14 @@ namespace Refactoring
 
         #endregion
 
-        #region Normal Velocity
+        #region Velocity
 
         float currentMoveSpeed;
         float gravity;
         float maxJumpVelocity;
         float minJumpVelocity;
+        float doubleJumpVelocity;
+        int jumpsCount;
         Vector3 velocity;
         float velocityXSmoothing;
 
@@ -118,11 +119,14 @@ namespace Refactoring
             get { return _faceingDirection; }
             set
             {
-                _faceingDirection = value;
-                if (_faceingDirection > 0)
-                    data.animatorProxy.transform.rotation = Quaternion.Euler(rightFaceingDirection);
-                else if (_faceingDirection < 0)
-                    data.animatorProxy.transform.rotation = Quaternion.Euler(leftFaceingDirection);
+                if (_faceingDirection != value)
+                {
+                    _faceingDirection = value;
+                    if (_faceingDirection > 0)
+                        data.animatorProxy.transform.rotation = Quaternion.Euler(rightFaceingDirection);
+                    else if (_faceingDirection < 0)
+                        data.animatorProxy.transform.rotation = Quaternion.Euler(leftFaceingDirection);
+                }
             }
         }
         Vector3 rightFaceingDirection = Vector3.zero;
@@ -138,14 +142,24 @@ namespace Refactoring
         {
             data = Entity.Data as PlayerEntityData;
 
+            #region Jumping
             gravity = -(2 * maxJumpHeight) / Mathf.Pow(timeToJumpApex, 2);
             maxJumpVelocity = Mathf.Abs(gravity) * timeToJumpApex;
             minJumpVelocity = Mathf.Sqrt(2 * Mathf.Abs(gravity) * minJumpHeight);
+            doubleJumpVelocity = Mathf.Sqrt(2 * Mathf.Abs(gravity) * doubleJumpHeight);
+            jumpsCount = 0;
+            #endregion
+
+            #region Movement
             currentMoveSpeed = moveSpeed;
             accelerationTime = Mathf.Abs(accelerationTime);
             decelerationTime = Mathf.Abs(decelerationTime);
+            #endregion
+
+            #region Dashing
             dashSpeed = dashDistance / dashDuration;
             airDashesCount = 0;
+            #endregion
         }
 
         public override void OnUpdate()
@@ -191,27 +205,33 @@ namespace Refactoring
 
         public void OnJumpInputDown()
         {
-            if (wallSliding)
-            {
-                if (wallDirX == directionalInput.x)
-                {
-                    velocity.x = -wallDirX * wallJumpClimb.x;
-                    velocity.y = wallJumpClimb.y;
-                }
-                else if (directionalInput.x == 0)
-                {
-                    velocity.x = -wallDirX * wallJumpOff.x;
-                    velocity.y = wallJumpOff.y;
-                }
-                else
-                {
-                    velocity.x = -wallDirX * wallLeap.x;
-                    velocity.y = wallLeap.y;
-                }
-            }
+            //if (wallSliding)
+            //{
+            //    if (wallDirX == directionalInput.x)
+            //    {
+            //        velocity.x = -wallDirX * wallJumpClimb.x;
+            //        velocity.y = wallJumpClimb.y;
+            //    }
+            //    else if (directionalInput.x == 0)
+            //    {
+            //        velocity.x = -wallDirX * wallJumpOff.x;
+            //        velocity.y = wallJumpOff.y;
+            //    }
+            //    else
+            //    {
+            //        velocity.x = -wallDirX * wallLeap.x;
+            //        velocity.y = wallLeap.y;
+            //    }
+            //}
             if (data.controller3D.Below)
             {
                 velocity.y = maxJumpVelocity;
+                jumpsCount++;
+            }
+            else if (jumpsCount < 2)
+            {
+                velocity.y = doubleJumpVelocity;
+                jumpsCount++;
             }
         }
 
@@ -278,6 +298,7 @@ namespace Refactoring
             }
 
             airDashesCount = 0;
+            jumpsCount = 0;
         }
 
         #endregion
@@ -402,7 +423,20 @@ namespace Refactoring
 
         void HandleAnimations()
         {
-            FaceingDirection = (int)Mathf.Sign(velocity.x);
+            if (velocity.x > 0)
+            {
+                FaceingDirection = 1;
+                data.animatorProxy.IsWalking = true;
+            }
+            else if (velocity.x < 0)
+            {
+                FaceingDirection = -1;
+                data.animatorProxy.IsWalking = true;
+            }
+            else
+            {
+                data.animatorProxy.IsWalking = false;
+            }
 
             if (data.controller3D.Below)
                 data.animatorProxy.IsGrounded = true;
@@ -413,11 +447,6 @@ namespace Refactoring
                 data.animatorProxy.IsRising = true;
             else if (velocity.y < 0)
                 data.animatorProxy.IsRising = false;
-
-            if (velocity == Vector3.zero)
-                data.animatorProxy.IsWalking = false;
-            else
-                data.animatorProxy.IsWalking = true;
         }
 
         #endregion
