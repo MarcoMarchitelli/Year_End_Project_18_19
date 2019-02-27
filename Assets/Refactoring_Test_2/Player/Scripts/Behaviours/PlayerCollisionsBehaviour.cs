@@ -3,7 +3,7 @@ using System.Collections;
 
 namespace Refactoring
 {
-    public class Controller3D : RaycastController
+    public class PlayerCollisionsBehaviour : RaycastController
     {
         PlayerEntityData data;
 
@@ -13,6 +13,20 @@ namespace Refactoring
         public CollisionInfo collisions;
         [HideInInspector]
         public Vector2 playerInput;
+
+        public bool Below
+        {
+            get { return collisions.below; }
+            set
+            {
+                if (collisions.below != value)
+                {
+                    collisions.below = value;
+                    if(collisions.below)
+                        data.playerGameplayBehaviour.HandleGroundCollision();
+                }
+            }
+        }
 
         protected override void CustomSetup()
         {
@@ -54,7 +68,7 @@ namespace Refactoring
 
             if (standingOnPlatform)
             {
-                collisions.below = true;
+                Below = true;
             }
 
             return moveAmount;
@@ -178,7 +192,7 @@ namespace Refactoring
                         moveAmount.x = moveAmount.y / Mathf.Tan(collisions.slopeAngle * Mathf.Deg2Rad) * Mathf.Sign(moveAmount.x);
                     }
 
-                    collisions.below = directionY == -1;
+                    Below = directionY == -1;
                     collisions.above = directionY == 1;
                 }
             }
@@ -211,7 +225,7 @@ namespace Refactoring
             {
                 moveAmount.y = climbmoveAmountY;
                 moveAmount.x = Mathf.Cos(slopeAngle * Mathf.Deg2Rad) * moveDistance * Mathf.Sign(moveAmount.x);
-                collisions.below = true;
+                Below = true;
                 collisions.climbingSlope = true;
                 collisions.slopeAngle = slopeAngle;
             }
@@ -239,7 +253,7 @@ namespace Refactoring
 
                             collisions.slopeAngle = slopeAngle;
                             collisions.descendingSlope = true;
-                            collisions.below = true;
+                            Below = true;
                         }
                     }
                 }
@@ -275,5 +289,5 @@ namespace Refactoring
             }
         }
 
-    } 
+    }
 }

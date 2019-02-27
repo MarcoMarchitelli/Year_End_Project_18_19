@@ -24,7 +24,7 @@ namespace Refactoring
         float nextMoveTime;
 
         List<PassengerMovement> passengerMovement;
-        Dictionary<Transform, Controller3D> passengerDictionary = new Dictionary<Transform, Controller3D>();
+        Dictionary<Transform, PlayerCollisionsBehaviour> passengerDictionary = new Dictionary<Transform, PlayerCollisionsBehaviour>();
 
         protected override void CustomSetup()
         {
@@ -98,7 +98,7 @@ namespace Refactoring
             {
                 if (!passengerDictionary.ContainsKey(passenger.transform))
                 {
-                    passengerDictionary.Add(passenger.transform, passenger.transform.GetComponent<Controller3D>());
+                    passengerDictionary.Add(passenger.transform, passenger.transform.GetComponent<PlayerCollisionsBehaviour>());
                 }
 
                 if (passenger.moveBeforePlatform == beforeMovePlatform)

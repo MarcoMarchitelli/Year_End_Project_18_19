@@ -6,7 +6,7 @@ namespace Refactoring
     public class CameraFollow : MonoBehaviour
     {
 
-        public Controller3D target;
+        public PlayerCollisionsBehaviour target;
         public float verticalOffset;
         public float lookAheadDstX;
         public float lookSmoothTimeX;
