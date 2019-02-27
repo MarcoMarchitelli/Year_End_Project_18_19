@@ -10,6 +10,7 @@ namespace Refactoring
 
         [SerializeField] KeyCode JumpKey = KeyCode.Space;
         [SerializeField] KeyCode SprintKey = KeyCode.LeftShift;
+        [SerializeField] KeyCode DashKey = KeyCode.K;
 
         protected override void CustomSetup()
         {
@@ -37,6 +38,11 @@ namespace Refactoring
             if (Input.GetKeyUp(SprintKey))
             {
                 data.playerGameplayBehaviour.HandleSprintRelease();
+            }
+
+            if (Input.GetKeyDown(DashKey))
+            {
+                data.playerGameplayBehaviour.HandleDashPress();
             }
         }
     } 

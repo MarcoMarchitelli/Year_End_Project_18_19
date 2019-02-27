@@ -9,9 +9,6 @@ public class PlayerDashBehaviour : BaseBehaviour
 {
     #region Serialized Fields
 
-    /// <summary>
-    /// The force applyed to the entity.
-    /// </summary>
     [SerializeField] float dashDistance = 5f;
     [SerializeField] float dashDuration;
 

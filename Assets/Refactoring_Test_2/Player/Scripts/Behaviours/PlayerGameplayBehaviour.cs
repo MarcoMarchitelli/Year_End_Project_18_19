@@ -13,7 +13,9 @@ namespace Refactoring
 
         [Header("Movement")]
         [SerializeField] float moveSpeed = 6;
+        [Tooltip("Time it takes to the player to linearly interpolate from no speed to move speed, while grounded")]
         [SerializeField] float accelerationTimeGrounded = 0f;
+        [Tooltip("Time it takes to the player to linearly interpolate from no speed to move speed, while in air")]
         [SerializeField] float accelerationTimeAirborne = .2f;
 
         [Header("Sprinting")]
@@ -27,6 +29,10 @@ namespace Refactoring
         [SerializeField] float decelerationTime;
         [Tooltip("Describes how the run speed interpolates back to move speed.")]
         [SerializeField] AnimationCurve runDecelerationCurve;
+
+        [Header("Dashing")]
+        [SerializeField] float dashDistance = 5f;
+        [SerializeField] float dashDuration;
 
         [Header("Jumping")]
         public float maxJumpHeight = 4;
@@ -77,10 +83,54 @@ namespace Refactoring
 
         #endregion
 
-        Vector2 directionalInput;
+        #region Dashing
+
+        Vector3 dashDirection;
+        float dashSpeed;
+        const int airDashes = 1;
+        int airDashesCount;
+        float dashTimer;
+        bool _isDashing = false;
+        bool IsDashing
+        {
+            get { return _isDashing; }
+            set
+            {
+                if (_isDashing != value)
+                {
+                    _isDashing = value;
+                    data.animatorProxy.IsDashing = _isDashing;
+                    if (_isDashing)
+                    {
+                        dashTimer = 0;
+                    }
+                }
+            }
+        }
+
+        #endregion
+
+        #region Faceing
+
+        int _faceingDirection;
+        int FaceingDirection
+        {
+            get { return _faceingDirection; }
+            set
+            {
+                _faceingDirection = value;
+                if (_faceingDirection > 0)
+                    data.animatorProxy.transform.rotation = Quaternion.Euler(rightFaceingDirection);
+                else if (_faceingDirection < 0)
+                    data.animatorProxy.transform.rotation = Quaternion.Euler(leftFaceingDirection);
+            }
+        }
         Vector3 rightFaceingDirection = Vector3.zero;
         Vector3 leftFaceingDirection = Vector3.up * 180;
-        bool isSprinting;
+
+        #endregion
+
+        Vector2 directionalInput;
 
         #endregion
 
@@ -94,6 +144,8 @@ namespace Refactoring
             currentMoveSpeed = moveSpeed;
             accelerationTime = Mathf.Abs(accelerationTime);
             decelerationTime = Mathf.Abs(decelerationTime);
+            dashSpeed = dashDistance / dashDuration;
+            airDashesCount = 0;
         }
 
         public override void OnUpdate()
@@ -101,6 +153,7 @@ namespace Refactoring
             #region Calculations
 
             HandleSprinting();
+            HandleDashing();
             CalculateVelocity();
             //HandleWallSliding();
 
@@ -170,9 +223,15 @@ namespace Refactoring
             }
         }
 
-        public void SetSprint(bool _value)
+        public void HandleDashPress()
         {
-            isSprinting = _value;
+            if (IsSetupped && !IsDashing)
+            {
+                if (data.controller3D.Below)
+                    StartDash();
+                else if (airDashesCount < 1)
+                    StartDash(true);
+            }
         }
 
         public void HandleSprintPress()
@@ -217,11 +276,30 @@ namespace Refactoring
                 decelTimer = 0;
                 groundCollisionDecelHandled = true;
             }
+
+            airDashesCount = 0;
         }
 
         #endregion
 
         #region Player Gameplay Methods
+
+        void StartDash(bool _isAirDash = false)
+        {
+            if (_isAirDash)
+                airDashesCount++;
+            IsDashing = true;
+        }
+
+        void HandleDashing()
+        {
+            if (IsDashing)
+            {
+                dashTimer += Time.deltaTime;
+                if (dashTimer >= dashDuration)
+                    IsDashing = false;
+            }
+        }
 
         void HandleWallSliding()
         {
@@ -266,7 +344,7 @@ namespace Refactoring
                 accelTimer += Time.deltaTime;
                 if (accelTimer > accelerationTime)
                     accelTimer = accelerationTime;
-                EvaluateRunCurve(accelerating);
+                EvaluateSprintCurve(accelerating);
             }
 
             if (decelerating)
@@ -274,12 +352,12 @@ namespace Refactoring
                 decelTimer += Time.deltaTime;
                 if (decelTimer > decelerationTime)
                     decelTimer = decelerationTime;
-                EvaluateRunCurve(accelerating);
+                EvaluateSprintCurve(accelerating);
             }
         }
 
         float interpolationValue;
-        void EvaluateRunCurve(bool _isAccelerating)
+        void EvaluateSprintCurve(bool _isAccelerating)
         {
             if (_isAccelerating)
             {
@@ -309,17 +387,22 @@ namespace Refactoring
 
         void CalculateVelocity()
         {
-            float targetVelocityX = directionalInput.x * currentMoveSpeed;
-            velocity.x = Mathf.SmoothDamp(velocity.x, targetVelocityX, ref velocityXSmoothing, (data.controller3D.Below) ? accelerationTimeGrounded : accelerationTimeAirborne);
-            velocity.y += gravity * Time.deltaTime;
+            if (!IsDashing)
+            {
+                float targetVelocityX = directionalInput.x * currentMoveSpeed;
+                velocity.x = Mathf.SmoothDamp(velocity.x, targetVelocityX, ref velocityXSmoothing, (data.controller3D.Below) ? accelerationTimeGrounded : accelerationTimeAirborne);
+                velocity.y += gravity * Time.deltaTime;
+            }
+            else
+            {
+                velocity.x = dashSpeed * FaceingDirection;
+                velocity.y = 0;
+            }
         }
 
         void HandleAnimations()
         {
-            if (velocity.x > 0)
-                data.animatorProxy.transform.rotation = Quaternion.Euler(rightFaceingDirection);
-            else if (velocity.x < 0)
-                data.animatorProxy.transform.rotation = Quaternion.Euler(leftFaceingDirection);
+            FaceingDirection = (int)Mathf.Sign(velocity.x);
 
             if (data.controller3D.Below)
                 data.animatorProxy.IsGrounded = true;
@@ -328,7 +411,7 @@ namespace Refactoring
 
             if (velocity.y > 0)
                 data.animatorProxy.IsRising = true;
-            else
+            else if (velocity.y < 0)
                 data.animatorProxy.IsRising = false;
 
             if (velocity == Vector3.zero)
