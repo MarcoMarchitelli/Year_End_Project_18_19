@@ -9,19 +9,29 @@ namespace Refactoring
     {
         PlayerEntityData data;
 
+        #region Vars
+
         public float maxJumpHeight = 4;
         public float minJumpHeight = 1;
         public float timeToJumpApex = .4f;
+        [SerializeField]
         float accelerationTimeAirborne = .2f;
-        float accelerationTimeGrounded = .1f;
+        [SerializeField]
+        float accelerationTimeGrounded = 0f;
+        [SerializeField]
         float moveSpeed = 6;
 
+        [HideInInspector]
         public Vector2 wallJumpClimb;
+        [HideInInspector]
         public Vector2 wallJumpOff;
+        [HideInInspector]
         public Vector2 wallLeap;
-
+        [HideInInspector]
         public float wallSlideSpeedMax = 3;
+        [HideInInspector]
         public float wallStickTime = .25f;
+        [HideInInspector]
         float timeToWallUnstick;
 
         float gravity;
@@ -31,8 +41,12 @@ namespace Refactoring
         float velocityXSmoothing;
 
         Vector2 directionalInput;
+        Vector3 rightFaceingDirection = Vector3.zero;
+        Vector3 leftFaceingDirection = Vector3.up * 180;
         bool wallSliding;
         int wallDirX;
+
+        #endregion
 
         protected override void CustomSetup()
         {
@@ -55,22 +69,11 @@ namespace Refactoring
                 velocity.y = 0;
             }
 
-            if (data.controller3D.collisions.below)
-                data.animatorProxy.IsGrounded = true;
-            else
-                data.animatorProxy.IsGrounded = false;
-
-            if (velocity.y > 0)
-                data.animatorProxy.IsRising = true;
-            else
-                data.animatorProxy.IsRising = false;
-
-            if (velocity.x == 0)
-                data.animatorProxy.IsWalking = false;
-            else
-                data.animatorProxy.IsWalking = true;
+            HandleAnimations();
 
         }
+
+        #region API
 
         public void SetDirectionalInput(Vector2 input)
         {
@@ -110,6 +113,10 @@ namespace Refactoring
                 velocity.y = minJumpVelocity;
             }
         }
+
+        #endregion
+
+        #region Player Gameplay Methods
 
         void HandleWallSliding()
         {
@@ -153,5 +160,30 @@ namespace Refactoring
             velocity.x = Mathf.SmoothDamp(velocity.x, targetVelocityX, ref velocityXSmoothing, (data.controller3D.collisions.below) ? accelerationTimeGrounded : accelerationTimeAirborne);
             velocity.y += gravity * Time.deltaTime;
         }
+
+        void HandleAnimations()
+        {
+            if (velocity.x > 0)
+                data.animatorProxy.transform.rotation = Quaternion.Euler(rightFaceingDirection);
+            else if(velocity.x < 0)
+                data.animatorProxy.transform.rotation = Quaternion.Euler(leftFaceingDirection);
+
+            if (data.controller3D.collisions.below)
+                data.animatorProxy.IsGrounded = true;
+            else
+                data.animatorProxy.IsGrounded = false;
+
+            if (velocity.y > 0)
+                data.animatorProxy.IsRising = true;
+            else
+                data.animatorProxy.IsRising = false;
+
+            if (velocity == Vector3.zero)
+                data.animatorProxy.IsWalking = false;
+            else
+                data.animatorProxy.IsWalking = true;
+        }
+
+        #endregion
     }
 }
