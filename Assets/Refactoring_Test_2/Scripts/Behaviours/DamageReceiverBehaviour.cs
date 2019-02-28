@@ -49,6 +49,11 @@ public class DamageReceiverBehaviour : BaseBehaviour
         CurrentHealth = tempHealth;
     }
 
+    public void ResetHealth()
+    {
+        _currentHealth = maxHealth;
+    }
+
     public int GetHealth()
     {
         return CurrentHealth;
