@@ -36,7 +36,7 @@ namespace Refactoring
         public float maxJumpHeight = 4;
         public float minJumpHeight = 1;
         public float doubleJumpHeight = 2;
-        public float timeToJumpApex = .4f;
+        public float timeToJumpApex = .4f;        
 
         #endregion
 

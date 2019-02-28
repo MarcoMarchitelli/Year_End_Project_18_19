@@ -10,6 +10,9 @@ namespace Refactoring
         [SerializeField] KeyCode JumpKey = KeyCode.Space;
         [SerializeField] KeyCode SprintKey = KeyCode.LeftShift;
         [SerializeField] KeyCode DashKey = KeyCode.K;
+        [SerializeField] KeyCode AttackKey = KeyCode.J;
+
+        [SerializeField] UnityVoidEvent OnAttackInput;
 
         protected override void CustomSetup()
         {
@@ -42,6 +45,12 @@ namespace Refactoring
             if (Input.GetKeyDown(DashKey))
             {
                 data.playerGameplayBehaviour.HandleDashPress();
+            }
+
+            if (Input.GetKeyDown(AttackKey))
+            {
+                data.animatorProxy.Attack();
+                OnAttackInput.Invoke();
             }
         }
     } 

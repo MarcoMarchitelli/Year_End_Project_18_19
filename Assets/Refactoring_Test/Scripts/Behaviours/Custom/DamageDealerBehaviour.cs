@@ -2,7 +2,7 @@
 
 public class DamageDealerBehaviour : BaseBehaviour
 {
-
+    [SerializeField] bool disableOnStart = false;
     [SerializeField] protected bool dealsOnCollision = false;
     [SerializeField] protected bool dealsOnTrigger = false;
     [SerializeField] protected bool depleatesHealth = false;
@@ -11,6 +11,12 @@ public class DamageDealerBehaviour : BaseBehaviour
     #region Events
     [SerializeField] UnityFloatEvent OnDamageDealt;
     #endregion
+
+    protected override void CustomSetup()
+    {
+        if (disableOnStart)
+            Enable(false);
+    }
 
     /// <summary>
     /// Funzione che infligge danno al receiver rilevato
@@ -31,6 +37,9 @@ public class DamageDealerBehaviour : BaseBehaviour
 
     protected virtual void OnTriggerEnter(Collider other)
     {
+        if (!IsSetupped)
+            return;
+
         if (dealsOnTrigger)
         {
             DamageReceiverBehaviour receiver = other.GetComponent<DamageReceiverBehaviour>();
@@ -41,6 +50,9 @@ public class DamageDealerBehaviour : BaseBehaviour
 
     protected virtual void OnCollisionEnter(Collision collision)
     {
+        if (!IsSetupped)
+            return;
+
         if (dealsOnCollision)
         {
             DamageReceiverBehaviour receiver = collision.collider.GetComponent<DamageReceiverBehaviour>();

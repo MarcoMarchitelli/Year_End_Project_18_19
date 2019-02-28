@@ -4,6 +4,9 @@ public class AnimatorProxy : MonoBehaviour
 {
     [SerializeField] Animator animator;
 
+    [Header("Events")]
+    [SerializeField] UnityVoidEvent OnAttackEnd;
+
     bool _isGrounded;
     public bool IsGrounded
     {
@@ -63,6 +66,11 @@ public class AnimatorProxy : MonoBehaviour
     public void Attack()
     {
         animator.SetTrigger("Attack");
+    }
+
+    public void HandleAttackEnd()
+    {
+        OnAttackEnd.Invoke();
     }
 
 }
