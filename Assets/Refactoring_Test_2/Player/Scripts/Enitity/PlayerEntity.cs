@@ -18,13 +18,13 @@ namespace Refactoring
     public class PlayerEntityData : BoxColliderEntityData
     {
         public PlayerGameplayBehaviour playerGameplayBehaviour;
-        public PlayerCollisionsBehaviour controller3D;
+        public PlayerCollisionsBehaviour playerCollisionsBehaviour;
         public AnimatorProxy animatorProxy;
 
         public PlayerEntityData(PlayerGameplayBehaviour _p, PlayerCollisionsBehaviour _c, BoxCollider _bc, AnimatorProxy _ap)
         {
             playerGameplayBehaviour = _p;
-            controller3D = _c;
+            playerCollisionsBehaviour = _c;
             collider = _bc;
             animatorProxy = _ap;
         }

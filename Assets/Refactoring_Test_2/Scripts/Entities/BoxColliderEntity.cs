@@ -1,9 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Refactoring
 {
+    [RequireComponent(typeof(BoxCollider))]
     public abstract class BoxColliderEntity : BaseEntity
     {
         [SerializeField] bool setupOnStart = false;

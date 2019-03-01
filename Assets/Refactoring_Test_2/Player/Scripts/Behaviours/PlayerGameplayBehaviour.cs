@@ -175,13 +175,13 @@ namespace Refactoring
 
             #region Movement
 
-            data.controller3D.Move(velocity * Time.deltaTime, directionalInput);
+            data.playerCollisionsBehaviour.Move(velocity * Time.deltaTime, directionalInput);
 
             #endregion
 
             #region Collisions
 
-            if (data.controller3D.collisions.above || data.controller3D.Below)
+            if (data.playerCollisionsBehaviour.collisions.above || data.playerCollisionsBehaviour.Below)
             {
                 velocity.y = 0;
             }
@@ -223,7 +223,7 @@ namespace Refactoring
             //        velocity.y = wallLeap.y;
             //    }
             //}
-            if (data.controller3D.Below)
+            if (data.playerCollisionsBehaviour.Below)
             {
                 velocity.y = maxJumpVelocity;
                 jumpsCount++;
@@ -247,7 +247,7 @@ namespace Refactoring
         {
             if (IsSetupped && !IsDashing)
             {
-                if (data.controller3D.Below)
+                if (data.playerCollisionsBehaviour.Below)
                     StartDash();
                 else if (airDashesCount < 1)
                     StartDash(true);
@@ -256,7 +256,7 @@ namespace Refactoring
 
         public void HandleSprintPress()
         {
-            if (data.controller3D.Below)
+            if (data.playerCollisionsBehaviour.Below)
             {
                 accelerating = true;
                 decelerating = false;
@@ -271,7 +271,7 @@ namespace Refactoring
             accelTimer = 0;
 
             //check ground collision
-            if (data.controller3D.Below)
+            if (data.playerCollisionsBehaviour.Below)
             {
                 decelerating = true;
                 runReleasedInAir = false;
@@ -324,9 +324,9 @@ namespace Refactoring
 
         void HandleWallSliding()
         {
-            wallDirX = (data.controller3D.collisions.left) ? -1 : 1;
+            wallDirX = (data.playerCollisionsBehaviour.collisions.left) ? -1 : 1;
             wallSliding = false;
-            if ((data.controller3D.collisions.left || data.controller3D.collisions.right) && !data.controller3D.Below && velocity.y < 0)
+            if ((data.playerCollisionsBehaviour.collisions.left || data.playerCollisionsBehaviour.collisions.right) && !data.playerCollisionsBehaviour.Below && velocity.y < 0)
             {
                 wallSliding = true;
 
@@ -411,7 +411,7 @@ namespace Refactoring
             if (!IsDashing)
             {
                 float targetVelocityX = directionalInput.x * currentMoveSpeed;
-                velocity.x = Mathf.SmoothDamp(velocity.x, targetVelocityX, ref velocityXSmoothing, (data.controller3D.Below) ? accelerationTimeGrounded : accelerationTimeAirborne);
+                velocity.x = Mathf.SmoothDamp(velocity.x, targetVelocityX, ref velocityXSmoothing, (data.playerCollisionsBehaviour.Below) ? accelerationTimeGrounded : accelerationTimeAirborne);
                 velocity.y += gravity * Time.deltaTime;
             }
             else
@@ -438,7 +438,7 @@ namespace Refactoring
                 data.animatorProxy.IsWalking = false;
             }
 
-            if (data.controller3D.Below)
+            if (data.playerCollisionsBehaviour.Below)
                 data.animatorProxy.IsGrounded = true;
             else
                 data.animatorProxy.IsGrounded = false;

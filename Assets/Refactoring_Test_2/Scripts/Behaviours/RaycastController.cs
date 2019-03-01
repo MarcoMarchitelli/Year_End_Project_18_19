@@ -3,7 +3,7 @@ using System.Collections;
 
 namespace Refactoring
 {
-    [RequireComponent(typeof(BoxCollider))]
+    [RequireComponent(typeof(BoxColliderEntity))]
     public abstract class RaycastController : BaseBehaviour
     {
         BoxColliderEntityData data;

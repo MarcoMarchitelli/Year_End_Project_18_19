@@ -5,7 +5,7 @@ namespace Refactoring
 {
     public class MovingPlatformBehaviour : RaycastController
     {
-        MovingPlatformEntityData data;
+        PlatformEntityData data;
 
         public LayerMask passengerMask;
 
@@ -28,7 +28,7 @@ namespace Refactoring
         protected override void CustomSetup()
         {
             base.CustomSetup();
-            data = Entity.Data as MovingPlatformEntityData;
+            data = Entity.Data as PlatformEntityData;
             globalWaypoints = new Vector3[localWaypoints.Length];
             for (int i = 0; i < localWaypoints.Length; i++)
             {

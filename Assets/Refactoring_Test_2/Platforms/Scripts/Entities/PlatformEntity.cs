@@ -2,7 +2,7 @@
 
 namespace Refactoring
 {
-    public class MovingPlatformEntity : BoxColliderEntity
+    public class PlatformEntity : BoxColliderEntity
     {
         public override void Start()
         {
@@ -11,13 +11,13 @@ namespace Refactoring
 
         public override void CustomSetup()
         {
-            Data = new MovingPlatformEntityData(GetComponent<BoxCollider>());
+            Data = new PlatformEntityData(GetComponent<BoxCollider>());
         }
     }
 
-    public class MovingPlatformEntityData : BoxColliderEntityData
+    public class PlatformEntityData : BoxColliderEntityData
     {
-        public MovingPlatformEntityData(BoxCollider _bc)
+        public PlatformEntityData(BoxCollider _bc)
         {
             collider = _bc;
         }
