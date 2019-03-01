@@ -12,6 +12,7 @@ namespace Refactoring
             if (setupOnStart)
                 SetUpEntity();
         }
+
     }
 
     public abstract class BoxColliderEntityData : IEntityData

@@ -1,12 +1,12 @@
 ﻿using UnityEngine;
 
-public class EnemyEntity : BaseEntity
+namespace Refactoring
 {
-    [SerializeField] bool setupOnStart = false;
-
-    void Start()
+    public class EnemyEntity : BoxColliderEntity
     {
-        if (setupOnStart)
-            SetUpEntity();
-    }
+        public override void Start()
+        {
+            base.Start();
+        }
+    } 
 }

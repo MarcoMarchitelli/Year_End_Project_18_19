@@ -5,8 +5,6 @@ namespace Refactoring
 {
     public class MovingPlatformBehaviour : RaycastController
     {
-        PlatformEntityData data;
-
         public LayerMask passengerMask;
 
         public Vector3[] localWaypoints;
@@ -38,15 +36,18 @@ namespace Refactoring
 
         public override void OnUpdate()
         {
-            UpdateRaycastOrigins();
+            if (globalWaypoints.Length != 0)
+            {
+                UpdateRaycastOrigins();
 
-            Vector3 velocity = CalculatePlatformMovement();
+                Vector3 velocity = CalculatePlatformMovement();
 
-            CalculatePassengerMovement(velocity);
+                CalculatePassengerMovement(velocity);
 
-            MovePassengers(true);
-            transform.Translate(velocity);
-            MovePassengers(false);
+                MovePassengers(true);
+                transform.Translate(velocity);
+                MovePassengers(false);
+            }
         }
 
         float Ease(float x)
@@ -222,5 +223,5 @@ namespace Refactoring
             }
         }
 
-    } 
+    }
 }

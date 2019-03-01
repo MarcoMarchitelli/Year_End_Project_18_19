@@ -11,9 +11,9 @@ namespace Refactoring
 
         public override void CustomSetup()
         {
-            Data = new PlatformEntityData(GetComponent<BoxCollider>());
+            Data = new PlatformEntityData(GetComponentInChildren<BoxCollider>());
         }
-    }
+    } 
 
     public class PlatformEntityData : BoxColliderEntityData
     {

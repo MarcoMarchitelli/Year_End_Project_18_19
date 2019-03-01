@@ -41,6 +41,8 @@ public class PatrolBehaviour : BaseBehaviour
 
     #endregion
 
+    Coroutine pathRoutine;
+
     protected override void CustomSetup()
     {
         if (!path)
@@ -52,20 +54,42 @@ public class PatrolBehaviour : BaseBehaviour
             StartPatrol();
     }
 
+    public override void Enable(bool _value)
+    {
+        if(!_value)
+            StopPatrol();
+        base.Enable(_value);
+    }
+
     #region API
 
     public void StartPatrol()
     {
-        StartCoroutine(FollowPath());
+        if (!IsSetupped)
+        {
+            Debug.LogWarning(name + "'s patrol behaviour is not setupped!");
+            return;
+        }
+        pathRoutine = StartCoroutine(FollowPath());
     }
 
     public void StopPatrol()
     {
-        StopCoroutine(FollowPath());
+        if (!IsSetupped)
+        {
+            Debug.LogWarning(name + "'s patrol behaviour is not setupped!");
+            return;
+        }
+        StopCoroutine(pathRoutine);
     }
 
     public void ToggleRotationToWaypoint(bool _value)
     {
+        if (!IsSetupped)
+        {
+            Debug.LogWarning(name + "'s patrol behaviour is not setupped!");
+            return;
+        }
         rotatesToWaypoint = _value;
     }
 

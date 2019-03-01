@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1642632881591047675}
-  - component: {fileID: 7695440521285336637}
+  - component: {fileID: 704776518882928153}
   m_Layer: 10
   m_Name: SP_1x6
   m_TagString: Untagged
@@ -37,32 +37,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!61 &7695440521285336637
-BoxCollider2D:
+--- !u!65 &704776518882928153
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5618128573032081019}
-  m_Enabled: 1
-  m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
+  m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 6, y: 1}
-  m_EdgeRadius: 0
+  m_Size: {x: 6.0217032, y: 1, z: 1}
+  m_Center: {x: -0.0000011920929, y: 0, z: 0}
 --- !u!1001 &42907856243386892
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -70,11 +57,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1642632881591047675}
     m_Modifications:
-    - target: {fileID: 114150919632467274, guid: dfb86705a6ebf4441959249bb4c338f6,
-        type: 3}
-      propertyPath: m_Name
-      value: PlatA2_Front (1)
-      objectReference: {fileID: 0}
     - target: {fileID: 1384813248877303009, guid: dfb86705a6ebf4441959249bb4c338f6,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -129,6 +111,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114150919632467274, guid: dfb86705a6ebf4441959249bb4c338f6,
+        type: 3}
+      propertyPath: m_Name
+      value: PlatA2_Front (1)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dfb86705a6ebf4441959249bb4c338f6, type: 3}
@@ -295,11 +282,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1642632881591047675}
     m_Modifications:
-    - target: {fileID: 114150919632467274, guid: dfb86705a6ebf4441959249bb4c338f6,
-        type: 3}
-      propertyPath: m_Name
-      value: PlatA2_Front
-      objectReference: {fileID: 0}
     - target: {fileID: 1384813248877303009, guid: dfb86705a6ebf4441959249bb4c338f6,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -354,6 +336,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114150919632467274, guid: dfb86705a6ebf4441959249bb4c338f6,
+        type: 3}
+      propertyPath: m_Name
+      value: PlatA2_Front
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dfb86705a6ebf4441959249bb4c338f6, type: 3}

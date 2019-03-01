@@ -6,8 +6,6 @@ namespace Refactoring
 {
     public class FadingPlatformBehaviour : RaycastController
     {
-        PlatformEntityData data;
-
         [SerializeField] bool above;
         [SerializeField] bool below;
         [SerializeField] bool right;
@@ -146,7 +144,6 @@ namespace Refactoring
             {
                 timer += Time.deltaTime;
                 fadePercent = timer / fadeEffectDuration;
-                print(fadePercent);
 
                 for (int i = 0; i < meshesToFade.Length; i++)
                 {

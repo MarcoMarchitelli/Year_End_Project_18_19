@@ -24,6 +24,12 @@ public class DamageDealerBehaviour : BaseBehaviour
     /// <param name="_receiver"></param>
     public void DealDamage(DamageReceiverBehaviour _receiver)
     {
+        if (!IsSetupped)
+        {
+            Debug.LogWarning(name + "'s damage dealer behaviour is not setupped!");
+            return;
+        }
+
         if (!depleatesHealth)
         {
             _receiver.SetHealth(-damage);

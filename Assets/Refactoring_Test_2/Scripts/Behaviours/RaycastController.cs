@@ -3,10 +3,9 @@ using System.Collections;
 
 namespace Refactoring
 {
-    [RequireComponent(typeof(BoxColliderEntity))]
     public abstract class RaycastController : BaseBehaviour
     {
-        BoxColliderEntityData data;
+        protected BoxColliderEntityData data;
 
         public LayerMask collisionMask;
 
