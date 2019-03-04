@@ -10,6 +10,8 @@ public class PlayerController : EntityBaseController
     /// </summary>
     private CanvasManager cm;
 
+    public PlayerStateMachine SM;
+
     [Header("Multiple Jump")]
     /// <summary>
     /// Se attivato, il player può fare più salti consecutivi
@@ -82,6 +84,7 @@ public class PlayerController : EntityBaseController
             {
                 velocity.y = ((2 * MultipleJumpHeight) / Mathf.Pow(TimeToJumpApex, 2)) * TimeToJumpApex;
                 currentMultipleJumpsCount--;
+                SM.myAnim.SetTrigger("DoubleJump");
             }
         }
     }

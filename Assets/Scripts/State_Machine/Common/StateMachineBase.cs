@@ -5,7 +5,8 @@ using UnityEngine;
 [RequireComponent(typeof(Animator))]
 public abstract class StateMachineBase : MonoBehaviour {
 
-    protected Animator myAnim;
+    [HideInInspector]
+    public Animator myAnim;
     protected List<StateBase> states;
     protected IStateMachineContext context;
 
