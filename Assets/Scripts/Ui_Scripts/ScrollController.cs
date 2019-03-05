@@ -28,12 +28,12 @@ public class ScrollController : MonoBehaviour
 
         if (Input.GetButton("Horizontal")) {
             float translation = Input.GetAxisRaw("Horizontal") * 10;
-            Map.transform.Translate(translation,0,0);
+            Map.transform.Translate(-translation,0,0);
         }
         if (Input.GetButton("Vertical"))
         {
             float translation = Input.GetAxisRaw("Vertical") * 10;
-            Map.transform.Translate(0, translation, 0);
+            Map.transform.Translate(0, -translation, 0);
         }
     }
 }
