@@ -24,30 +24,30 @@ namespace Refactoring
             Vector2 directionalInput = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
             data.playerGameplayBehaviour.SetDirectionalInput(directionalInput);
 
-            if (Input.GetKeyDown(JumpKey))
+            if (Input.GetButtonDown("Jump"))
             {
                 data.playerGameplayBehaviour.OnJumpInputDown();
             }
-            if (Input.GetKeyUp(JumpKey))
+            if (Input.GetButtonUp("Jump"))
             {
                 data.playerGameplayBehaviour.OnJumpInputUp();
             }
 
-            if (Input.GetKeyDown(SprintKey))
+            if (Input.GetButtonDown("Run"))
             {
                 data.playerGameplayBehaviour.HandleSprintPress();
             }
-            if (Input.GetKeyUp(SprintKey))
+            if (Input.GetButtonUp("Run"))
             {
                 data.playerGameplayBehaviour.HandleSprintRelease();
             }
 
-            if (Input.GetKeyDown(DashKey))
+            if (Input.GetButtonDown("Dash"))
             {
                 data.playerGameplayBehaviour.HandleDashPress();
             }
 
-            if (Input.GetKeyDown(AttackKey))
+            if (Input.GetButtonDown("Attack"))
             {
                 data.animatorProxy.Attack();
                 OnAttackInput.Invoke();

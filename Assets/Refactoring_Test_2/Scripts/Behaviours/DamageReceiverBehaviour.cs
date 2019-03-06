@@ -51,8 +51,6 @@ public class DamageReceiverBehaviour : BaseBehaviour
 
     public void ResetHealth()
     {
-        if (!IsSetupped)
-            return;
         _currentHealth = maxHealth;
     }
 
