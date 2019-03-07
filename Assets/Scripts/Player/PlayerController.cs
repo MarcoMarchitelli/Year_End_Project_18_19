@@ -123,4 +123,10 @@ public class PlayerController : EntityBaseController
         }
         cm.UpdateLifeBar(Health);
     }
+
+    public void ActivateAbilities()
+    {
+        canMultipleJump = !canMultipleJump;
+        canDash = !canDash;
+    }
 }

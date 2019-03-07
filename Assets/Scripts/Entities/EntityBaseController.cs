@@ -219,7 +219,7 @@ public abstract class EntityBaseController : MonoBehaviour, IDamageable
     /// Se true, il player può fare il dash
     /// </summary>
     [Tooltip("Se true, il player può fare il dash")]
-    protected bool canDash = true;
+    public bool canDash;
 
     /// <summary>
     /// Distanza percorsa dal dash
