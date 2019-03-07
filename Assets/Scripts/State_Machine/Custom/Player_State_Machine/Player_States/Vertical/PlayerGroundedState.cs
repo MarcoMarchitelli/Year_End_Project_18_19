@@ -19,7 +19,7 @@ public class PlayerGroundedState : PlayerStateBase
 
         if (Input.GetButtonDown("Jump"))
         {
-            myContext.myPlayer.Jump();
+            myContext.myPlayer.JumpMax();
         }
     }
 
