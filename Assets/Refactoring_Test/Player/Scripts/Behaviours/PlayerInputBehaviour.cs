@@ -7,11 +7,6 @@ namespace Refactoring
     {
         PlayerEntityData data;
 
-        [SerializeField] KeyCode JumpKey = KeyCode.Space;
-        [SerializeField] KeyCode SprintKey = KeyCode.LeftShift;
-        [SerializeField] KeyCode DashKey = KeyCode.K;
-        [SerializeField] KeyCode AttackKey = KeyCode.J;
-
         [SerializeField] UnityVoidEvent OnAttackInput;
 
         protected override void CustomSetup()

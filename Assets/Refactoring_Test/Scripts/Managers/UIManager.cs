@@ -6,12 +6,18 @@ public class UIManager : MonoBehaviour
     [SerializeField] GameObject gameplayPanel;
     [SerializeField] GameObject pausePanel;
     [SerializeField] GameObject mapPanel;
+    [SerializeField] GameObject inventoryPanel;
     [SerializeField] GameObject controllerCommandsScheme;
     [SerializeField] GameObject keyboardCommandsScheme;
 
     bool controllerSchemeActive = true;
 
     #region API
+
+    public void ToggleInventoryPanel(bool _value)
+    {
+        inventoryPanel.SetActive(_value);
+    }
 
     public void ToggleGameplayPanel(bool _value)
     {
