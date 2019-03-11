@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3453232986200420981}
-  - component: {fileID: 7331025903871333159}
+  - component: {fileID: 3046359371088280004}
   - component: {fileID: 7059261797809476939}
   - component: {fileID: 4216176502564750608}
   m_Layer: 10
@@ -36,7 +36,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7331025903871333159
+--- !u!114 &3046359371088280004
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -45,7 +45,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4366547462410495793}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 81342249f10bf2842aafc6756713de89, type: 3}
+  m_Script: {fileID: 11500000, guid: 44d7414ce40cb7e4b8744a12743bc099, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   setupOnStart: 1
@@ -72,10 +72,10 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   localWaypoints: []
-  speed: 0
+  speed: 3
   cyclic: 0
   waitTime: 0
-  easeAmount: 0
+  easeAmount: 1
 --- !u!65 &4216176502564750608
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -256,11 +256,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3453232986200420981}
     m_Modifications:
-    - target: {fileID: 1424578693596916022, guid: ef57c5fe3d7956444a6af2cd694c4beb,
-        type: 3}
-      propertyPath: m_Name
-      value: PlatA3_Retro
-      objectReference: {fileID: 0}
     - target: {fileID: 2800565198380795958, guid: ef57c5fe3d7956444a6af2cd694c4beb,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -315,6 +310,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1424578693596916022, guid: ef57c5fe3d7956444a6af2cd694c4beb,
+        type: 3}
+      propertyPath: m_Name
+      value: PlatA3_Retro
       objectReference: {fileID: 0}
     - target: {fileID: 4918005552393704362, guid: ef57c5fe3d7956444a6af2cd694c4beb,
         type: 3}

@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5146636949682895302}
-  - component: {fileID: 6261601857835459376}
+  - component: {fileID: 2264806978093042400}
   - component: {fileID: 9061625521437641433}
   - component: {fileID: 1577495223855411013}
   m_Layer: 10
@@ -36,7 +36,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6261601857835459376
+--- !u!114 &2264806978093042400
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -45,7 +45,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2370868133881110714}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 81342249f10bf2842aafc6756713de89, type: 3}
+  m_Script: {fileID: 11500000, guid: 44d7414ce40cb7e4b8744a12743bc099, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   setupOnStart: 1
@@ -101,8 +101,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 2.9997888, y: 1, z: 1}
+  m_Center: {x: -0.0064927936, y: 0, z: 0}
 --- !u!1 &8709648553169294102
 GameObject:
   m_ObjectHideFlags: 0
@@ -141,21 +141,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5146636949682895302}
     m_Modifications:
-    - target: {fileID: 1794410658513922609, guid: 1af237357126e854982e4b5b95d4ae47,
-        type: 3}
-      propertyPath: m_Name
-      value: Holographic_Side (1)
-      objectReference: {fileID: 0}
-    - target: {fileID: 1794410658513922609, guid: 1af237357126e854982e4b5b95d4ae47,
-        type: 3}
-      propertyPath: m_Layer
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 1794410658513922609, guid: 1af237357126e854982e4b5b95d4ae47,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 3453891733030067987, guid: 1af237357126e854982e4b5b95d4ae47,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -211,6 +196,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1794410658513922609, guid: 1af237357126e854982e4b5b95d4ae47,
+        type: 3}
+      propertyPath: m_Name
+      value: Holographic_Side (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1794410658513922609, guid: 1af237357126e854982e4b5b95d4ae47,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1794410658513922609, guid: 1af237357126e854982e4b5b95d4ae47,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1af237357126e854982e4b5b95d4ae47, type: 3}
 --- !u!4 &1084397156550472459 stripped
@@ -226,21 +226,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5146636949682895302}
     m_Modifications:
-    - target: {fileID: 1794410658513922609, guid: 1af237357126e854982e4b5b95d4ae47,
-        type: 3}
-      propertyPath: m_Name
-      value: Holographic_Side
-      objectReference: {fileID: 0}
-    - target: {fileID: 1794410658513922609, guid: 1af237357126e854982e4b5b95d4ae47,
-        type: 3}
-      propertyPath: m_Layer
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 1794410658513922609, guid: 1af237357126e854982e4b5b95d4ae47,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 3453891733030067987, guid: 1af237357126e854982e4b5b95d4ae47,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -295,6 +280,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1794410658513922609, guid: 1af237357126e854982e4b5b95d4ae47,
+        type: 3}
+      propertyPath: m_Name
+      value: Holographic_Side
+      objectReference: {fileID: 0}
+    - target: {fileID: 1794410658513922609, guid: 1af237357126e854982e4b5b95d4ae47,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1794410658513922609, guid: 1af237357126e854982e4b5b95d4ae47,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1af237357126e854982e4b5b95d4ae47, type: 3}
@@ -311,11 +311,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3304747661480968334}
     m_Modifications:
-    - target: {fileID: 7998751986723720952, guid: ba3abb9fca8c2964db9c0e58cf084ceb,
-        type: 3}
-      propertyPath: m_Name
-      value: HoloPlat_Front
-      objectReference: {fileID: 0}
     - target: {fileID: 3273498721303853281, guid: ba3abb9fca8c2964db9c0e58cf084ceb,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -370,6 +365,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7998751986723720952, guid: ba3abb9fca8c2964db9c0e58cf084ceb,
+        type: 3}
+      propertyPath: m_Name
+      value: HoloPlat_Front
       objectReference: {fileID: 0}
     - target: {fileID: 715489548553578082, guid: ba3abb9fca8c2964db9c0e58cf084ceb,
         type: 3}
