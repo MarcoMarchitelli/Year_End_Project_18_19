@@ -14,6 +14,7 @@ namespace Refactoring
             Data = new PlayerEntityData(
                 GetBehaviour<PlayerGameplayBehaviour>(),
                 GetBehaviour<PlayerCollisionsBehaviour>(),
+                GetBehaviour<PlayerInputBehaviour>(),
                 GetComponent<BoxCollider>(),
                 GetComponentInChildren<AnimatorProxy>(),
                 GetBehaviour<DamageReceiverBehaviour>(),
@@ -26,14 +27,16 @@ namespace Refactoring
     {
         public PlayerGameplayBehaviour playerGameplayBehaviour;
         public PlayerCollisionsBehaviour playerCollisionsBehaviour;
+        public PlayerInputBehaviour playerInputBehaviour;
         public AnimatorProxy animatorProxy;
         public DamageReceiverBehaviour damageReceiverBehaviour;
         public RespawnBehaviour respawnBehaviour;
 
-        public PlayerEntityData(PlayerGameplayBehaviour _p, PlayerCollisionsBehaviour _c, BoxCollider _bc, AnimatorProxy _ap, DamageReceiverBehaviour _drb, RespawnBehaviour _rb)
+        public PlayerEntityData(PlayerGameplayBehaviour _p, PlayerCollisionsBehaviour _c, PlayerInputBehaviour _pib, BoxCollider _bc, AnimatorProxy _ap, DamageReceiverBehaviour _drb, RespawnBehaviour _rb)
         {
             playerGameplayBehaviour = _p;
             playerCollisionsBehaviour = _c;
+            playerInputBehaviour = _pib;
             collider = _bc;
             animatorProxy = _ap;
             damageReceiverBehaviour = _drb;

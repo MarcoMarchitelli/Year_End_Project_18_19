@@ -9,6 +9,9 @@ namespace Refactoring
 
         [SerializeField] UnityVoidEvent OnAttackInput;
 
+        [HideInInspector] public bool IsPressingJump;
+        [HideInInspector] public bool FallingThrough;
+
         protected override void CustomSetup()
         {
             data = Entity.Data as PlayerEntityData;
@@ -21,11 +24,20 @@ namespace Refactoring
 
             if (Input.GetButtonDown("Jump"))
             {
-                data.playerGameplayBehaviour.OnJumpInputDown();
+                if (directionalInput.y == -1 && data.playerCollisionsBehaviour.CollidingWithTraversable)
+                {
+                    data.playerCollisionsBehaviour.SetFallingThrowPlatform();
+                }
+                else
+                {
+                    data.playerGameplayBehaviour.OnJumpInputDown();
+                    IsPressingJump = true;
+                }
             }
             if (Input.GetButtonUp("Jump"))
             {
                 data.playerGameplayBehaviour.OnJumpInputUp();
+                IsPressingJump = false;
             }
 
             if (Input.GetButtonDown("Run"))
@@ -48,5 +60,5 @@ namespace Refactoring
                 OnAttackInput.Invoke();
             }
         }
-    } 
+    }
 }

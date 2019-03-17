@@ -21,11 +21,12 @@ namespace Refactoring
                 if (collisions.below != value)
                 {
                     collisions.below = value;
-                    if(collisions.below)
+                    if (collisions.below)
                         data.playerGameplayBehaviour.HandleGroundCollision();
                 }
             }
         }
+        [HideInInspector] public bool CollidingWithTraversable = false;
 
         protected override void CustomSetup()
         {
@@ -175,12 +176,12 @@ namespace Refactoring
                         {
                             continue;
                         }
-                        if (playerInput.y == -1)
-                        {
-                            collisions.fallingThroughPlatform = true;
-                            Invoke("ResetFallingThroughPlatform", .5f);
-                            continue;
-                        }
+                        if (directionY == -1)
+                            CollidingWithTraversable = true;
+                    }
+                    else
+                    {
+                        CollidingWithTraversable = false;
                     }
 
                     moveAmount.y = (hit.distance - skinWidth) * directionY;
@@ -257,6 +258,12 @@ namespace Refactoring
                     }
                 }
             }
+        }
+
+        public void SetFallingThrowPlatform()
+        {
+            collisions.fallingThroughPlatform = true;
+            Invoke("ResetFallingThroughPlatform", .5f);
         }
 
         void ResetFallingThroughPlatform()
