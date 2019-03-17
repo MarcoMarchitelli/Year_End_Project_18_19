@@ -17,8 +17,11 @@ public class SpikeDamageBehaviour : BaseBehaviour
             return;
 
         PlayerEntityData d = p.Data as PlayerEntityData;
-        d.damageReceiverBehaviour.SetHealth(-damage);
-        d.respawnBehaviour.Respawn();
+
+        if(d.damageReceiverBehaviour.SetHealth(-damage))
+            d.respawnBehaviour.Respawn(true);
+        else
+            d.respawnBehaviour.Respawn(false);
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -31,8 +34,11 @@ public class SpikeDamageBehaviour : BaseBehaviour
             return;
 
         PlayerEntityData d = p.Data as PlayerEntityData;
-        d.damageReceiverBehaviour.SetHealth(-damage);
-        d.respawnBehaviour.Respawn();
+
+        if (d.damageReceiverBehaviour.SetHealth(-damage))
+            d.respawnBehaviour.Respawn(true);
+        else
+            d.respawnBehaviour.Respawn(false);
     }
 
 }

@@ -394,22 +394,10 @@ MonoBehaviour:
       PublicKeyToken=null
   OnHealthDepleated:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 4071094914124930311}
-        m_MethodName: Respawn
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_TypeName: UnityVoidEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
   maxHealth: 3
-  _currentHealth: 0
 --- !u!114 &7358505336034913253
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -468,7 +456,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: edd1366d824e6474f926ca8dde0371e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  OnRespawn:
+  OnDeathRespawn:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 6361020903582265855}
@@ -482,6 +470,11 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+    m_TypeName: UnityVoidEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  OnCheckpointRespawn:
+    m_PersistentCalls:
+      m_Calls: []
     m_TypeName: UnityVoidEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
 --- !u!65 &4031181972257501210

@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4188858515911611015}
   - component: {fileID: 7373272487096201632}
-  - component: {fileID: 4821831941831337946}
+  - component: {fileID: 3513973626231479243}
   - component: {fileID: 4821831941831337948}
   - component: {fileID: 4821831941831337947}
   m_Layer: 10
@@ -47,7 +47,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   setupOnStart: 1
---- !u!114 &4821831941831337946
+--- !u!114 &3513973626231479243
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -56,19 +56,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 4821831941831337949}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0eb23ce6b7858d54fa16dadb806acf53, type: 3}
+  m_Script: {fileID: 11500000, guid: c7d3db6cb76d706449e94b4a4389f593, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  disableOnStart: 0
-  dealsOnCollision: 0
-  dealsOnTrigger: 1
-  depleatesHealth: 0
   damage: 1
-  OnDamageDealt:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityFloatEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
+  dealsOnTrigger: 1
+  dealsOnCollision: 0
 --- !u!65 &4821831941831337948
 BoxCollider:
   m_ObjectHideFlags: 0

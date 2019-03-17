@@ -2,7 +2,8 @@
 
 public class RespawnBehaviour : BaseBehaviour
 {
-    [SerializeField] UnityVoidEvent OnRespawn;
+    [SerializeField] UnityVoidEvent OnDeathRespawn;
+    [SerializeField] UnityVoidEvent OnCheckpointRespawn;
 
     Vector3 respawnPoint;
 
@@ -16,10 +17,18 @@ public class RespawnBehaviour : BaseBehaviour
         respawnPoint = _value;
     }
 
-    public void Respawn()
+    public void Respawn(bool _isDeathRespawn)
     {
-        Entity.gameObject.transform.position = respawnPoint;
-        OnRespawn.Invoke();
+        if (_isDeathRespawn)
+        {
+            Entity.gameObject.transform.position = respawnPoint;
+            OnDeathRespawn.Invoke();
+        }
+        else
+        {
+            Entity.gameObject.transform.position = respawnPoint;
+            OnCheckpointRespawn.Invoke();
+        }
     }
 
 }
