@@ -16,22 +16,26 @@ public class UIManager : MonoBehaviour
 
     public void ToggleInventoryPanel(bool _value)
     {
-        inventoryPanel.SetActive(_value);
+        if(inventoryPanel)
+            inventoryPanel.SetActive(_value);
     }
 
     public void ToggleGameplayPanel(bool _value)
     {
-        gameplayPanel.SetActive(_value);
+        if(gameplayPanel)
+            gameplayPanel.SetActive(_value);
     }
 
     public void TogglePausePanel(bool _value)
     {
-        pausePanel.SetActive(_value);
+        if(pausePanel)
+            pausePanel.SetActive(_value);
     }
 
     public void ToggleMapPanel(bool _value)
     {
-        mapPanel.SetActive(_value);
+        if(mapPanel)
+            mapPanel.SetActive(_value);
     }
 
     public void ToggleCommandsScheme()

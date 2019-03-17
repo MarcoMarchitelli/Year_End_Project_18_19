@@ -37,7 +37,7 @@ public class DamageDealerBehaviour : BaseBehaviour
         }
         else
         {
-            _receiver.SetHealth(-_receiver.GetHealth());
+            _receiver.SetHealth(-_receiver.CurrentHealth);
         }
     }
 

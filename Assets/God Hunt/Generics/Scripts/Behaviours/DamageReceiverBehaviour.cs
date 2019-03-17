@@ -13,24 +13,27 @@ public class DamageReceiverBehaviour : BaseBehaviour
     }
 
     [SerializeField] int maxHealth;
-    [SerializeField] int _currentHealth;
-    int CurrentHealth
+    public int MaxHealth
+    {
+        get { return maxHealth; }
+    }
+    int _currentHealth;
+    public int CurrentHealth
     {
         get { return _currentHealth; }
-        set
+        private set
         {
             if (_currentHealth != value)
             {
+                print(name + " health has changed from " + _currentHealth + " to " + value);
                 _currentHealth = value;
                 if (_currentHealth == 0)
                 {
                     OnHealthDepleated.Invoke();
-                    print(name + " died.");
                 }
                 else
                 {
                     OnHealthChanged.Invoke(_currentHealth);
-                    print(name + " has taken damage!");
                 }
             }
         }
@@ -56,10 +59,6 @@ public class DamageReceiverBehaviour : BaseBehaviour
     public void ResetHealth()
     {
         _currentHealth = maxHealth;
-    }
-
-    public int GetHealth()
-    {
-        return CurrentHealth;
+        OnHealthChanged.Invoke(_currentHealth);
     }
 }
