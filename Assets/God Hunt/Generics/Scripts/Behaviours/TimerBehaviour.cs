@@ -54,7 +54,7 @@ public class TimerBehaviour : BaseBehaviour
     {
         time = _time;
         countTime = true;
-        print(name + " è iniziato");
+        OnTimerStart.Invoke();
     }
 
     public void StartTimer()
@@ -90,4 +90,5 @@ public class TimerBehaviour : BaseBehaviour
     }
 
     #endregion
+
 }
