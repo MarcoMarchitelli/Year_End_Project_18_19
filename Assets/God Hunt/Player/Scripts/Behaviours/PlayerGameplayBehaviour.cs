@@ -38,6 +38,7 @@ public class PlayerGameplayBehaviour : BaseBehaviour
     public float minJumpHeight = 1;
     public float doubleJumpHeight = 2;
     public float timeToJumpApex = .4f;
+    public float fallingGravityMultiplier = 2f;
 
     #endregion
 
@@ -64,7 +65,9 @@ public class PlayerGameplayBehaviour : BaseBehaviour
     #region Velocity
 
     float currentMoveSpeed;
-    float gravity;
+    float normalGravity;
+    float fallingGravity;
+    float currentGravity;
     float maxJumpVelocity;
     float minJumpVelocity;
     float doubleJumpVelocity;
@@ -148,10 +151,11 @@ public class PlayerGameplayBehaviour : BaseBehaviour
         data = Entity.Data as PlayerEntityData;
 
         #region Jumping
-        gravity = -(2 * maxJumpHeight) / Mathf.Pow(timeToJumpApex, 2);
-        maxJumpVelocity = Mathf.Abs(gravity) * timeToJumpApex;
-        minJumpVelocity = Mathf.Sqrt(2 * Mathf.Abs(gravity) * minJumpHeight);
-        doubleJumpVelocity = Mathf.Sqrt(2 * Mathf.Abs(gravity) * doubleJumpHeight);
+        normalGravity = -(2 * maxJumpHeight) / Mathf.Pow(timeToJumpApex, 2);
+        fallingGravity = normalGravity * fallingGravityMultiplier;
+        maxJumpVelocity = Mathf.Abs(normalGravity) * timeToJumpApex;
+        minJumpVelocity = Mathf.Sqrt(2 * Mathf.Abs(normalGravity) * minJumpHeight);
+        doubleJumpVelocity = Mathf.Sqrt(2 * Mathf.Abs(normalGravity) * doubleJumpHeight);
         jumpsCount = 0;
         #endregion
 
@@ -173,6 +177,7 @@ public class PlayerGameplayBehaviour : BaseBehaviour
 
         HandleSprinting();
         HandleDashing();
+        SetGravity();
         CalculateVelocity();
         //HandleWallSliding();
 
@@ -411,13 +416,25 @@ public class PlayerGameplayBehaviour : BaseBehaviour
         }
     }
 
+    void SetGravity()
+    {
+        if(velocity.y < 0)
+        {
+            currentGravity = fallingGravity;
+        }
+        else
+        {
+            currentGravity = normalGravity;
+        }
+    }
+
     void CalculateVelocity()
     {
         if (!IsDashing)
         {
             float targetVelocityX = directionalInput.x * currentMoveSpeed;
             velocity.x = Mathf.SmoothDamp(velocity.x, targetVelocityX, ref velocityXSmoothing, (data.playerCollisionsBehaviour.Below) ? accelerationTimeGrounded : accelerationTimeAirborne);
-            velocity.y += gravity * Time.deltaTime;
+            velocity.y += currentGravity * Time.deltaTime;
         }
         else
         {
