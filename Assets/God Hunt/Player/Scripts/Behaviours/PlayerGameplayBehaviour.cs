@@ -166,6 +166,7 @@ public class PlayerGameplayBehaviour : BaseBehaviour
         #endregion
 
         #region Dashing
+        FaceingDirection = 1;
         dashSpeed = dashDistance / dashDuration;
         airDashesCount = 0;
         #endregion
@@ -418,7 +419,7 @@ public class PlayerGameplayBehaviour : BaseBehaviour
 
     void SetGravity()
     {
-        if(velocity.y < 0)
+        if (velocity.y < 0)
         {
             currentGravity = fallingGravity;
         }
@@ -445,25 +446,29 @@ public class PlayerGameplayBehaviour : BaseBehaviour
 
     void HandleAnimations()
     {
-        if (velocity.x > 0)
-        {
-            FaceingDirection = 1;
-            data.animatorProxy.IsWalking = true;
-        }
-        else if (velocity.x < 0)
-        {
-            FaceingDirection = -1;
-            data.animatorProxy.IsWalking = true;
-        }
-        else
-        {
-            data.animatorProxy.IsWalking = false;
-        }
-
         if (data.playerCollisionsBehaviour.Below)
             data.animatorProxy.IsGrounded = true;
         else
             data.animatorProxy.IsGrounded = false;
+
+        if (velocity.x > 0)
+        {
+            FaceingDirection = 1;
+            if (data.animatorProxy.IsGrounded)
+                data.animatorProxy.IsWalking = true;
+            else
+                data.animatorProxy.IsWalking = false;
+        }
+        else if (velocity.x < 0)
+        {
+            FaceingDirection = -1;
+            if (data.animatorProxy.IsGrounded)
+                data.animatorProxy.IsWalking = true;
+            else
+                data.animatorProxy.IsWalking = false;
+        }
+        else if (data.animatorProxy.IsGrounded)
+            data.animatorProxy.IsWalking = false;
 
         if (velocity.y > 0)
             data.animatorProxy.IsRising = true;

@@ -242,7 +242,7 @@ MonoBehaviour:
   m_Script: {fileID: -619905303, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_FirstSelected: {fileID: 0}
+  m_FirstSelected: {fileID: 1460024932}
   m_sendNavigationEvents: 1
   m_DragThreshold: 10
 --- !u!4 &258428455
@@ -447,7 +447,7 @@ MonoBehaviour:
   m_LookAt: {fileID: 0}
   m_Follow: {fileID: 1004764434304795277}
   m_Lens:
-    FieldOfView: 40
+    FieldOfView: 60
     OrthographicSize: 5.2
     NearClipPlane: 0.1
     FarClipPlane: 5000
@@ -1198,6 +1198,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac0b09e7857660247b1477e93731de29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1460024932 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3043449979168258481, guid: 0b64bd79b14758048a459b1746195657,
+    type: 3}
+  m_PrefabInstance: {fileID: 1939371263}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1494637268
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1683,6 +1689,36 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -513
       objectReference: {fileID: 0}
+    - target: {fileID: 81782470445787163, guid: 0b64bd79b14758048a459b1746195657,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1073440776}
+    - target: {fileID: 81782470445787163, guid: 0b64bd79b14758048a459b1746195657,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Quit
+      objectReference: {fileID: 0}
+    - target: {fileID: 3043449979168258487, guid: 0b64bd79b14758048a459b1746195657,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1073440776}
+    - target: {fileID: 3043449979168258487, guid: 0b64bd79b14758048a459b1746195657,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: TogglePause
+      objectReference: {fileID: 0}
+    - target: {fileID: 11505572531948147, guid: 0b64bd79b14758048a459b1746195657,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1073440776}
+    - target: {fileID: 11505572531948147, guid: 0b64bd79b14758048a459b1746195657,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Restart
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0b64bd79b14758048a459b1746195657, type: 3}
 --- !u!224 &1939371264 stripped
@@ -1914,8 +1950,8 @@ Camera:
     height: 1
   near clip plane: 0.1
   far clip plane: 5000
-  field of view: 40
-  orthographic: 1
+  field of view: 60
+  orthographic: 0
   orthographic size: 5.2
   m_Depth: -1
   m_CullingMask:
