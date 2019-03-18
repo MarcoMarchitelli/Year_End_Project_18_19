@@ -27,10 +27,10 @@ public class PlayerInputBehaviour : BaseBehaviour
 
     void ReadInputs()
     {
-        Vector2 directionalInput = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+        Vector2 directionalInput = new Vector2(Input.GetAxisRaw(GameManager.Instance.CurrentInputDevice + "Horizontal"), Input.GetAxisRaw(GameManager.Instance.CurrentInputDevice + "Vertical"));
         data.playerGameplayBehaviour.SetDirectionalInput(directionalInput);
 
-        if (Input.GetButtonDown("Jump"))
+        if (Input.GetButtonDown(GameManager.Instance.CurrentInputDevice + "Jump"))
         {
             if (directionalInput.y == -1 && data.playerCollisionsBehaviour.CollidingWithTraversable)
             {
@@ -42,27 +42,27 @@ public class PlayerInputBehaviour : BaseBehaviour
                 IsPressingJump = true;
             }
         }
-        if (Input.GetButtonUp("Jump"))
+        if (Input.GetButtonUp(GameManager.Instance.CurrentInputDevice + "Jump"))
         {
             data.playerGameplayBehaviour.OnJumpInputUp();
             IsPressingJump = false;
         }
 
-        if (Input.GetButtonDown("Run"))
+        if (Input.GetButtonDown(GameManager.Instance.CurrentInputDevice + "Run"))
         {
             data.playerGameplayBehaviour.HandleSprintPress();
         }
-        if (Input.GetButtonUp("Run"))
+        if (Input.GetButtonUp(GameManager.Instance.CurrentInputDevice + "Run"))
         {
             data.playerGameplayBehaviour.HandleSprintRelease();
         }
 
-        if (canDash && Input.GetButtonDown("Dash"))
+        if (canDash && Input.GetButtonDown(GameManager.Instance.CurrentInputDevice + "Dash"))
         {
             data.playerGameplayBehaviour.HandleDashPress();
         }
 
-        if (Input.GetButtonDown("Attack"))
+        if (Input.GetButtonDown(GameManager.Instance.CurrentInputDevice + "Attack"))
         {
             data.animatorProxy.Attack();
             OnAttackInput.Invoke();

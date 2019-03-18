@@ -1,14 +1,18 @@
 ﻿using UnityEngine;
-using Refactoring;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
 
+    public static GameManager Instance;
+
     #region References
 
     [SerializeField] UIManager uiManager;
     [SerializeField] PlayerEntity player;
+    EventSystem eventSystem;
+    StandaloneInputModule inputModule;
 
     #endregion
 
@@ -16,17 +20,33 @@ public class GameManager : MonoBehaviour
     bool isMapOpen = false;
     bool isInInventory = false;
 
+    string _currentInputDevice;
+    public string CurrentInputDevice
+    {
+        get { return _currentInputDevice; }
+        private set { _currentInputDevice = value; }
+    }
+    const string keyboard = "Keyboard ";
+    const string xboxController = "XBOX ";
+
     #region MonoBehaviour Methods
+
+    private void Awake()
+    {
+        Setup();
+    }
 
     private void Update()
     {
-        if (!isMapOpen && !isInInventory && Input.GetButtonDown("Pause"))
+        CheckInputDevices();
+
+        if (!isMapOpen && !isInInventory && Input.GetButtonDown(CurrentInputDevice + "Pause"))
             TogglePause();
 
-        if (!isPaused && !isInInventory && Input.GetButtonDown("Map"))
+        if (!isPaused && !isInInventory && Input.GetButtonDown(CurrentInputDevice + "Map"))
             ToggleMap();
 
-        if (!isPaused && !isMapOpen && Input.GetButtonDown("Inventory"))
+        if (!isPaused && !isMapOpen && Input.GetButtonDown(CurrentInputDevice + "Inventory"))
             ToggleInventory();
     }
 
@@ -97,6 +117,70 @@ public class GameManager : MonoBehaviour
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         Time.timeScale = 1;
+    }
+
+    #endregion
+
+    #region Internals
+
+    void Setup()
+    {
+        if (!Instance)
+            Instance = this;
+
+        eventSystem = FindObjectOfType<EventSystem>();
+        inputModule = FindObjectOfType<StandaloneInputModule>();
+
+        ChangeCurrentInputDevice(keyboard);
+        string[] joyNames = Input.GetJoystickNames();
+        if (joyNames.Length > 0)
+            for (int i = 0; i < joyNames.Length; i++)
+            {
+                if (joyNames[i].Length == 33)
+                    ChangeCurrentInputDevice(xboxController);
+            }
+    }
+
+    string[] joyNames;
+    void CheckInputDevices()
+    {
+        joyNames = Input.GetJoystickNames();
+
+        //if current device is keyboard and i detect a controller --> change to controller
+        if (CurrentInputDevice == keyboard && joyNames.Length > 0)
+            for (int i = 0; i < joyNames.Length; i++)
+            {
+                if (joyNames[i].Length == 33)
+                    ChangeCurrentInputDevice(xboxController);
+            }
+        //If current device is controller but i do not detect it anymore --> change to keyboard
+        else if(CurrentInputDevice == xboxController && joyNames.Length == 0)
+        {
+            ChangeCurrentInputDevice(keyboard);
+        }
+    }
+
+    void ChangeCurrentInputDevice(string _newInputDeviceName)
+    {
+        CurrentInputDevice = _newInputDeviceName;
+
+        switch (CurrentInputDevice)
+        {
+            case keyboard:
+                inputModule.horizontalAxis = keyboard + "Horizontal";
+                inputModule.verticalAxis = keyboard + "Vertical";
+                inputModule.submitButton = keyboard + "Submit";
+                inputModule.cancelButton = keyboard + "Cancel";
+                break;
+            case xboxController:
+                inputModule.horizontalAxis = xboxController + "DPAD Horizontal";
+                inputModule.verticalAxis = xboxController + "DPAD Vertical";
+                inputModule.submitButton = xboxController + "Submit";
+                inputModule.cancelButton = xboxController + "Cancel";
+                break;
+        }
+
+        print(CurrentInputDevice);
     }
 
     #endregion
