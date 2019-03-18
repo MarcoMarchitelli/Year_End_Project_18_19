@@ -5,6 +5,8 @@ using System;
 
 public abstract class BaseEntity : MonoBehaviour, IEntity
 {
+    [SerializeField] bool setupOnStart = false;
+
     /// <summary>
     /// List of IBehaviours that describe this Entity.
     /// </summary>
@@ -13,6 +15,12 @@ public abstract class BaseEntity : MonoBehaviour, IEntity
     public IEntityData Data { get; set; }
 
     bool isEnabled;
+
+    private void Start()
+    {
+        if (setupOnStart)
+            SetUpEntity();
+    }
 
     /// <summary>
     /// Basic Entity setup. Every Entity needs to implement this to function.

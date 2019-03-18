@@ -2,11 +2,6 @@
 
 public class PlayerEntity : BoxColliderEntity
 {
-    public override void Start()
-    {
-        base.Start();
-    }
-
     public override void CustomSetup()
     {
         Data = new PlayerEntityData(
