@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] UIManager uiManager;
     [SerializeField] PlayerEntity player;
+    public RoomSystem roomSystem;
     EventSystem eventSystem;
     StandaloneInputModule inputModule;
 
@@ -127,6 +128,8 @@ public class GameManager : MonoBehaviour
     {
         if (!Instance)
             Instance = this;
+
+        roomSystem.Setup();
 
         eventSystem = FindObjectOfType<EventSystem>();
         inputModule = FindObjectOfType<StandaloneInputModule>();
