@@ -31,6 +31,7 @@ public class PlayerGameplayBehaviour : BaseBehaviour
     [SerializeField] float dashDistance = 5f;
     [SerializeField] float dashDuration;
     [SerializeField] float dashCooldown;
+    [SerializeField] UnityVoidEvent OnDashStart;
     [SerializeField] UnityFloatEvent OnDashEnd;
 
     [Header("Jumping")]
@@ -39,6 +40,7 @@ public class PlayerGameplayBehaviour : BaseBehaviour
     public float doubleJumpHeight = 2;
     public float timeToJumpApex = .4f;
     public float fallingGravityMultiplier = 2f;
+    [SerializeField] UnityVoidEvent OnDoubleJump;
 
     #endregion
 
@@ -243,6 +245,7 @@ public class PlayerGameplayBehaviour : BaseBehaviour
         {
             velocity.y = doubleJumpVelocity;
             jumpsCount++;
+            OnDoubleJump.Invoke();
         }
     }
 
@@ -321,6 +324,7 @@ public class PlayerGameplayBehaviour : BaseBehaviour
         if (_isAirDash)
             airDashesCount++;
         IsDashing = true;
+        OnDashStart.Invoke();
     }
 
     void HandleDashing()
