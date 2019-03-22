@@ -11,6 +11,8 @@ public class PlayerCollisionsBehaviour : RaycastController
     [HideInInspector]
     public Vector2 playerInput;
 
+    [SerializeField] UnityVoidEvent OnCollisionBelow;
+
     public bool Below
     {
         get { return collisions.below; }
@@ -20,7 +22,10 @@ public class PlayerCollisionsBehaviour : RaycastController
             {
                 collisions.below = value;
                 if (collisions.below)
+                {
                     data.playerGameplayBehaviour.HandleGroundCollision();
+                    OnCollisionBelow.Invoke();
+                }
             }
         }
     }
