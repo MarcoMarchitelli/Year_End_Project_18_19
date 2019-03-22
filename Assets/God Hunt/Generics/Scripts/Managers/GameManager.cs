@@ -4,13 +4,13 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-
     public static GameManager Instance;
 
     #region References
 
     [SerializeField] UIManager uiManager;
     [SerializeField] PlayerEntity player;
+    public RoomSystem roomSystem;
     EventSystem eventSystem;
     StandaloneInputModule inputModule;
 
@@ -119,6 +119,12 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1;
     }
 
+    public void LoadScene(string _sceneName)
+    {
+        SceneManager.LoadScene(_sceneName);
+        Time.timeScale = 1;
+    }
+
     #endregion
 
     #region Internals
@@ -127,6 +133,9 @@ public class GameManager : MonoBehaviour
     {
         if (!Instance)
             Instance = this;
+
+        if(roomSystem)
+            roomSystem.Setup();
 
         eventSystem = FindObjectOfType<EventSystem>();
         inputModule = FindObjectOfType<StandaloneInputModule>();
@@ -184,5 +193,4 @@ public class GameManager : MonoBehaviour
     }
 
     #endregion
-
 }
