@@ -34,7 +34,6 @@ public abstract class BaseEntity : MonoBehaviour, IEntity
             behaviour.Setup(this);
         }
         isEnabled = true;
-        print(name + " is setupped");
     }
 
     /// <summary>
