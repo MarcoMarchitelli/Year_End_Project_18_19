@@ -5,8 +5,6 @@ public class PlayerInputBehaviour : BaseBehaviour
 {
     PlayerEntityData data;
 
-    [SerializeField] UnityVoidEvent OnAttackInput;
-
     [HideInInspector] public bool IsPressingJump;
     [HideInInspector] public bool FallingThrough;
 
@@ -64,8 +62,11 @@ public class PlayerInputBehaviour : BaseBehaviour
 
         if (Input.GetButtonDown(GameManager.Instance.CurrentInputDevice + "Attack"))
         {
-            data.animatorProxy.Attack();
-            OnAttackInput.Invoke();
+            data.playerAttackBehaviour.HandleAttackPress();
+        }
+        if (Input.GetButtonUp(GameManager.Instance.CurrentInputDevice + "Attack"))
+        {
+            data.playerAttackBehaviour.HandleAttackRelease();
         }
     }
 
