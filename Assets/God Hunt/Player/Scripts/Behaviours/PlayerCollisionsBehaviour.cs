@@ -11,6 +11,7 @@ public class PlayerCollisionsBehaviour : RaycastController
     [HideInInspector]
     public Vector2 playerInput;
 
+    [SerializeField] float traversableTime = .5f;
     [SerializeField] UnityVoidEvent OnCollisionBelow;
 
     public bool Below
@@ -267,7 +268,7 @@ public class PlayerCollisionsBehaviour : RaycastController
     public void SetFallingThrowPlatform()
     {
         collisions.fallingThroughPlatform = true;
-        Invoke("ResetFallingThroughPlatform", .5f);
+        Invoke("ResetFallingThroughPlatform", traversableTime);
     }
 
     void ResetFallingThroughPlatform()
