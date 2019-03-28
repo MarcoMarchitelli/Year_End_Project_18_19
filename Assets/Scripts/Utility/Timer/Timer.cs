@@ -3,7 +3,7 @@ using UnityEngine.Events;
 
 namespace Deirin.Utility
 {
-    public class MonoTimer : MonoBehaviour
+    public class Timer : MonoBehaviour
     {
         [Multiline] public string description;
         public float time;

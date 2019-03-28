@@ -41,11 +41,6 @@ public class DamageDealerBehaviour : BaseBehaviour
         }
     }
 
-    public void SetDamage(int _value)
-    {
-        damage = _value;
-    }
-
     protected virtual void OnTriggerEnter(Collider other)
     {
         if (!IsSetupped)

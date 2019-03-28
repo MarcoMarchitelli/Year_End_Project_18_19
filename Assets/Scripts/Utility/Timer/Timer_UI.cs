@@ -3,10 +3,10 @@ using UnityEngine.UI;
 using Deirin.Utility;
 using TMPro;
 
-public class MonoTimer_UI : MonoBehaviour
+public class Timer_UI : MonoBehaviour
 {
     [Header("Target")]
-    public MonoTimer timer;
+    public Timer timer;
 
     [Header("References")]
     public Slider slider;
