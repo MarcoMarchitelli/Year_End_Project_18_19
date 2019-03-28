@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 10395120309997400}
   - component: {fileID: 5146386237616246544}
   m_Layer: 10
-  m_Name: Fading
+  m_Name: Logic_Fading
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -60,7 +60,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   collisionMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 256
   horizontalRayCount: 0
   verticalRayCount: 0
   horizontalRaySpacing: 0
@@ -69,8 +69,8 @@ MonoBehaviour:
   below: 0
   right: 0
   left: 0
-  fadeEffectDuration: 1.5
-  fadeDuration: 3
+  fadeEffectDuration: 0.5
+  fadeDuration: 2
   OnTargetCollision:
     m_PersistentCalls:
       m_Calls: []
