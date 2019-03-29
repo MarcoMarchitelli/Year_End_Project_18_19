@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Action : MonoBehaviour
+[System.Serializable]
+public class Action
 {
     #region Data
 
@@ -17,6 +18,7 @@ public class Action : MonoBehaviour
 
     public bool InterruptOtherActions;
         public List<Action> ActionsToInterrupt;
+        public List<Action> InterruptableActions;
 
     #endregion
 
@@ -41,11 +43,17 @@ public class Action : MonoBehaviour
         ActionsToInterrupt.RemoveAt(_index);
     }
 
+    public void RemoveActionToInterrupt(Action _action)
+    {
+        ActionsToInterrupt.Remove(_action);
+    }
+
     #endregion
 
     public Action()
     {
         Name = "New Action";
         ActionsToInterrupt = new List<Action>();
+        InterruptableActions = new List<Action>();
     }
 }
