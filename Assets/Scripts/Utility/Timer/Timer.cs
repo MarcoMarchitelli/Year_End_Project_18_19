@@ -50,6 +50,11 @@ namespace Deirin.Utility
         #endregion
 
         #region API
+        public void SetTime(float _value)
+        {
+            time = _value;
+        }
+
         public void StartTimer(float _time)
         {
             time = _time;

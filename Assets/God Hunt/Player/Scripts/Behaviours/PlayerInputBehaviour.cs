@@ -6,6 +6,7 @@ public class PlayerInputBehaviour : BaseBehaviour
     PlayerEntityData data;
 
     [SerializeField] UnityVoidEvent OnAttackInput;
+    [SerializeField] UnityVoidEvent OnChargedAttackInput;
 
     [HideInInspector] public bool IsPressingJump;
     [HideInInspector] public bool FallingThrough;
