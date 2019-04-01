@@ -26,6 +26,7 @@ public class AttackBehaviour : BaseBehaviour
     [SerializeField] UnityVoidEvent OnAttackEnd;
 
     DamageDealerBehaviour damageDealerBehaviour;
+    KnockbackDealerBehaviour knockbackDealerBehaviour;
     BoxCollider damageCollider;
 
     Timer repeatCDTimer;
@@ -38,7 +39,11 @@ public class AttackBehaviour : BaseBehaviour
         data = Entity.Data as PlayerEntityData;
 
         damageDealerBehaviour = GetComponent<DamageDealerBehaviour>();
+        knockbackDealerBehaviour = GetComponent<KnockbackDealerBehaviour>();
         damageCollider = GetComponent<BoxCollider>();
+
+        damageDealerBehaviour.SetDamage(damage);
+        knockbackDealerBehaviour.SetKnockbackPower(knockbackPower);
 
         //timers intantiation
         repeatCDTimer = Instantiate(timerPrefab, transform);

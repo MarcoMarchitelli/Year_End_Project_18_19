@@ -70,7 +70,8 @@ public class PatrolBehaviour : BaseBehaviour
             Debug.LogWarning(name + "'s patrol behaviour is not setupped!");
             return;
         }
-        pathRoutine = StartCoroutine(FollowPath());
+        if(path)
+            pathRoutine = StartCoroutine(FollowPath());
     }
 
     public void StopPatrol()
@@ -80,7 +81,8 @@ public class PatrolBehaviour : BaseBehaviour
             Debug.LogWarning(name + "'s patrol behaviour is not setupped!");
             return;
         }
-        StopCoroutine(pathRoutine);
+        if(pathRoutine != null)
+            StopCoroutine(pathRoutine);
     }
 
     public void ToggleRotationToWaypoint(bool _value)

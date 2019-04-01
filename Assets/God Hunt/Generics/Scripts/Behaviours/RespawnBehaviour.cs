@@ -8,6 +8,11 @@ public class RespawnBehaviour : BaseBehaviour
     Vector3 deathRespawnPoint;
     Vector3 checkPoint;
 
+    protected override void CustomSetup()
+    {
+        SetRespawnPoint(Entity.gameObject.transform.position);
+    }
+
     public void SetRespawnPoint(Vector3 _value)
     {
         deathRespawnPoint = _value;

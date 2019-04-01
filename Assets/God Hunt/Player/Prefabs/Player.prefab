@@ -399,6 +399,7 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityVoidEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
+  hasDoubleJumped: 0
   wallJumpClimb: {x: 0, y: 0}
   wallJumpOff: {x: 0, y: 0}
   wallLeap: {x: 0, y: 0}
@@ -472,7 +473,18 @@ MonoBehaviour:
       PublicKeyToken=null
   OnHealthDepleated:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 4071094914124930311}
+        m_MethodName: Respawn
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
     m_TypeName: UnityVoidEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
   maxHealth: 3
@@ -579,6 +591,7 @@ GameObject:
   - component: {fileID: 2835675428517170386}
   - component: {fileID: 2130853565126631121}
   - component: {fileID: 7795403639108988997}
+  - component: {fileID: 6019690131294451600}
   - component: {fileID: 6520526812539716830}
   m_Layer: 8
   m_Name: Base Up Attack Collider
@@ -676,6 +689,27 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityFloatEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
+--- !u!114 &6019690131294451600
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2463771380610180160}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c461cb2821ca5f47b6a57c2f8541dd3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  disableOnStart: 0
+  dealsOnCollision: 0
+  dealsOnTrigger: 1
+  knockbackPower: 0
+  OnKnockbackDealt:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityFloatEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
 --- !u!65 &6520526812539716830
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -700,6 +734,7 @@ GameObject:
   - component: {fileID: 6981795639542485177}
   - component: {fileID: 6640341155248902611}
   - component: {fileID: 5405564629482058054}
+  - component: {fileID: 5794533523582212900}
   - component: {fileID: 4361359958260559415}
   m_Layer: 8
   m_Name: Charged Attack Collider
@@ -793,6 +828,27 @@ MonoBehaviour:
   depleatesHealth: 0
   damage: 3
   OnDamageDealt:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityFloatEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+--- !u!114 &5794533523582212900
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3269446217525906433}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c461cb2821ca5f47b6a57c2f8541dd3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  disableOnStart: 0
+  dealsOnCollision: 0
+  dealsOnTrigger: 1
+  knockbackPower: 0
+  OnKnockbackDealt:
     m_PersistentCalls:
       m_Calls: []
     m_TypeName: UnityFloatEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
@@ -929,6 +985,7 @@ GameObject:
   - component: {fileID: 3740545243478977394}
   - component: {fileID: 6017284612874405341}
   - component: {fileID: 5723298436029287750}
+  - component: {fileID: 6207191441750202686}
   - component: {fileID: 7005315866789324636}
   m_Layer: 8
   m_Name: Base Lateral Attack Collider
@@ -967,7 +1024,7 @@ MonoBehaviour:
   timerPrefab: {fileID: 8633921778407538006, guid: 24b2f40b82b546b42a156c95c4933334,
     type: 3}
   damage: 1
-  knockbackPower: 1
+  knockbackPower: 10
   duration: 0.2
   repeatTime: 0.1
   otherAttacksTime: 0.1
@@ -1022,6 +1079,27 @@ MonoBehaviour:
   depleatesHealth: 0
   damage: 1
   OnDamageDealt:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityFloatEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+--- !u!114 &6207191441750202686
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4542420392266209883}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c461cb2821ca5f47b6a57c2f8541dd3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  disableOnStart: 0
+  dealsOnCollision: 0
+  dealsOnTrigger: 1
+  knockbackPower: 0
+  OnKnockbackDealt:
     m_PersistentCalls:
       m_Calls: []
     m_TypeName: UnityFloatEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,

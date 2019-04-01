@@ -78,7 +78,7 @@ public class PlayerGameplayBehaviour : BaseBehaviour
     #region Velocity
 
     float currentMoveSpeed;
-    float normalGravity;
+    public static float normalGravity;
     float fallingGravity;
     float currentGravity;
     float maxJumpVelocity;
