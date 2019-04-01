@@ -49,6 +49,14 @@ public class PlayerGameplayBehaviour : BaseBehaviour
 
     #region Vars
 
+    #region Jumping
+
+    [HideInInspector]
+    public bool hasDoubleJumped = false;
+    int jumpsCount;
+
+    #endregion
+
     #region Wall Jumping
 
     [HideInInspector]
@@ -76,7 +84,6 @@ public class PlayerGameplayBehaviour : BaseBehaviour
     float maxJumpVelocity;
     float minJumpVelocity;
     float doubleJumpVelocity;
-    int jumpsCount;
     Vector3 velocity;
     float velocityXSmoothing;
 
@@ -244,11 +251,12 @@ public class PlayerGameplayBehaviour : BaseBehaviour
             velocity.y = maxJumpVelocity;
             jumpsCount++;
         }
-        else if (jumpsCount < 2)
+        else if (jumpsCount < 2 && !hasDoubleJumped)
         {
             velocity.y = doubleJumpVelocity;
             jumpsCount++;
             OnDoubleJump.Invoke();
+            hasDoubleJumped = true;
         }
     }
 
@@ -316,6 +324,7 @@ public class PlayerGameplayBehaviour : BaseBehaviour
 
         airDashesCount = 0;
         jumpsCount = 0;
+        hasDoubleJumped = false;
     }
 
     #endregion
