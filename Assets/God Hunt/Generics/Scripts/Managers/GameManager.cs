@@ -4,13 +4,6 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    string _currentInputDevice;
-    public string CurrentInputDevice
-    {
-        get { return _currentInputDevice; }
-        private set { _currentInputDevice = value; }
-    }
-
     public static GameManager Instance;
 
     #region References
@@ -18,6 +11,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] UIManager uiManager;
     [SerializeField] PlayerEntity player;
     public RoomSystem roomSystem;
+    [SerializeField] InputManager inputManager;
 
 
     #endregion
@@ -128,6 +122,9 @@ public class GameManager : MonoBehaviour
 
         if (roomSystem)
             roomSystem.Setup();
+
+        if (inputManager)
+            inputManager.Setup();
     }
 
     #endregion

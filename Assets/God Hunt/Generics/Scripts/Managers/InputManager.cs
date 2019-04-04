@@ -58,23 +58,6 @@ public class InputManager : MonoBehaviour
             Instance = this;
     }
 
-    void Setup()
-    {
-        Singleton();
-
-        eventSystem = FindObjectOfType<EventSystem>();
-        inputModule = FindObjectOfType<StandaloneInputModule>();
-
-        ChangeCurrentInputDevice(keyboard);
-        string[] joyNames = Input.GetJoystickNames();
-        if (joyNames.Length > 0)
-            for (int i = 0; i < joyNames.Length; i++)
-            {
-                if (joyNames[i].Length == 33)
-                    ChangeCurrentInputDevice(xboxController);
-            }
-    }
-
     void CheckInputDevices()
     {
         joyNames = Input.GetJoystickNames();
@@ -120,6 +103,23 @@ public class InputManager : MonoBehaviour
     #endregion
 
     #region API
+
+    public void Setup()
+    {
+        Singleton();
+
+        eventSystem = FindObjectOfType<EventSystem>();
+        inputModule = FindObjectOfType<StandaloneInputModule>();
+
+        ChangeCurrentInputDevice(keyboard);
+        string[] joyNames = Input.GetJoystickNames();
+        if (joyNames.Length > 0)
+            for (int i = 0; i < joyNames.Length; i++)
+            {
+                if (joyNames[i].Length == 33)
+                    ChangeCurrentInputDevice(xboxController);
+            }
+    }
 
     public void ReadInput(InputKey _key)
     {

@@ -36,11 +36,11 @@ public class PlayerInputBehaviour : BaseBehaviour
 
     void ReadInputs()
     {
-        Vector2 directionalInput = new Vector2(Input.GetAxisRaw(GameManager.Instance.CurrentInputDevice + "Horizontal"), Input.GetAxisRaw(GameManager.Instance.CurrentInputDevice + "Vertical"));
+        Vector2 directionalInput = new Vector2(Input.GetAxisRaw(InputManager.CurrentInputDevice + "Horizontal"), Input.GetAxisRaw(InputManager.CurrentInputDevice + "Vertical"));
         data.playerGameplayBehaviour.SetDirectionalInput(directionalInput);
         data.playerAttacksBehaviour.SetDirection(directionalInput);
 
-        if (Input.GetButtonDown(GameManager.Instance.CurrentInputDevice + "Jump"))
+        if (Input.GetButtonDown(InputManager.CurrentInputDevice + "Jump"))
         {
             if (directionalInput.y == -1 && data.playerCollisionsBehaviour.CollidingWithTraversable)
             {
@@ -52,32 +52,32 @@ public class PlayerInputBehaviour : BaseBehaviour
                 IsPressingJump = true;
             }
         }
-        if (Input.GetButtonUp(GameManager.Instance.CurrentInputDevice + "Jump"))
+        if (Input.GetButtonUp(InputManager.CurrentInputDevice + "Jump"))
         {
             data.playerGameplayBehaviour.OnJumpInputUp();
             IsPressingJump = false;
         }
 
-        if (Input.GetButtonDown(GameManager.Instance.CurrentInputDevice + "Run"))
+        if (Input.GetButtonDown(InputManager.CurrentInputDevice + "Run"))
         {
             data.playerGameplayBehaviour.HandleSprintPress();
         }
-        if (Input.GetButtonUp(GameManager.Instance.CurrentInputDevice + "Run"))
+        if (Input.GetButtonUp(InputManager.CurrentInputDevice + "Run"))
         {
             data.playerGameplayBehaviour.HandleSprintRelease();
         }
 
-        if (canDash && Input.GetButtonDown(GameManager.Instance.CurrentInputDevice + "Dash"))
+        if (canDash && Input.GetButtonDown(InputManager.CurrentInputDevice + "Dash"))
         {
             data.playerGameplayBehaviour.HandleDashPress();
         }
 
-        if (canAttack && Input.GetButtonDown(GameManager.Instance.CurrentInputDevice + "Attack"))
+        if (canAttack && Input.GetButtonDown(InputManager.CurrentInputDevice + "Attack"))
         {
             hasChargeAttacked = false;
             countTime = true;
         }
-        if (!hasChargeAttacked && canAttack && Input.GetButtonUp(GameManager.Instance.CurrentInputDevice + "Attack"))
+        if (!hasChargeAttacked && canAttack && Input.GetButtonUp(InputManager.CurrentInputDevice + "Attack"))
         {
             EvaluateAttackTime(directionalInput);
         }
