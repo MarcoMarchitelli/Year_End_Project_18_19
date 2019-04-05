@@ -17,7 +17,12 @@ public class Room : MonoBehaviour
     public void Setup()
     {
         vCam = GetComponentInChildren<CinemachineVirtualCamera>();
-        vCam.enabled = false;
+        if(vCam)
+            vCam.enabled = false;
+        else
+        {
+            Debug.LogWarning(name + " cannot find a virtual camera!");
+        }
     }
 
     public void Discover()
