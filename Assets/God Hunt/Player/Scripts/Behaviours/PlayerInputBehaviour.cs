@@ -36,13 +36,17 @@ public class PlayerInputBehaviour : BaseBehaviour
 
     void ReadInputs()
     {
+        if (!IsSetupped)
+            return;
+
         Vector2 directionalInput = new Vector2(Input.GetAxisRaw(InputManager.CurrentInputDevice + "Horizontal"), Input.GetAxisRaw(InputManager.CurrentInputDevice + "Vertical"));
         data.playerGameplayBehaviour.SetDirectionalInput(directionalInput);
         data.playerAttacksBehaviour.SetDirection(directionalInput);
 
         if (Input.GetButtonDown(InputManager.CurrentInputDevice + "Jump"))
         {
-            if (directionalInput.y == -1 && data.playerCollisionsBehaviour.CollidingWithTraversable)
+            print(directionalInput.y);
+            if (directionalInput.y <= -.8f && data.playerCollisionsBehaviour.CollidingWithTraversable)
             {
                 data.playerCollisionsBehaviour.SetFallingThrowPlatform();
             }
@@ -139,4 +143,5 @@ public class PlayerInputBehaviour : BaseBehaviour
     }
 
     #endregion
+
 }
