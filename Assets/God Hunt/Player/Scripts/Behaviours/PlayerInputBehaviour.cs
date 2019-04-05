@@ -42,7 +42,8 @@ public class PlayerInputBehaviour : BaseBehaviour
 
         if (Input.GetButtonDown(InputManager.CurrentInputDevice + "Jump"))
         {
-            if (directionalInput.y == -1 && data.playerCollisionsBehaviour.CollidingWithTraversable)
+            print(directionalInput.y);
+            if (directionalInput.y <= -.8f && data.playerCollisionsBehaviour.CollidingWithTraversable)
             {
                 data.playerCollisionsBehaviour.SetFallingThrowPlatform();
             }
