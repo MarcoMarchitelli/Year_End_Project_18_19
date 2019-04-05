@@ -36,6 +36,9 @@ public class PlayerInputBehaviour : BaseBehaviour
 
     void ReadInputs()
     {
+        if (!IsSetupped)
+            return;
+
         Vector2 directionalInput = new Vector2(Input.GetAxisRaw(InputManager.CurrentInputDevice + "Horizontal"), Input.GetAxisRaw(InputManager.CurrentInputDevice + "Vertical"));
         data.playerGameplayBehaviour.SetDirectionalInput(directionalInput);
         data.playerAttacksBehaviour.SetDirection(directionalInput);
@@ -140,4 +143,5 @@ public class PlayerInputBehaviour : BaseBehaviour
     }
 
     #endregion
+
 }
