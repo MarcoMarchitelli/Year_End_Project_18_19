@@ -52,14 +52,14 @@ public class PlayerCollisionsBehaviour : RaycastController
         collisions.moveAmountOld = moveAmount;
         playerInput = input;
 
-        if (moveAmount.x != 0)
-        {
-            collisions.faceDir = (int)Mathf.Sign(moveAmount.x);
-        }
-
         if (moveAmount.y < 0)
         {
             DescendSlope(ref moveAmount);
+        }
+
+        if (moveAmount.x != 0)
+        {
+            collisions.faceDir = (int)Mathf.Sign(moveAmount.x);
         }
 
         HorizontalCollisions(ref moveAmount);

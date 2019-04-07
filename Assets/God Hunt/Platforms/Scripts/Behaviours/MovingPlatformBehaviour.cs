@@ -127,15 +127,18 @@ namespace Refactoring
                     rayOrigin += Vector2.right * (verticalRaySpacing * i);
                     RaycastHit hit;
 
-                    if (Physics.Raycast(rayOrigin, Vector2.up * directionY, out hit, rayLength, passengerMask) && hit.distance != 0)
+                    if (Physics.Raycast(rayOrigin, Vector2.up * directionY, out hit, rayLength, passengerMask))
                     {
-                        if (!movedPassengers.Contains(hit.transform))
+                        if (hit.distance != 0)
                         {
-                            movedPassengers.Add(hit.transform);
-                            float pushX = (directionY == 1) ? velocity.x : 0;
-                            float pushY = velocity.y - (hit.distance - skinWidth) * directionY;
+                            if (!movedPassengers.Contains(hit.transform))
+                            {
+                                movedPassengers.Add(hit.transform);
+                                float pushX = (directionY == 1) ? velocity.x : 0;
+                                float pushY = velocity.y - (hit.distance - skinWidth) * directionY;
 
-                            passengerMovement.Add(new PassengerMovement(hit.transform, new Vector3(pushX, pushY), directionY == 1, true));
+                                passengerMovement.Add(new PassengerMovement(hit.transform, new Vector3(pushX, pushY), directionY == 1, true));
+                            }
                         }
                     }
                 }
@@ -152,15 +155,18 @@ namespace Refactoring
                     rayOrigin += Vector2.up * (horizontalRaySpacing * i);
                     RaycastHit hit;
 
-                    if (Physics.Raycast(rayOrigin, Vector2.up * directionY, out hit, rayLength, passengerMask) && hit.distance != 0)
+                    if (Physics.Raycast(rayOrigin, Vector2.right * directionX, out hit, rayLength, passengerMask))
                     {
-                        if (!movedPassengers.Contains(hit.transform))
+                        if (hit.distance != 0)
                         {
-                            movedPassengers.Add(hit.transform);
-                            float pushX = velocity.x - (hit.distance - skinWidth) * directionX;
-                            float pushY = -skinWidth;
+                            if (!movedPassengers.Contains(hit.transform))
+                            {
+                                movedPassengers.Add(hit.transform);
+                                float pushX = velocity.x - (hit.distance - skinWidth) * directionX;
+                                float pushY = -skinWidth;
 
-                            passengerMovement.Add(new PassengerMovement(hit.transform, new Vector3(pushX, pushY), false, true));
+                                passengerMovement.Add(new PassengerMovement(hit.transform, new Vector3(pushX, pushY), false, true));
+                            }
                         }
                     }
                 }
@@ -176,15 +182,18 @@ namespace Refactoring
                     Vector2 rayOrigin = raycastOrigins.topLeft + Vector2.right * (verticalRaySpacing * i);
                     RaycastHit hit;
 
-                    if (Physics.Raycast(rayOrigin, Vector2.up, out hit, rayLength, passengerMask) && hit.distance != 0)
+                    if (Physics.Raycast(rayOrigin, Vector2.up, out hit, rayLength, passengerMask))
                     {
-                        if (!movedPassengers.Contains(hit.transform))
+                        if (hit.distance != 0)
                         {
-                            movedPassengers.Add(hit.transform);
-                            float pushX = velocity.x;
-                            float pushY = velocity.y;
+                            if (!movedPassengers.Contains(hit.transform))
+                            {
+                                movedPassengers.Add(hit.transform);
+                                float pushX = velocity.x;
+                                float pushY = velocity.y;
 
-                            passengerMovement.Add(new PassengerMovement(hit.transform, new Vector3(pushX, pushY), true, false));
+                                passengerMovement.Add(new PassengerMovement(hit.transform, new Vector3(pushX, pushY), true, false));
+                            }
                         }
                     }
                 }
