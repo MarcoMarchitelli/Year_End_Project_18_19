@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 [RequireComponent(typeof(EnemyCollisionBehaviour))]
 public class EnemyMovementBehaviour : BaseBehaviour
@@ -8,8 +6,24 @@ public class EnemyMovementBehaviour : BaseBehaviour
 
     EnemyEntityData data;
 
+    public float moveSpeed;
+    [SerializeField] UnityVoidEvent OnMovementStart, OnMovementEnd;
+
+    bool isMoving;
+    public bool IsMoving
+    {
+        get { return isMoving; }
+        set
+        {
+            if (value != isMoving && value)
+                OnMovementStart.Invoke();
+            else if (value != isMoving)
+                OnMovementEnd.Invoke();
+            isMoving = value;
+        }
+    }
+
     Vector2 moveDirection;
-    float moveSpeed;
     Vector2 velocity;
 
     protected override void CustomSetup()
@@ -27,6 +41,11 @@ public class EnemyMovementBehaviour : BaseBehaviour
         {
             velocity.y = 0;
         }
+    }
+
+    public void SetMoveDirection(Vector2 _moveDirection)
+    {
+        moveDirection = _moveDirection;
     }
 
     void CalculateVelocity()

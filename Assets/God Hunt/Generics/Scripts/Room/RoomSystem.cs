@@ -14,7 +14,6 @@ public class RoomSystem : MonoBehaviour
         }
         firstRoom = startingRoom;
         firstRoom.Discover();
-        print(name + " setup!");
     }
 
     public void OnRoomEnter(Room _room)

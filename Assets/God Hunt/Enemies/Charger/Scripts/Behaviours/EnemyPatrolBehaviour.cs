@@ -1,8 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PatrolBehaviour : BaseBehaviour
+[RequireComponent(typeof(EnemyMovementBehaviour))]
+public class EnemyPatrolBehaviour : BaseBehaviour
 {
+    EnemyEntityData data;
+
     #region References
     [SerializeField] Transform path;
     #endregion
@@ -13,38 +16,21 @@ public class PatrolBehaviour : BaseBehaviour
     #endregion
 
     #region Parameters
-    [SerializeField] float speed = 5f;
+    [SerializeField] float waypointDistanceThreshold = .2f;
     [SerializeField] float waitTime = 1f;
     [SerializeField] float rotationAnglePerSecond = 90f;
     #endregion
 
     #region Events
-    [SerializeField] UnityVoidEvent OnMovementStart, OnMovementEnd, OnWaypointReached, OnPathFinished;
-    #endregion
-
-    #region Properties
-
-    bool isMoving;
-
-    public bool IsMoving
-    {
-        get { return isMoving; }
-        private set
-        {
-            if (value != isMoving && value)
-                OnMovementStart.Invoke();
-            else if (value != isMoving)
-                OnMovementEnd.Invoke();
-            isMoving = value;
-        }
-    }
-
+    [SerializeField] UnityVoidEvent OnWaypointReached, OnPathFinished;
     #endregion
 
     Coroutine pathRoutine;
 
     protected override void CustomSetup()
     {
+        data = Entity.Data as EnemyEntityData;
+
         if (!path)
         {
             Debug.LogWarning(name + " has no path referenced!");
@@ -56,7 +42,7 @@ public class PatrolBehaviour : BaseBehaviour
 
     public override void Enable(bool _value)
     {
-        if(!_value)
+        if (!_value)
             StopPatrol();
         base.Enable(_value);
     }
@@ -70,7 +56,7 @@ public class PatrolBehaviour : BaseBehaviour
             Debug.LogWarning(name + "'s patrol behaviour is not setupped!");
             return;
         }
-        if(path)
+        if (path)
             pathRoutine = StartCoroutine(FollowPath());
     }
 
@@ -81,7 +67,7 @@ public class PatrolBehaviour : BaseBehaviour
             Debug.LogWarning(name + "'s patrol behaviour is not setupped!");
             return;
         }
-        if(pathRoutine != null)
+        if (pathRoutine != null)
             StopCoroutine(pathRoutine);
     }
 
@@ -122,13 +108,14 @@ public class PatrolBehaviour : BaseBehaviour
 
         while (true)
         {
-            transform.position = Vector3.MoveTowards(transform.position, nextPoint, speed * Time.deltaTime);
-            IsMoving = true;
-            if (transform.position == nextPoint)
+            data.enemyMovementBehaviour.SetMoveDirection(((Vector2)nextPoint - (Vector2)transform.position).normalized);
+            data.enemyMovementBehaviour.IsMoving = true;
+            if (Vector2.Distance(transform.position,nextPoint) <= waypointDistanceThreshold)
             {
+                data.enemyMovementBehaviour.SetMoveDirection(Vector2.zero);
                 nextPointIndex = (nextPointIndex + 1) % wayPoints.Length;
                 nextPoint = wayPoints[nextPointIndex];
-                IsMoving = false;
+                data.enemyMovementBehaviour.IsMoving = false;
 
                 //events
                 if (nextPointIndex == wayPoints.Length - 1)
@@ -147,13 +134,13 @@ public class PatrolBehaviour : BaseBehaviour
 
     IEnumerator RotateTo(Vector3 _rotationTarget)
     {
-        Vector3 directionToTarget = (_rotationTarget - transform.position).normalized;
+        Vector3 directionToTarget = (_rotationTarget - data.graphics.position).normalized;
         float targetAngle = Mathf.Atan2(directionToTarget.z, directionToTarget.x) * Mathf.Rad2Deg;
 
-        while (Mathf.DeltaAngle(transform.eulerAngles.y, targetAngle) > 0.05f || Mathf.DeltaAngle(transform.eulerAngles.y, targetAngle) < -0.05f)
+        while (Mathf.DeltaAngle(data.graphics.eulerAngles.y, targetAngle) > 0.05f || Mathf.DeltaAngle(data.graphics.eulerAngles.y, targetAngle) < -0.05f)
         {
-            float angle = Mathf.MoveTowardsAngle(transform.eulerAngles.y, targetAngle, Time.deltaTime * rotationAnglePerSecond);
-            transform.eulerAngles = Vector3.up * angle;
+            float angle = Mathf.MoveTowardsAngle(data.graphics.eulerAngles.y, targetAngle, Time.deltaTime * rotationAnglePerSecond);
+            data.graphics.eulerAngles = Vector3.up * angle;
             yield return null;
         }
     }
