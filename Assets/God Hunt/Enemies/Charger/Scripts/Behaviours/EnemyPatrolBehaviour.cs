@@ -25,8 +25,6 @@ public class EnemyPatrolBehaviour : BaseBehaviour
     [SerializeField] UnityVoidEvent OnWaypointReached, OnPathFinished;
     #endregion
 
-    Coroutine pathRoutine;
-
     protected override void CustomSetup()
     {
         data = Entity.Data as EnemyEntityData;
@@ -57,7 +55,19 @@ public class EnemyPatrolBehaviour : BaseBehaviour
             return;
         }
         if (path)
-            pathRoutine = StartCoroutine(FollowPath());
+        {
+            StartCoroutine(FollowPath());
+        }
+    }
+
+    public void ContinuePatrol()
+    {
+        if (!IsSetupped)
+        {
+            Debug.LogWarning(name + "'s patrol behaviour is not setupped!");
+            return;
+        }
+        StartCoroutine(RotateTo());
     }
 
     public void StopPatrol()
@@ -67,8 +77,10 @@ public class EnemyPatrolBehaviour : BaseBehaviour
             Debug.LogWarning(name + "'s patrol behaviour is not setupped!");
             return;
         }
-        if (pathRoutine != null)
-            StopCoroutine(pathRoutine);
+
+        StopAllCoroutines();
+        data.enemyMovementBehaviour.SetMoveDirection(Vector2.zero);
+        wasInterrupted = true;
     }
 
     public void ToggleRotationToWaypoint(bool _value)
@@ -110,7 +122,8 @@ public class EnemyPatrolBehaviour : BaseBehaviour
         {
             data.enemyMovementBehaviour.SetMoveDirection(((Vector2)nextPoint - (Vector2)transform.position).normalized);
             data.enemyMovementBehaviour.IsMoving = true;
-            if (Vector2.Distance(transform.position,nextPoint) <= waypointDistanceThreshold)
+
+            if (Vector2.Distance(transform.position, nextPoint) <= waypointDistanceThreshold)
             {
                 data.enemyMovementBehaviour.SetMoveDirection(Vector2.zero);
                 nextPointIndex = (nextPointIndex + 1) % wayPoints.Length;
@@ -124,7 +137,9 @@ public class EnemyPatrolBehaviour : BaseBehaviour
                     OnWaypointReached.Invoke();
 
                 if (rotatesToWaypoint)
-                    yield return StartCoroutine(RotateTo(nextPoint));
+                {
+                    yield return StartCoroutine(RotateTo());
+                }
                 else
                     yield return new WaitForSeconds(waitTime);
             }
@@ -132,9 +147,9 @@ public class EnemyPatrolBehaviour : BaseBehaviour
         }
     }
 
-    IEnumerator RotateTo(Vector3 _rotationTarget)
+    IEnumerator RotateTo()
     {
-        Vector3 directionToTarget = (_rotationTarget - data.graphics.position).normalized;
+        Vector3 directionToTarget = (nextPoint - data.graphics.position).normalized;
         float targetAngle = Mathf.Atan2(directionToTarget.z, directionToTarget.x) * Mathf.Rad2Deg;
 
         while (Mathf.DeltaAngle(data.graphics.eulerAngles.y, targetAngle) > 0.05f || Mathf.DeltaAngle(data.graphics.eulerAngles.y, targetAngle) < -0.05f)
@@ -143,6 +158,9 @@ public class EnemyPatrolBehaviour : BaseBehaviour
             data.graphics.eulerAngles = Vector3.up * angle;
             yield return null;
         }
+
+        if (wasInterrupted)
+            StartCoroutine(FollowPath());
     }
 
     #endregion

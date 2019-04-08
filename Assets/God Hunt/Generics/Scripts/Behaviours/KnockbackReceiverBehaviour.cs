@@ -4,7 +4,7 @@ using System.Collections;
 public class KnockbackReceiverBehaviour : BaseBehaviour
 {
     #region Events
-    public UnityIntEvent OnKnockbackReceived;
+    public UnityVoidEvent OnKnockbackReceived;
     public UnityVoidEvent OnKnockbackEnd;
     #endregion
 
@@ -26,6 +26,8 @@ public class KnockbackReceiverBehaviour : BaseBehaviour
 
     IEnumerator KnockbackDisplacement(Vector2 _knockbackDirection, float _knockbackForce) // i treat force as a speed
     {
+        OnKnockbackReceived.Invoke();
+
         float spaceTraveled = ((Vector2)transform.position + _knockbackDirection * _knockbackForce).magnitude;
         float travelTime = spaceTraveled / _knockbackForce;
         float timer = 0;

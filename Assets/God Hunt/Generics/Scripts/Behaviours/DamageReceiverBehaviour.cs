@@ -25,7 +25,6 @@ public class DamageReceiverBehaviour : BaseBehaviour
         {
             if (_currentHealth != value)
             {
-                print(name + " health has changed from " + _currentHealth + " to " + value);
                 _currentHealth = value;
                 if (_currentHealth == 0)
                 {

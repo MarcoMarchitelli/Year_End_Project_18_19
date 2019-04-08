@@ -80,13 +80,11 @@ public class AttackBehaviour : BaseBehaviour
     public void Play()
     {
         OnAttackStart.Invoke();
-        print(name + " started");
     }
 
     public void Stop()
     {
         OnAttackEnd.Invoke();
-        print(name + " ended");
     }
 
     public void ActivateDamageCollider()
