@@ -4,17 +4,16 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager Instance;
 
-    #region References
+    [SerializeField] bool initPlayer;
+    [SerializeField] bool initUIManager;
+    [SerializeField] bool initRoomSystem;
+    [SerializeField] bool initInputManager;
 
-    [SerializeField] UIManager uiManager;
-    [SerializeField] PlayerEntity player;
-    public RoomSystem roomSystem;
-    [SerializeField] InputManager inputManager;
-
-
-    #endregion
+    private UIManager uiManager;
+    [HideInInspector] public PlayerEntity player;
+    [HideInInspector] public RoomSystem roomSystem;
+    private InputManager inputManager;
 
     bool isPaused = false;
     bool isMapOpen = false;
@@ -117,14 +116,37 @@ public class GameManager : MonoBehaviour
 
     void Setup()
     {
+        Singleton();
+
+        if (initInputManager)
+        {
+            inputManager = FindObjectOfType<InputManager>();
+            inputManager.Setup();
+        }
+
+        if (initUIManager)
+        {
+            uiManager = FindObjectOfType<UIManager>();
+        }
+
+        if (initPlayer)
+        {
+            player = FindObjectOfType<PlayerEntity>();
+            player.SetUpEntity();
+        }
+
+        if (initRoomSystem)
+        {
+            roomSystem = FindObjectOfType<RoomSystem>();
+            roomSystem.Setup();
+        }
+    }
+
+    public static GameManager Instance;
+    void Singleton()
+    {
         if (!Instance)
             Instance = this;
-
-        if (roomSystem)
-            roomSystem.Setup();
-
-        if (inputManager)
-            inputManager.Setup();
     }
 
     #endregion
