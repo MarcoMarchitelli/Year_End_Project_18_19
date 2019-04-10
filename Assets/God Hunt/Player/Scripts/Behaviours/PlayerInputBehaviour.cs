@@ -41,7 +41,10 @@ public class PlayerInputBehaviour : BaseBehaviour
     void ReadInputs()
     {
         if (!IsSetupped)
+        {
+            Debug.Log(name + " input not setupped!");
             return;
+        }
 
         Vector2 directionalInput = new Vector2(Input.GetAxisRaw(InputManager.CurrentInputDevice + "Horizontal"), Input.GetAxisRaw(InputManager.CurrentInputDevice + "Vertical"));
         if (Mathf.Abs(directionalInput.x) >= horizontalInputDeadzone)

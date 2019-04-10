@@ -121,11 +121,6 @@ public class InputManager : MonoBehaviour
             }
     }
 
-    public void ReadInput(InputKey _key)
-    {
-
-    }
-
     public void RemoveInputKey(int _index)
     {
         InputKeys.RemoveAt(_index);
