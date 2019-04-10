@@ -4110,6 +4110,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6361020903582265855, guid: b44c7349678676347bc1e673cd602c2f,
+        type: 3}
+      propertyPath: maxHealth
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b44c7349678676347bc1e673cd602c2f, type: 3}
 --- !u!114 &189355464304696261 stripped
@@ -5358,12 +5363,12 @@ PrefabInstance:
     - target: {fileID: 6355674919080962671, guid: fcb1d587faf80d6459ef94c25fab82b2,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 77.47396
+      value: 38.326126
       objectReference: {fileID: 0}
     - target: {fileID: 6355674919080962671, guid: fcb1d587faf80d6459ef94c25fab82b2,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 7.1521406
+      value: 4.998345
       objectReference: {fileID: 0}
     - target: {fileID: 6355674919080962671, guid: fcb1d587faf80d6459ef94c25fab82b2,
         type: 3}
@@ -5388,7 +5393,7 @@ PrefabInstance:
     - target: {fileID: 6355674919080962671, guid: fcb1d587faf80d6459ef94c25fab82b2,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 6355674919080962671, guid: fcb1d587faf80d6459ef94c25fab82b2,
         type: 3}
@@ -5584,6 +5589,51 @@ PrefabInstance:
       propertyPath: m_FirstSelected
       value: 
       objectReference: {fileID: 7447240452885859731}
+    - target: {fileID: 5724405159494476917, guid: f73f2b18627a0a8478ef2578dbc5eb44,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5132182853716846649, guid: f73f2b18627a0a8478ef2578dbc5eb44,
+        type: 3}
+      propertyPath: HPChunkPrefab
+      value: 
+      objectReference: {fileID: 486857882409138031, guid: 127f8de233b4d3c4ba56b0702defba8d,
+        type: 3}
+    - target: {fileID: 5132182853716846649, guid: f73f2b18627a0a8478ef2578dbc5eb44,
+        type: 3}
+      propertyPath: PlayerIcon
+      value: 
+      objectReference: {fileID: 7447240452885859732}
+    - target: {fileID: 5132182853716846649, guid: f73f2b18627a0a8478ef2578dbc5eb44,
+        type: 3}
+      propertyPath: damageReceiver
+      value: 
+      objectReference: {fileID: 189355464304696261}
+    - target: {fileID: 5132182853716846649, guid: f73f2b18627a0a8478ef2578dbc5eb44,
+        type: 3}
+      propertyPath: HPChunkFull
+      value: 
+      objectReference: {fileID: 21300000, guid: 6381f96902d88114b9b39b62027dd509,
+        type: 3}
+    - target: {fileID: 5132182853716846649, guid: f73f2b18627a0a8478ef2578dbc5eb44,
+        type: 3}
+      propertyPath: HPChunkEmpty
+      value: 
+      objectReference: {fileID: 21300000, guid: 7099d97459ae9e641b17ca2fbbec4923,
+        type: 3}
+    - target: {fileID: 5132182853716846649, guid: f73f2b18627a0a8478ef2578dbc5eb44,
+        type: 3}
+      propertyPath: PlayerIconFull
+      value: 
+      objectReference: {fileID: 21300000, guid: 834989884fa5dac44b3ffd7a88823a94,
+        type: 3}
+    - target: {fileID: 5132182853716846649, guid: f73f2b18627a0a8478ef2578dbc5eb44,
+        type: 3}
+      propertyPath: PlayerIconDamaged
+      value: 
+      objectReference: {fileID: 21300000, guid: c1e9fae3c03c4be48a2e206e6f9aacbf,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f73f2b18627a0a8478ef2578dbc5eb44, type: 3}
 --- !u!1 &7447240452885859731 stripped
@@ -5592,6 +5642,18 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 7447240452885859730}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &7447240452885859732 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1503542892236103295, guid: f73f2b18627a0a8478ef2578dbc5eb44,
+    type: 3}
+  m_PrefabInstance: {fileID: 7447240452885859730}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &8584415706483757178
 PrefabInstance:
   m_ObjectHideFlags: 0
