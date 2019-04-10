@@ -221,6 +221,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 094fde230764f764bb9d6e43832d416b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  verticalInputDeadzone: 0.8
+  horizontalInputDeadzone: 0.2
   OnSideAttackInput:
     m_PersistentCalls:
       m_Calls:
@@ -499,6 +501,17 @@ MonoBehaviour:
       - m_Target: {fileID: 1103692139956934996}
         m_MethodName: Enable
         m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1103692139956934996}
+        m_MethodName: ResetDirectionInput
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine

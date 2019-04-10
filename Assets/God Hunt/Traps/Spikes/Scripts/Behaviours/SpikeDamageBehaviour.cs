@@ -18,10 +18,12 @@ public class SpikeDamageBehaviour : BaseBehaviour
 
         PlayerEntityData d = p.Data as PlayerEntityData;
 
-        if(d.damageReceiverBehaviour.SetHealth(-damage))
-            d.respawnBehaviour.Respawn(true);
-        else
+        //this deals damage even if player is invulnerable and respawns.
+        if (d.damageReceiverBehaviour.SetHealth(-damage, true) && d.damageReceiverBehaviour.CurrentHealth > 0)
+        {
             d.respawnBehaviour.Respawn(false);
+        }
+
     }
 
     private void OnCollisionEnter(Collision collision)
