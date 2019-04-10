@@ -12,6 +12,7 @@ public class RoomSystem : MonoBehaviour
         {
             rooms[i].Setup();
         }
+
         firstRoom = startingRoom;
         firstRoom.Discover();
         PlayerEntityData playerData = GameManager.Instance.player.Data as PlayerEntityData;
