@@ -5,6 +5,10 @@ public class PlayerInputBehaviour : BaseBehaviour
 {
     PlayerEntityData data;
 
+    [Range(0, 1)]
+    [SerializeField] float verticalInputDeadzone = .8f;
+    [Range(0, 1)]
+    [SerializeField] float horizontalInputDeadzone = .2f;
     [SerializeField] UnityVoidEvent OnSideAttackInput;
     [SerializeField] UnityVoidEvent OnUpAttackInput;
     [SerializeField] float chargeTime;
@@ -40,12 +44,20 @@ public class PlayerInputBehaviour : BaseBehaviour
             return;
 
         Vector2 directionalInput = new Vector2(Input.GetAxisRaw(InputManager.CurrentInputDevice + "Horizontal"), Input.GetAxisRaw(InputManager.CurrentInputDevice + "Vertical"));
+        if (Mathf.Abs(directionalInput.x) >= horizontalInputDeadzone)
+        {
+            directionalInput.x = Mathf.Sign(directionalInput.x);
+        }
+        else
+        {
+            directionalInput.x = 0;
+        }
         data.playerGameplayBehaviour.SetDirectionalInput(directionalInput);
         data.playerAttacksBehaviour.SetDirection(directionalInput);
 
         if (Input.GetButtonDown(InputManager.CurrentInputDevice + "Jump"))
         {
-            if (directionalInput.y <= -.8f && data.playerCollisionsBehaviour.CollidingWithTraversable)
+            if (directionalInput.y <= -verticalInputDeadzone && data.playerCollisionsBehaviour.CollidingWithTraversable)
             {
                 data.playerCollisionsBehaviour.SetFallingThrowPlatform();
             }
@@ -91,7 +103,7 @@ public class PlayerInputBehaviour : BaseBehaviour
         if (countTime)
         {
             timer += Time.deltaTime;
-            if(timer >= chargeTime)
+            if (timer >= chargeTime)
             {
                 OnChargedAttackInput.Invoke();
                 hasChargeAttacked = true;
