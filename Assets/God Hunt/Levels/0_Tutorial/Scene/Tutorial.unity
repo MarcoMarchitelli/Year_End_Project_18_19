@@ -15623,6 +15623,26 @@ PrefabInstance:
       propertyPath: inputManager
       value: 
       objectReference: {fileID: 380541598}
+    - target: {fileID: 827980336920325095, guid: 4604fdf9a6d83b749858b405cbe6a6c6,
+        type: 3}
+      propertyPath: initPlayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 827980336920325095, guid: 4604fdf9a6d83b749858b405cbe6a6c6,
+        type: 3}
+      propertyPath: initUIManager
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 827980336920325095, guid: 4604fdf9a6d83b749858b405cbe6a6c6,
+        type: 3}
+      propertyPath: initRoomSystem
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 827980336920325095, guid: 4604fdf9a6d83b749858b405cbe6a6c6,
+        type: 3}
+      propertyPath: initInputManager
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4604fdf9a6d83b749858b405cbe6a6c6, type: 3}
 --- !u!4 &861501571 stripped
@@ -38257,26 +38277,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 552232638, guid: b44c7349678676347bc1e673cd602c2f, type: 3}
-      propertyPath: m_Name
-      value: Double Jump
-      objectReference: {fileID: 0}
-    - target: {fileID: 552232641, guid: b44c7349678676347bc1e673cd602c2f, type: 3}
-      propertyPath: EmissionModule.rateOverTime.scalar
-      value: 200
-      objectReference: {fileID: 0}
-    - target: {fileID: 552232641, guid: b44c7349678676347bc1e673cd602c2f, type: 3}
-      propertyPath: InitialModule.startLifetime.scalar
-      value: 0.3
-      objectReference: {fileID: 0}
-    - target: {fileID: 552232641, guid: b44c7349678676347bc1e673cd602c2f, type: 3}
-      propertyPath: lengthInSec
-      value: 0.3
-      objectReference: {fileID: 0}
-    - target: {fileID: 552232641, guid: b44c7349678676347bc1e673cd602c2f, type: 3}
-      propertyPath: ShapeModule.radius.value
-      value: 0.19608374
-      objectReference: {fileID: 0}
     - target: {fileID: 2111077760, guid: b44c7349678676347bc1e673cd602c2f, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -38304,6 +38304,36 @@ PrefabInstance:
     - target: {fileID: 2111037900, guid: b44c7349678676347bc1e673cd602c2f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: -74.241264
+      objectReference: {fileID: 0}
+    - target: {fileID: 1729457638865453558, guid: b44c7349678676347bc1e673cd602c2f,
+        type: 3}
+      propertyPath: m_AABB.m_Center.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1729457638865453558, guid: b44c7349678676347bc1e673cd602c2f,
+        type: 3}
+      propertyPath: m_AABB.m_Center.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1729457638865453558, guid: b44c7349678676347bc1e673cd602c2f,
+        type: 3}
+      propertyPath: m_AABB.m_Center.z
+      value: 0.008069992
+      objectReference: {fileID: 0}
+    - target: {fileID: 1729457638865453558, guid: b44c7349678676347bc1e673cd602c2f,
+        type: 3}
+      propertyPath: m_AABB.m_Extent.x
+      value: 0.5015476
+      objectReference: {fileID: 0}
+    - target: {fileID: 1729457638865453558, guid: b44c7349678676347bc1e673cd602c2f,
+        type: 3}
+      propertyPath: m_AABB.m_Extent.y
+      value: 0.5289112
+      objectReference: {fileID: 0}
+    - target: {fileID: 1729457638865453558, guid: b44c7349678676347bc1e673cd602c2f,
+        type: 3}
+      propertyPath: m_AABB.m_Extent.z
+      value: 0.55468947
       objectReference: {fileID: 0}
     - target: {fileID: 2111037908, guid: b44c7349678676347bc1e673cd602c2f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
@@ -38365,36 +38395,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -1.9347266e-14
       objectReference: {fileID: 0}
-    - target: {fileID: 1729457638865453558, guid: b44c7349678676347bc1e673cd602c2f,
-        type: 3}
-      propertyPath: m_AABB.m_Center.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1729457638865453558, guid: b44c7349678676347bc1e673cd602c2f,
-        type: 3}
-      propertyPath: m_AABB.m_Center.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1729457638865453558, guid: b44c7349678676347bc1e673cd602c2f,
-        type: 3}
-      propertyPath: m_AABB.m_Center.z
-      value: 0.008069992
-      objectReference: {fileID: 0}
-    - target: {fileID: 1729457638865453558, guid: b44c7349678676347bc1e673cd602c2f,
-        type: 3}
-      propertyPath: m_AABB.m_Extent.x
-      value: 0.5015476
-      objectReference: {fileID: 0}
-    - target: {fileID: 1729457638865453558, guid: b44c7349678676347bc1e673cd602c2f,
-        type: 3}
-      propertyPath: m_AABB.m_Extent.y
-      value: 0.5289112
-      objectReference: {fileID: 0}
-    - target: {fileID: 1729457638865453558, guid: b44c7349678676347bc1e673cd602c2f,
-        type: 3}
-      propertyPath: m_AABB.m_Extent.z
-      value: 0.55468947
-      objectReference: {fileID: 0}
     - target: {fileID: 2111037894, guid: b44c7349678676347bc1e673cd602c2f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 1.9999999
@@ -38410,6 +38410,26 @@ PrefabInstance:
     - target: {fileID: 2111037916, guid: b44c7349678676347bc1e673cd602c2f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: -2.543321e-14
+      objectReference: {fileID: 0}
+    - target: {fileID: 552232638, guid: b44c7349678676347bc1e673cd602c2f, type: 3}
+      propertyPath: m_Name
+      value: Double Jump
+      objectReference: {fileID: 0}
+    - target: {fileID: 552232641, guid: b44c7349678676347bc1e673cd602c2f, type: 3}
+      propertyPath: EmissionModule.rateOverTime.scalar
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 552232641, guid: b44c7349678676347bc1e673cd602c2f, type: 3}
+      propertyPath: InitialModule.startLifetime.scalar
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 552232641, guid: b44c7349678676347bc1e673cd602c2f, type: 3}
+      propertyPath: lengthInSec
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 552232641, guid: b44c7349678676347bc1e673cd602c2f, type: 3}
+      propertyPath: ShapeModule.radius.value
+      value: 0.19608374
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b44c7349678676347bc1e673cd602c2f, type: 3}

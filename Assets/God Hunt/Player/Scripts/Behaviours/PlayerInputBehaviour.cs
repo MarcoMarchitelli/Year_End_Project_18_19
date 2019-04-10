@@ -156,6 +156,13 @@ public class PlayerInputBehaviour : BaseBehaviour
         canAttack = true;
     }
 
+    public void ResetDirectionInput()
+    {
+        Vector2 directionalInput = Vector2.zero;
+        data.playerGameplayBehaviour.SetDirectionalInput(directionalInput);
+        data.playerAttacksBehaviour.SetDirection(directionalInput);
+    }
+
     #endregion
 
 }
