@@ -92,6 +92,10 @@ public class PlayerInputBehaviour : BaseBehaviour
         {
             data.playerGameplayBehaviour.HandleDashPress();
         }
+        if (canDash && Input.GetButtonUp(InputManager.CurrentInputDevice + "Dash"))
+        {
+            data.playerGameplayBehaviour.HandleDashRelease();
+        }
 
         if (canAttack && Input.GetButtonDown(InputManager.CurrentInputDevice + "Attack"))
         {

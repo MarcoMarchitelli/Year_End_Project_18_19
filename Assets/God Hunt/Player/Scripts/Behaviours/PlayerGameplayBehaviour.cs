@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using UnityEngine.Events;
+using System.Collections;
 
 [RequireComponent(typeof(PlayerCollisionsBehaviour))]
 public class PlayerGameplayBehaviour : BaseBehaviour
@@ -31,8 +31,9 @@ public class PlayerGameplayBehaviour : BaseBehaviour
     [SerializeField] AnimationCurve runDecelerationCurve;
 
     [Header("Dashing")]
-    [SerializeField] float dashDistance = 5f;
-    [SerializeField] float dashDuration;
+    [SerializeField] float minDashDistance = 5f;
+    [SerializeField] float maxDashDistance = 7f;
+    [SerializeField] float minDashTime;
     [SerializeField] float dashCooldown;
     [SerializeField] UnityVoidEvent OnDashStart;
     [SerializeField] UnityFloatEvent OnDashEnd;
@@ -102,11 +103,12 @@ public class PlayerGameplayBehaviour : BaseBehaviour
 
     #region Dashing
 
+    bool dashPressed;
     Vector3 dashDirection;
     float dashSpeed;
+    float maxDashTime;
     const int airDashes = 1;
     int airDashesCount;
-    float dashTimer;
     bool _isDashing = false;
     bool IsDashing
     {
@@ -117,11 +119,7 @@ public class PlayerGameplayBehaviour : BaseBehaviour
             {
                 _isDashing = value;
                 data.animatorProxy.IsDashing = _isDashing;
-                if (_isDashing)
-                {
-                    dashTimer = 0;
-                }
-                else
+                if (!_isDashing)
                 {
                     OnDashEnd.Invoke(dashCooldown);
                 }
@@ -158,6 +156,8 @@ public class PlayerGameplayBehaviour : BaseBehaviour
 
     #endregion
 
+    #region Overrides
+
     protected override void CustomSetup()
     {
         data = Entity.Data as PlayerEntityData;
@@ -179,7 +179,8 @@ public class PlayerGameplayBehaviour : BaseBehaviour
 
         #region Dashing
         FaceingDirection = 1;
-        dashSpeed = dashDistance / dashDuration;
+        dashSpeed = minDashDistance / minDashTime;
+        maxDashTime = maxDashDistance / dashSpeed;
         airDashesCount = 0;
         #endregion
     }
@@ -189,7 +190,6 @@ public class PlayerGameplayBehaviour : BaseBehaviour
         #region Calculations
 
         HandleSprinting();
-        HandleDashing();
         SetGravity();
         CalculateVelocity();
         //HandleWallSliding();
@@ -218,6 +218,8 @@ public class PlayerGameplayBehaviour : BaseBehaviour
         #endregion
 
     }
+
+    #endregion
 
     #region API
 
@@ -279,6 +281,14 @@ public class PlayerGameplayBehaviour : BaseBehaviour
         }
     }
 
+    public void HandleDashRelease()
+    {
+        if (!IsDashing)
+            return;
+
+        dashPressed = false;
+    }
+
     public void HandleSprintPress()
     {
         if (data.playerCollisionsBehaviour.Below)
@@ -335,18 +345,41 @@ public class PlayerGameplayBehaviour : BaseBehaviour
     {
         if (_isAirDash)
             airDashesCount++;
-        IsDashing = true;
+
+        StopAllCoroutines();
+        StartCoroutine(DashRoutine());
+
         OnDashStart.Invoke();
     }
 
-    void HandleDashing()
+    IEnumerator DashRoutine()
     {
-        if (IsDashing)
+        dashPressed = true;
+        IsDashing = true;
+
+        float currentDashTime = minDashTime;
+        float timer = 0;
+
+        while(true)
         {
-            dashTimer += Time.deltaTime;
-            if (dashTimer >= dashDuration)
-                IsDashing = false;
+            timer += Time.deltaTime;
+
+            if (dashPressed)
+            {
+                if (timer > maxDashTime)
+                    break;
+            }
+            else
+            {
+                if (timer > minDashTime)
+                    break;
+            }
+
+            yield return null;
         }
+
+        IsDashing = false;
+
     }
 
     void HandleWallSliding()
