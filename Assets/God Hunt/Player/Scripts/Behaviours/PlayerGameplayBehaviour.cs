@@ -11,12 +11,12 @@ public class PlayerGameplayBehaviour : BaseBehaviour
     [Header("Movement")]
     [SerializeField] float moveSpeed = 6;
 
-    //TODO: for now we hide this and have it at 0 cuz of air dash momentum issue.
-    [Tooltip("Time it takes to the player to linearly interpolate from no speed to move speed, while grounded")]
-    float accelerationTimeGrounded = 0f;
-    //TODO: for now we hide this and have it at 0 cuz of air dash momentum issue.
-    [Tooltip("Time it takes to the player to linearly interpolate from no speed to move speed, while in air")]
-    float accelerationTimeAirborne = 0;
+    ////TODO: for now we hide this and have it at 0 cuz of air dash momentum issue.
+    //[Tooltip("Time it takes to the player to linearly interpolate from no speed to move speed, while grounded")]
+    //float accelerationTimeGrounded = 0f;
+    ////TODO: for now we hide this and have it at 0 cuz of air dash momentum issue.
+    //[Tooltip("Time it takes to the player to linearly interpolate from no speed to move speed, while in air")]
+    //float accelerationTimeAirborne = 0;
 
     [Header("Sprinting")]
     [Tooltip("Behaviour's running speed.")]
@@ -192,6 +192,7 @@ public class PlayerGameplayBehaviour : BaseBehaviour
         HandleSprinting();
         SetGravity();
         CalculateVelocity();
+        CalculateCameraTargetStuff();
         //HandleWallSliding();
 
         #endregion
@@ -482,8 +483,9 @@ public class PlayerGameplayBehaviour : BaseBehaviour
     {
         if (!IsDashing)
         {
-            float targetVelocityX = directionalInput.x * currentMoveSpeed;
-            velocity.x = Mathf.SmoothDamp(velocity.x, targetVelocityX, ref velocityXSmoothing, (data.playerCollisionsBehaviour.Below) ? accelerationTimeGrounded : accelerationTimeAirborne);
+            //float targetVelocityX = directionalInput.x * currentMoveSpeed;
+            //velocity.x = Mathf.SmoothDamp(velocity.x, targetVelocityX, ref velocityXSmoothing, (data.playerCollisionsBehaviour.Below) ? accelerationTimeGrounded : accelerationTimeAirborne);
+            velocity.x = directionalInput.x * currentMoveSpeed;
             velocity.y += currentGravity * Time.deltaTime;
         }
         else
@@ -523,6 +525,11 @@ public class PlayerGameplayBehaviour : BaseBehaviour
             data.animatorProxy.IsRising = true;
         else if (velocity.y < 0)
             data.animatorProxy.IsRising = false;
+    }
+
+    void CalculateCameraTargetStuff()
+    {
+        data.cameraTarget.SetVelocity(velocity);
     }
 
     #endregion

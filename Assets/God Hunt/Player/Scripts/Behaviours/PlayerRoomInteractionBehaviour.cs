@@ -18,10 +18,8 @@ public class PlayerRoomInteractionBehaviour : BaseBehaviour
 
         if (r && r!= currentRoom)
         {
-            if(currentRoom)
-                currentRoom.ToggleVCam(false);
             currentRoom = r;
-            currentRoom.ToggleVCam(true);
+            CameraManager.Instance.SetActiveCamera(currentRoom.vCam);
             data.respawnBehaviour.SetCheckPoint(currentRoom.SpawnPoint.position);
             roomSystem.OnRoomEnter(r);
         }

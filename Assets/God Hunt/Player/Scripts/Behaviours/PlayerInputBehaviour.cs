@@ -49,7 +49,7 @@ public class PlayerInputBehaviour : BaseBehaviour
         }
 
         Vector2 directionalInput = new Vector2(Input.GetAxisRaw(InputManager.CurrentInputDevice + "Horizontal"), Input.GetAxisRaw(InputManager.CurrentInputDevice + "Vertical"));
-        //cameraTarget.SetMoveDirection(directionalInput);
+        data.cameraTarget.SetInputDirection(directionalInput);
         if (Mathf.Abs(directionalInput.x) >= horizontalInputDeadzone)
         {
             directionalInput.x = Mathf.Sign(directionalInput.x);

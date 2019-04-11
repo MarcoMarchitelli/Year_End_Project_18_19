@@ -12,13 +12,13 @@ public class Room : MonoBehaviour
     [HideInInspector]
     public bool Open = true;
 
-    CinemachineVirtualCamera vCam;
+    public CinemachineVirtualCamera vCam;
 
     public void Setup()
     {
         vCam = GetComponentInChildren<CinemachineVirtualCamera>();
         if (vCam)
-            ToggleVCam(false);
+            CameraManager.Instance.SetActiveCamera(vCam);
         else
         {
             Debug.LogWarning(name + " cannot find a virtual camera!");
@@ -34,11 +34,6 @@ public class Room : MonoBehaviour
     {
         Open = false;
         OnClose.Invoke();
-    }
-
-    public void ToggleVCam(bool _value)
-    {
-        vCam.enabled = _value;
     }
 
     public void Say(string _msg)

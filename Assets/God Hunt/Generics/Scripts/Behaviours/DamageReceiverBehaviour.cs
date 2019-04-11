@@ -3,8 +3,10 @@
 public class DamageReceiverBehaviour : BaseBehaviour
 {
     #region Events
+
     public UnityIntEvent OnHealthChanged;
     [SerializeField] UnityVoidEvent OnHealthDepleated;
+
     #endregion
 
     protected override void CustomSetup()
@@ -42,7 +44,7 @@ public class DamageReceiverBehaviour : BaseBehaviour
     /// Health setter. Returns true if damage was dealt succesfully.
     /// </summary>
     /// <param name="_value">Health to add (subtract if negative)/param>
-    public bool SetHealth(int _value, bool _deal_through_invulnerability = false)
+    public bool SetHealth(int _value, bool _deal_through_invulnerability = false, bool _camShake = true)
     {
         if (!IsSetupped && !_deal_through_invulnerability)
         {
@@ -59,6 +61,8 @@ public class DamageReceiverBehaviour : BaseBehaviour
             tempHealth = maxHealth;
 
         CurrentHealth = tempHealth;
+        if (_camShake)
+            CameraManager.Instance.CamShake();
         return true;
     }
 

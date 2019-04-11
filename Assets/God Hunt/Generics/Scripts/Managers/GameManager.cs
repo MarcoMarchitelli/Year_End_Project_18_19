@@ -9,10 +9,12 @@ public class GameManager : MonoBehaviour
     [SerializeField] bool initUIManager;
     [SerializeField] bool initRoomSystem;
     [SerializeField] bool initInputManager;
+    [SerializeField] bool initCameraManager;
 
     private UIManager uiManager;
     [HideInInspector] public PlayerEntity player;
     [HideInInspector] public RoomSystem roomSystem;
+    private CameraManager cameraManager;
     private InputManager inputManager;
 
     bool isPaused = false;
@@ -133,6 +135,12 @@ public class GameManager : MonoBehaviour
         {
             player = FindObjectOfType<PlayerEntity>();
             player.SetUpEntity();
+        }
+
+        if (initCameraManager)
+        {
+            cameraManager = FindObjectOfType<CameraManager>();
+            cameraManager.Setup();
         }
 
         if (initRoomSystem)

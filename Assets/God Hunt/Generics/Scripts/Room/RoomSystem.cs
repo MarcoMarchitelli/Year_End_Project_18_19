@@ -15,6 +15,7 @@ public class RoomSystem : MonoBehaviour
 
         firstRoom = startingRoom;
         firstRoom.Discover();
+        CameraManager.Instance.SetActiveCamera(firstRoom.vCam);
         PlayerEntityData playerData = GameManager.Instance.player.Data as PlayerEntityData;
         playerData.respawnBehaviour.SetRespawnPoint(firstRoom.SpawnPoint.position);
     }

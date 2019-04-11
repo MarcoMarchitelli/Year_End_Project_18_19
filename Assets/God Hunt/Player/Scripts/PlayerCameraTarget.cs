@@ -9,7 +9,7 @@ public class PlayerCameraTarget : MonoBehaviour
 
     public LayerMask collisionMask;
 
-    BoxCollider collider;
+    [SerializeField] BoxCollider collider;
 
     #region Rays settings
     public const float skinWidth = .015f;
@@ -23,11 +23,6 @@ public class PlayerCameraTarget : MonoBehaviour
     [HideInInspector]
     public float verticalRaySpacing;
     #endregion
-
-    private void Awake()
-    {
-        collider = GetComponent<BoxCollider>();
-    }
 
     public RaycastOrigins raycastOrigins;
 
@@ -337,37 +332,92 @@ public class PlayerCameraTarget : MonoBehaviour
 
     #region Movement
 
-    public float moveSpeed;
-    Vector2 moveDirection;
+    public float freeLookMoveSpeed = 3f;
+    public float lookAheadX;
+    public float speedXMultiplier = 1.2f;
+    public float lookAheadY;
+    public float speedYMultiplier = 1.2f;
+    Vector2 inputDir;
     Vector2 velocity;
+    Vector2 oldVelocity;
+    bool calculateCollisions;
+    bool freeLookMode;
+    Vector2 directionToFather;
+    float xLimit, yLimit;
 
     private void Update()
     {
-        CalculateVelocity();
+        CalculateData();
 
-        Move(velocity * Time.deltaTime, false);
+        print(velocity);
 
-        if (collisions.above || collisions.below)
+        if (calculateCollisions)
         {
-            velocity.y = 0;
+            Move(velocity * Time.deltaTime, false);
+
+            if (collisions.above || collisions.below)
+            {
+                velocity.y = 0;
+            }
         }
+        else
+        {
+            transform.Translate(velocity * Time.deltaTime);
+        }
+
+        HandlePositionX();
+        HandlePositionY();
     }
 
-    public void SetMoveDirection(Vector2 _moveDirection)
+    void HandlePositionX()
     {
-        moveDirection = _moveDirection;
-        if(moveDirection == Vector2.zero)
-        {
-            moveDirection = (transform.position - transform.parent.position).normalized;
-        }
+        if (Mathf.Abs(transform.position.x) >= xLimit)
+            transform.position = new Vector2(xLimit, transform.position.y);
     }
 
-    void CalculateVelocity()
+    void HandlePositionY()
     {
-        velocity.x = moveDirection.x * moveSpeed;
-        velocity.y += moveDirection.y * moveSpeed;
+        if (Mathf.Abs(transform.position.y) >= yLimit)
+            transform.position = new Vector2(transform.position.x, yLimit);
+    }
+
+    void CalculateData()
+    {
+        directionToFather = (transform.parent.position - transform.position).normalized;
+        xLimit = transform.parent.position.x + lookAheadX;
+        yLimit = transform.parent.position.y + lookAheadY;
+    }
+
+    public void SetVelocity(Vector2 _newVelocity)
+    {
+        //if accelerating or steady speed
+        if (_newVelocity.sqrMagnitude >= oldVelocity.sqrMagnitude)
+        {
+            velocity = new Vector2(_newVelocity.x * speedXMultiplier, _newVelocity.y * speedYMultiplier);
+            calculateCollisions = true;
+        }
+        //if decelerating
+        else if (_newVelocity.sqrMagnitude < oldVelocity.sqrMagnitude)
+        {
+            velocity = directionToFather * 7;
+            calculateCollisions = false;
+        }
+
+        oldVelocity = _newVelocity;
+    }
+
+    public void SetInputDirection(Vector2 _inputDir)
+    {
+        inputDir = _inputDir;
     }
 
     #endregion
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireCube(transform.position, collider.size);
+        Gizmos.DrawWireCube(transform.position, new Vector2(xLimit * 2, yLimit * 2));
+    }
 
 }
