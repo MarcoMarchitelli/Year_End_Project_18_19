@@ -39,31 +39,27 @@ public class DamageReceiverBehaviour : BaseBehaviour
     }
 
     /// <summary>
-    /// Funzione che aggiunge o sottrae salute. Returns true if lethal damage was inflicted.
+    /// Health setter. Returns true if damage was dealt succesfully.
     /// </summary>
-    /// <param name="_value">la salute da aggiungere o sottrarre</param>
-    public bool SetHealth(int _value)
+    /// <param name="_value">Health to add (subtract if negative)/param>
+    public bool SetHealth(int _value, bool _deal_through_invulnerability = false)
     {
-        if (!IsSetupped)
+        if (!IsSetupped && !_deal_through_invulnerability)
         {
             Debug.LogWarning(name + "'s damage receiver is not setupped!");
             return false;
         }
+
         int tempHealth = CurrentHealth;
         tempHealth += _value;
 
         if (tempHealth <= 0)
-        {
             tempHealth = 0;
-            CurrentHealth = tempHealth;
-            return true;
-        }
-
-        if (tempHealth > maxHealth)
+        else if (tempHealth > maxHealth)
             tempHealth = maxHealth;
 
         CurrentHealth = tempHealth;
-        return false;
+        return true;
     }
 
     public void ResetHealth()

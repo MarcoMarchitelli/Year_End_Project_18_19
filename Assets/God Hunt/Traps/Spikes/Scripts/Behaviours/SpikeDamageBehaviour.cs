@@ -18,9 +18,8 @@ public class SpikeDamageBehaviour : BaseBehaviour
 
         PlayerEntityData d = p.Data as PlayerEntityData;
 
-        if(d.damageReceiverBehaviour.SetHealth(-damage))
-            d.respawnBehaviour.Respawn(true);
-        else
+        d.damageReceiverBehaviour.SetHealth(-damage, true);
+        if (d.damageReceiverBehaviour.CurrentHealth > 0)
             d.respawnBehaviour.Respawn(false);
     }
 
@@ -35,9 +34,8 @@ public class SpikeDamageBehaviour : BaseBehaviour
 
         PlayerEntityData d = p.Data as PlayerEntityData;
 
-        if (d.damageReceiverBehaviour.SetHealth(-damage))
-            d.respawnBehaviour.Respawn(true);
-        else
+        d.damageReceiverBehaviour.SetHealth(-damage, true);
+        if (d.damageReceiverBehaviour.CurrentHealth > 0)
             d.respawnBehaviour.Respawn(false);
     }
 
