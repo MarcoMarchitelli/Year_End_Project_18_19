@@ -22,6 +22,7 @@ public class PlayerInputBehaviour : BaseBehaviour
     bool canDash = false;
     bool canJump = false;
     bool canAttack = false;
+    bool canTurn = false;
     bool hasChargeAttacked = false;
     bool countTime = false;
     float timer;
@@ -31,6 +32,7 @@ public class PlayerInputBehaviour : BaseBehaviour
         data = Entity.Data as PlayerEntityData;
         SetDashInput(true);
         SetJumpInput(true);
+        ToggleDirectionalInput(true);
         AttackInputOn();
     }
 
@@ -42,6 +44,7 @@ public class PlayerInputBehaviour : BaseBehaviour
 
     #region Internals
 
+    Vector2 directionalInput;
     void ReadInputs()
     {
         if (!IsSetupped)
@@ -50,8 +53,12 @@ public class PlayerInputBehaviour : BaseBehaviour
             return;
         }
 
-        Vector2 directionalInput = new Vector2(Input.GetAxisRaw(InputManager.CurrentInputDevice + "Horizontal"), Input.GetAxisRaw(InputManager.CurrentInputDevice + "Vertical"));
+        if (canTurn)
+        {
+            directionalInput = new Vector2(Input.GetAxisRaw(InputManager.CurrentInputDevice + "Horizontal"), Input.GetAxisRaw(InputManager.CurrentInputDevice + "Vertical"));
+        }
         //cameraTarget.SetMoveDirection(directionalInput);
+
         if (Mathf.Abs(directionalInput.x) >= horizontalInputDeadzone)
         {
             directionalInput.x = Mathf.Sign(directionalInput.x);
@@ -149,6 +156,11 @@ public class PlayerInputBehaviour : BaseBehaviour
     #endregion
 
     #region API
+
+    public void ToggleDirectionalInput(bool _value)
+    {
+        canTurn = _value;
+    }
 
     public void SetDashInput(bool _value)
     {

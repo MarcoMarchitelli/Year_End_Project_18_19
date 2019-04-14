@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Deirin.Utility;
 
-[RequireComponent(typeof(DamageDealerBehaviour),typeof(BoxCollider))]
+[RequireComponent(typeof(DamageDealerBehaviour), typeof(BoxCollider))]
 public class AttackBehaviour : BaseBehaviour
 {
     PlayerEntityData data;
@@ -15,6 +15,7 @@ public class AttackBehaviour : BaseBehaviour
     [SerializeField] int damage;
     [SerializeField] float knockbackPower;
     [SerializeField] float duration;
+    [SerializeField] bool canTurn = false;
 
     [Header("Times")]
     [SerializeField] float repeatTime;
@@ -79,11 +80,13 @@ public class AttackBehaviour : BaseBehaviour
 
     public void Play()
     {
+        data.playerInputBehaviour.ToggleDirectionalInput(canTurn);
         OnAttackStart.Invoke();
     }
 
     public void Stop()
     {
+        data.playerInputBehaviour.ToggleDirectionalInput(true);
         OnAttackEnd.Invoke();
     }
 
