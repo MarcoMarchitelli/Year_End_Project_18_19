@@ -20,6 +20,7 @@ public class PlayerInputBehaviour : BaseBehaviour
     [HideInInspector] public bool FallingThrough;
 
     bool canDash = false;
+    bool canJump = false;
     bool canAttack = false;
     bool hasChargeAttacked = false;
     bool countTime = false;
@@ -29,6 +30,7 @@ public class PlayerInputBehaviour : BaseBehaviour
     {
         data = Entity.Data as PlayerEntityData;
         SetDashInput(true);
+        SetJumpInput(true);
         AttackInputOn();
     }
 
@@ -61,7 +63,7 @@ public class PlayerInputBehaviour : BaseBehaviour
         data.playerGameplayBehaviour.SetDirectionalInput(directionalInput);
         data.playerAttacksBehaviour.SetDirection(directionalInput);
 
-        if (Input.GetButtonDown(InputManager.CurrentInputDevice + "Jump"))
+        if (canJump && Input.GetButtonDown(InputManager.CurrentInputDevice + "Jump"))
         {
             if (directionalInput.y <= -verticalInputDeadzone && data.playerCollisionsBehaviour.CollidingWithTraversable)
             {
@@ -73,7 +75,7 @@ public class PlayerInputBehaviour : BaseBehaviour
                 IsPressingJump = true;
             }
         }
-        if (Input.GetButtonUp(InputManager.CurrentInputDevice + "Jump"))
+        if (canJump && Input.GetButtonUp(InputManager.CurrentInputDevice + "Jump"))
         {
             data.playerGameplayBehaviour.OnJumpInputUp();
             IsPressingJump = false;
@@ -151,6 +153,11 @@ public class PlayerInputBehaviour : BaseBehaviour
     public void SetDashInput(bool _value)
     {
         canDash = _value;
+    }
+
+    public void SetJumpInput(bool _value)
+    {
+        canJump = _value;
     }
 
     public void AttackInputOff()
