@@ -42,6 +42,11 @@ public class PlayerHPUI : MonoBehaviour
         instHpEnd = Instantiate(HPEnd, transform);
     }
 
+    public void UpdateUIAuto()
+    {
+        UpdateUI(damageReceiver.CurrentHealth);
+    }
+
     void UpdateUI(int _hp_value)
     {
         if(_hp_value < damageReceiver.MaxHealth)
