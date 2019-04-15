@@ -14,6 +14,8 @@ public class AttackBehaviour : BaseBehaviour
     [Header("Stats")]
     [SerializeField] int damage;
     [SerializeField] float knockbackPower;
+    [SerializeField] float speedMultiplier;
+    [SerializeField] float distanceMultiplier;
     [SerializeField] float duration;
     [SerializeField] bool canTurn = false;
 
@@ -45,6 +47,8 @@ public class AttackBehaviour : BaseBehaviour
 
         damageDealerBehaviour.SetDamage(damage);
         knockbackDealerBehaviour.SetKnockbackPower(knockbackPower);
+        knockbackDealerBehaviour.speedMultiplier = speedMultiplier;
+        knockbackDealerBehaviour.distanceMultiplier = distanceMultiplier;
 
         //timers intantiation
         repeatCDTimer = Instantiate(timerPrefab, transform);

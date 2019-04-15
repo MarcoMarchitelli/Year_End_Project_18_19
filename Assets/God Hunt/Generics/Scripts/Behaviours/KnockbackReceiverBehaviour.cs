@@ -15,28 +15,28 @@ public class KnockbackReceiverBehaviour : BaseBehaviour
         mass = _value;
     }
 
-    public void Knockback(float _knockbackPower, Vector2 _knockbackDirection)
+    public void Knockback(float _knockbackPower, float _speedMul, float _distMul, Vector2 _knockbackDirection)
     {
         if (!IsSetupped)
             return;
 
         float knockbackForce = Mathf.Max(0, _knockbackPower - mass);
-        StartCoroutine(KnockbackDisplacement(_knockbackDirection, knockbackForce));
+        StartCoroutine(KnockbackDisplacement(_knockbackDirection, knockbackForce * _distMul, knockbackForce * _speedMul));
     }
 
-    IEnumerator KnockbackDisplacement(Vector2 _knockbackDirection, float _knockbackForce) // i treat force as a speed
+    IEnumerator KnockbackDisplacement(Vector2 _knockbackDirection, float _knockbackDistValue, float _knockbackSpeedValue)
     {
         OnKnockbackReceived.Invoke();
 
-        float spaceTraveled = ((Vector2)transform.position + _knockbackDirection * _knockbackForce).magnitude;
-        float travelTime = spaceTraveled / _knockbackForce;
+        float spaceTraveled = ((Vector2)transform.position + _knockbackDirection * _knockbackDistValue).magnitude;
+        float travelTime = spaceTraveled / _knockbackSpeedValue;
         float timer = 0;
 
         while (timer < travelTime)
         {
             timer += Time.deltaTime;
 
-            KnockbackMove(_knockbackDirection, _knockbackForce);
+            KnockbackMove(_knockbackDirection, _knockbackSpeedValue);
 
             yield return null;
         }
