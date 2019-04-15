@@ -12,7 +12,8 @@ public class PlayerEntity : BoxColliderEntity
             GetComponent<BoxCollider>(),
             GetComponentInChildren<AnimatorProxy>(),
             GetBehaviour<DamageReceiverBehaviour>(),
-            GetBehaviour<RespawnBehaviour>()
+            GetBehaviour<RespawnBehaviour>(),
+            GetBehaviour<PlayerCameraTarget>()
             );
     }
 }
@@ -26,8 +27,10 @@ public class PlayerEntityData : BoxColliderEntityData
     public AnimatorProxy animatorProxy;
     public DamageReceiverBehaviour damageReceiverBehaviour;
     public RespawnBehaviour respawnBehaviour;
+    public PlayerCameraTarget cameraTarget;
 
-    public PlayerEntityData(PlayerGameplayBehaviour _p, PlayerCollisionsBehaviour _c, PlayerInputBehaviour _pib, PlayerAttacksBehaviour _pab, BoxCollider _bc, AnimatorProxy _ap, DamageReceiverBehaviour _drb, RespawnBehaviour _rb)
+    public PlayerEntityData(PlayerGameplayBehaviour _p, PlayerCollisionsBehaviour _c, PlayerInputBehaviour _pib, PlayerAttacksBehaviour _pab, 
+        BoxCollider _bc, AnimatorProxy _ap, DamageReceiverBehaviour _drb, RespawnBehaviour _rb, PlayerCameraTarget _pct)
     {
         playerGameplayBehaviour = _p;
         playerCollisionsBehaviour = _c;
@@ -37,5 +40,6 @@ public class PlayerEntityData : BoxColliderEntityData
         animatorProxy = _ap;
         damageReceiverBehaviour = _drb;
         respawnBehaviour = _rb;
+        cameraTarget = _pct;
     }
 }
