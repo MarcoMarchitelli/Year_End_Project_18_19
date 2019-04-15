@@ -2,7 +2,6 @@
 
 public class PlayerAttacksBehaviour : BaseBehaviour
 {
-    
     public void SetDirection(Vector2 _direction)
     {
         if (_direction.x > 0)

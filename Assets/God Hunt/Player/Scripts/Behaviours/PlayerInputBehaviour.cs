@@ -9,6 +9,7 @@ public class PlayerInputBehaviour : BaseBehaviour
     [SerializeField] float verticalInputDeadzone = .8f;
     [Range(0, 1)]
     [SerializeField] float horizontalInputDeadzone = .2f;
+
     [SerializeField] UnityVoidEvent OnSideAttackInput;
     [SerializeField] UnityVoidEvent OnUpAttackInput;
     [SerializeField] float chargeTime;
@@ -67,12 +68,20 @@ public class PlayerInputBehaviour : BaseBehaviour
         {
             directionalInput.x = 0;
         }
+        if (Mathf.Abs(directionalInput.y) >= verticalInputDeadzone)
+        {
+            directionalInput.y = Mathf.Sign(directionalInput.y);
+        }
+        else
+        {
+            directionalInput.y = 0;
+        }
         data.playerGameplayBehaviour.SetDirectionalInput(directionalInput);
         data.playerAttacksBehaviour.SetDirection(directionalInput);
 
         if (canJump && Input.GetButtonDown(InputManager.CurrentInputDevice + "Jump"))
         {
-            if (directionalInput.y <= -verticalInputDeadzone && data.playerCollisionsBehaviour.CollidingWithTraversable)
+            if (directionalInput.y == -1 && data.playerCollisionsBehaviour.CollidingWithTraversable)
             {
                 data.playerCollisionsBehaviour.SetFallingThrowPlatform();
             }
