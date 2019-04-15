@@ -15,7 +15,7 @@ public class PlayerInputBehaviour : BaseBehaviour
     [SerializeField] float chargeTime;
     [SerializeField] UnityVoidEvent OnChargedAttackInput;
 
-    //[SerializeField] PlayerCameraTarget cameraTarget;
+    [SerializeField] PlayerCameraTarget cameraTarget;
 
     [HideInInspector] public bool IsPressingJump;
     [HideInInspector] public bool FallingThrough;
@@ -58,7 +58,8 @@ public class PlayerInputBehaviour : BaseBehaviour
         {
             directionalInput = new Vector2(Input.GetAxisRaw(InputManager.CurrentInputDevice + "Horizontal"), Input.GetAxisRaw(InputManager.CurrentInputDevice + "Vertical"));
         }
-        //cameraTarget.SetMoveDirection(directionalInput);
+
+        cameraTarget.SetMoveDirection(directionalInput, data.playerGameplayBehaviour.accelerating);
 
         if (Mathf.Abs(directionalInput.x) >= horizontalInputDeadzone)
         {

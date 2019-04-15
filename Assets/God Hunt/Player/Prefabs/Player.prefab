@@ -1,5 +1,74 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &699000409
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 699000410}
+  - component: {fileID: 699000412}
+  - component: {fileID: 699000411}
+  m_Layer: 8
+  m_Name: Camera Target
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &699000410
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 699000409}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1103692139956934985}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &699000412
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 699000409}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &699000411
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 699000409}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4db62619a8e640e4abd95d0484017fc7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  collisionMask:
+    serializedVersion: 2
+    m_Bits: 0
+  horizontalRayCount: 0
+  verticalRayCount: 0
+  horizontalRaySpacing: 0
+  verticalRaySpacing: 0
+  traversableTime: 0.5
+  CollidingWithTraversable: 0
+  lookDistance: 5
+  runLookDistance: 8
+  lookSmoothness: 0
 --- !u!1 &790127823442546196
 GameObject:
   m_ObjectHideFlags: 0
@@ -193,6 +262,7 @@ Transform:
   - {fileID: 2335877243961467100}
   - {fileID: 4972826612561640455}
   - {fileID: 436773975401129998}
+  - {fileID: 699000410}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -272,6 +342,7 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityVoidEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
+  cameraTarget: {fileID: 699000411}
   IsPressingJump: 0
   FallingThrough: 0
 --- !u!114 &1103692139956934987
@@ -430,6 +501,7 @@ MonoBehaviour:
   wallLeap: {x: 0, y: 0}
   wallSlideSpeedMax: 3
   wallStickTime: 0.25
+  accelerating: 0
 --- !u!114 &1103692139956934997
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -709,9 +781,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timerPrefab: {fileID: 8633921778407538006, guid: 24b2f40b82b546b42a156c95c4933334,
     type: 3}
+  horizontalInputDeadzone: 0
+  verticalInputDeadzone: 0
   damage: 1
   knockbackPower: 2
+  speedMultiplier: 0
+  distanceMultiplier: 0
   duration: 0.2
+  canTurn: 0
   repeatTime: 0
   otherAttacksTime: 0
   otherActionsTime: 0
@@ -785,6 +862,8 @@ MonoBehaviour:
   dealsOnCollision: 0
   dealsOnTrigger: 1
   knockbackPower: 0
+  speedMultiplier: 0
+  distanceMultiplier: 0
   OnKnockbackDealt:
     m_PersistentCalls:
       m_Calls: []
@@ -852,9 +931,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timerPrefab: {fileID: 8633921778407538006, guid: 24b2f40b82b546b42a156c95c4933334,
     type: 3}
+  horizontalInputDeadzone: 0
+  verticalInputDeadzone: 0
   damage: 3
   knockbackPower: 3
+  speedMultiplier: 0
+  distanceMultiplier: 0
   duration: 0.3
+  canTurn: 0
   repeatTime: 0
   otherAttacksTime: 0
   otherActionsTime: 0
@@ -928,6 +1012,8 @@ MonoBehaviour:
   dealsOnCollision: 0
   dealsOnTrigger: 1
   knockbackPower: 0
+  speedMultiplier: 0
+  distanceMultiplier: 0
   OnKnockbackDealt:
     m_PersistentCalls:
       m_Calls: []
@@ -1103,9 +1189,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timerPrefab: {fileID: 8633921778407538006, guid: 24b2f40b82b546b42a156c95c4933334,
     type: 3}
+  horizontalInputDeadzone: 0
+  verticalInputDeadzone: 0
   damage: 1
   knockbackPower: 2
+  speedMultiplier: 10
+  distanceMultiplier: 0.3
   duration: 0.2
+  canTurn: 0
   repeatTime: 0
   otherAttacksTime: 0
   otherActionsTime: 0
@@ -1179,6 +1270,8 @@ MonoBehaviour:
   dealsOnCollision: 0
   dealsOnTrigger: 1
   knockbackPower: 0
+  speedMultiplier: 0
+  distanceMultiplier: 0
   OnKnockbackDealt:
     m_PersistentCalls:
       m_Calls: []

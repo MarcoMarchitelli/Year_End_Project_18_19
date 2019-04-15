@@ -337,35 +337,31 @@ public class PlayerCameraTarget : MonoBehaviour
 
     #region Movement
 
-    public float moveSpeed;
-    Vector2 moveDirection;
+    public float lookDistance = 5f;
+    public float runLookDistance = 8f;
+    [Range(0,1)]
+    public float lookSmoothness;
+
     Vector2 velocity;
+    Vector2 lookInput;
+    bool isRunning;
 
     private void Update()
     {
-        CalculateVelocity();
-
-        Move(velocity * Time.deltaTime, false);
-
-        if (collisions.above || collisions.below)
-        {
-            velocity.y = 0;
-        }
+        CamMove();
     }
 
-    public void SetMoveDirection(Vector2 _moveDirection)
+    public void SetMoveDirection(Vector2 _lookInput, bool _isRunning )
     {
-        moveDirection = _moveDirection;
-        if(moveDirection == Vector2.zero)
-        {
-            moveDirection = (transform.position - transform.parent.position).normalized;
-        }
+        lookInput = _lookInput;
+        isRunning = _isRunning;
     }
 
-    void CalculateVelocity()
+    Vector2 currentVelocityRef;
+    void CamMove()
     {
-        velocity.x = moveDirection.x * moveSpeed;
-        velocity.y += moveDirection.y * moveSpeed;
+        Vector2 destination =  (Vector2)transform.parent.position +  lookInput * new Vector2(isRunning ? runLookDistance : lookDistance, lookDistance);
+        transform.position = Vector2.SmoothDamp(transform.position, destination, ref currentVelocityRef, lookSmoothness);
     }
 
     #endregion

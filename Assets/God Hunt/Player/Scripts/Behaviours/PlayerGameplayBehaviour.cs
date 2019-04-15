@@ -92,7 +92,7 @@ public class PlayerGameplayBehaviour : BaseBehaviour
 
     #region Sprinting
 
-    bool accelerating;
+    [HideInInspector] public bool accelerating;
     float accelTimer;
     bool decelerating;
     float decelTimer;

@@ -442,7 +442,7 @@ MonoBehaviour:
   m_Priority: 10
   m_StandbyUpdate: 2
   m_LookAt: {fileID: 0}
-  m_Follow: {fileID: 1004764434304795277}
+  m_Follow: {fileID: 699000410}
   m_Lens:
     FieldOfView: 60
     OrthographicSize: 5.2
@@ -687,6 +687,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &699000410 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 699000410, guid: b44c7349678676347bc1e673cd602c2f,
+    type: 3}
+  m_PrefabInstance: {fileID: 189355464304696260}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &700463644
 GameObject:
   m_ObjectHideFlags: 0
@@ -2124,15 +2130,9 @@ PrefabInstance:
       propertyPath: OnHealthDepleated.m_PersistentCalls.m_Calls.Array.data[3].m_Target
       value: 
       objectReference: {fileID: 1540865744}
-    - target: {fileID: 6017284612874405341, guid: b44c7349678676347bc1e673cd602c2f,
-        type: 3}
-      propertyPath: speedMultiplier
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 6017284612874405341, guid: b44c7349678676347bc1e673cd602c2f,
-        type: 3}
-      propertyPath: distanceMultiplier
-      value: 0.3
+    - target: {fileID: 699000411, guid: b44c7349678676347bc1e673cd602c2f, type: 3}
+      propertyPath: lookSmoothness
+      value: 0.028
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b44c7349678676347bc1e673cd602c2f, type: 3}
@@ -2275,12 +2275,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4604fdf9a6d83b749858b405cbe6a6c6, type: 3}
---- !u!4 &1004764434304795277 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1103692139956934985, guid: b44c7349678676347bc1e673cd602c2f,
-    type: 3}
-  m_PrefabInstance: {fileID: 189355464304696260}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &3213628225685595821
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -16,7 +16,6 @@ public class Room : MonoBehaviour
 
     public void Setup()
     {
-        vCam = GetComponentInChildren<CinemachineVirtualCamera>();
         if (vCam)
             ToggleVCam(false);
         else
