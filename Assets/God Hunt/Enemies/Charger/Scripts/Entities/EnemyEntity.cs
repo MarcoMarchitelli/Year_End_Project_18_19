@@ -11,7 +11,8 @@ public class EnemyEntity : BoxColliderEntity
             GetBehaviour<EnemyCollisionBehaviour>(),
             GetBehaviour<EnemyMovementBehaviour>(),
             graphics,
-            GetComponent<BoxCollider>()
+            GetComponent<BoxCollider>(),
+            GetBehaviour<EnemyPatrolBehaviour>()
             );
     }
 
@@ -22,12 +23,14 @@ public class EnemyEntityData : BoxColliderEntityData
     public EnemyCollisionBehaviour enemyCollisionBehaviour;
     public EnemyMovementBehaviour enemyMovementBehaviour;
     public Transform graphics;
+    public EnemyPatrolBehaviour enemyPatrolBehaviour;
 
-    public EnemyEntityData(EnemyCollisionBehaviour _ecb, EnemyMovementBehaviour _emb, Transform _g, BoxCollider _boxCollider)
+    public EnemyEntityData(EnemyCollisionBehaviour _ecb, EnemyMovementBehaviour _emb, Transform _g, BoxCollider _boxCollider, EnemyPatrolBehaviour _enemyPatrolBehaviour)
     {
         collider = _boxCollider;
         enemyCollisionBehaviour = _ecb;
         enemyMovementBehaviour = _emb;
         graphics = _g;
+        enemyPatrolBehaviour = _enemyPatrolBehaviour;
     }
 }

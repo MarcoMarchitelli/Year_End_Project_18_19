@@ -2,58 +2,61 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[System.Serializable]
-public class Action
+namespace ActionSystem
 {
-    #region Data
+    [System.Serializable]
+    public class Action
+    {
+        #region Data
 
-    public string Name;
+        public string Name;
 
-    public bool Input;
+        public bool Input;
         public KeyCode InputKey;
         public bool Hold;
         public float HoldTime;
 
-    public float Duration;
+        public float Duration;
 
-    public bool InterruptOtherActions;
+        public bool InterruptOtherActions;
         public List<Action> ActionsToInterrupt;
         public List<Action> InterruptableActions;
 
-    #endregion
+        #endregion
 
-    #region Status
+        #region Status
 
-    public bool enabled;
+        public bool enabled;
 
-    #endregion
+        #endregion
 
-    #region API
+        #region API
 
-    public void AddActionToInterrupt(Action _action)
-    {
-        if (ActionsToInterrupt == null)
+        public void AddActionToInterrupt(Action _action)
+        {
+            if (ActionsToInterrupt == null)
+                ActionsToInterrupt = new List<Action>();
+
+            ActionsToInterrupt.Add(_action);
+        }
+
+        public void RemoveActionToInterrupt(int _index)
+        {
+            ActionsToInterrupt.RemoveAt(_index);
+        }
+
+        public void RemoveActionToInterrupt(Action _action)
+        {
+            ActionsToInterrupt.Remove(_action);
+        }
+
+        #endregion
+
+        public Action()
+        {
+            Name = "New Action";
             ActionsToInterrupt = new List<Action>();
-
-        ActionsToInterrupt.Add(_action);
-    }
-
-    public void RemoveActionToInterrupt(int _index)
-    {
-        ActionsToInterrupt.RemoveAt(_index);
-    }
-
-    public void RemoveActionToInterrupt(Action _action)
-    {
-        ActionsToInterrupt.Remove(_action);
-    }
-
-    #endregion
-
-    public Action()
-    {
-        Name = "New Action";
-        ActionsToInterrupt = new List<Action>();
-        InterruptableActions = new List<Action>();
-    }
+            InterruptableActions = new List<Action>();
+        }
+    } 
 }

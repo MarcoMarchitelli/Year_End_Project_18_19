@@ -67,7 +67,7 @@ public class EnemyPatrolBehaviour : BaseBehaviour
             Debug.LogWarning(name + "'s patrol behaviour is not setupped!");
             return;
         }
-        StartCoroutine(RotateTo());
+        data.enemyMovementBehaviour.TurnTo((nextPoint - data.graphics.position).normalized, rotationAnglePerSecond, RotationEndCallback);
     }
 
     public void StopPatrol()
@@ -101,6 +101,7 @@ public class EnemyPatrolBehaviour : BaseBehaviour
     Vector3 nextPoint;
     int nextPointIndex;
     bool wasInterrupted = false;
+
     IEnumerator FollowPath()
     {
         if (!wasInterrupted)
@@ -120,47 +121,34 @@ public class EnemyPatrolBehaviour : BaseBehaviour
 
         while (true)
         {
-            data.enemyMovementBehaviour.SetMoveDirection(((Vector2)nextPoint - (Vector2)transform.position).normalized);
-            data.enemyMovementBehaviour.IsMoving = true;
+            yield return data.enemyMovementBehaviour.MoveTo(nextPoint, data.enemyMovementBehaviour.moveSpeed);
 
-            if (Vector2.Distance(transform.position, nextPoint) <= waypointDistanceThreshold)
+            nextPointIndex = (nextPointIndex + 1) % wayPoints.Length;
+            nextPoint = wayPoints[nextPointIndex];
+
+            //events
+            if (nextPointIndex == wayPoints.Length - 1)
+                OnPathFinished.Invoke();
+            else
+                OnWaypointReached.Invoke();
+
+            if (rotatesToWaypoint)
             {
-                data.enemyMovementBehaviour.SetMoveDirection(Vector2.zero);
-                nextPointIndex = (nextPointIndex + 1) % wayPoints.Length;
-                nextPoint = wayPoints[nextPointIndex];
-                data.enemyMovementBehaviour.IsMoving = false;
-
-                //events
-                if (nextPointIndex == wayPoints.Length - 1)
-                    OnPathFinished.Invoke();
-                else
-                    OnWaypointReached.Invoke();
-
-                if (rotatesToWaypoint)
-                {
-                    yield return StartCoroutine(RotateTo());
-                }
-                else
-                    yield return new WaitForSeconds(waitTime);
+                yield return data.enemyMovementBehaviour.TurnTo((nextPoint - data.graphics.position).normalized, rotationAnglePerSecond, RotationEndCallback);
             }
+            else
+                yield return new WaitForSeconds(waitTime);
+
             yield return null;
         }
     }
 
-    IEnumerator RotateTo()
+    public void RotationEndCallback()
     {
-        Vector3 directionToTarget = (nextPoint - data.graphics.position).normalized;
-        float targetAngle = Mathf.Atan2(directionToTarget.z, directionToTarget.x) * Mathf.Rad2Deg;
-
-        while (Mathf.DeltaAngle(data.graphics.eulerAngles.y, targetAngle) > 0.05f || Mathf.DeltaAngle(data.graphics.eulerAngles.y, targetAngle) < -0.05f)
-        {
-            float angle = Mathf.MoveTowardsAngle(data.graphics.eulerAngles.y, targetAngle, Time.deltaTime * rotationAnglePerSecond);
-            data.graphics.eulerAngles = Vector3.up * angle;
-            yield return null;
-        }
-
         if (wasInterrupted)
+        {
             StartCoroutine(FollowPath());
+        }
     }
 
     #endregion
