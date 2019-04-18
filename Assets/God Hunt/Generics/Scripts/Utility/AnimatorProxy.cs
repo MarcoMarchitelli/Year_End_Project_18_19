@@ -63,6 +63,20 @@ public class AnimatorProxy : MonoBehaviour
         }
     }
 
+    bool _chargeing;
+    public bool Chargeing
+    {
+        get { return _chargeing; }
+        set
+        {
+            if (value != _chargeing)
+            {
+                _chargeing = value;
+                animator.SetBool("Chargeing", _chargeing);
+            }
+        }
+    }
+
     public void Attack()
     {
         animator.SetTrigger("Attack");
@@ -81,6 +95,11 @@ public class AnimatorProxy : MonoBehaviour
     public void DeathAnimEnd()
     {
         OnDeathAnimEnd.Invoke();
+    }
+
+    public void ChargeAttack()
+    {
+        animator.SetTrigger("Charge Attack");
     }
 
 }

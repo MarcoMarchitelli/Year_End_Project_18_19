@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using Deirin.Utility;
 
 [RequireComponent(typeof(DamageDealerBehaviour), typeof(BoxCollider))]
@@ -12,10 +10,6 @@ public class AttackBehaviour : BaseBehaviour
     [SerializeField] Timer timerPrefab;
 
     [Header("Stats")]
-    [Range(0, 1)]
-    [SerializeField] float horizontalInputDeadzone;
-    [Range(0, 1)]
-    [SerializeField] float verticalInputDeadzone;
     [SerializeField] int damage;
     [SerializeField] float knockbackPower;
     [SerializeField] float speedMultiplier;

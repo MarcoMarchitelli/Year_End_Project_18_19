@@ -13,7 +13,8 @@ public class PlayerInputBehaviour : BaseBehaviour
     [SerializeField] UnityVoidEvent OnSideAttackInput;
     [SerializeField] UnityVoidEvent OnUpAttackInput;
     [SerializeField] float chargeTime;
-    [SerializeField] UnityVoidEvent OnChargedAttackInput;
+    [SerializeField] UnityVoidEvent OnChargedAttackStart;
+    [SerializeField] UnityVoidEvent OnChargedAttackHit;
 
     [HideInInspector] public bool IsPressingJump;
     [HideInInspector] public bool FallingThrough;
@@ -118,6 +119,7 @@ public class PlayerInputBehaviour : BaseBehaviour
         {
             hasChargeAttacked = false;
             countTime = true;
+            OnChargedAttackStart.Invoke();
         }
         if (!hasChargeAttacked && canAttack && Input.GetButtonUp(InputManager.CurrentInputDevice + "Attack"))
         {
@@ -130,13 +132,6 @@ public class PlayerInputBehaviour : BaseBehaviour
         if (countTime)
         {
             timer += Time.deltaTime;
-            if (timer >= chargeTime)
-            {
-                OnChargedAttackInput.Invoke();
-                hasChargeAttacked = true;
-                countTime = false;
-                timer = 0;
-            }
         }
     }
 
@@ -154,10 +149,11 @@ public class PlayerInputBehaviour : BaseBehaviour
             }
             else
             {
-                OnChargedAttackInput.Invoke();
+                OnChargedAttackHit.Invoke();
                 hasChargeAttacked = true;
             }
         }
+
         timer = 0;
     }
 
