@@ -307,6 +307,17 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 113071023248487755}
+        m_MethodName: set_Chargeing
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityVoidEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
   OnUpAttackInput:
@@ -323,14 +334,63 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 113071023248487755}
+        m_MethodName: set_Chargeing
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityVoidEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
   chargeTime: 1.5
-  OnChargedAttackInput:
+  OnChargedAttackStart:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 113071023248487755}
+        m_MethodName: set_Chargeing
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+    m_TypeName: UnityVoidEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  OnChargedAttackHit:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 113071023248487755}
+        m_MethodName: set_Chargeing
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 6640341155248902611}
         m_MethodName: Play
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 113071023248487755}
+        m_MethodName: ChargeAttack
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -780,8 +840,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timerPrefab: {fileID: 8633921778407538006, guid: 24b2f40b82b546b42a156c95c4933334,
     type: 3}
-  horizontalInputDeadzone: 0
-  verticalInputDeadzone: 0
   damage: 1
   knockbackPower: 2
   speedMultiplier: 0
@@ -930,8 +988,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timerPrefab: {fileID: 8633921778407538006, guid: 24b2f40b82b546b42a156c95c4933334,
     type: 3}
-  horizontalInputDeadzone: 0
-  verticalInputDeadzone: 0
   damage: 3
   knockbackPower: 3
   speedMultiplier: 0
@@ -943,34 +999,12 @@ MonoBehaviour:
   otherActionsTime: 0
   OnAttackStart:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 5826600207390607017}
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
+      m_Calls: []
     m_TypeName: UnityVoidEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
   OnAttackEnd:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 5826600207390607017}
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_TypeName: UnityVoidEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
 --- !u!114 &5405564629482058054
@@ -1188,8 +1222,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timerPrefab: {fileID: 8633921778407538006, guid: 24b2f40b82b546b42a156c95c4933334,
     type: 3}
-  horizontalInputDeadzone: 0
-  verticalInputDeadzone: 0
   damage: 1
   knockbackPower: 2
   speedMultiplier: 10
@@ -1202,9 +1234,9 @@ MonoBehaviour:
   OnAttackStart:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 5458854386110253172}
-        m_MethodName: SetActive
-        m_Mode: 6
+      - m_Target: {fileID: 113071023248487755}
+        m_MethodName: Attack
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -1217,18 +1249,7 @@ MonoBehaviour:
       PublicKeyToken=null
   OnAttackEnd:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 5458854386110253172}
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_TypeName: UnityVoidEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
 --- !u!114 &5723298436029287750
