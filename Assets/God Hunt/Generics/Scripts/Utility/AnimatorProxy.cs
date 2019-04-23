@@ -82,6 +82,11 @@ public class AnimatorProxy : MonoBehaviour
         animator.SetTrigger("Attack");
     }
 
+    public void UpAttack()
+    {
+        animator.SetTrigger("Up Attack");
+    }
+
     public void Damaged()
     {
         animator.SetTrigger("Damaged");

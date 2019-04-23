@@ -139,19 +139,17 @@ public class PlayerInputBehaviour : BaseBehaviour
     {
         countTime = false;
 
-        if (_directionalInput.y > 0)
-            OnUpAttackInput.Invoke();
+        if(timer >= chargeTime)
+        {
+            OnChargedAttackHit.Invoke();
+            hasChargeAttacked = true;
+        }
         else
         {
-            if (timer < chargeTime)
-            {
-                OnSideAttackInput.Invoke();
-            }
+            if (_directionalInput.y > 0)
+                OnUpAttackInput.Invoke();
             else
-            {
-                OnChargedAttackHit.Invoke();
-                hasChargeAttacked = true;
-            }
+                OnSideAttackInput.Invoke();
         }
 
         timer = 0;
