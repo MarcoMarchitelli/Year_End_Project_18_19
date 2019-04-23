@@ -263,7 +263,7 @@ GameObject:
   m_Component:
   - component: {fileID: 116287344}
   m_Layer: 0
-  m_Name: GameObject (1)
+  m_Name: Waypoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -590,7 +590,7 @@ GameObject:
   - component: {fileID: 590540757}
   - component: {fileID: 590540758}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: Charger's path
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1024,7 +1024,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1321358846}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: Waypoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1886,7 +1886,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2058438604}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.007741, y: 4.9983387, z: -10}
+  m_LocalPosition: {x: -1.0089645, y: 4.9983387, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 831409824}
@@ -2082,6 +2082,36 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 6640341155248902611, guid: b44c7349678676347bc1e673cd602c2f,
+        type: 3}
+      propertyPath: OnAttackStart.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6640341155248902611, guid: b44c7349678676347bc1e673cd602c2f,
+        type: 3}
+      propertyPath: OnAttackEnd.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6640341155248902611, guid: b44c7349678676347bc1e673cd602c2f,
+        type: 3}
+      propertyPath: OnAttackStart.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6640341155248902611, guid: b44c7349678676347bc1e673cd602c2f,
+        type: 3}
+      propertyPath: OnAttackStart.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_BoolArgument
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6640341155248902611, guid: b44c7349678676347bc1e673cd602c2f,
+        type: 3}
+      propertyPath: OnAttackStart.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6640341155248902611, guid: b44c7349678676347bc1e673cd602c2f,
+        type: 3}
+      propertyPath: OnAttackStart.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 189355464304696264}
     - target: {fileID: 1103692139956934985, guid: b44c7349678676347bc1e673cd602c2f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2382,36 +2412,6 @@ PrefabInstance:
       propertyPath: OnAttackStart.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 6640341155248902611, guid: b44c7349678676347bc1e673cd602c2f,
-        type: 3}
-      propertyPath: OnAttackStart.m_PersistentCalls.m_Calls.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6640341155248902611, guid: b44c7349678676347bc1e673cd602c2f,
-        type: 3}
-      propertyPath: OnAttackEnd.m_PersistentCalls.m_Calls.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6640341155248902611, guid: b44c7349678676347bc1e673cd602c2f,
-        type: 3}
-      propertyPath: OnAttackStart.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6640341155248902611, guid: b44c7349678676347bc1e673cd602c2f,
-        type: 3}
-      propertyPath: OnAttackStart.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_BoolArgument
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6640341155248902611, guid: b44c7349678676347bc1e673cd602c2f,
-        type: 3}
-      propertyPath: OnAttackStart.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 6640341155248902611, guid: b44c7349678676347bc1e673cd602c2f,
-        type: 3}
-      propertyPath: OnAttackStart.m_PersistentCalls.m_Calls.Array.data[1].m_Target
-      value: 
-      objectReference: {fileID: 189355464304696264}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b44c7349678676347bc1e673cd602c2f, type: 3}
 --- !u!114 &189355464304696261 stripped
@@ -2923,36 +2923,6 @@ PrefabInstance:
       propertyPath: path
       value: 
       objectReference: {fileID: 590540757}
-    - target: {fileID: 3264598925554043704, guid: 48be27b17546cf747a6d993265893ec4,
-        type: 3}
-      propertyPath: OnHealthDepleated.m_PersistentCalls.m_Calls.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 3264598925554043704, guid: 48be27b17546cf747a6d993265893ec4,
-        type: 3}
-      propertyPath: OnHealthDepleated.m_PersistentCalls.m_Calls.Array.data[3].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3264598925554043704, guid: 48be27b17546cf747a6d993265893ec4,
-        type: 3}
-      propertyPath: OnHealthDepleated.m_PersistentCalls.m_Calls.Array.data[3].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3264598925554043704, guid: 48be27b17546cf747a6d993265893ec4,
-        type: 3}
-      propertyPath: OnHealthDepleated.m_PersistentCalls.m_Calls.Array.data[3].m_Target
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 3264598925554043704, guid: 48be27b17546cf747a6d993265893ec4,
-        type: 3}
-      propertyPath: OnHealthDepleated.m_PersistentCalls.m_Calls.Array.data[3].m_MethodName
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 3264598925554043704, guid: 48be27b17546cf747a6d993265893ec4,
-        type: 3}
-      propertyPath: OnHealthDepleated.m_PersistentCalls.m_Calls.Array.data[3].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: 
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 48be27b17546cf747a6d993265893ec4, type: 3}
 --- !u!60 &8083077415983973612

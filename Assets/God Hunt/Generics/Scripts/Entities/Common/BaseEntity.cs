@@ -47,6 +47,7 @@ public abstract class BaseEntity : MonoBehaviour, IEntity
     /// <param name="_value"></param>
     public void Enable(bool _value)
     {
+        print("entiy: "+_value);
         isEnabled = _value;
         foreach (IBehaviour behaviour in Behaviours)
         {

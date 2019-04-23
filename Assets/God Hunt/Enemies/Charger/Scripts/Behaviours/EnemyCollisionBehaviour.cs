@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 
+[RequireComponent(typeof(EnemyEntity))]
 public class EnemyCollisionBehaviour : RaycastController
 {
     EnemyEntityData data;

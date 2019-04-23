@@ -28,10 +28,12 @@ public class EnemyMovementBehaviour : BaseBehaviour
     Vector2 moveDirection;
     Vector2 velocity;
     bool inRoutine = false;
+    [HideInInspector] public float currentMoveSpeed;
 
     protected override void CustomSetup()
     {
         data = Entity.Data as EnemyEntityData;
+        currentMoveSpeed = moveSpeed;
     }
 
     public override void Enable(bool _value)
@@ -39,10 +41,14 @@ public class EnemyMovementBehaviour : BaseBehaviour
         if (!_value)
             StopAllCoroutines();
         base.Enable(_value);
+        print(_value);
     }
 
     public override void OnUpdate()
     {
+        if (!IsSetupped)
+            return;
+
         if (!inRoutine)
         {
             CalculateVelocity();
@@ -60,6 +66,11 @@ public class EnemyMovementBehaviour : BaseBehaviour
         moveDirection = _moveDirection;
     }
 
+    public void ResetMoveDirection()
+    {
+        moveDirection = Vector2.zero;
+    }
+
     public Coroutine TurnTo(Vector3 _dir, float _rotationAnglePerSecond, Action _callback = null)
     {
         StopAllCoroutines();
@@ -74,7 +85,7 @@ public class EnemyMovementBehaviour : BaseBehaviour
 
     void CalculateVelocity()
     {
-        velocity.x = moveDirection.x * moveSpeed;
+        velocity.x = moveDirection.x * currentMoveSpeed;
         velocity.y += PlayerGameplayBehaviour.normalGravity * Time.deltaTime;
     }
 
@@ -98,19 +109,26 @@ public class EnemyMovementBehaviour : BaseBehaviour
     {
         inRoutine = true;
         velocity = Vector2.zero;
+
         Vector3 moveDir = (_target - transform.position).normalized;
+        float distance = Vector2.Distance(_target, transform.position);
+        float pathTime = distance / _moveSpeed;
+        float timer = 0;
+
         SetMoveDirection(moveDir);
-        moveSpeed = _moveSpeed;
+        currentMoveSpeed = _moveSpeed;
         IsMoving = true;
 
-        while (Vector2.Distance(transform.position, _target) > .1f)
+        while (timer < pathTime)
         {
-            data.enemyCollisionBehaviour.Move(moveDir * moveSpeed * Time.deltaTime, false);
+            timer += Time.deltaTime;
+            data.enemyCollisionBehaviour.Move(moveDir * currentMoveSpeed * Time.deltaTime, false);
             yield return null;
         }
 
-        _callback?.Invoke();
+        currentMoveSpeed = moveSpeed;
         IsMoving = false;
         inRoutine = false;
+        _callback?.Invoke();
     }
 }

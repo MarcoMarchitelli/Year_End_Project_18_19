@@ -1,15 +1,19 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
+[RequireComponent(typeof(EnemyMovementBehaviour))]
 public class EnemyChargeBehaviour : BaseBehaviour
 {
     EnemyEntityData data;
 
     [SerializeField] float chargeSpeed;
+    [SerializeField] float chargeDistance;
     [SerializeField] float turnToTargetSpeed = 90;
+    [SerializeField] float chargeCooldown = 2;
+    [SerializeField] UnityVoidEvent OnChargeStart;
+    [SerializeField] UnityFloatEvent OnChargeEnd;
 
     Transform target;
+    Vector3 dirToTarget;
 
     protected override void CustomSetup()
     {
@@ -25,14 +29,20 @@ public class EnemyChargeBehaviour : BaseBehaviour
 
     public void StartCharge()
     {
-        data.enemyPatrolBehaviour.StopPatrol();
-        data.enemyMovementBehaviour.TurnTo((transform.position - target.position).normalized, turnToTargetSpeed, Charge);
+        OnChargeStart.Invoke();
+        dirToTarget = (target.position - transform.position).normalized;
+        data.enemyMovementBehaviour.TurnTo(dirToTarget, turnToTargetSpeed, Charge);
     }
 
     #endregion
 
     void Charge()
     {
-        data.enemyMovementBehaviour.moveSpeed = chargeSpeed;
+        data.enemyMovementBehaviour.MoveTo((Vector2)transform.position + new Vector2(Mathf.Sign( dirToTarget.x ) * chargeDistance, 0), chargeSpeed, EndCharge);
+    }
+
+    void EndCharge()
+    {
+        OnChargeEnd.Invoke(chargeCooldown);
     }
 }

@@ -124,7 +124,7 @@ public class ScanBehaviour : BaseBehaviour
     {
         if (!IsSetupped)
         {
-            Debug.LogError(name + "'s scan behaviour is not setupped!");
+            Debug.LogWarning(name + "'s scan behaviour is not setupped!");
             return false;
         }
         if (!target)

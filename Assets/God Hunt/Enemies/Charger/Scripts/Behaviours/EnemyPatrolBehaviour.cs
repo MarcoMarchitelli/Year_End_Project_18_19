@@ -81,6 +81,7 @@ public class EnemyPatrolBehaviour : BaseBehaviour
         StopAllCoroutines();
         data.enemyMovementBehaviour.SetMoveDirection(Vector2.zero);
         wasInterrupted = true;
+        print("patrol stop");
     }
 
     public void ToggleRotationToWaypoint(bool _value)
@@ -121,7 +122,7 @@ public class EnemyPatrolBehaviour : BaseBehaviour
 
         while (true)
         {
-            yield return data.enemyMovementBehaviour.MoveTo(nextPoint, data.enemyMovementBehaviour.moveSpeed);
+            yield return data.enemyMovementBehaviour.MoveTo(nextPoint, data.enemyMovementBehaviour.currentMoveSpeed);
 
             nextPointIndex = (nextPointIndex + 1) % wayPoints.Length;
             nextPoint = wayPoints[nextPointIndex];
