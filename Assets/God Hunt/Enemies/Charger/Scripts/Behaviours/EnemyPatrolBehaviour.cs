@@ -22,7 +22,7 @@ public class EnemyPatrolBehaviour : BaseBehaviour
     #endregion
 
     #region Events
-    [SerializeField] UnityVoidEvent OnWaypointReached, OnPathFinished;
+    [SerializeField] UnityVoidEvent OnWaypointReached , OnPathFinished, OnPatrolStart, OnPatrolEnd;
     #endregion
 
     protected override void CustomSetup()
@@ -57,6 +57,7 @@ public class EnemyPatrolBehaviour : BaseBehaviour
         if (path)
         {
             StartCoroutine(FollowPath());
+            OnPatrolStart.Invoke();
         }
     }
 
@@ -81,7 +82,7 @@ public class EnemyPatrolBehaviour : BaseBehaviour
         StopAllCoroutines();
         data.enemyMovementBehaviour.SetMoveDirection(Vector2.zero);
         wasInterrupted = true;
-        print("patrol stop");
+        OnPatrolEnd.Invoke();
     }
 
     public void ToggleRotationToWaypoint(bool _value)
