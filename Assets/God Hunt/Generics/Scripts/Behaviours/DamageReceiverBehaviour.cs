@@ -3,7 +3,9 @@
 public class DamageReceiverBehaviour : BaseBehaviour
 {
     [SerializeField] bool camShake = true;
+    [SerializeField] float frequency = 1.5f, amplitude = .4f, duration = .2f;
     [SerializeField] bool freezeFrames = true;
+    [SerializeField] float time = .1f;
 
     #region Events
     public UnityIntEvent OnHealthChanged;
