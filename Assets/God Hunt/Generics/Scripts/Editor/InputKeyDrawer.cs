@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using UnityEditor;
-using System.Collections.Generic;
 
 [CustomPropertyDrawer(typeof(InputKey))]
 public class InputKeyDrawer : PropertyDrawer

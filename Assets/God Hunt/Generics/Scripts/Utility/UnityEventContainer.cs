@@ -44,6 +44,24 @@ public class UnityTransformEvent : UnityEvent<Transform> { }
 public class UnityDamageReceiverEvent : UnityEvent<DamageReceiverBehaviour> { }
 
 /// <summary>
+/// Unity Event passing a string
+/// </summary>
+[System.Serializable]
+public class UnityStringEvent : UnityEvent<string> { }
+
+/// <summary>
+/// Unity Event passing a Component
+/// </summary>
+[System.Serializable]
+public class UnityComponentEvent : UnityEvent<Component> { }
+
+/// <summary>
+/// Unity Event passing a LayerMask
+/// </summary>
+[System.Serializable]
+public class UnityLayerMaskEvent : UnityEvent<LayerMask> { }
+
+/// <summary>
 /// Evento di unity void
 /// </summary>
 [System.Serializable]
