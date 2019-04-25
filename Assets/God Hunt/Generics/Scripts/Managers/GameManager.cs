@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Collections;
 
 public class GameManager : MonoBehaviour
 {
@@ -110,6 +111,11 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1;
     }
 
+    public void FreezeFrames(float _duration)
+    {
+        StartCoroutine(CountFreezeFrames(_duration));
+    }
+
     #endregion
 
     #region Internals
@@ -155,5 +161,15 @@ public class GameManager : MonoBehaviour
             Instance = this;
     }
 
+    IEnumerator CountFreezeFrames(float _time)
+    {
+        Time.timeScale = 0;
+
+        yield return new WaitForSecondsRealtime(_time);
+
+        Time.timeScale = 1;
+    }
+
     #endregion
+
 }

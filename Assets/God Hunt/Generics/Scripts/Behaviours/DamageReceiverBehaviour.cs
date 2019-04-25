@@ -3,6 +3,7 @@
 public class DamageReceiverBehaviour : BaseBehaviour
 {
     [SerializeField] bool camShake = true;
+    [SerializeField] bool freezeFrames = true;
 
     #region Events
     public UnityIntEvent OnHealthChanged;
@@ -38,6 +39,8 @@ public class DamageReceiverBehaviour : BaseBehaviour
                 }
                 if (camShake)
                     CameraManager.Instance.CameraShake(1.5f, .4f, .2f);
+                if (freezeFrames)
+                    GameManager.Instance.FreezeFrames(.1f);
             }
         }
     }
