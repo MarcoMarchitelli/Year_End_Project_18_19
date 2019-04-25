@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
@@ -8,6 +7,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] bool initPlayer;
     [SerializeField] bool initUIManager;
     [SerializeField] bool initRoomSystem;
+    [SerializeField] bool initCameraManager;
     [SerializeField] bool initInputManager;
 
     private UIManager uiManager;
@@ -124,15 +124,21 @@ public class GameManager : MonoBehaviour
             inputManager.Setup();
         }
 
-        if (initUIManager)
-        {
-            uiManager = FindObjectOfType<UIManager>();
-        }
-
         if (initPlayer)
         {
             player = FindObjectOfType<PlayerEntity>();
             player.SetUpEntity();
+        }
+
+        if (initUIManager)
+        {
+            uiManager = FindObjectOfType<UIManager>();
+            uiManager.Setup();
+        }
+
+        if (initCameraManager)
+        {
+            FindObjectOfType<CameraManager>().Init();
         }
 
         if (initRoomSystem)

@@ -2,6 +2,8 @@
 
 public class DamageReceiverBehaviour : BaseBehaviour
 {
+    [SerializeField] bool camShake = true;
+
     #region Events
     public UnityIntEvent OnHealthChanged;
     [SerializeField] UnityVoidEvent OnHealthDepleated;
@@ -34,6 +36,8 @@ public class DamageReceiverBehaviour : BaseBehaviour
                 {
                     OnHealthChanged.Invoke(_currentHealth);
                 }
+                if (camShake)
+                    CameraManager.Instance.CameraShake(1.5f, .4f, .2f);
             }
         }
     }

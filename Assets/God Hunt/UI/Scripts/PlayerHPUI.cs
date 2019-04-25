@@ -13,7 +13,7 @@ public class PlayerHPUI : MonoBehaviour
     [SerializeField] Sprite PlayerIconFull;
     [SerializeField] Sprite PlayerIconDamaged;
     [Header("References")]
-    [SerializeField] DamageReceiverBehaviour damageReceiver;
+    public DamageReceiverBehaviour damageReceiver;
     [SerializeField] Image PlayerIcon;
     [SerializeField] Image HPEnd;
 
