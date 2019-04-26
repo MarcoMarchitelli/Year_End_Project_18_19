@@ -71,6 +71,11 @@ public class EnemyMovementBehaviour : BaseBehaviour
         moveDirection = Vector2.zero;
     }
 
+    public void ResetMoveSpeed()
+    {
+        currentMoveSpeed = moveSpeed;
+    }
+
     public Coroutine TurnTo(Vector3 _dir, float _rotationAnglePerSecond, Action _callback = null)
     {
         StopAllCoroutines();
