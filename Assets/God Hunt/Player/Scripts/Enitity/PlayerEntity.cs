@@ -10,7 +10,7 @@ public class PlayerEntity : BoxColliderEntity
             GetBehaviour<PlayerInputBehaviour>(),
             GetBehaviour<PlayerAttacksBehaviour>(),
             GetComponent<BoxCollider>(),
-            GetComponentInChildren<AnimatorProxy>(),
+            GetComponentInChildren<PlayerAnimatorProxy>(),
             GetBehaviour<DamageReceiverBehaviour>(),
             GetBehaviour<RespawnBehaviour>(),
             GetBehaviour<PlayerCameraTarget>()
@@ -24,13 +24,13 @@ public class PlayerEntityData : BoxColliderEntityData
     public PlayerCollisionsBehaviour playerCollisionsBehaviour;
     public PlayerInputBehaviour playerInputBehaviour;
     public PlayerAttacksBehaviour playerAttacksBehaviour;
-    public AnimatorProxy animatorProxy;
+    public PlayerAnimatorProxy animatorProxy;
     public DamageReceiverBehaviour damageReceiverBehaviour;
     public RespawnBehaviour respawnBehaviour;
     public PlayerCameraTarget cameraTarget;
 
     public PlayerEntityData(PlayerGameplayBehaviour _p, PlayerCollisionsBehaviour _c, PlayerInputBehaviour _pib, PlayerAttacksBehaviour _pab, 
-        BoxCollider _bc, AnimatorProxy _ap, DamageReceiverBehaviour _drb, RespawnBehaviour _rb, PlayerCameraTarget _pct)
+        BoxCollider _bc, PlayerAnimatorProxy _ap, DamageReceiverBehaviour _drb, RespawnBehaviour _rb, PlayerCameraTarget _pct)
     {
         playerGameplayBehaviour = _p;
         playerCollisionsBehaviour = _c;

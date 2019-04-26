@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class AnimatorProxy : MonoBehaviour
+public class PlayerAnimatorProxy : MonoBehaviour
 {
     [SerializeField] Animator animator;
 
