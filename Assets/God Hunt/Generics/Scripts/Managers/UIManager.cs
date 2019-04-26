@@ -9,10 +9,18 @@ public class UIManager : MonoBehaviour
     [SerializeField] GameObject inventoryPanel;
     [SerializeField] GameObject controllerCommandsScheme;
     [SerializeField] GameObject keyboardCommandsScheme;
+    public PlayerHPUI playerHPUI;
 
     bool controllerSchemeActive = true;
 
     #region API
+
+    public void Setup()
+    {
+        PlayerEntityData playerData = GameManager.Instance.player.Data as PlayerEntityData;
+
+        playerHPUI.damageReceiver = playerData.damageReceiverBehaviour;
+    }
 
     public void ToggleInventoryPanel(bool _value)
     {

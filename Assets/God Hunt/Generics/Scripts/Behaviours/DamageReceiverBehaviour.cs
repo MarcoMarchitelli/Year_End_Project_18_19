@@ -2,6 +2,11 @@
 
 public class DamageReceiverBehaviour : BaseBehaviour
 {
+    [SerializeField] bool camShake = true;
+    [SerializeField] float frequency = 1.5f, amplitude = .4f, duration = .2f;
+    [SerializeField] bool freezeFrames = true;
+    [SerializeField] float time = .1f;
+
     #region Events
     public UnityIntEvent OnHealthChanged;
     [SerializeField] UnityVoidEvent OnHealthDepleated;
@@ -34,6 +39,10 @@ public class DamageReceiverBehaviour : BaseBehaviour
                 {
                     OnHealthChanged.Invoke(_currentHealth);
                 }
+                if (camShake)
+                    CameraManager.Instance.CameraShake(1.5f, .4f, .2f);
+                if (freezeFrames)
+                    GameManager.Instance.FreezeFrames(.1f);
             }
         }
     }

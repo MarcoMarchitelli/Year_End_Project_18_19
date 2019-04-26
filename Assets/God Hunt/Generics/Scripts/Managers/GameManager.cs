@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
+using System.Collections;
 
 public class GameManager : MonoBehaviour
 {
@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] bool initPlayer;
     [SerializeField] bool initUIManager;
     [SerializeField] bool initRoomSystem;
+    [SerializeField] bool initCameraManager;
     [SerializeField] bool initInputManager;
 
     private UIManager uiManager;
@@ -110,6 +111,11 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1;
     }
 
+    public void FreezeFrames(float _duration)
+    {
+        StartCoroutine(CountFreezeFrames(_duration));
+    }
+
     #endregion
 
     #region Internals
@@ -124,15 +130,21 @@ public class GameManager : MonoBehaviour
             inputManager.Setup();
         }
 
-        if (initUIManager)
-        {
-            uiManager = FindObjectOfType<UIManager>();
-        }
-
         if (initPlayer)
         {
             player = FindObjectOfType<PlayerEntity>();
             player.SetUpEntity();
+        }
+
+        if (initUIManager)
+        {
+            uiManager = FindObjectOfType<UIManager>();
+            uiManager.Setup();
+        }
+
+        if (initCameraManager)
+        {
+            FindObjectOfType<CameraManager>().Init();
         }
 
         if (initRoomSystem)
@@ -149,5 +161,15 @@ public class GameManager : MonoBehaviour
             Instance = this;
     }
 
+    IEnumerator CountFreezeFrames(float _time)
+    {
+        Time.timeScale = 0;
+
+        yield return new WaitForSecondsRealtime(_time);
+
+        Time.timeScale = 1;
+    }
+
     #endregion
+
 }
