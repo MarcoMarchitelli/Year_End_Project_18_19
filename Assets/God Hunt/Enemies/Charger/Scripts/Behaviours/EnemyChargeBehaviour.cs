@@ -34,6 +34,14 @@ public class EnemyChargeBehaviour : BaseBehaviour
         data.enemyMovementBehaviour.TurnTo(dirToTarget, turnToTargetSpeed, Charge);
     }
 
+    public void StopCharge()
+    {
+        data.enemyMovementBehaviour.ResetMoveDirection();
+        data.enemyMovementBehaviour.ResetMoveSpeed();
+        data.enemyMovementBehaviour.StopAllCoroutines();
+        OnChargeEnd.Invoke(chargeCooldown);
+    }
+
     #endregion
 
     void Charge()
