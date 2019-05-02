@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Refactoring
@@ -16,8 +15,6 @@ namespace Refactoring
         [SerializeField] UnityVoidEvent OnTargetCollision;
         [SerializeField] UnityVoidEvent OnFadeEffectComplete;
         [SerializeField] UnityVoidEvent OnFadeEnd;
-
-        [SerializeField] Material transparentMaterial;
 
         MeshRenderer[] meshesToFade;
         Material[] meshesOldMaterials; 
@@ -147,7 +144,7 @@ namespace Refactoring
 
                 for (int i = 0; i < meshesToFade.Length; i++)
                 {
-                    meshesToFade[i].material.color = new Color(meshesToFade[i].material.color.r, meshesToFade[i].material.color.g, meshesToFade[i].material.color.b, Mathf.Lerp(1, 0, fadePercent));
+                    meshesToFade[i].material.SetColor("_BaseColor", new Color(meshesToFade[i].material.color.r, meshesToFade[i].material.color.g, meshesToFade[i].material.color.b, Mathf.Lerp(1, 0, fadePercent)));
                 }
 
                 yield return null;
@@ -162,7 +159,7 @@ namespace Refactoring
             data.collider.enabled = true;
             for (int i = 0; i < meshesToFade.Length; i++)
             {
-                meshesToFade[i].material.color = new Color(meshesToFade[i].material.color.r, meshesToFade[i].material.color.g, meshesToFade[i].material.color.b, 1);
+                meshesToFade[i].material.SetColor("_BaseColor", new Color(meshesToFade[i].material.color.r, meshesToFade[i].material.color.g, meshesToFade[i].material.color.b, 1));
             }
             fadeing = false;
         }
