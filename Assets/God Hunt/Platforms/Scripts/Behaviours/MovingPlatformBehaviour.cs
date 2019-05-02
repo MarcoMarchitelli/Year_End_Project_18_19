@@ -127,6 +127,8 @@ namespace Refactoring
                     rayOrigin += Vector2.right * (verticalRaySpacing * i);
                     RaycastHit hit;
 
+                    Debug.DrawLine(rayOrigin, rayOrigin + Vector2.up * directionY * rayLength, Color.red);
+
                     if (Physics.Raycast(rayOrigin, Vector2.up * directionY, out hit, rayLength, passengerMask))
                     {
                         if (hit.distance != 0)
@@ -155,6 +157,8 @@ namespace Refactoring
                     rayOrigin += Vector2.up * (horizontalRaySpacing * i);
                     RaycastHit hit;
 
+                    Debug.DrawLine(rayOrigin, rayOrigin + Vector2.right * directionX * rayLength, Color.red);
+
                     if (Physics.Raycast(rayOrigin, Vector2.right * directionX, out hit, rayLength, passengerMask))
                     {
                         if (hit.distance != 0)
@@ -181,6 +185,8 @@ namespace Refactoring
                 {
                     Vector2 rayOrigin = raycastOrigins.topLeft + Vector2.right * (verticalRaySpacing * i);
                     RaycastHit hit;
+
+                    Debug.DrawLine(rayOrigin, rayOrigin + Vector2.up * rayLength, Color.red);
 
                     if (Physics.Raycast(rayOrigin, Vector2.up, out hit, rayLength, passengerMask))
                     {
