@@ -45,7 +45,6 @@ public class CameraManager : MonoBehaviour
         currentNoise.m_AmplitudeGain = _amplitudeGain;
         currentNoise.m_FrequencyGain = _frequencyGain;
         TimerGod.Timer(_duration, StopShake);
-        print("madonna che cam shake impressionante");
     }
 
     public void StopShake()

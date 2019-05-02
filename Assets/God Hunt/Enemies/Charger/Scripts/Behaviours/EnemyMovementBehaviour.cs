@@ -41,7 +41,6 @@ public class EnemyMovementBehaviour : BaseBehaviour
         if (!_value)
             StopAllCoroutines();
         base.Enable(_value);
-        print(_value);
     }
 
     public override void OnUpdate()

@@ -30,7 +30,8 @@ public class DamageReceiverBehaviour : BaseBehaviour
         {
             if (_currentHealth != value)
             {
-                _currentHealth = value;
+                _currentHealth = value;          
+
                 if (_currentHealth == 0)
                 {
                     OnHealthDepleated.Invoke();
@@ -39,6 +40,7 @@ public class DamageReceiverBehaviour : BaseBehaviour
                 {
                     OnHealthChanged.Invoke(_currentHealth);
                 }
+
                 if (camShake)
                     CameraManager.Instance.CameraShake(1.5f, .4f, .2f);
                 if (freezeFrames)

@@ -32,6 +32,8 @@ public class KnockbackReceiverBehaviour : BaseBehaviour
         float travelTime = spaceTraveled / _knockbackSpeedValue;
         float timer = 0;
 
+        print(name + " knockback start");
+
         while (timer < travelTime)
         {
             timer += Time.deltaTime;
@@ -40,6 +42,8 @@ public class KnockbackReceiverBehaviour : BaseBehaviour
 
             yield return null;
         }
+
+        print(name + " knockback end");
 
         OnKnockbackEnd.Invoke();
     }

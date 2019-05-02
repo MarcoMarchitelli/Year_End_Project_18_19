@@ -127,6 +127,7 @@ public class ScanBehaviour : BaseBehaviour
             Debug.LogWarning(name + "'s scan behaviour is not setupped!");
             return false;
         }
+
         if (!target)
         {
             return false;

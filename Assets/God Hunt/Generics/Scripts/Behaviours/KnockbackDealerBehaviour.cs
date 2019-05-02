@@ -6,8 +6,8 @@ public class KnockbackDealerBehaviour : BaseBehaviour
     [SerializeField] protected bool dealsOnCollision = false;
     [SerializeField] protected bool dealsOnTrigger = false;
     [SerializeField] protected float knockbackPower;
-    [HideInInspector] public float speedMultiplier;
-    [HideInInspector] public float distanceMultiplier;
+    public float speedMultiplier;
+    public float distanceMultiplier;
 
     #region Events
     [SerializeField] UnityFloatEvent OnKnockbackDealt;
@@ -28,6 +28,8 @@ public class KnockbackDealerBehaviour : BaseBehaviour
         }
 
         Vector2 collisionDirection = (_receiver.transform.position - Entity.gameObject.transform.position).normalized;
+
+        print(collisionDirection);
 
         _receiver.Knockback(knockbackPower, knockbackPower * speedMultiplier, knockbackPower * distanceMultiplier, collisionDirection);
     }
