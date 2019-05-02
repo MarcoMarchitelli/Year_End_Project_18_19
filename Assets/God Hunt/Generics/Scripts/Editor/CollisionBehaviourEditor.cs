@@ -153,7 +153,7 @@ public class CollisionBehaviourEditor : Editor
                 GUILayout.EndVertical();
             }
 
-            if (GUILayout.Button("Add New Skill"))
+            if (GUILayout.Button("Add New Collision"))
             {
                 collisionBehaviour.AddCollision();
                 collisionShowers.Add(false);
