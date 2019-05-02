@@ -54,10 +54,10 @@ public class InteractableBehaviour : BaseBehaviour
                 if (countTime)
                     timer += Time.deltaTime;
 
-                if (Input.GetKeyDown(currentInteraction.Input))
+                if (Input.GetButtonDown(InputManager.CurrentInputDevice + currentInteraction.Input))
                     countTime = true;
 
-                if (Input.GetKeyUp(currentInteraction.Input))
+                if (Input.GetButtonUp(InputManager.CurrentInputDevice + currentInteraction.Input))
                 {
                     countTime = false;
                     timer = 0;
@@ -80,7 +80,7 @@ public class InteractableBehaviour : BaseBehaviour
             }
             else
             {
-                if (Input.GetKeyDown(currentInteraction.Input))
+                if (Input.GetButtonDown(InputManager.CurrentInputDevice + currentInteraction.Input))
                 {
                     currentInteraction.OnInteraction.Invoke();
                 }
@@ -185,7 +185,7 @@ public class Interaction
 {
     public bool RequiresInput;
     public bool RequiresTimer;
-    public KeyCode Input;
+    public string Input;
     public float Time;
     public UnityVoidEvent OnInteraction;
 }

@@ -26,10 +26,21 @@ public class PlayerHPUI : MonoBehaviour
             Setup();
     }
 
-    void Setup()
+    public void Setup()
     {
         damageReceiver.OnHealthChanged.AddListener(UpdateUI);
         damageReceiver.OnHealthDepleated.AddListener(UpdateUI);
+        damageReceiver.OnHealthUpgraded.AddListener(InstantiateChunks);
+
+        InstantiateChunks();
+    }
+
+    void InstantiateChunks()
+    {       
+        for (int i = 1; i < transform.childCount; i++)
+        {
+            Destroy(transform.GetChild(i).gameObject);
+        }
 
         HPChunks = new List<Image>();
 
@@ -39,8 +50,10 @@ public class PlayerHPUI : MonoBehaviour
             hp.SetNativeSize();
             HPChunks.Add(hp);
         }
-
+        
         instHpEnd = Instantiate(HPEnd, transform);
+
+        UpdateUIAuto();
     }
 
     public void UpdateUIAuto()

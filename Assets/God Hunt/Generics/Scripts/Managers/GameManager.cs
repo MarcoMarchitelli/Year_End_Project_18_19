@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour
     bool isPaused = false;
     bool isMapOpen = false;
     bool isInInventory = false;
+    bool isInCollectablesScreen = false;
 
     #region MonoBehaviour Methods
 
@@ -33,7 +34,7 @@ public class GameManager : MonoBehaviour
 
     public void ToggleInventory()
     {
-        if (!isPaused && !isMapOpen)
+        if (!isPaused && !isMapOpen && !isInCollectablesScreen)
         {
             isInInventory = !isInInventory;
 
@@ -54,7 +55,7 @@ public class GameManager : MonoBehaviour
 
     public void ToggleMap()
     {
-        if (!isPaused && !isInInventory)
+        if (!isPaused && !isInInventory && !isInCollectablesScreen)
         {
             isMapOpen = !isMapOpen;
 
@@ -75,7 +76,7 @@ public class GameManager : MonoBehaviour
 
     public void TogglePause()
     {
-        if (!isMapOpen && !isInInventory)
+        if (!isMapOpen && !isInInventory && !isInCollectablesScreen)
         {
             isPaused = !isPaused;
 
@@ -90,6 +91,27 @@ public class GameManager : MonoBehaviour
                 Time.timeScale = 1;
                 player.Enable(true);
                 uiManager.TogglePausePanel(false);
+            }
+        }
+    }
+
+    public void ToggleCollectablesScreen()
+    {
+        if (!isMapOpen && !isInInventory && !isPaused)
+        {
+            isInCollectablesScreen = !isInCollectablesScreen;
+
+            if (isInCollectablesScreen)
+            {
+                Time.timeScale = 0;
+                player.Enable(false);
+                uiManager.ToggleCollectablesScreen(isInCollectablesScreen);
+            }
+            else
+            {
+                Time.timeScale = 1;
+                player.Enable(true);
+                uiManager.ToggleCollectablesScreen(isInCollectablesScreen);
             }
         }
     }

@@ -237,7 +237,7 @@ public class CollisionData
     public EventType eventType = EventType.enter;
     public TargetType searchFor = TargetType.Layer;
     public LayerMask layer;
-    public Component component;
+    public MonoBehaviour component;
     public string tag;
     public UnityStringEvent onTagCollisionEnter, onTagCollisionStay, onTagCollisionExit;
     public UnityComponentEvent onComponentCollisionEnter, onComponentCollisionStay, onComponentCollisionExit;

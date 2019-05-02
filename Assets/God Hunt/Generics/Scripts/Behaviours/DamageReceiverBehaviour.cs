@@ -9,18 +9,20 @@ public class DamageReceiverBehaviour : BaseBehaviour
 
     #region Events
     public UnityIntEvent OnHealthChanged;
+    public UnityVoidEvent OnHealthUpgraded;
     public UnityVoidEvent OnHealthDepleated;
     #endregion
 
     protected override void CustomSetup()
     {
-        _currentHealth = maxHealth;
+        _currentHealth = _maxHealth;
     }
 
-    [SerializeField] int maxHealth;
+    [SerializeField] int _maxHealth;
     public int MaxHealth
     {
-        get { return maxHealth; }
+        get { return _maxHealth; }
+        private set { _maxHealth = value; }
     }
     int _currentHealth;
     public int CurrentHealth
@@ -66,16 +68,22 @@ public class DamageReceiverBehaviour : BaseBehaviour
 
         if (tempHealth <= 0)
             tempHealth = 0;
-        else if (tempHealth > maxHealth)
-            tempHealth = maxHealth;
+        else if (tempHealth > _maxHealth)
+            tempHealth = _maxHealth;
 
         CurrentHealth = tempHealth;
         return true;
     }
 
+    public void SetMaxHealth(int _value)
+    {
+        MaxHealth = _value;
+        OnHealthUpgraded.Invoke();
+    }
+
     public void ResetHealth()
     {
-        _currentHealth = maxHealth;
+        _currentHealth = _maxHealth;
         OnHealthChanged.Invoke(_currentHealth);
     }
 }

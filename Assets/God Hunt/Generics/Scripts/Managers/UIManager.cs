@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using TMPro;
 
 public class UIManager : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] GameObject inventoryPanel;
     [SerializeField] GameObject controllerCommandsScheme;
     [SerializeField] GameObject keyboardCommandsScheme;
+    [SerializeField] GameObject collectablesScreen;
     public PlayerHPUI playerHPUI;
 
     bool controllerSchemeActive = true;
@@ -20,12 +22,19 @@ public class UIManager : MonoBehaviour
         PlayerEntityData playerData = GameManager.Instance.player.Data as PlayerEntityData;
 
         playerHPUI.damageReceiver = playerData.damageReceiverBehaviour;
+        playerHPUI.Setup();
     }
 
     public void ToggleInventoryPanel(bool _value)
     {
         if(inventoryPanel)
             inventoryPanel.SetActive(_value);
+    }
+
+    public void ToggleCollectablesScreen(bool _value)
+    {
+        if (collectablesScreen)
+            collectablesScreen.SetActive(_value);
     }
 
     public void ToggleGameplayPanel(bool _value)

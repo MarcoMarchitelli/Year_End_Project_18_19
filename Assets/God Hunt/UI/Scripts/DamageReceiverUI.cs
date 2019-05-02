@@ -13,6 +13,7 @@ public class DamageReceiverUI : MonoBehaviour
     [SerializeField] bool setupOnAwake = false;
 
     GameObject[] healthChunks;
+    HorizontalLayoutGroup layoutGroup;
 
     public void SetUp(DamageReceiverBehaviour _drb = null)
     {
@@ -20,8 +21,9 @@ public class DamageReceiverUI : MonoBehaviour
             damageReceiver = _drb;
 
         damageReceiver.OnHealthChanged.AddListener(UpdateUI);
+        damageReceiver.OnHealthUpgraded.AddListener(UpgradeUI);
 
-        HorizontalLayoutGroup layoutGroup = GetComponent<HorizontalLayoutGroup>();
+        layoutGroup = GetComponent<HorizontalLayoutGroup>();
 
         StartCoroutine(LayoutSetup(layoutGroup));
     }
@@ -41,7 +43,12 @@ public class DamageReceiverUI : MonoBehaviour
         }
     }
 
-    IEnumerator LayoutSetup(HorizontalLayoutGroup _l)
+    public void UpgradeUI()
+    {
+        StartCoroutine(LayoutSetup(layoutGroup));
+    }
+
+    IEnumerator LayoutSetup(HorizontalLayoutGroup _l, bool _updateUI = false)
     {
         healthChunks = new GameObject[damageReceiver.MaxHealth];
 
@@ -58,6 +65,11 @@ public class DamageReceiverUI : MonoBehaviour
         _l.childControlHeight = false;
         _l.childForceExpandWidth = false;
         _l.childForceExpandHeight = false;
+
+        if (_updateUI)
+        {
+            UpdateUI(damageReceiver.CurrentHealth);
+        }
     }
 
     private void Start()
