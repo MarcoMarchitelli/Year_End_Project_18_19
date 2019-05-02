@@ -29,6 +29,7 @@ public class PlayerHPUI : MonoBehaviour
     void Setup()
     {
         damageReceiver.OnHealthChanged.AddListener(UpdateUI);
+        damageReceiver.OnHealthDepleated.AddListener(UpdateUI);
 
         HPChunks = new List<Image>();
 
@@ -62,6 +63,31 @@ public class PlayerHPUI : MonoBehaviour
         {
             //full hp
             if( i < _hp_value)
+            {
+                HPChunks[i].sprite = HPChunkFull;
+            }
+            else
+            {
+                HPChunks[i].sprite = HPChunkEmpty;
+            }
+        }
+    }
+
+    void UpdateUI()
+    {
+        if (0 < damageReceiver.MaxHealth)
+        {
+            PlayerIcon.sprite = PlayerIconDamaged;
+        }
+        else
+        {
+            PlayerIcon.sprite = PlayerIconFull;
+        }
+
+        for (int i = 0; i < damageReceiver.MaxHealth; i++)
+        {
+            //full hp
+            if (i < 0)
             {
                 HPChunks[i].sprite = HPChunkFull;
             }

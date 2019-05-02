@@ -9,7 +9,7 @@ public class DamageReceiverBehaviour : BaseBehaviour
 
     #region Events
     public UnityIntEvent OnHealthChanged;
-    [SerializeField] UnityVoidEvent OnHealthDepleated;
+    public UnityVoidEvent OnHealthDepleated;
     #endregion
 
     protected override void CustomSetup()
