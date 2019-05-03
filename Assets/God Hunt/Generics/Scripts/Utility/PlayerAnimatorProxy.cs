@@ -7,6 +7,8 @@ public class PlayerAnimatorProxy : MonoBehaviour
     [Header("Events")]
     [SerializeField] UnityVoidEvent OnDeathAnimEnd;
 
+    public bool IsDead = false;
+
     bool _isGrounded;
     public bool IsGrounded
     {
@@ -95,6 +97,7 @@ public class PlayerAnimatorProxy : MonoBehaviour
     public void Death()
     {
         animator.SetTrigger("Death");
+        IsDead = true;
     }
 
     public void DeathAnimEnd()

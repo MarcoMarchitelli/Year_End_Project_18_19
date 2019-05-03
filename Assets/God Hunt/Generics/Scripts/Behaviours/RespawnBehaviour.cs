@@ -2,6 +2,8 @@
 
 public class RespawnBehaviour : BaseBehaviour
 {
+    PlayerEntityData data;
+
     [SerializeField] UnityVoidEvent OnDeathRespawn;
     [SerializeField] UnityVoidEvent OnCheckpointRespawn;
 
@@ -11,6 +13,7 @@ public class RespawnBehaviour : BaseBehaviour
     protected override void CustomSetup()
     {
         SetRespawnPoint(Entity.gameObject.transform.position);
+        data = Entity.Data as PlayerEntityData;
     }
 
     public void SetRespawnPoint(Vector3 _value)
@@ -28,6 +31,7 @@ public class RespawnBehaviour : BaseBehaviour
         if (_isDeathRespawn)
         {
             Entity.gameObject.transform.position = deathRespawnPoint;
+            data.animatorProxy.IsDead = false;
             OnDeathRespawn.Invoke();
         }
         else

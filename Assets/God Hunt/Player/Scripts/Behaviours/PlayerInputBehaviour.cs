@@ -47,9 +47,8 @@ public class PlayerInputBehaviour : BaseBehaviour
     Vector2 directionalInput;
     void ReadInputs()
     {
-        if (!IsSetupped)
+        if (!IsSetupped || data.animatorProxy.IsDead)
         {
-            Debug.Log(name + " input not setupped!");
             return;
         }
 
