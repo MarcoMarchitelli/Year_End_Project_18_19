@@ -10,7 +10,7 @@ public class InputManager : MonoBehaviour
 
     public static InputManager Instance;
 
-    EventSystem eventSystem;
+    public EventSystem eventSystem;
     StandaloneInputModule inputModule;
 
     string _currentInputDevice;
