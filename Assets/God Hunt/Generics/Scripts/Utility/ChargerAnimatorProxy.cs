@@ -6,7 +6,6 @@ public class ChargerAnimatorProxy : MonoBehaviour
 
     [Header("Events")]
     public UnityVoidEvent OnChargeAnimStart;
-    public UnityVoidEvent OnAttackAnimEnd;
 
     bool _isWalking;
     public bool IsWalking
@@ -42,14 +41,18 @@ public class ChargerAnimatorProxy : MonoBehaviour
         animator.SetTrigger("Death");
     }
 
+    public void ChargeStart()
+    {
+        animator.SetTrigger("Start Charge");
+    }
+
+    public void ChargeEnd()
+    {
+        animator.SetTrigger("End Charge");
+    }
+
     public void Charge()
     {
         OnChargeAnimStart.Invoke();
     }
-
-    public void AttackEnd()
-    {
-        OnAttackAnimEnd.Invoke();
-    }
-
 }

@@ -25,15 +25,21 @@ public class EnemyChargeBehaviour : BaseBehaviour
     public void SetTarget(Transform _target)
     {
         target = _target;
+        dirToTarget = (target.position - transform.position).normalized;
+        data.enemyMovementBehaviour.TurnTo(dirToTarget, turnToTargetSpeed, StartCharge);
     }
 
+    /// <summary>
+    /// Triggers an event which is responsible for animation triggering and knockback settings.
+    /// </summary>
     public void StartCharge()
     {
         OnChargeStart.Invoke();
-        dirToTarget = (target.position - transform.position).normalized;
-        data.enemyMovementBehaviour.TurnTo(dirToTarget, turnToTargetSpeed, Charge);
     }
 
+    /// <summary>
+    /// Interrupts the charge and calls related event.
+    /// </summary>
     public void StopCharge()
     {
         data.enemyMovementBehaviour.ResetMoveDirection();
@@ -42,13 +48,19 @@ public class EnemyChargeBehaviour : BaseBehaviour
         OnChargeEnd.Invoke(0.1f);
     }
 
-    #endregion
-
-    void Charge()
+    /// <summary>
+    /// Performs the charge.
+    /// </summary>
+    public void Charge()
     {
         data.enemyMovementBehaviour.MoveTo((Vector2)transform.position + new Vector2(Mathf.Sign( dirToTarget.x ) * chargeDistance, 0), chargeSpeed, EndCharge);
     }
 
+    #endregion
+
+    /// <summary>
+    /// Calls an event which handles the end of the charge (animations, cooldown and knockback settings).
+    /// </summary>
     void EndCharge()
     {
         OnChargeEnd.Invoke(chargeCooldown);
