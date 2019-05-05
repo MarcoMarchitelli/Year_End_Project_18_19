@@ -355,6 +355,30 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 391091245}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &458561221 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7662638240920340621, guid: 48be27b17546cf747a6d993265893ec4,
+    type: 3}
+  m_PrefabInstance: {fileID: 7662638240920340617}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7e739bde162cdd4c8a6efdca53a6e75, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &458561228 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3264598925554043710, guid: 48be27b17546cf747a6d993265893ec4,
+    type: 3}
+  m_PrefabInstance: {fileID: 7662638240920340617}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d623a2f456d0ee54dbaac393bb54b445, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &470117352
 GameObject:
   m_ObjectHideFlags: 0
@@ -1779,7 +1803,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2058438604}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.019021988, y: 4.9983387, z: -10}
+  m_LocalPosition: {x: -1.0113182, y: 4.9983387, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 831409824}
@@ -2234,6 +2258,81 @@ PrefabInstance:
       propertyPath: path
       value: 
       objectReference: {fileID: 590540757}
+    - target: {fileID: 3264598925554043704, guid: 48be27b17546cf747a6d993265893ec4,
+        type: 3}
+      propertyPath: OnHealthChanged.m_PersistentCalls.m_Calls.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3264598925554043704, guid: 48be27b17546cf747a6d993265893ec4,
+        type: 3}
+      propertyPath: OnHealthDepleated.m_PersistentCalls.m_Calls.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3264598925554043704, guid: 48be27b17546cf747a6d993265893ec4,
+        type: 3}
+      propertyPath: OnHealthChanged.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3264598925554043704, guid: 48be27b17546cf747a6d993265893ec4,
+        type: 3}
+      propertyPath: OnHealthChanged.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3264598925554043704, guid: 48be27b17546cf747a6d993265893ec4,
+        type: 3}
+      propertyPath: OnHealthChanged.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 458561221}
+    - target: {fileID: 3264598925554043704, guid: 48be27b17546cf747a6d993265893ec4,
+        type: 3}
+      propertyPath: OnHealthChanged.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: StopCharge
+      objectReference: {fileID: 0}
+    - target: {fileID: 3264598925554043704, guid: 48be27b17546cf747a6d993265893ec4,
+        type: 3}
+      propertyPath: OnHealthChanged.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 3264598925554043704, guid: 48be27b17546cf747a6d993265893ec4,
+        type: 3}
+      propertyPath: OnHealthDepleated.m_PersistentCalls.m_Calls.Array.data[3].m_Mode
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3264598925554043704, guid: 48be27b17546cf747a6d993265893ec4,
+        type: 3}
+      propertyPath: OnHealthDepleated.m_PersistentCalls.m_Calls.Array.data[3].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3264598925554043704, guid: 48be27b17546cf747a6d993265893ec4,
+        type: 3}
+      propertyPath: OnHealthDepleated.m_PersistentCalls.m_Calls.Array.data[3].m_Target
+      value: 
+      objectReference: {fileID: 458561228}
+    - target: {fileID: 3264598925554043704, guid: 48be27b17546cf747a6d993265893ec4,
+        type: 3}
+      propertyPath: OnHealthDepleated.m_PersistentCalls.m_Calls.Array.data[3].m_MethodName
+      value: Enable
+      objectReference: {fileID: 0}
+    - target: {fileID: 3264598925554043704, guid: 48be27b17546cf747a6d993265893ec4,
+        type: 3}
+      propertyPath: OnHealthDepleated.m_PersistentCalls.m_Calls.Array.data[3].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 3264598925554043704, guid: 48be27b17546cf747a6d993265893ec4,
+        type: 3}
+      propertyPath: OnHealthDepleated.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: StopCharge
+      objectReference: {fileID: 0}
+    - target: {fileID: 3264598925554043704, guid: 48be27b17546cf747a6d993265893ec4,
+        type: 3}
+      propertyPath: OnHealthDepleated.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3264598925554043704, guid: 48be27b17546cf747a6d993265893ec4,
+        type: 3}
+      propertyPath: OnHealthDepleated.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 458561221}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 48be27b17546cf747a6d993265893ec4, type: 3}
 --- !u!60 &8083077415983973612

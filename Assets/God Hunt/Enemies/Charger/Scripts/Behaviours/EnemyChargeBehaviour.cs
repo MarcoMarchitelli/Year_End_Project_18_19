@@ -39,7 +39,7 @@ public class EnemyChargeBehaviour : BaseBehaviour
         data.enemyMovementBehaviour.ResetMoveDirection();
         data.enemyMovementBehaviour.ResetMoveSpeed();
         data.enemyMovementBehaviour.StopAllCoroutines();
-        OnChargeEnd.Invoke(chargeCooldown);
+        OnChargeEnd.Invoke(0.1f);
     }
 
     #endregion

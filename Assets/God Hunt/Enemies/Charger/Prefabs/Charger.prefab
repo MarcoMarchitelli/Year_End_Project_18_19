@@ -327,9 +327,9 @@ MonoBehaviour:
   disableOnStart: 0
   dealsOnCollision: 0
   dealsOnTrigger: 1
-  knockbackPower: 5
-  speedMultiplier: 1
-  distanceMultiplier: 1
+  knockbackPower: 1.5
+  speedMultiplier: 3
+  distanceMultiplier: 0.5
   OnKnockbackDealt:
     m_PersistentCalls:
       m_Calls: []
@@ -666,6 +666,17 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1779370303}
+        m_MethodName: SetKnockbackPower
+        m_Mode: 4
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 5
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityVoidEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
   OnChargeEnd:
@@ -679,6 +690,17 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1779370303}
+        m_MethodName: SetKnockbackPower
+        m_Mode: 4
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 3
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2

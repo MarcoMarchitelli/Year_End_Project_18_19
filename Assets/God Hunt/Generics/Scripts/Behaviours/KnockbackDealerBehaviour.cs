@@ -29,8 +29,6 @@ public class KnockbackDealerBehaviour : BaseBehaviour
 
         Vector2 collisionDirection = (_receiver.transform.position - Entity.gameObject.transform.position).normalized;
 
-        print(collisionDirection);
-
         _receiver.Knockback(knockbackPower, knockbackPower * speedMultiplier, knockbackPower * distanceMultiplier, collisionDirection);
     }
 

@@ -20,7 +20,7 @@ public class KnockbackReceiverBehaviour : BaseBehaviour
         if (!IsSetupped)
             return;
 
-        float knockbackForce = Mathf.Max(0, _knockbackPower - mass);
+        float knockbackForce = Mathf.Max(1, _knockbackPower - mass);
         StartCoroutine(KnockbackDisplacement(_knockbackDirection, knockbackForce * _distMul, knockbackForce * _speedMul));
     }
 
@@ -28,11 +28,11 @@ public class KnockbackReceiverBehaviour : BaseBehaviour
     {
         OnKnockbackReceived.Invoke();
 
-        float spaceTraveled = ((Vector2)transform.position + _knockbackDirection * _knockbackDistValue).magnitude;
+        float spaceTraveled = (_knockbackDirection * _knockbackDistValue).magnitude;
         float travelTime = spaceTraveled / _knockbackSpeedValue;
         float timer = 0;
 
-        print(name + " knockback start");
+        print(name + " knockback start with " + travelTime + " traveltime");
 
         while (timer < travelTime)
         {
