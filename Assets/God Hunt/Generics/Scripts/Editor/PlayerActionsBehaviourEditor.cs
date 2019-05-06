@@ -143,7 +143,7 @@ namespace ActionSystem
                     GUILayout.EndVertical();
                 }
 
-                if (GUILayout.Button("Add New Skill"))
+                if (GUILayout.Button("Add New Action"))
                 {
                     PlayerActions.AddAction();
                     actionShowers.Add(false);

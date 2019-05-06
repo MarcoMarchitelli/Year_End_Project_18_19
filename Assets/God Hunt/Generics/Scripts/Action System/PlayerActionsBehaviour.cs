@@ -10,6 +10,9 @@ namespace ActionSystem
 
         public void RemoveAction(int _index)
         {
+            if (Actions == null)
+                Actions = new List<Action>();
+
             Action actionToRemove = Actions[_index];
             Actions.RemoveAt(_index);
             for (int i = 0; i < Actions.Count; i++)
@@ -21,6 +24,9 @@ namespace ActionSystem
 
         public void AddAction()
         {
+            if (Actions == null)
+                Actions = new List<Action>();
+
             Actions.Add(new Action());
 
             if (Actions.Count > 1)
