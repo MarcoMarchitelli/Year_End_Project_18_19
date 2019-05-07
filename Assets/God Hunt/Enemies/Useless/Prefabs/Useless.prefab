@@ -257,12 +257,34 @@ MonoBehaviour:
       PublicKeyToken=null
   OnMovementStart:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6251459324752127630}
+        m_MethodName: set_IsWalking
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
     m_TypeName: UnityVoidEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
   OnMovementEnd:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6251459324752127630}
+        m_MethodName: set_IsWalking
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityVoidEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
   OnPatrolStart:
@@ -328,7 +350,18 @@ MonoBehaviour:
       PublicKeyToken=null
   OnHealthDepleated:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6251459324752127630}
+        m_MethodName: Death
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityVoidEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
   _maxHealth: 3
@@ -361,6 +394,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
+--- !u!114 &6251459324752127630
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5961843585798621585}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 290cfdf7100d84640b40f7520a5064cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &3442486973918013897
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -430,6 +475,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e5a9c71f1dbcfdf489ad4ddce1aeed4c, type: 3}
+--- !u!1 &5961843585798621585 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9041700343062011992, guid: e5a9c71f1dbcfdf489ad4ddce1aeed4c,
+    type: 3}
+  m_PrefabInstance: {fileID: 3442486973918013897}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &3260942828622205455 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 182142417752341446, guid: e5a9c71f1dbcfdf489ad4ddce1aeed4c,
