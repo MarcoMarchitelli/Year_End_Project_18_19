@@ -7,7 +7,7 @@ public class PlayerAnimatorProxy : MonoBehaviour
     [Header("Events")]
     [SerializeField] UnityVoidEvent OnDeathAnimEnd;
 
-    public bool IsDead = false;
+    [HideInInspector] public bool IsDead = false;
 
     bool _isGrounded;
     public bool IsGrounded
