@@ -15,6 +15,8 @@ public class PlayerInputBehaviour : BaseBehaviour
     [SerializeField] float chargeTime;
     [Tooltip("Gets called on charge input down")]
     [SerializeField] UnityVoidEvent OnChargedStart;
+    [Tooltip("Gets called on charge input hold if charge time was enough to perform a charged attack")]
+    [SerializeField] UnityVoidEvent OnChargeCompleted;
     [Tooltip("Gets called on charge input up if charge time was enough to perform a charged attack")]
     [SerializeField] UnityVoidEvent OnChargedAttackInput;
 
@@ -136,11 +138,17 @@ public class PlayerInputBehaviour : BaseBehaviour
         }
     }
 
+    bool hasCalledChargeEvent = false;
     void CountTime()
     {
         if (countTime)
         {
             timer += Time.deltaTime;
+            if(hasCalledChargeEvent == false && timer >= chargeTime)
+            {
+                OnChargeCompleted.Invoke();
+                hasCalledChargeEvent = true;
+            }
         }
     }
 
@@ -152,6 +160,7 @@ public class PlayerInputBehaviour : BaseBehaviour
         {
             OnChargedAttackInput.Invoke();
             hasChargeAttacked = true;
+            hasCalledChargeEvent = false;
         }
         else
         {
