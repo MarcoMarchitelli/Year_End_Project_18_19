@@ -337,30 +337,62 @@ public class PlayerCameraTarget : BaseBehaviour
 
     #region Movement
 
-    public float lookDistance = 5f;
-    public float runLookDistance = 8f;
-    [Range(0,1)]
+    public float lookYHoldTime = 1f;
+    public float lookDistanceX = 5f;
+    public float lookDistanceY = 5f;
+    public float runLookDistanceX = 8f;
+    [Range(0, 1)]
     public float lookSmoothness;
 
     Vector2 velocity;
     Vector2 lookInput;
     bool isRunning;
+    bool countTime = false;
+    float timer = 0;
+    float currentLookDistanceY;
+
+    bool CountTime
+    {
+        get { return countTime; }
+        set
+        {
+            if (countTime != value)
+            {
+                countTime = value;
+                if (!countTime)
+                {
+                    timer = 0;
+                    currentLookDistanceY = 0;
+                }
+                print(countTime);
+            }
+        }
+    }
 
     private void Update()
     {
+        if (CountTime)
+        {
+            timer += Time.deltaTime;
+            if (timer >= lookYHoldTime)
+                currentLookDistanceY = lookDistanceY;
+        }
+
         CamMove();
     }
 
-    public void SetMoveDirection(Vector2 _lookInput, bool _isRunning )
+    public void SetMoveDirection(Vector2 _lookInput, bool _isRunning)
     {
         lookInput = _lookInput;
+        CountTime = lookInput.y != 0;
+
         isRunning = _isRunning;
     }
 
     Vector2 currentVelocityRef;
     void CamMove()
     {
-        Vector2 destination =  (Vector2)transform.parent.position +  lookInput * new Vector2(isRunning ? runLookDistance : lookDistance, lookDistance);
+        Vector2 destination = (Vector2)transform.parent.position + lookInput * new Vector2(isRunning ? runLookDistanceX : lookDistanceX, currentLookDistanceY);
         transform.position = Vector2.SmoothDamp(transform.position, destination, ref currentVelocityRef, lookSmoothness);
     }
 
