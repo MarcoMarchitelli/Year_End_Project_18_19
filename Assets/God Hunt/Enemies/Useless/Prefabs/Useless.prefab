@@ -190,6 +190,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   disableOnStart: 0
+  collisionMask:
+    serializedVersion: 2
+    m_Bits: 256
   dealsOnCollision: 0
   dealsOnTrigger: 1
   depleatesHealth: 0
@@ -252,7 +255,7 @@ GameObject:
   - component: {fileID: 3633661687163427986}
   - component: {fileID: 3633661687163427991}
   - component: {fileID: 3633661687163427946}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Useless
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -487,17 +490,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1044219091}
-        m_MethodName: StartTimer
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
     m_TypeName: UnityVoidEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
   _maxHealth: 3
@@ -549,11 +541,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3633661685740830374}
     m_Modifications:
-    - target: {fileID: 9041700343062011992, guid: e5a9c71f1dbcfdf489ad4ddce1aeed4c,
-        type: 3}
-      propertyPath: m_Name
-      value: Useless_Graphics
-      objectReference: {fileID: 0}
     - target: {fileID: 182142417752341446, guid: e5a9c71f1dbcfdf489ad4ddce1aeed4c,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -608,6 +595,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9041700343062011992, guid: e5a9c71f1dbcfdf489ad4ddce1aeed4c,
+        type: 3}
+      propertyPath: m_Name
+      value: Useless_Graphics
       objectReference: {fileID: 0}
     - target: {fileID: 8462189203715845418, guid: e5a9c71f1dbcfdf489ad4ddce1aeed4c,
         type: 3}

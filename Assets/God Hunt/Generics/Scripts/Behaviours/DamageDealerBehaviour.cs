@@ -3,6 +3,7 @@
 public class DamageDealerBehaviour : BaseBehaviour
 {
     [SerializeField] bool disableOnStart = false;
+    [SerializeField] LayerMask collisionMask;
     [SerializeField] protected bool dealsOnCollision = false;
     [SerializeField] protected bool dealsOnTrigger = false;
     [SerializeField] protected bool depleatesHealth = false;
@@ -53,9 +54,12 @@ public class DamageDealerBehaviour : BaseBehaviour
 
         if (dealsOnTrigger)
         {
-            DamageReceiverBehaviour receiver = other.GetComponent<DamageReceiverBehaviour>();
-            if (receiver)
-                DealDamage(receiver);
+            if (collisionMask == (collisionMask | (1 << other.gameObject.layer)))
+            {
+                DamageReceiverBehaviour receiver = other.GetComponent<DamageReceiverBehaviour>();
+                if (receiver)
+                    DealDamage(receiver);
+            }
         }
     }
 
@@ -66,9 +70,12 @@ public class DamageDealerBehaviour : BaseBehaviour
 
         if (dealsOnCollision)
         {
-            DamageReceiverBehaviour receiver = collision.collider.GetComponent<DamageReceiverBehaviour>();
-            if (receiver)
-                DealDamage(receiver);
+            if (collisionMask == (collisionMask | (1 << collision.gameObject.layer)))
+            {
+                DamageReceiverBehaviour receiver = collision.collider.GetComponent<DamageReceiverBehaviour>();
+                if (receiver)
+                    DealDamage(receiver);
+            }
         }
     }
 }
