@@ -1,32 +1,24 @@
 ﻿using UnityEngine;
-using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
-    [Header("References")]
+    [Header("HUD")]
     [SerializeField] GameObject gameplayPanel;
+    public PlayerHPUI playerHPUI;
+    [Header("Pause")]
     [SerializeField] GameObject pausePanel;
     [SerializeField] GameObject firstSelectedObject;
-    [SerializeField] GameObject mapPanel;
-    [SerializeField] GameObject inventoryPanel;
     [SerializeField] GameObject controllerCommandsScheme;
     [SerializeField] GameObject keyboardCommandsScheme;
+    [Header("Map")]
+    [SerializeField] GameObject mapPanel;
+    [Header("Inventory")]
+    [SerializeField] GameObject inventoryPanel;
+    [SerializeField] GameObject firstSelectedItem;
+    [Header("????")]
     [SerializeField] GameObject collectablesScreen;
-    public PlayerHPUI playerHPUI;
 
     bool controllerSchemeActive = true;
-    Button _firstSelectedObjectButton;
-    Button FirstSelectedObjectButton
-    {
-        get
-        {
-            if (_firstSelectedObjectButton == null)
-            {
-                _firstSelectedObjectButton = firstSelectedObject.GetComponent<Button>();
-            }
-            return _firstSelectedObjectButton;
-        }
-    }
 
     #region API
 
@@ -42,6 +34,11 @@ public class UIManager : MonoBehaviour
     {
         if (inventoryPanel)
             inventoryPanel.SetActive(_value);
+
+        if (_value == true && firstSelectedItem != null)
+        {
+            InputManager.Instance.eventSystem.SetSelectedGameObject(firstSelectedItem);
+        }
     }
 
     public void ToggleCollectablesScreen(bool _value)
@@ -64,7 +61,6 @@ public class UIManager : MonoBehaviour
         if ( _value == true && firstSelectedObject != null )
         {
             InputManager.Instance.eventSystem.SetSelectedGameObject( firstSelectedObject );
-            FirstSelectedObjectButton.Select();
         }
     }
 
