@@ -142,7 +142,11 @@ public class EnemyPatrolBehaviour : BaseBehaviour
                 yield return data.enemyMovementBehaviour.TurnTo((nextPoint - data.graphics.position).normalized, rotationAnglePerSecond, RotationEndCallback);
             }
             else
+            {
+                data.enemyMovementBehaviour.ResetMoveDirection();
+                data.enemyMovementBehaviour.ResetMoveSpeed();
                 yield return new WaitForSeconds(waitTime);
+            }
 
             yield return null;
         }
