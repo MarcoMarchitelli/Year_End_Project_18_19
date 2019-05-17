@@ -44,9 +44,9 @@ public class DamageReceiverBehaviour : BaseBehaviour
                 }
 
                 if (camShake)
-                    CameraManager.Instance.CameraShake(1.5f, .4f, .2f);
+                    CameraManager.Instance.CameraShake(frequency, amplitude, duration);
                 if (freezeFrames)
-                    GameManager.Instance.FreezeFrames(.1f);
+                    GameManager.Instance.FreezeFrames(time);
             }
         }
     }
