@@ -1077,14 +1077,15 @@ MonoBehaviour:
   timerPrefab: {fileID: 8633921778407538006, guid: 24b2f40b82b546b42a156c95c4933334,
     type: 3}
   damage: 1
+  duration: 0.2
+  canTurn: 0
   knockbackPower: 2
   speedMultiplier: 0
   distanceMultiplier: 0
-  duration: 0.2
-  canTurn: 0
-  repeatTime: 0
-  otherAttacksTime: 0
-  otherActionsTime: 0
+  colliderActivationDelay: 0.1
+  repeatTime: 0.2
+  otherAttacksTime: 0.2
+  otherActionsTime: 0.2
   OnAttackStart:
     m_PersistentCalls:
       m_Calls:
@@ -1216,14 +1217,15 @@ MonoBehaviour:
   timerPrefab: {fileID: 8633921778407538006, guid: 24b2f40b82b546b42a156c95c4933334,
     type: 3}
   damage: 3
+  duration: 0.3
+  canTurn: 0
   knockbackPower: 3
   speedMultiplier: 0
   distanceMultiplier: 0
-  duration: 0.3
-  canTurn: 0
+  colliderActivationDelay: 0.1
   repeatTime: 0
-  otherAttacksTime: 0
-  otherActionsTime: 0
+  otherAttacksTime: 0.2
+  otherActionsTime: 0.2
   OnAttackStart:
     m_PersistentCalls:
       m_Calls: []
@@ -1375,14 +1377,15 @@ MonoBehaviour:
   timerPrefab: {fileID: 8633921778407538006, guid: 24b2f40b82b546b42a156c95c4933334,
     type: 3}
   damage: 1
+  duration: 0.2
+  canTurn: 0
   knockbackPower: 2
   speedMultiplier: 10
   distanceMultiplier: 0.3
-  duration: 0.2
-  canTurn: 0
-  repeatTime: 0
-  otherAttacksTime: 0
-  otherActionsTime: 0
+  colliderActivationDelay: 0.1
+  repeatTime: 0.2
+  otherAttacksTime: 0.2
+  otherActionsTime: 0.2
   OnAttackStart:
     m_PersistentCalls:
       m_Calls:
@@ -1556,39 +1559,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5907574349735824129, guid: b7ea6ea354c695844b92e05a7636bf42,
         type: 3}
-      propertyPath: OnDeathAnimEnd.m_PersistentCalls.m_Calls.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5907574349735824129, guid: b7ea6ea354c695844b92e05a7636bf42,
-        type: 3}
       propertyPath: OnDeathAnimEnd.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 4071094914124930311}
-    - target: {fileID: 5907574349735824129, guid: b7ea6ea354c695844b92e05a7636bf42,
-        type: 3}
-      propertyPath: OnDeathAnimEnd.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: Respawn
-      objectReference: {fileID: 0}
-    - target: {fileID: 5907574349735824129, guid: b7ea6ea354c695844b92e05a7636bf42,
-        type: 3}
-      propertyPath: OnDeathAnimEnd.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 5907574349735824129, guid: b7ea6ea354c695844b92e05a7636bf42,
-        type: 3}
-      propertyPath: OnDeathAnimEnd.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 5907574349735824129, guid: b7ea6ea354c695844b92e05a7636bf42,
-        type: 3}
-      propertyPath: OnDeathAnimEnd.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_BoolArgument
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5907574349735824129, guid: b7ea6ea354c695844b92e05a7636bf42,
-        type: 3}
-      propertyPath: OnDeathAnimEnd.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 6526552754546491827, guid: b7ea6ea354c695844b92e05a7636bf42,
         type: 3}
       propertyPath: InitialModule.startSize.scalar
