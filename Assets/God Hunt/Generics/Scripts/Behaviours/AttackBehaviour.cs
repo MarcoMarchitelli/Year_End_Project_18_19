@@ -11,13 +11,16 @@ public class AttackBehaviour : BaseBehaviour
 
     [Header("Stats")]
     [SerializeField] int damage;
-    [SerializeField] float knockbackPower;
-    [SerializeField] float speedMultiplier;
-    [SerializeField] float distanceMultiplier;
     [SerializeField] float duration;
     [SerializeField] bool canTurn = false;
 
+    [Header("Knockback", order = 2)]
+    [SerializeField] float knockbackPower;
+    [SerializeField] float speedMultiplier;
+    [SerializeField] float distanceMultiplier;
+
     [Header("Times")]
+    [SerializeField] float colliderActivationDelay;
     [SerializeField] float repeatTime;
     [SerializeField] float otherAttacksTime;
     [SerializeField] float otherActionsTime;
@@ -34,6 +37,7 @@ public class AttackBehaviour : BaseBehaviour
     Timer otherAttacksCDTimer;
     Timer durationTimer;
     Timer otherActionsCDTimer;
+    Timer colliderActivationDelayTimer;
 
     protected override void CustomSetup()
     {
@@ -53,17 +57,22 @@ public class AttackBehaviour : BaseBehaviour
         otherAttacksCDTimer = Instantiate(timerPrefab, transform);
         otherActionsCDTimer = Instantiate(timerPrefab, transform);
         durationTimer = Instantiate(timerPrefab, transform);
+        colliderActivationDelayTimer = Instantiate(timerPrefab, transform);
 
         //timers value assingment
         repeatCDTimer.SetTime(repeatTime);
         otherAttacksCDTimer.SetTime(otherAttacksTime);
         otherActionsCDTimer.SetTime(otherActionsTime);
         durationTimer.SetTime(duration);
+        colliderActivationDelayTimer.SetTime(colliderActivationDelay);
 
         //internal events setup
-        OnAttackStart.AddListener(ActivateDamageCollider);
         OnAttackStart.AddListener(data.playerInputBehaviour.AttackInputOff);
         OnAttackEnd.AddListener(DeactivateDamageCollider);
+
+        //delay timer setup
+        OnAttackStart.AddListener(colliderActivationDelayTimer.StartTimer);
+        colliderActivationDelayTimer.OnTimerEnd.AddListener(ActivateDamageCollider);
 
         //duration timer setup
         OnAttackStart.AddListener(durationTimer.StartTimer);
