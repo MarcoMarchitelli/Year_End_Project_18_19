@@ -9,6 +9,7 @@ public class EnemyMovementBehaviour : BaseBehaviour
     EnemyEntityData data;
 
     public float moveSpeed;
+    public bool gravity = true;
     [SerializeField] UnityVoidEvent OnMovementStart, OnMovementEnd;
 
     bool isMoving;
@@ -90,7 +91,10 @@ public class EnemyMovementBehaviour : BaseBehaviour
     void CalculateVelocity()
     {
         velocity.x = moveDirection.x * currentMoveSpeed;
-        velocity.y += PlayerGameplayBehaviour.normalGravity * Time.deltaTime;
+        if (gravity)
+        {
+            velocity.y += PlayerGameplayBehaviour.normalGravity * Time.deltaTime;
+        }
     }
 
     IEnumerator RotateTo(Vector3 _dir, float _rotationAnglePerSecond, Action _callback = null)
