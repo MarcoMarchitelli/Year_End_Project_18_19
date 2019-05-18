@@ -110,4 +110,10 @@ public class PlayerAnimatorProxy : MonoBehaviour
         animator.SetTrigger("Charge Attack");
     }
 
+    public void Interrupt()
+    {
+        Chargeing = false;
+        IsDashing = false;
+    }
+
 }

@@ -20,7 +20,6 @@ public class PlayerInputBehaviour : BaseBehaviour
     [Tooltip("Gets called on charge input up if charge time was enough to perform a charged attack")]
     [SerializeField] UnityVoidEvent OnChargedAttackInput;
 
-    [HideInInspector] public bool IsPressingJump;
     [HideInInspector] public bool FallingThrough;
 
     bool canDash = false;
@@ -30,6 +29,11 @@ public class PlayerInputBehaviour : BaseBehaviour
     bool hasChargeAttacked = false;
     bool countTime = false;
     float timer;
+
+    [HideInInspector] public bool IsPressingJump;
+    bool isChargeing;
+    bool isDashing;
+    bool isRunning;
 
     protected override void CustomSetup()
     {
@@ -102,7 +106,7 @@ public class PlayerInputBehaviour : BaseBehaviour
                 IsPressingJump = true;
             }
         }
-        if (canJump && Input.GetButtonUp(InputManager.CurrentInputDevice + "Jump"))
+        if (canJump && IsPressingJump && Input.GetButtonUp(InputManager.CurrentInputDevice + "Jump"))
         {
             data.playerGameplayBehaviour.OnJumpInputUp();
             IsPressingJump = false;
@@ -110,30 +114,35 @@ public class PlayerInputBehaviour : BaseBehaviour
 
         if (Input.GetButtonDown(InputManager.CurrentInputDevice + "Run"))
         {
+            isRunning = true;
             data.playerGameplayBehaviour.HandleSprintPress();
         }
-        if (Input.GetButtonUp(InputManager.CurrentInputDevice + "Run"))
+        if (isRunning && Input.GetButtonUp(InputManager.CurrentInputDevice + "Run"))
         {
             data.playerGameplayBehaviour.HandleSprintRelease();
         }
 
         if (canDash && Input.GetButtonDown(InputManager.CurrentInputDevice + "Dash"))
         {
+            isDashing = true;
             data.playerGameplayBehaviour.HandleDashPress();
         }
-        if (canDash && Input.GetButtonUp(InputManager.CurrentInputDevice + "Dash"))
+        if (canDash && isDashing && Input.GetButtonUp(InputManager.CurrentInputDevice + "Dash"))
         {
+            isDashing = false;
             data.playerGameplayBehaviour.HandleDashRelease();
         }
 
         if (canAttack && Input.GetButtonDown(InputManager.CurrentInputDevice + "Attack"))
         {
+            isChargeing = true;
             hasChargeAttacked = false;
             countTime = true;
             OnChargedStart.Invoke();
         }
-        if (!hasChargeAttacked && canAttack && Input.GetButtonUp(InputManager.CurrentInputDevice + "Attack"))
+        if (!hasChargeAttacked && canAttack && isChargeing && Input.GetButtonUp(InputManager.CurrentInputDevice + "Attack"))
         {
+            isChargeing = false;
             EvaluateAttackTime(directionalInput);
         }
     }
@@ -207,6 +216,22 @@ public class PlayerInputBehaviour : BaseBehaviour
         Vector2 directionalInput = Vector2.zero;
         data.playerGameplayBehaviour.SetDirectionalInput(directionalInput);
         data.playerAttacksBehaviour.SetDirection(directionalInput);
+    }
+
+    public void Interrupt()
+    {
+        ResetDirectionInput();
+
+        isChargeing = false;
+        isDashing = false;
+        IsPressingJump = false;
+        isRunning = false;
+
+        hasCalledChargeEvent = false;
+        countTime = false;
+        timer = 0;
+
+        data.animatorProxy.Interrupt();
     }
 
     #endregion

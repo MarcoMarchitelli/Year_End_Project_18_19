@@ -364,7 +364,6 @@ public class PlayerCameraTarget : BaseBehaviour
                     timer = 0;
                     currentLookDistanceY = 0;
                 }
-                print(countTime);
             }
         }
     }

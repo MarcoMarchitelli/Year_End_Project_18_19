@@ -59,7 +59,6 @@ public class DamageReceiverBehaviour : BaseBehaviour
     {
         if (!IsSetupped && !_deal_through_invulnerability)
         {
-            Debug.LogWarning(name + "'s damage receiver is not setupped!");
             return false;
         }
 
