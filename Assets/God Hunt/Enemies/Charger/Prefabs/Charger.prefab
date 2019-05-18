@@ -328,11 +328,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   disableOnStart: 0
+  collisionMask:
+    serializedVersion: 2
+    m_Bits: 256
   dealsOnCollision: 0
   dealsOnTrigger: 1
-  knockbackPower: 1.5
-  speedMultiplier: 3
-  distanceMultiplier: 0.5
+  knockbackPower: 1.1
+  speedMultiplier: 2.5
+  distanceMultiplier: 0.3
   OnKnockbackDealt:
     m_PersistentCalls:
       m_Calls: []
@@ -422,6 +425,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
+  gravity: 1
   OnMovementStart:
     m_PersistentCalls:
       m_Calls: []
@@ -1322,6 +1326,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3264598925554043709}
     m_Modifications:
+    - target: {fileID: 709706044518641299, guid: eba5ce2ebc8fcf442961ab1640d788f6,
+        type: 3}
+      propertyPath: m_Name
+      value: vfx_enemy_damage
+      objectReference: {fileID: 0}
     - target: {fileID: 3068749105188839745, guid: eba5ce2ebc8fcf442961ab1640d788f6,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1381,11 +1390,6 @@ PrefabInstance:
         type: 3}
       propertyPath: InitialModule.startSize.scalar
       value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 709706044518641299, guid: eba5ce2ebc8fcf442961ab1640d788f6,
-        type: 3}
-      propertyPath: m_Name
-      value: vfx_enemy_damage
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: eba5ce2ebc8fcf442961ab1640d788f6, type: 3}
@@ -1482,6 +1486,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3264598925554043709}
     m_Modifications:
+    - target: {fileID: 709706044518641299, guid: eba5ce2ebc8fcf442961ab1640d788f6,
+        type: 3}
+      propertyPath: m_Name
+      value: vfx_enemy_damage (1)
+      objectReference: {fileID: 0}
     - target: {fileID: 3068749105188839745, guid: eba5ce2ebc8fcf442961ab1640d788f6,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1546,11 +1555,6 @@ PrefabInstance:
         type: 3}
       propertyPath: InitialModule.startSize.scalar
       value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 709706044518641299, guid: eba5ce2ebc8fcf442961ab1640d788f6,
-        type: 3}
-      propertyPath: m_Name
-      value: vfx_enemy_damage (1)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: eba5ce2ebc8fcf442961ab1640d788f6, type: 3}

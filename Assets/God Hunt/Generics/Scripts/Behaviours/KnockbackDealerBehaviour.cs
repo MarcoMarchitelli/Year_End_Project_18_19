@@ -3,6 +3,7 @@
 public class KnockbackDealerBehaviour : BaseBehaviour
 {
     [SerializeField] bool disableOnStart = false;
+    [SerializeField] LayerMask collisionMask;
     [SerializeField] protected bool dealsOnCollision = false;
     [SerializeField] protected bool dealsOnTrigger = false;
     [SerializeField] protected float knockbackPower;
@@ -44,9 +45,12 @@ public class KnockbackDealerBehaviour : BaseBehaviour
 
         if (dealsOnTrigger)
         {
-            KnockbackReceiverBehaviour receiver = other.GetComponent<KnockbackReceiverBehaviour>();
-            if (receiver)
-                DealKnockback(receiver);
+            if (collisionMask == (collisionMask | (1 << other.gameObject.layer)))
+            {
+                KnockbackReceiverBehaviour receiver = other.GetComponent<KnockbackReceiverBehaviour>();
+                if (receiver)
+                    DealKnockback(receiver);
+            }
         }
     }
 
@@ -57,9 +61,12 @@ public class KnockbackDealerBehaviour : BaseBehaviour
 
         if (dealsOnCollision)
         {
-            KnockbackReceiverBehaviour receiver = collision.collider.GetComponent<KnockbackReceiverBehaviour>();
-            if (receiver)
-                DealKnockback(receiver);
+            if (collisionMask == (collisionMask | (1 << collision.gameObject.layer)))
+            {
+                KnockbackReceiverBehaviour receiver = collision.collider.GetComponent<KnockbackReceiverBehaviour>();
+                if (receiver)
+                    DealKnockback(receiver);
+            }
         }
     }
 }
