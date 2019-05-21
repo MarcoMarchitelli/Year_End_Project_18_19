@@ -29,6 +29,7 @@ public class PlayerGameplayBehaviour : BaseBehaviour
     [SerializeField] float decelerationTime;
     [Tooltip("Describes how the run speed interpolates back to move speed.")]
     [SerializeField] AnimationCurve runDecelerationCurve;
+    [SerializeField] UnityVoidEvent OnAccelerationStart, OnDecelerationStart;
 
     [Header("Dashing")]
     [SerializeField] float minDashDistance = 5f;
@@ -296,6 +297,7 @@ public class PlayerGameplayBehaviour : BaseBehaviour
             accelerating = true;
             decelerating = false;
             decelTimer = 0;
+            OnAccelerationStart.Invoke();
         }
     }
 
@@ -304,6 +306,8 @@ public class PlayerGameplayBehaviour : BaseBehaviour
         //Reset accel timer.
         accelerating = false;
         accelTimer = 0;
+
+        OnDecelerationStart.Invoke();
 
         //check ground collision
         if (data.playerCollisionsBehaviour.Below)
