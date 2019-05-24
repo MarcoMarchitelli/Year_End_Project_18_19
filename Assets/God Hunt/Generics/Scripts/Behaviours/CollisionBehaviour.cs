@@ -22,7 +22,7 @@ public class CollisionBehaviour : BaseBehaviour
                         }
                         break;
                     case CollisionData.TargetType.Layer:
-                        if(other.gameObject.layer == c.layer)
+                        if(c.layer == (c.layer | (1 << other.gameObject.layer)))
                         {
                             c.onLayerCollisionEnter.Invoke();
                         }
@@ -56,7 +56,7 @@ public class CollisionBehaviour : BaseBehaviour
                         }
                         break;
                     case CollisionData.TargetType.Layer:
-                        if (other.gameObject.layer == c.layer)
+                        if (c.layer == (c.layer | (1 << other.gameObject.layer)))
                         {
                             c.onLayerCollisionStay.Invoke();
                         }
@@ -90,7 +90,7 @@ public class CollisionBehaviour : BaseBehaviour
                         }
                         break;
                     case CollisionData.TargetType.Layer:
-                        if (other.gameObject.layer == c.layer)
+                        if (c.layer == (c.layer | (1 << other.gameObject.layer)))
                         {
                             c.onLayerCollisionExit.Invoke();
                         }
@@ -124,7 +124,7 @@ public class CollisionBehaviour : BaseBehaviour
                         }
                         break;
                     case CollisionData.TargetType.Layer:
-                        if (collision.collider.gameObject.layer == c.layer)
+                        if (c.layer == (c.layer | (1 << collision.gameObject.layer)))
                         {
                             c.onLayerCollisionEnter.Invoke();
                         }
@@ -158,7 +158,7 @@ public class CollisionBehaviour : BaseBehaviour
                         }
                         break;
                     case CollisionData.TargetType.Layer:
-                        if (collision.collider.gameObject.layer == c.layer)
+                        if (c.layer == (c.layer | (1 << collision.gameObject.layer)))
                         {
                             c.onLayerCollisionStay.Invoke();
                         }
@@ -192,7 +192,7 @@ public class CollisionBehaviour : BaseBehaviour
                         }
                         break;
                     case CollisionData.TargetType.Layer:
-                        if (collision.collider.gameObject.layer == c.layer)
+                        if (c.layer == (c.layer | (1 << collision.gameObject.layer)))
                         {
                             c.onLayerCollisionExit.Invoke();
                         }

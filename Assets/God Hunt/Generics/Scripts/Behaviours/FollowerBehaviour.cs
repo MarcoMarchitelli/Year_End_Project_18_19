@@ -17,7 +17,6 @@ public class FollowerBehaviour : BaseBehaviour
         PlayerEntity player = FindObjectOfType<PlayerEntity>();
         if (player)
         {
-            //player.OnDeath += EndFollow;
             target = player.transform;
         }
 
@@ -25,7 +24,7 @@ public class FollowerBehaviour : BaseBehaviour
             StartFollow();
     }
 
-    void Update()
+    public override void OnUpdate()
     {
         if (!follow)
             return;

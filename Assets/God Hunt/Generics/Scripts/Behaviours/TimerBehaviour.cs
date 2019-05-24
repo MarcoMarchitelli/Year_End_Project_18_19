@@ -14,7 +14,7 @@ public class TimerBehaviour : BaseBehaviour
 
     #region MonoBehaviour methods
 
-    private void OnEnable()
+    protected override void CustomSetup()
     {
         if (countOnEnable)
         {
@@ -25,6 +25,18 @@ public class TimerBehaviour : BaseBehaviour
         else
             OnTimerEnd.AddListener(StopTimer);
     }
+
+    //private void OnEnable()
+    //{
+    //    if (countOnEnable)
+    //    {
+    //        StartTimer();
+    //    }
+    //    if (repeat)
+    //        OnTimerEnd.AddListener(ResetTimer);
+    //    else
+    //        OnTimerEnd.AddListener(StopTimer);
+    //}
 
     private void OnDisable()
     {
@@ -77,7 +89,7 @@ public class TimerBehaviour : BaseBehaviour
     {
         timer = 0;
         if (repeat)
-            countTime = true;
+            StartTimer();
         else
             countTime = false;
     }
