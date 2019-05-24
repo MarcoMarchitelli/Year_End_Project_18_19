@@ -314,7 +314,7 @@ MonoBehaviour:
 
 '
   time: 30
-  startCountingOnAwake: 1
+  countOnEnable: 0
   repeat: 0
   OnTimerStart:
     m_PersistentCalls:
@@ -651,12 +651,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 176607784}
-  - component: {fileID: 176607790}
-  - component: {fileID: 176607789}
-  - component: {fileID: 176607788}
+  - component: {fileID: 176607785}
   - component: {fileID: 176607787}
   - component: {fileID: 176607786}
-  - component: {fileID: 176607785}
+  - component: {fileID: 176607789}
+  - component: {fileID: 176607788}
+  - component: {fileID: 176607790}
   m_Layer: 0
   m_Name: Laser_4
   m_TagString: Untagged
@@ -707,7 +707,7 @@ MonoBehaviour:
   disableOnStart: 0
   collisionMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 256
   dealsOnCollision: 0
   dealsOnTrigger: 1
   knockbackPower: 5
@@ -756,51 +756,71 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 0.704067, z: 1}
   m_Center: {x: 0, y: -0.1479669, z: 0}
---- !u!23 &176607789
-MeshRenderer:
+--- !u!114 &176607789
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 176607783}
-  m_Enabled: 0
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: 73c176f402d2c2f4d929aa5da7585d17, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 0
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
---- !u!33 &176607790
-MeshFilter:
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3089c6b75d763e8499970135d0270ab2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  description: 
+  time: 1
+  countOnEnable: 1
+  repeat: 0
+  OnTimerStart:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 176607788}
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityVoidEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  OnTimerEnd:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 176607788}
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+    m_TypeName: UnityVoidEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  timer: 0
+--- !u!54 &176607790
+Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 176607783}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &200682939
 GameObject:
   m_ObjectHideFlags: 0
@@ -1242,7 +1262,7 @@ MonoBehaviour:
 
 '
   time: 3.5
-  startCountingOnAwake: 0
+  countOnEnable: 0
   repeat: 0
   OnTimerStart:
     m_PersistentCalls:
@@ -1388,7 +1408,7 @@ MonoBehaviour:
 
 '
   time: 3.5
-  startCountingOnAwake: 0
+  countOnEnable: 0
   repeat: 0
   OnTimerStart:
     m_PersistentCalls:
@@ -1473,7 +1493,7 @@ MonoBehaviour:
 
 '
   time: 2.5
-  startCountingOnAwake: 0
+  countOnEnable: 0
   repeat: 0
   OnTimerStart:
     m_PersistentCalls:
@@ -1494,9 +1514,9 @@ MonoBehaviour:
   OnTimerEnd:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 262427550}
-        m_MethodName: SetActive
-        m_Mode: 6
+      - m_Target: {fileID: 329018609}
+        m_MethodName: StartTimer
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -1505,9 +1525,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 329018609}
-        m_MethodName: StartTimer
-        m_Mode: 1
+      - m_Target: {fileID: 262427550}
+        m_MethodName: SetActive
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -2204,7 +2224,7 @@ MonoBehaviour:
 
 '
   time: 30
-  startCountingOnAwake: 1
+  countOnEnable: 0
   repeat: 0
   OnTimerStart:
     m_PersistentCalls:
@@ -2451,7 +2471,7 @@ MonoBehaviour:
 
 '
   time: 30
-  startCountingOnAwake: 1
+  countOnEnable: 0
   repeat: 0
   OnTimerStart:
     m_PersistentCalls:
@@ -2725,7 +2745,7 @@ MonoBehaviour:
 
 '
   time: 2.5
-  startCountingOnAwake: 0
+  countOnEnable: 0
   repeat: 0
   OnTimerStart:
     m_PersistentCalls:
@@ -2783,9 +2803,9 @@ GameObject:
   - component: {fileID: 970852177}
   - component: {fileID: 970852176}
   - component: {fileID: 970852175}
+  - component: {fileID: 970852173}
   - component: {fileID: 970852178}
   - component: {fileID: 970852179}
-  - component: {fileID: 970852173}
   m_Layer: 13
   m_Name: Boss
   m_TagString: Untagged
@@ -3112,7 +3132,7 @@ MonoBehaviour:
 
 '
   time: 2.5
-  startCountingOnAwake: 0
+  countOnEnable: 0
   repeat: 0
   OnTimerStart:
     m_PersistentCalls:
@@ -3167,12 +3187,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1088110880}
-  - component: {fileID: 1088110886}
-  - component: {fileID: 1088110885}
-  - component: {fileID: 1088110884}
+  - component: {fileID: 1088110881}
   - component: {fileID: 1088110883}
   - component: {fileID: 1088110882}
-  - component: {fileID: 1088110881}
+  - component: {fileID: 1088110885}
+  - component: {fileID: 1088110884}
+  - component: {fileID: 1088110886}
   m_Layer: 0
   m_Name: Laser_2
   m_TagString: Untagged
@@ -3223,7 +3243,7 @@ MonoBehaviour:
   disableOnStart: 0
   collisionMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 256
   dealsOnCollision: 0
   dealsOnTrigger: 1
   knockbackPower: 5
@@ -3272,51 +3292,71 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 0.704067, z: 1}
   m_Center: {x: 0, y: -0.1479669, z: 0}
---- !u!23 &1088110885
-MeshRenderer:
+--- !u!114 &1088110885
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1088110879}
-  m_Enabled: 0
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: 73c176f402d2c2f4d929aa5da7585d17, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 0
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
---- !u!33 &1088110886
-MeshFilter:
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3089c6b75d763e8499970135d0270ab2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  description: 
+  time: 1
+  countOnEnable: 1
+  repeat: 0
+  OnTimerStart:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1088110884}
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityVoidEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  OnTimerEnd:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1088110884}
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+    m_TypeName: UnityVoidEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  timer: 0
+--- !u!54 &1088110886
+Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1088110879}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &1118613209
 GameObject:
   m_ObjectHideFlags: 0
@@ -3521,12 +3561,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1183732770}
-  - component: {fileID: 1183732773}
-  - component: {fileID: 1183732772}
-  - component: {fileID: 1183732771}
+  - component: {fileID: 1183732776}
   - component: {fileID: 1183732775}
   - component: {fileID: 1183732774}
-  - component: {fileID: 1183732776}
+  - component: {fileID: 1183732772}
+  - component: {fileID: 1183732771}
+  - component: {fileID: 1183732773}
   m_Layer: 0
   m_Name: Laser_1
   m_TagString: Untagged
@@ -3562,51 +3602,71 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 0.704067, z: 1}
   m_Center: {x: 0, y: -0.1479669, z: 0}
---- !u!23 &1183732772
-MeshRenderer:
+--- !u!114 &1183732772
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1183732769}
-  m_Enabled: 0
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: 73c176f402d2c2f4d929aa5da7585d17, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 0
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
---- !u!33 &1183732773
-MeshFilter:
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3089c6b75d763e8499970135d0270ab2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  description: 
+  time: 1
+  countOnEnable: 1
+  repeat: 0
+  OnTimerStart:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1183732771}
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityVoidEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  OnTimerEnd:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1183732771}
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+    m_TypeName: UnityVoidEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  timer: 0
+--- !u!54 &1183732773
+Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1183732769}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!114 &1183732774
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3622,7 +3682,7 @@ MonoBehaviour:
   disableOnStart: 0
   collisionMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 256
   dealsOnCollision: 0
   dealsOnTrigger: 1
   knockbackPower: 5
@@ -4832,7 +4892,7 @@ MonoBehaviour:
 
 '
   time: 3.5
-  startCountingOnAwake: 0
+  countOnEnable: 0
   repeat: 0
   OnTimerStart:
     m_PersistentCalls:
@@ -4970,12 +5030,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1607542979}
-  - component: {fileID: 1607542985}
-  - component: {fileID: 1607542984}
-  - component: {fileID: 1607542983}
+  - component: {fileID: 1607542980}
   - component: {fileID: 1607542982}
   - component: {fileID: 1607542981}
-  - component: {fileID: 1607542980}
+  - component: {fileID: 1607542984}
+  - component: {fileID: 1607542983}
+  - component: {fileID: 1607542985}
   m_Layer: 0
   m_Name: Laser_3
   m_TagString: Untagged
@@ -5026,7 +5086,7 @@ MonoBehaviour:
   disableOnStart: 0
   collisionMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 256
   dealsOnCollision: 0
   dealsOnTrigger: 1
   knockbackPower: 5
@@ -5075,51 +5135,71 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 0.704067, z: 1}
   m_Center: {x: 0, y: -0.1479669, z: 0}
---- !u!23 &1607542984
-MeshRenderer:
+--- !u!114 &1607542984
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1607542978}
-  m_Enabled: 0
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: 73c176f402d2c2f4d929aa5da7585d17, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 0
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
---- !u!33 &1607542985
-MeshFilter:
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3089c6b75d763e8499970135d0270ab2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  description: 
+  time: 1
+  countOnEnable: 1
+  repeat: 0
+  OnTimerStart:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1607542983}
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityVoidEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  OnTimerEnd:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1607542983}
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+    m_TypeName: UnityVoidEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  timer: 0
+--- !u!54 &1607542985
+Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1607542978}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &1613999063
 GameObject:
   m_ObjectHideFlags: 0
@@ -5135,7 +5215,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1613999064
 Transform:
   m_ObjectHideFlags: 0
@@ -5143,9 +5223,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1613999063}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.39152384, y: -0.50075567, z: -0.078125}
-  m_LocalScale: {x: 1, y: 0.33333334, z: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 139241975}
   m_Father: {fileID: 970852172}
@@ -5884,6 +5964,11 @@ PrefabInstance:
       propertyPath: looping
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8416587030389679413, guid: 92066cce57d433a409abb95f352e3ab5,
+        type: 3}
+      propertyPath: playOnAwake
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 436602011532169373, guid: 92066cce57d433a409abb95f352e3ab5,
         type: 3}
       propertyPath: m_LocalPosition.z
@@ -5908,6 +5993,16 @@ PrefabInstance:
         type: 3}
       propertyPath: InitialModule.startLifetime.scalar
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7582291326085773264, guid: 92066cce57d433a409abb95f352e3ab5,
+        type: 3}
+      propertyPath: playOnAwake
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1360789103046284971, guid: 92066cce57d433a409abb95f352e3ab5,
+        type: 3}
+      propertyPath: playOnAwake
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 92066cce57d433a409abb95f352e3ab5, type: 3}
@@ -6481,7 +6576,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2058438604}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 12.0044, y: 4.9867163, z: -10}
+  m_LocalPosition: {x: 12.004401, y: 4.9873695, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 831409824}

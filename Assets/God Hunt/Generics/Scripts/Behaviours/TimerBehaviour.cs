@@ -2,15 +2,9 @@
 
 public class TimerBehaviour : BaseBehaviour
 {
-    protected override void CustomSetup()
-    {
-        if (startCountingOnAwake)
-            StartTimer();
-    }
-
     [Multiline] [SerializeField] private string description;
     [SerializeField] private float time;
-    [SerializeField] private bool startCountingOnAwake = false;
+    [SerializeField] private bool countOnEnable = false;
     [SerializeField] private bool repeat = true;
 
     public UnityVoidEvent OnTimerStart, OnTimerEnd;
@@ -22,6 +16,10 @@ public class TimerBehaviour : BaseBehaviour
 
     private void OnEnable()
     {
+        if (countOnEnable)
+        {
+            StartTimer();
+        }
         if (repeat)
             OnTimerEnd.AddListener(ResetTimer);
         else
