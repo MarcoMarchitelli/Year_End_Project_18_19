@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4288245258604101842}
   - component: {fileID: 4288245258604101853}
   - component: {fileID: 4288245258604101840}
+  - component: {fileID: 3173136122939057969}
   - component: {fileID: 4288245258604101843}
   - component: {fileID: 4288245258604101841}
   m_Layer: 13
@@ -109,7 +110,7 @@ MonoBehaviour:
     searchFor: 1
     layer:
       serializedVersion: 2
-      m_Bits: 24375
+      m_Bits: 1792
     component: {fileID: 0}
     tag: 
     onTagCollisionEnter:
@@ -144,7 +145,18 @@ MonoBehaviour:
         PublicKeyToken=null
     onLayerCollisionEnter:
       m_PersistentCalls:
-        m_Calls: []
+        m_Calls:
+        - m_Target: {fileID: 3173136122939057969}
+          m_MethodName: Destroy
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
       m_TypeName: UnityVoidEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
         PublicKeyToken=null
     onLayerCollisionStay:
@@ -157,6 +169,23 @@ MonoBehaviour:
         m_Calls: []
       m_TypeName: UnityVoidEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
         PublicKeyToken=null
+--- !u!114 &3173136122939057969
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4288245258604101854}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8bb9c4a9e1316a740a334e3b84e87757, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnDestruction:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityVoidEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
 --- !u!54 &4288245258604101843
 Rigidbody:
   m_ObjectHideFlags: 0
