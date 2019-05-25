@@ -6,8 +6,11 @@ public class KnockbackDealerBehaviour : BaseBehaviour
     [SerializeField] LayerMask collisionMask;
     [SerializeField] protected bool dealsOnCollision = false;
     [SerializeField] protected bool dealsOnTrigger = false;
+    [Min(0.01f)]
     [SerializeField] protected float knockbackPower;
+    [Min(0.01f)]
     public float speedMultiplier;
+    [Min(0.01f)]
     public float distanceMultiplier;
 
     #region Events
@@ -24,7 +27,7 @@ public class KnockbackDealerBehaviour : BaseBehaviour
     {
         if (!IsSetupped)
         {
-            Debug.LogWarning(name + "'s damage dealer behaviour is not setupped!");
+            Debug.LogWarning(name + "'s knockback dealer behaviour is not setupped!");
             return;
         }
 

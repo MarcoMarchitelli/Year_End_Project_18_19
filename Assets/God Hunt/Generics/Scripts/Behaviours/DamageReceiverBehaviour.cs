@@ -74,9 +74,16 @@ public class DamageReceiverBehaviour : BaseBehaviour
         return true;
     }
 
-    public void SetMaxHealth(int _value)
+    //public void SetMaxHealth(int _value)
+    //{
+    //    MaxHealth = _value;
+    //    OnHealthUpgraded.Invoke();
+    //}
+
+    public void UpgradeHealth()
     {
-        MaxHealth = _value;
+        MaxHealth++;
+        _currentHealth++;
         OnHealthUpgraded.Invoke();
     }
 

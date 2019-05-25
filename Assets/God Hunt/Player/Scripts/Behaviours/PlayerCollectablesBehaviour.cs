@@ -20,7 +20,7 @@ public class PlayerCollectablesBehaviour : BaseBehaviour
         collectablesCount++;
         if(collectablesCount >= COLLECTABLES_TO_UPGRADE)
         {
-            data.damageReceiverBehaviour.SetMaxHealth(data.damageReceiverBehaviour.MaxHealth + 1);
+            data.damageReceiverBehaviour.UpgradeHealth();
             collectablesCount = 0;
         }
     }

@@ -11,6 +11,9 @@ public class PlayerKnockbackReceiverBehaviour : KnockbackReceiverBehaviour
 
     public override void KnockbackMove(Vector2 _direction, float _speed)
     {
+        if (!IsSetupped)
+            return;
+
         data.playerCollisionsBehaviour.Move(_direction * _speed * Time.deltaTime, false);
     }
 }
