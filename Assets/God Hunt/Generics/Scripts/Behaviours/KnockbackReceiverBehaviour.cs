@@ -36,7 +36,7 @@ public class KnockbackReceiverBehaviour : BaseBehaviour
         {
             timer += Time.deltaTime;
 
-            KnockbackMove(_knockbackDirection, _knockbackSpeedValue);
+            KnockbackMove(_knockbackDirection, _knockbackSpeedValue * Time.deltaTime);
 
             yield return null;
         }

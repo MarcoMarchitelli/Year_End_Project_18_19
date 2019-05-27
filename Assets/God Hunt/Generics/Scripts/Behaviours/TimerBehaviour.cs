@@ -26,17 +26,17 @@ public class TimerBehaviour : BaseBehaviour
             OnTimerEnd.AddListener(StopTimer);
     }
 
-    //private void OnEnable()
-    //{
-    //    if (countOnEnable)
-    //    {
-    //        StartTimer();
-    //    }
-    //    if (repeat)
-    //        OnTimerEnd.AddListener(ResetTimer);
-    //    else
-    //        OnTimerEnd.AddListener(StopTimer);
-    //}
+    private void OnEnable()
+    {
+        if (countOnEnable)
+        {
+            StartTimer();
+        }
+        if (repeat)
+            OnTimerEnd.AddListener(ResetTimer);
+        else
+            OnTimerEnd.AddListener(StopTimer);
+    }
 
     private void OnDisable()
     {

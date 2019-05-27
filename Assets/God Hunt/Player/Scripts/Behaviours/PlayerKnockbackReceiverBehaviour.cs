@@ -14,6 +14,6 @@ public class PlayerKnockbackReceiverBehaviour : KnockbackReceiverBehaviour
         if (!IsSetupped)
             return;
 
-        data.playerCollisionsBehaviour.Move(_direction * _speed * Time.deltaTime, false);
+        data.playerCollisionsBehaviour.Move(_direction * _speed, false);
     }
 }

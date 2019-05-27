@@ -11,6 +11,6 @@ public class EnemyKnockbackReceiverBehaviour : KnockbackReceiverBehaviour
 
     public override void KnockbackMove(Vector2 _direction, float _speed)
     {
-        data.enemyCollisionBehaviour.Move(_direction * _speed * Time.deltaTime, false);
+        data.enemyCollisionBehaviour.Move(_direction * _speed, false);
     }
 }
