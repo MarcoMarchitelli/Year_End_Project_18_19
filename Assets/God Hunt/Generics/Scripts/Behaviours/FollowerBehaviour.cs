@@ -3,6 +3,7 @@
 public class FollowerBehaviour : BaseBehaviour
 {
     public float moveSpeed;
+    public bool faceTarget = false;
     public float turnSpeed;
     public bool startFollowingOnAwake = true;
 
@@ -19,8 +20,12 @@ public class FollowerBehaviour : BaseBehaviour
         {
             target = player.transform;
         }
+        else
+        {
+            Debug.LogWarning(name + "'s follower behaviour cannot find the target!!");
+        }
 
-        if(startFollowingOnAwake)
+        if (startFollowingOnAwake && target)
             StartFollow();
     }
 
@@ -31,12 +36,15 @@ public class FollowerBehaviour : BaseBehaviour
 
         //go towards target
         directionToTarget = (target.position - transform.position).normalized;
-        transform.Translate(-directionToTarget * moveSpeed * Time.deltaTime);
+        transform.Translate(directionToTarget * moveSpeed * Time.deltaTime);
 
         //face target
-        targetAngle = 90 - Mathf.Atan2(directionToTarget.z, directionToTarget.x) * Mathf.Rad2Deg;
-        angle = Mathf.MoveTowardsAngle(transform.eulerAngles.y, targetAngle, Time.deltaTime * turnSpeed);
-        transform.eulerAngles = Vector3.up * angle;
+        if (faceTarget)
+        {
+            targetAngle = 90 - Mathf.Atan2(directionToTarget.z, directionToTarget.x) * Mathf.Rad2Deg;
+            angle = Mathf.MoveTowardsAngle(transform.eulerAngles.y, targetAngle, Time.deltaTime * turnSpeed);
+            transform.eulerAngles = Vector3.up * angle;
+        }
     }
 
     public void StartFollow()
