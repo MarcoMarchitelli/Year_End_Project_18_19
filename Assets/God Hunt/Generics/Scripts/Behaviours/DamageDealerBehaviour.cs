@@ -6,6 +6,7 @@ public class DamageDealerBehaviour : BaseBehaviour
     [SerializeField] LayerMask collisionMask;
     [SerializeField] protected bool dealsOnCollision = false;
     [SerializeField] protected bool dealsOnTrigger = false;
+    [Tooltip("Sets the target's health to 0.")]
     [SerializeField] protected bool depleatesHealth = false;
     [SerializeField] protected int damage;
 

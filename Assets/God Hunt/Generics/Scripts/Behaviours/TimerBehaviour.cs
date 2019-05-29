@@ -4,6 +4,7 @@ public class TimerBehaviour : BaseBehaviour
 {
     [Multiline] [SerializeField] private string description;
     [SerializeField] private float time;
+    [SerializeField] private bool countOnSetup = false;
     [SerializeField] private bool countOnEnable = false;
     [SerializeField] private bool repeat = true;
 
@@ -16,7 +17,7 @@ public class TimerBehaviour : BaseBehaviour
 
     protected override void CustomSetup()
     {
-        if (countOnEnable)
+        if (countOnSetup)
         {
             StartTimer();
         }

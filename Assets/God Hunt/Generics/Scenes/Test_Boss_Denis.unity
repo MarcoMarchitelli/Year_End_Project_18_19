@@ -357,6 +357,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   description: 
   time: 30
+  countOnSetup: 0
   countOnEnable: 1
   repeat: 0
   OnTimerStart:
@@ -767,6 +768,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   description: 
   time: 1
+  countOnSetup: 0
   countOnEnable: 1
   repeat: 0
   OnTimerStart:
@@ -852,27 +854,22 @@ MonoBehaviour:
   - prefab: {fileID: 4288245258604101854, guid: 79874901f68737042882905e603122e0,
       type: 3}
     spawnPoint: {fileID: 1989366581}
-    spawnAsChild: 0
     useSpawnRotation: 1
   - prefab: {fileID: 4288245258604101854, guid: 79874901f68737042882905e603122e0,
       type: 3}
     spawnPoint: {fileID: 832952571}
-    spawnAsChild: 0
     useSpawnRotation: 1
   - prefab: {fileID: 4288245258604101854, guid: 79874901f68737042882905e603122e0,
       type: 3}
     spawnPoint: {fileID: 272537503}
-    spawnAsChild: 0
     useSpawnRotation: 1
   - prefab: {fileID: 4288245258604101854, guid: 79874901f68737042882905e603122e0,
       type: 3}
     spawnPoint: {fileID: 1210643745}
-    spawnAsChild: 0
     useSpawnRotation: 1
   - prefab: {fileID: 4288245258604101854, guid: 79874901f68737042882905e603122e0,
       type: 3}
     spawnPoint: {fileID: 225113716}
-    spawnAsChild: 0
     useSpawnRotation: 1
 --- !u!114 &184138295
 MonoBehaviour:
@@ -1189,27 +1186,22 @@ MonoBehaviour:
   - prefab: {fileID: 4195761923624202286, guid: 2a3dbe4bd2f1cc84ab4103fadc4e412a,
       type: 3}
     spawnPoint: {fileID: 1983546632}
-    spawnAsChild: 0
     useSpawnRotation: 0
   - prefab: {fileID: 4195761923624202286, guid: 2a3dbe4bd2f1cc84ab4103fadc4e412a,
       type: 3}
     spawnPoint: {fileID: 1361728345}
-    spawnAsChild: 0
     useSpawnRotation: 0
   - prefab: {fileID: 4195761923624202286, guid: 2a3dbe4bd2f1cc84ab4103fadc4e412a,
       type: 3}
     spawnPoint: {fileID: 771340417}
-    spawnAsChild: 0
     useSpawnRotation: 0
   - prefab: {fileID: 4195761923624202286, guid: 2a3dbe4bd2f1cc84ab4103fadc4e412a,
       type: 3}
     spawnPoint: {fileID: 118046566}
-    spawnAsChild: 0
     useSpawnRotation: 0
   - prefab: {fileID: 4195761923624202286, guid: 2a3dbe4bd2f1cc84ab4103fadc4e412a,
       type: 3}
     spawnPoint: {fileID: 392346160}
-    spawnAsChild: 0
     useSpawnRotation: 0
 --- !u!114 &306010035
 MonoBehaviour:
@@ -1225,7 +1217,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rotationEuler: {x: 0, y: 0, z: 0}
   rotationSpace: 0
-  startRotatingOnAwake: 1
+  startRotatingOnAwake: 0
 --- !u!1 &329018607
 GameObject:
   m_ObjectHideFlags: 0
@@ -1273,7 +1265,8 @@ MonoBehaviour:
 
 '
   time: 3.5
-  countOnEnable: 1
+  countOnSetup: 0
+  countOnEnable: 0
   repeat: 0
   OnTimerStart:
     m_PersistentCalls:
@@ -1491,6 +1484,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   description: 
   time: 10
+  countOnSetup: 0
   countOnEnable: 0
   repeat: 1
   OnTimerStart:
@@ -1562,7 +1556,8 @@ MonoBehaviour:
 
 '
   time: 2.5
-  countOnEnable: 1
+  countOnSetup: 0
+  countOnEnable: 0
   repeat: 0
   OnTimerStart:
     m_PersistentCalls:
@@ -1807,6 +1802,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   description: 
   time: 30
+  countOnSetup: 0
   countOnEnable: 1
   repeat: 0
   OnTimerStart:
@@ -2616,6 +2612,7 @@ MonoBehaviour:
 
 '
   time: 30
+  countOnSetup: 0
   countOnEnable: 1
   repeat: 0
   OnTimerStart:
@@ -3289,6 +3286,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   description: 
   time: 1
+  countOnSetup: 0
   countOnEnable: 1
   repeat: 0
   OnTimerStart:
@@ -3538,23 +3536,18 @@ MonoBehaviour:
   spawnData:
   - prefab: {fileID: 346115619853597454, guid: 4d7f3580830311d4b98a1efa43d28106, type: 3}
     spawnPoint: {fileID: 1201067942}
-    spawnAsChild: 0
     useSpawnRotation: 1
   - prefab: {fileID: 346115619853597454, guid: 4d7f3580830311d4b98a1efa43d28106, type: 3}
     spawnPoint: {fileID: 711868968}
-    spawnAsChild: 0
     useSpawnRotation: 1
   - prefab: {fileID: 346115619853597454, guid: 4d7f3580830311d4b98a1efa43d28106, type: 3}
     spawnPoint: {fileID: 1047569147}
-    spawnAsChild: 0
     useSpawnRotation: 1
   - prefab: {fileID: 346115619853597454, guid: 4d7f3580830311d4b98a1efa43d28106, type: 3}
     spawnPoint: {fileID: 1236775344}
-    spawnAsChild: 0
     useSpawnRotation: 1
   - prefab: {fileID: 346115619853597454, guid: 4d7f3580830311d4b98a1efa43d28106, type: 3}
     spawnPoint: {fileID: 1929650745}
-    spawnAsChild: 0
     useSpawnRotation: 1
 --- !u!114 &1142865692
 MonoBehaviour:
@@ -3684,6 +3677,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   description: Collider activation delay
   time: 1
+  countOnSetup: 0
   countOnEnable: 1
   repeat: 0
   OnTimerStart:
@@ -3970,6 +3964,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   description: 
   time: 30
+  countOnSetup: 0
   countOnEnable: 1
   repeat: 0
   OnTimerStart:
@@ -4080,22 +4075,18 @@ MonoBehaviour:
   - prefab: {fileID: 4288245258604101854, guid: 79874901f68737042882905e603122e0,
       type: 3}
     spawnPoint: {fileID: 357729375}
-    spawnAsChild: 0
     useSpawnRotation: 1
   - prefab: {fileID: 4288245258604101854, guid: 79874901f68737042882905e603122e0,
       type: 3}
     spawnPoint: {fileID: 1056032427}
-    spawnAsChild: 0
     useSpawnRotation: 1
   - prefab: {fileID: 4288245258604101854, guid: 79874901f68737042882905e603122e0,
       type: 3}
     spawnPoint: {fileID: 1218816403}
-    spawnAsChild: 0
     useSpawnRotation: 1
   - prefab: {fileID: 4288245258604101854, guid: 79874901f68737042882905e603122e0,
       type: 3}
     spawnPoint: {fileID: 1336829396}
-    spawnAsChild: 0
     useSpawnRotation: 1
 --- !u!114 &1255840645
 MonoBehaviour:
@@ -4109,9 +4100,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd83e516df546194f8c98ee4c3156fc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotationEuler: {x: 0, y: 0, z: 0}
+  rotationEuler: {x: 0, y: 0, z: 45}
   rotationSpace: 0
-  startRotatingOnAwake: 1
+  startRotatingOnAwake: 0
 --- !u!4 &1255840646
 Transform:
   m_ObjectHideFlags: 0
@@ -4175,6 +4166,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   description: 
   time: 10
+  countOnSetup: 0
   countOnEnable: 0
   repeat: 1
   OnTimerStart:
@@ -4398,7 +4390,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   description: 
-  time: 10
+  time: 2
+  countOnSetup: 0
   countOnEnable: 0
   repeat: 1
   OnTimerStart:
@@ -4870,6 +4863,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   description: 
   time: 30
+  countOnSetup: 0
   countOnEnable: 1
   repeat: 0
   OnTimerStart:
@@ -5085,6 +5079,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   description: 
   time: 10
+  countOnSetup: 0
   countOnEnable: 0
   repeat: 1
   OnTimerStart:
@@ -5358,6 +5353,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   description: 
   time: 1
+  countOnSetup: 0
   countOnEnable: 1
   repeat: 0
   OnTimerStart:
@@ -6427,7 +6423,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2058438604}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 12.0043955, y: 4.98304, z: -10}
+  m_LocalPosition: {x: 12.004398, y: 4.9839683, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 831409824}
@@ -6609,81 +6605,6 @@ PrefabInstance:
     - target: {fileID: 997, guid: b44c7349678676347bc1e673cd602c2f, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1103692139956934986, guid: b44c7349678676347bc1e673cd602c2f,
-        type: 3}
-      propertyPath: m_Name
-      value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 1103692139956934985, guid: b44c7349678676347bc1e673cd602c2f,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 12
-      objectReference: {fileID: 0}
-    - target: {fileID: 1103692139956934985, guid: b44c7349678676347bc1e673cd602c2f,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1103692139956934985, guid: b44c7349678676347bc1e673cd602c2f,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1103692139956934985, guid: b44c7349678676347bc1e673cd602c2f,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1103692139956934985, guid: b44c7349678676347bc1e673cd602c2f,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1103692139956934985, guid: b44c7349678676347bc1e673cd602c2f,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1103692139956934985, guid: b44c7349678676347bc1e673cd602c2f,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1103692139956934985, guid: b44c7349678676347bc1e673cd602c2f,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1103692139956934985, guid: b44c7349678676347bc1e673cd602c2f,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1103692139956934985, guid: b44c7349678676347bc1e673cd602c2f,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1103692139956934985, guid: b44c7349678676347bc1e673cd602c2f,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1103692139956934996, guid: b44c7349678676347bc1e673cd602c2f,
-        type: 3}
-      propertyPath: OnSideAttackInput.m_PersistentCalls.m_Calls.Array.size
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 1103692139956934996, guid: b44c7349678676347bc1e673cd602c2f,
-        type: 3}
-      propertyPath: OnSideAttackInput.m_PersistentCalls.m_Calls.Array.data[4].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1103692139956934996, guid: b44c7349678676347bc1e673cd602c2f,
-        type: 3}
-      propertyPath: OnSideAttackInput.m_PersistentCalls.m_Calls.Array.data[4].m_CallState
-      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b44c7349678676347bc1e673cd602c2f, type: 3}
