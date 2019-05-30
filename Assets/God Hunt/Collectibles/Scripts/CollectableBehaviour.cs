@@ -13,6 +13,9 @@ public class CollectableBehaviour : BaseBehaviour
 
     public void Collect()
     {
+        if (!IsSetupped)
+            return;
+
         playerData.playerCollectablesBehaviour.Collect();
         OnCollection.Invoke();
     }
