@@ -5,7 +5,6 @@ public class TimerBehaviour : BaseBehaviour
     [Multiline] [SerializeField] private string description;
     [SerializeField] private float time;
     [SerializeField] private bool countOnSetup = false;
-    [SerializeField] private bool countOnEnable = false;
     [SerializeField] private bool repeat = true;
 
     public UnityVoidEvent OnTimerStart, OnTimerEnd;
@@ -27,18 +26,6 @@ public class TimerBehaviour : BaseBehaviour
             OnTimerEnd.AddListener(StopTimer);
     }
 
-    private void OnEnable()
-    {
-        if (countOnEnable)
-        {
-            StartTimer();
-        }
-        if (repeat)
-            OnTimerEnd.AddListener(ResetTimer);
-        else
-            OnTimerEnd.AddListener(StopTimer);
-    }
-
     private void OnDisable()
     {
         if (repeat)
@@ -50,7 +37,10 @@ public class TimerBehaviour : BaseBehaviour
     public override void OnUpdate()
     {
         if (countTime)
+        {
             timer += Time.deltaTime;
+            Debug.Log(name + " " + timer);
+        }
         if (timer >= time && countTime)
         {
             OnTimerEnd.Invoke();
