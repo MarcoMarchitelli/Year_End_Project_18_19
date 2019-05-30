@@ -4707,8 +4707,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5137394936435393039}
-  - component: {fileID: 2099965975}
-  - component: {fileID: 2099965974}
+  - component: {fileID: 803858460}
+  - component: {fileID: 3014336771392608850}
   - component: {fileID: 6415841471421859593}
   - component: {fileID: 8472956748296264881}
   - component: {fileID: 6205933948906256920}
@@ -4737,7 +4737,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2099965975
+--- !u!114 &803858460
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4746,22 +4746,27 @@ MonoBehaviour:
   m_GameObject: {fileID: 5137394936435393032}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b799b7ba9a9cdf946a0006cbd813cdff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &2099965974
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5137394936435393032}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: da1cdebc7a9845c4295a89b65d389bf5, type: 3}
+  m_Script: {fileID: 11500000, guid: 8157039ad57ca2b4695223e5ecab78ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   setupOnStart: 1
+--- !u!114 &3014336771392608850
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5137394936435393032}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: caff2bd2f7159bc42ba27df2e5d82502, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnCollection:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityVoidEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
 --- !u!114 &6415841471421859593
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4775,7 +4780,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactionAgent: {fileID: 1188, guid: b44c7349678676347bc1e673cd602c2f, type: 3}
-  interactOnCollision: 1
+  interactOnCollision: 0
   interactOnTrigger: 1
   cycleInteractions: 0
   resetOnAreaExit: 0
@@ -4795,6 +4800,28 @@ MonoBehaviour:
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 2
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 3014336771392608850}
+          m_MethodName: Collect
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 3014336771392608850}
+          m_MethodName: Enable
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
@@ -9589,7 +9616,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   description: "Counts second to \nshow the collectable panel"
   time: 2
-  countOnEnable: 0
+  countOnSetup: 0
   repeat: 0
   OnTimerStart:
     m_PersistentCalls:
