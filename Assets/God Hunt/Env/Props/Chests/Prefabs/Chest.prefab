@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 4678659183346846203}
   - component: {fileID: 7988369993708597647}
   - component: {fileID: 6182049582152559258}
-  - component: {fileID: 962081263674580257}
   - component: {fileID: 5832331167706919678}
   - component: {fileID: 2228827489764536142}
+  - component: {fileID: 3474417980741748760}
   m_Layer: 0
   m_Name: Chest
   m_TagString: Untagged
@@ -75,8 +75,8 @@ MonoBehaviour:
     OnInteraction:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 962081263674580257}
-          m_MethodName: OpenChest
+        - m_Target: {fileID: 3474417980741748760}
+          m_MethodName: UnlockSkill
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -97,20 +97,30 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+        - m_Target: {fileID: 0}
+          m_MethodName: 
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: 
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 6076324131199661038}
+          m_MethodName: SetTrigger
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: Open
+            m_BoolArgument: 0
+          m_CallState: 2
       m_TypeName: UnityVoidEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
         PublicKeyToken=null
---- !u!114 &962081263674580257
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5857578798821941511}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b799b7ba9a9cdf946a0006cbd813cdff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!54 &5832331167706919678
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -140,6 +150,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 5, y: 3, z: 2}
   m_Center: {x: 0, y: 0.64, z: 0.5413953}
+--- !u!114 &3474417980741748760
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5857578798821941511}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca9fded734dcee24183c52a56b1e98b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skillToUnlock: 1
 --- !u!1001 &811057489613509970
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -287,6 +310,12 @@ PrefabInstance:
 --- !u!4 &6076324131209272334 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: b07bb3a1d82c2bd4da792f0082e9712a,
+    type: 3}
+  m_PrefabInstance: {fileID: 6076324131209135758}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &6076324131199661038 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 9500000, guid: b07bb3a1d82c2bd4da792f0082e9712a,
     type: 3}
   m_PrefabInstance: {fileID: 6076324131209135758}
   m_PrefabAsset: {fileID: 0}
