@@ -13,6 +13,10 @@ public class TeleportBehaviour : BaseBehaviour
 
     public void TeleportThisEntity(int _teleportPointIndex)
     {
+        if (!IsSetupped)
+        {
+            Debug.Log(name + " is not setupped!!");
+        }
         Entity.gameObject.transform.position = teleportPoints[_teleportPointIndex].position;
         OnTeleport.Invoke();
     }
