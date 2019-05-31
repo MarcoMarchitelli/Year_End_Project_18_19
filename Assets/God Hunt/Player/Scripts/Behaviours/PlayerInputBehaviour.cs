@@ -5,6 +5,11 @@ public class PlayerInputBehaviour : BaseBehaviour
 {
     PlayerEntityData data;
 
+    [Header("Starting Abilites")]
+    [SerializeField] bool doubleJump;
+    [SerializeField] bool sprint;
+    [SerializeField] bool dash;
+
     [Range(0, 1)]
     [SerializeField] float verticalInputDeadzone = .8f;
     [Range(0, 1)]
@@ -39,8 +44,9 @@ public class PlayerInputBehaviour : BaseBehaviour
     protected override void CustomSetup()
     {
         data = Entity.Data as PlayerEntityData;
-        SetRunInput(false);
-        SetDashInput(false);
+        SetSprintInput(sprint);
+        SetDashInput(dash);
+        data.playerGameplayBehaviour.ToggleDoubleJump(doubleJump);
         SetJumpInput(true);
         ToggleDirectionalInput(true);
         AttackInputOn();
@@ -203,7 +209,7 @@ public class PlayerInputBehaviour : BaseBehaviour
         canJump = _value;
     }
 
-    public void SetRunInput(bool _value)
+    public void SetSprintInput(bool _value)
     {
         canRun = _value;
     }

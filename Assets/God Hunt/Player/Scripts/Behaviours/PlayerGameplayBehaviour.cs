@@ -170,7 +170,6 @@ public class PlayerGameplayBehaviour : BaseBehaviour
         minJumpVelocity = Mathf.Sqrt(2 * Mathf.Abs(normalGravity) * minJumpHeight);
         doubleJumpVelocity = Mathf.Sqrt(2 * Mathf.Abs(normalGravity) * doubleJumpHeight);
         jumpsCount = 0;
-        ToggleDoubleJump(false);
         #endregion
 
         #region Movement
@@ -456,11 +455,15 @@ public class PlayerGameplayBehaviour : BaseBehaviour
             {
                 interpolationValue = runAccelerationCurve.Evaluate(accelTimer / accelerationTime);
                 currentMoveSpeed = Mathf.Lerp(moveSpeed, runMoveSpeed, interpolationValue);
+                if(interpolationValue == 1)
+                {
+                    OnAccelerationEnd.Invoke();
+                    print("OOOOH");
+                }
             }
             else
             {
                 currentMoveSpeed = runMoveSpeed;
-                OnAccelerationEnd.Invoke();
             }
         }
         else
@@ -469,11 +472,15 @@ public class PlayerGameplayBehaviour : BaseBehaviour
             {
                 interpolationValue = runDecelerationCurve.Evaluate(decelTimer / decelerationTime);
                 currentMoveSpeed = Mathf.Lerp(moveSpeed, runMoveSpeed, interpolationValue);
+                if (interpolationValue == 0)
+                {
+                    OnDecelerationEnd.Invoke();
+                    print("AAAAH");
+                }
             }
             else
             {
                 currentMoveSpeed = moveSpeed;
-                OnDecelerationEnd.Invoke();
             }
         }
     }

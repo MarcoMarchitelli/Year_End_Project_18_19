@@ -19,7 +19,7 @@
                 playerData.playerInputBehaviour.SetDashInput(true);
                 break;
             case SkillType.sprint:
-                playerData.playerInputBehaviour.SetRunInput(true);
+                playerData.playerInputBehaviour.SetSprintInput(true);
                 break;
             case SkillType.doubleJump:
                 playerData.playerGameplayBehaviour.ToggleDoubleJump(true);
