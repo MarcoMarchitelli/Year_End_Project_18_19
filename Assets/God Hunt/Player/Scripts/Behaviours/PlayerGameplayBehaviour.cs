@@ -29,7 +29,7 @@ public class PlayerGameplayBehaviour : BaseBehaviour
     [SerializeField] float decelerationTime;
     [Tooltip("Describes how the run speed interpolates back to move speed.")]
     [SerializeField] AnimationCurve runDecelerationCurve;
-    [SerializeField] UnityVoidEvent OnAccelerationStart, OnDecelerationStart;
+    [SerializeField] UnityVoidEvent OnAccelerationStart, OnAccelerationEnd, OnDecelerationStart, OnDecelerationEnd;
 
     [Header("Dashing")]
     [SerializeField] float minDashDistance = 5f;
@@ -53,8 +53,8 @@ public class PlayerGameplayBehaviour : BaseBehaviour
 
     #region Jumping
 
-    [HideInInspector]
-    public bool hasDoubleJumped = false;
+    [HideInInspector] public bool canDoubleJump;
+    [HideInInspector] public bool hasDoubleJumped = false;
     int jumpsCount;
 
     #endregion
@@ -170,6 +170,7 @@ public class PlayerGameplayBehaviour : BaseBehaviour
         minJumpVelocity = Mathf.Sqrt(2 * Mathf.Abs(normalGravity) * minJumpHeight);
         doubleJumpVelocity = Mathf.Sqrt(2 * Mathf.Abs(normalGravity) * doubleJumpHeight);
         jumpsCount = 0;
+        ToggleDoubleJump(false);
         #endregion
 
         #region Movement
@@ -224,6 +225,11 @@ public class PlayerGameplayBehaviour : BaseBehaviour
 
     #region API
 
+    public void ToggleDoubleJump(bool _value)
+    {
+        canDoubleJump = _value;
+    }
+
     public void SetDirectionalInput(Vector2 input)
     {
         directionalInput = input;
@@ -254,7 +260,7 @@ public class PlayerGameplayBehaviour : BaseBehaviour
             velocity.y = maxJumpVelocity;
             jumpsCount++;
         }
-        else if (jumpsCount < 2 && !hasDoubleJumped)
+        else if (canDoubleJump && jumpsCount < 2 && !hasDoubleJumped)
         {
             velocity.y = doubleJumpVelocity;
             jumpsCount++;
@@ -454,6 +460,7 @@ public class PlayerGameplayBehaviour : BaseBehaviour
             else
             {
                 currentMoveSpeed = runMoveSpeed;
+                OnAccelerationEnd.Invoke();
             }
         }
         else
@@ -466,6 +473,7 @@ public class PlayerGameplayBehaviour : BaseBehaviour
             else
             {
                 currentMoveSpeed = moveSpeed;
+                OnDecelerationEnd.Invoke();
             }
         }
     }

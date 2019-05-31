@@ -22,6 +22,7 @@ public class PlayerInputBehaviour : BaseBehaviour
 
     [HideInInspector] public bool FallingThrough;
 
+    bool canRun = false;
     bool canDash = false;
     bool canJump = false;
     bool canAttack = false;
@@ -38,7 +39,8 @@ public class PlayerInputBehaviour : BaseBehaviour
     protected override void CustomSetup()
     {
         data = Entity.Data as PlayerEntityData;
-        SetDashInput(true);
+        SetRunInput(false);
+        SetDashInput(false);
         SetJumpInput(true);
         ToggleDirectionalInput(true);
         AttackInputOn();
@@ -112,7 +114,7 @@ public class PlayerInputBehaviour : BaseBehaviour
             IsPressingJump = false;
         }
 
-        if (Input.GetButtonDown(InputManager.CurrentInputDevice + "Run"))
+        if (canRun && Input.GetButtonDown(InputManager.CurrentInputDevice + "Run"))
         {
             isRunning = true;
             data.playerGameplayBehaviour.HandleSprintPress();
@@ -201,6 +203,11 @@ public class PlayerInputBehaviour : BaseBehaviour
         canJump = _value;
     }
 
+    public void SetRunInput(bool _value)
+    {
+        canRun = _value;
+    }
+
     public void AttackInputOff()
     {
         canAttack = false;
@@ -235,5 +242,4 @@ public class PlayerInputBehaviour : BaseBehaviour
     }
 
     #endregion
-
 }
