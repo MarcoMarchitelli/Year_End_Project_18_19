@@ -39,7 +39,6 @@ public class TimerBehaviour : BaseBehaviour
         if (countTime)
         {
             timer += Time.deltaTime;
-            Debug.Log(name + " " + timer);
         }
         if (timer >= time && countTime)
         {
