@@ -9,7 +9,7 @@ public abstract class BaseBehaviour : MonoBehaviour, IBehaviour
     /// <summary>
     /// True se il Behaviour è stato setuppato, false altrimenti
     /// </summary>
-    public bool IsSetupped { get; private set; }
+    public bool isEnabled { get; private set; }
 
     /// <summary>
     /// Toggles the activity of the behaviour.
@@ -17,7 +17,15 @@ public abstract class BaseBehaviour : MonoBehaviour, IBehaviour
     /// <param name="_value">if active or not.</param>
     public virtual void Enable(bool _value)
     {
-        IsSetupped = _value;
+        isEnabled = _value;
+    }
+
+    /// <summary>
+    /// Behaviour's custom start.
+    /// </summary>
+    public virtual void OnStart()
+    {
+
     }
 
     /// <summary>
@@ -51,7 +59,7 @@ public abstract class BaseBehaviour : MonoBehaviour, IBehaviour
     public void Setup(IEntity _entity)
     {
         Entity = _entity;
-        IsSetupped = true;
+        isEnabled = true;
         CustomSetup();
     }
 

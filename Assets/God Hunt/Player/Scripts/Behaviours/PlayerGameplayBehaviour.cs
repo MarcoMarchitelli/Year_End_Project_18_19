@@ -278,7 +278,7 @@ public class PlayerGameplayBehaviour : BaseBehaviour
 
     public void HandleDashPress()
     {
-        if (IsSetupped && !IsDashing)
+        if (isEnabled && !IsDashing)
         {
             if (data.playerCollisionsBehaviour.Below)
                 StartDash();

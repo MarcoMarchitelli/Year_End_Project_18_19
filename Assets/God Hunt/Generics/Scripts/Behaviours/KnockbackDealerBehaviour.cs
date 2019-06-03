@@ -25,7 +25,7 @@ public class KnockbackDealerBehaviour : BaseBehaviour
 
     public void DealKnockback(KnockbackReceiverBehaviour _receiver)
     {
-        if (!IsSetupped)
+        if (!isEnabled)
         {
             Debug.LogWarning(name + "'s knockback dealer behaviour is not setupped!");
             return;
@@ -43,7 +43,7 @@ public class KnockbackDealerBehaviour : BaseBehaviour
 
     protected virtual void OnTriggerEnter(Collider other)
     {
-        if (!IsSetupped)
+        if (!isEnabled)
             return;
 
         if (dealsOnTrigger)
@@ -59,7 +59,7 @@ public class KnockbackDealerBehaviour : BaseBehaviour
 
     protected virtual void OnCollisionEnter(Collision collision)
     {
-        if (!IsSetupped)
+        if (!isEnabled)
             return;
 
         if (dealsOnCollision)

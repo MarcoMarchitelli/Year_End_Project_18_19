@@ -46,7 +46,7 @@ public class EnemyMovementBehaviour : BaseBehaviour
 
     public override void OnUpdate()
     {
-        if (!IsSetupped)
+        if (!isEnabled)
             return;
 
         if (!inRoutine)

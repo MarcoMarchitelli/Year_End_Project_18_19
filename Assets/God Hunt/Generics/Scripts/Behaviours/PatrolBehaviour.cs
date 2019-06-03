@@ -65,7 +65,7 @@ public class PatrolBehaviour : BaseBehaviour
 
     public void StartPatrol()
     {
-        if (!IsSetupped)
+        if (!isEnabled)
         {
             Debug.LogWarning(name + "'s patrol behaviour is not setupped!");
             return;
@@ -76,7 +76,7 @@ public class PatrolBehaviour : BaseBehaviour
 
     public void StopPatrol()
     {
-        if (!IsSetupped)
+        if (!isEnabled)
         {
             Debug.LogWarning(name + "'s patrol behaviour is not setupped!");
             return;
@@ -87,7 +87,7 @@ public class PatrolBehaviour : BaseBehaviour
 
     public void ToggleRotationToWaypoint(bool _value)
     {
-        if (!IsSetupped)
+        if (!isEnabled)
         {
             Debug.LogWarning(name + "'s patrol behaviour is not setupped!");
             return;
