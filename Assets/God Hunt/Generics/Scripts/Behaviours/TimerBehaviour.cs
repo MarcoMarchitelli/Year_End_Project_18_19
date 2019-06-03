@@ -4,7 +4,7 @@ public class TimerBehaviour : BaseBehaviour
 {
     [Multiline] [SerializeField] private string description;
     [SerializeField] private float time;
-    [SerializeField] private bool countOnSetup = false;
+    [SerializeField] private bool countOnStart = false;
     [SerializeField] private bool repeat = true;
 
     public UnityVoidEvent OnTimerStart, OnTimerEnd;
@@ -14,9 +14,9 @@ public class TimerBehaviour : BaseBehaviour
 
     #region MonoBehaviour methods
 
-    protected override void CustomSetup()
+    public override void OnStart()
     {
-        if (countOnSetup)
+        if (countOnStart)
         {
             StartTimer();
         }
@@ -90,5 +90,4 @@ public class TimerBehaviour : BaseBehaviour
     }
 
     #endregion
-
 }

@@ -17,7 +17,7 @@ public class KnockbackReceiverBehaviour : BaseBehaviour
 
     public void Knockback(float _knockbackPower, float _speedMul, float _distMul, Vector2 _knockbackDirection)
     {
-        if (!IsSetupped)
+        if (!isEnabled)
             return;
 
         float knockbackForce = Mathf.Max(1, _knockbackPower - mass);

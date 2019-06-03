@@ -20,6 +20,12 @@ public abstract class BaseEntity : MonoBehaviour, IEntity
     {
         if (setupOnStart)
             SetUpEntity();
+
+        if(isEnabled)
+            foreach (IBehaviour behaviour in Behaviours)
+            {
+                behaviour.OnStart();
+            }
     }
 
     /// <summary>
