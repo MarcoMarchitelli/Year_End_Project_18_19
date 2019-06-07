@@ -40,6 +40,49 @@ namespace GodHunt.Inputs
             CurrentInputDevice = InputDevice.keyboard;
         }
 
+        private void Update()
+        {
+            if(CurrentInputDevice == InputDevice.keyboard)
+            {
+                if (Input.GetKeyDown(keyboardBindings.Attack))
+                    OnAttackPressed?.Invoke();
+                if (Input.GetKeyUp(keyboardBindings.Attack))
+                    OnAttackReleased?.Invoke();
+
+                if (Input.GetKeyDown(keyboardBindings.Dash))
+                    OnDashPressed?.Invoke();        
+                if (Input.GetKeyUp(keyboardBindings.Dash))
+                    OnDashReleased?.Invoke();
+
+                if (Input.GetKeyDown(keyboardBindings.Run))
+                    OnRunPressed?.Invoke();        
+                if (Input.GetKeyUp(keyboardBindings.Run))
+                    OnRunReleased?.Invoke();
+
+                if (Input.GetKeyDown(keyboardBindings.Jump))
+                    OnJumpPressed?.Invoke();        
+                if (Input.GetKeyUp(keyboardBindings.Jump))
+                    OnJumpReleased?.Invoke();
+
+                if (Input.GetKeyDown(keyboardBindings.Pause))
+                    OnPausePressed?.Invoke();
+                if (Input.GetKeyUp(keyboardBindings.Pause))
+                    OnPauseReleased?.Invoke();
+
+                if (Input.GetKeyDown(keyboardBindings.Map))
+                    OnMapPressed?.Invoke();
+                if (Input.GetKeyUp(keyboardBindings.Map))
+                    OnMapReleased?.Invoke();
+
+                if (Input.GetKeyDown(keyboardBindings.Inventory))
+                    OnInventoryPressed?.Invoke();
+                if (Input.GetKeyUp(keyboardBindings.Inventory))
+                    OnInventoryReleased?.Invoke();
+
+                OnMovementInput?.Invoke(new Vector2(Input.GetAxisRaw(keyboardBindings.HorizontalAxis), Input.GetAxisRaw(keyboardBindings.VerticalAxis)));
+            }
+        }
+
         #region GamePad events handlers
         void HandleControllerConnection(IntellGamePad _gamePad)
         {
@@ -69,7 +112,7 @@ namespace GodHunt.Inputs
         #endregion
 
         #region Buttons/Axes check
-        void HandleButtonPress(IntellGamePad _pad, IntellGamePad.Buttons _button)
+        void HandleButtonPress(IntellGamePad _pad, Buttons _button)
         {
             if (_button == gamePadBindings.Attack)
             {
@@ -114,7 +157,7 @@ namespace GodHunt.Inputs
             }
         }
 
-        void HandleButtonRelease(IntellGamePad _pad, IntellGamePad.Buttons _button)
+        void HandleButtonRelease(IntellGamePad _pad, Buttons _button)
         {
             if (_button == gamePadBindings.Attack)
             {
@@ -171,13 +214,13 @@ namespace GodHunt.Inputs
             public enum InputType { button, dpad, trigger, stick }
 
             [Header("Game Pad")]
-            public IntellGamePad.Buttons Jump;
-            public IntellGamePad.Buttons Attack;
-            public IntellGamePad.Buttons Dash;
-            public IntellGamePad.Buttons Run;
-            public IntellGamePad.Buttons Pause;
-            public IntellGamePad.Buttons Map;
-            public IntellGamePad.Buttons Inventory;
+            public Buttons Jump;
+            public Buttons Attack;
+            public Buttons Dash;
+            public Buttons Run;
+            public Buttons Pause;
+            public Buttons Map;
+            public Buttons Inventory;
         }
 
         [System.Serializable]
@@ -191,6 +234,8 @@ namespace GodHunt.Inputs
             public KeyCode Pause;
             public KeyCode Map;
             public KeyCode Inventory;
+            public string HorizontalAxis;
+            public string VerticalAxis;
         }
     }
 

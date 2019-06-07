@@ -5,82 +5,77 @@ using UnityEngine;
 using XInputDotNetPure;
 using System.Linq;
 
-namespace GodHunt.Inputs
+/// <summary>
+/// Classe che fornisce le informazioni sullo stato dei gamepad collegati.
+/// </summary>
+public class InputChecker : MonoBehaviour
 {
+    #region Delegates
+    public static Action<IntellGamePad> OnGamepadConnected;
+    public static Action<IntellGamePad> OnGamepadDisconnected;
+    #endregion
+
+    #region properties
     /// <summary>
-    /// Classe che fornisce le informazioni sullo stato dei gamepad collegati.
+    /// Lista dei gamepad attivi.
     /// </summary>
-    public class InputChecker : MonoBehaviour
+    public List<IntellGamePad> Activegamepads { get; protected set; }
+    #endregion
+
+    public static InputChecker instance;
+
+    const float CONTROLLER_STATUS_CHECK_INTERVAL = .5f;
+
+    private void Awake()
     {
-        #region Delegates
-        public static Action<IntellGamePad> OnGamepadConnected;
-        public static Action<IntellGamePad> OnGamepadDisconnected;
-        #endregion
-
-        #region properties
-        public IntellGamePad.Settings defaultGamepadSettings;
-        /// <summary>
-        /// Lista dei gamepad attivi.
-        /// </summary>
-        public List<IntellGamePad> Activegamepads { get; protected set; }
-        #endregion
-
-        public static InputChecker instance;
-
-        const float CONTROLLER_STATUS_CHECK_INTERVAL = .5f;
-
-        private void Awake()
+        if (instance == null)
         {
-            if (instance == null)
-            {
-                instance = this;
-                Activegamepads = new List<IntellGamePad>();
-            }
-
-            StartCoroutine("ControllerStatusCheckRoutine");
+            instance = this;
+            Activegamepads = new List<IntellGamePad>();
         }
 
-        IEnumerator ControllerStatusCheckRoutine()
-        {
-            DoCheckInput();
-            yield return new WaitForSecondsRealtime(CONTROLLER_STATUS_CHECK_INTERVAL);
-        }
+        StartCoroutine("ControllerStatusCheckRoutine");
+    }
 
-        /// <summary>
-        /// Aggiorna la lista dello stato dei gamepad (Activegamepads).
-        /// </summary>
-        /// <returns></returns>
-        private void DoCheckInput()
+    IEnumerator ControllerStatusCheckRoutine()
+    {
+        DoCheckInput();
+        yield return new WaitForSecondsRealtime(CONTROLLER_STATUS_CHECK_INTERVAL);
+    }
+
+    /// <summary>
+    /// Aggiorna la lista dello stato dei gamepad (Activegamepads).
+    /// </summary>
+    /// <returns></returns>
+    private void DoCheckInput()
+    {
+        for (int i = 0; i < 4; ++i)
         {
-            for (int i = 0; i < 4; ++i)
+            PlayerIndex testPlayerIndex = (PlayerIndex)i;
+            GamePadState testState = GamePad.GetState(testPlayerIndex);
+            if (testState.IsConnected)
             {
-                PlayerIndex testPlayerIndex = (PlayerIndex)i;
-                GamePadState testState = GamePad.GetState(testPlayerIndex);
-                if (testState.IsConnected)
+                IntellGamePad newPad = Activegamepads.FirstOrDefault(gpad => gpad.ID == i);
+                if (newPad != null)
                 {
-                    IntellGamePad newPad = Activegamepads.FirstOrDefault(gpad => gpad.ID == i);
-                    if (newPad != null)
-                    {
-                        newPad.CurrentGamePadState = testState;
-                    }
-                    else
-                    {
-                        IntellGamePad padToAdd = new IntellGamePad(testState, i);
-                        Activegamepads.Add(padToAdd);
-                        padToAdd.SetSettings(defaultGamepadSettings);
-                        OnGamepadConnected?.Invoke(padToAdd);
-                    }
+                    newPad.CurrentGamePadState = testState;
                 }
                 else
                 {
-                    IntellGamePad padToRemove = Activegamepads.FirstOrDefault(gpad => gpad.ID == i);
-                    if (padToRemove != null)
-                    {
-                        Activegamepads.RemoveAt(i);
-                        OnGamepadDisconnected?.Invoke(padToRemove);
-                    }
+                    IntellGamePad padToAdd = new IntellGamePad(testState, i);
+                    Activegamepads.Add(padToAdd);
+                    OnGamepadConnected?.Invoke(padToAdd);
+                }
+            }
+            else
+            {
+                IntellGamePad padToRemove = Activegamepads.FirstOrDefault(gpad => gpad.ID == i);
+                if (padToRemove != null)
+                {
+                    Activegamepads.RemoveAt(i);
+                    OnGamepadDisconnected?.Invoke(padToRemove);
                 }
             }
         }
-    } 
+    }
 }

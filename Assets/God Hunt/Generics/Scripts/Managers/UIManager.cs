@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using InputTest;
 
 public class UIManager : MonoBehaviour
 {
@@ -22,7 +21,6 @@ public class UIManager : MonoBehaviour
     bool controllerSchemeActive = true;
 
     #region API
-
     public void Setup()
     {
         PlayerEntityData playerData = GameManager.Instance.player.Data as PlayerEntityData;
@@ -35,11 +33,6 @@ public class UIManager : MonoBehaviour
     {
         if (inventoryPanel)
             inventoryPanel.SetActive(_value);
-
-        if (_value == true && firstSelectedItem != null)
-        {
-            TestInputManager.Instance.eventSystem.SetSelectedGameObject(firstSelectedItem);
-        }
     }
 
     public void ToggleCollectablesScreen(bool _value)
@@ -58,11 +51,6 @@ public class UIManager : MonoBehaviour
     {
         if ( pausePanel != null )
             pausePanel.SetActive( _value );
-
-        if ( _value == true && firstSelectedObject != null )
-        {
-            TestInputManager.Instance.eventSystem.SetSelectedGameObject( firstSelectedObject );
-        }
     }
 
     public void ToggleMapPanel(bool _value)
@@ -86,6 +74,5 @@ public class UIManager : MonoBehaviour
             controllerSchemeActive = true;
         }
     }
-
     #endregion
 }

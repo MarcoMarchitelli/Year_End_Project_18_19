@@ -1,14 +1,25 @@
 ﻿using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-[RequireComponent(typeof(Button))]
+[RequireComponent(typeof(Image))]
+[RequireComponent(typeof(EventTrigger))]
 public class CustomButton : MonoBehaviour
 {
-    Button _button;
-    Button Button { get { if (!_button) _button = GetComponent<Button>(); return _button; } }
+    public UnityVoidEvent OnSelect, OnDeselect, OnClick;
 
     public void Select()
     {
-        Button.Select();
+        OnSelect.Invoke();
+    }
+
+    public void Deselect()
+    {
+        OnDeselect.Invoke();
+    }
+
+    public void Click()
+    {
+        OnClick.Invoke();
     }
 }

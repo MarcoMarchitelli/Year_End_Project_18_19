@@ -9,7 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 692926701359730871}
-  - component: {fileID: 692926701359730870}
+  - component: {fileID: 1610142619}
+  - component: {fileID: 1610142618}
   m_Layer: 0
   m_Name: Input Manager
   m_TagString: Untagged
@@ -31,7 +32,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &692926701359730870
+--- !u!114 &1610142619
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -40,15 +41,37 @@ MonoBehaviour:
   m_GameObject: {fileID: 692926701359730872}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: edfc64b1ea8877d489163ee2d6440278, type: 3}
+  m_Script: {fileID: 11500000, guid: 3183e799556c8b84a91c47f9289b26b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InputKeys:
-  - Key: 4
-    keyString: Inventory
-    isAxis: 0
-    Interaction: 0
-    TriggerWhileHolding: 0
-    TimeToHold: 0
-    Treshold: -0.87
-    TriggerMode: 0
+  defaultGamepadSettings:
+    rightStickDeadzone: 0
+    leftStickDeadzone: 0
+--- !u!114 &1610142618
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 692926701359730872}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23349d835011550498e18885cfd15605, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gamePadBindings:
+    Jump: 1
+    Attack: 3
+    Dash: 5
+    Run: 6
+    Pause: 7
+    Map: 8
+    Inventory: 4
+  keyboardBindings:
+    Jump: 32
+    Attack: 106
+    Dash: 107
+    Run: 304
+    Pause: 27
+    Map: 9
+    Inventory: 105

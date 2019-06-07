@@ -1,10 +1,8 @@
-﻿using InputTest;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class InteractableBehaviour : BaseBehaviour
 {
-
     #region Serialized
 
     [SerializeField] MonoBehaviour interactionAgent;
@@ -39,54 +37,54 @@ public class InteractableBehaviour : BaseBehaviour
         }
     }
 
-    public override void OnUpdate()
-    {
-        if (agentFound)
-        {
-            if (!currentInteraction.RequiresTimer && !currentInteraction.RequiresInput)
-            {
-                currentInteraction.OnInteraction.Invoke();
-                return;
-            }
-            else
-            if (currentInteraction.RequiresTimer && currentInteraction.RequiresInput)
-            {
-                if (countTime)
-                    timer += Time.deltaTime;
+    //public override void OnUpdate()
+    //{
+    //    if (agentFound)
+    //    {
+    //        if (!currentInteraction.RequiresTimer && !currentInteraction.RequiresInput)
+    //        {
+    //            currentInteraction.OnInteraction.Invoke();
+    //            return;
+    //        }
+    //        else
+    //        if (currentInteraction.RequiresTimer && currentInteraction.RequiresInput)
+    //        {
+    //            if (countTime)
+    //                timer += Time.deltaTime;
 
-                if (Input.GetButtonDown(TestInputManager.CurrentInputDevice + currentInteraction.Input))
-                    countTime = true;
+    //            if (Input.GetButtonDown(TestInputManager.CurrentInputDevice + currentInteraction.Input))
+    //                countTime = true;
 
-                if (Input.GetButtonUp(TestInputManager.CurrentInputDevice + currentInteraction.Input))
-                {
-                    countTime = false;
-                    timer = 0;
-                }
+    //            if (Input.GetButtonUp(TestInputManager.CurrentInputDevice + currentInteraction.Input))
+    //            {
+    //                countTime = false;
+    //                timer = 0;
+    //            }
 
-                if (timer >= currentInteraction.Time)
-                {
-                    currentInteraction.OnInteraction.Invoke();
-                }
-            }
-            else
-            if (currentInteraction.RequiresTimer && !currentInteraction.RequiresInput)
-            {
-                timer += Time.deltaTime;
+    //            if (timer >= currentInteraction.Time)
+    //            {
+    //                currentInteraction.OnInteraction.Invoke();
+    //            }
+    //        }
+    //        else
+    //        if (currentInteraction.RequiresTimer && !currentInteraction.RequiresInput)
+    //        {
+    //            timer += Time.deltaTime;
 
-                if (timer >= currentInteraction.Time)
-                {
-                    currentInteraction.OnInteraction.Invoke();
-                }
-            }
-            else
-            {
-                if (Input.GetButtonDown(TestInputManager.CurrentInputDevice + currentInteraction.Input))
-                {
-                    currentInteraction.OnInteraction.Invoke();
-                }
-            }
-        }
-    }
+    //            if (timer >= currentInteraction.Time)
+    //            {
+    //                currentInteraction.OnInteraction.Invoke();
+    //            }
+    //        }
+    //        else
+    //        {
+    //            if (Input.GetButtonDown(TestInputManager.CurrentInputDevice + currentInteraction.Input))
+    //            {
+    //                currentInteraction.OnInteraction.Invoke();
+    //            }
+    //        }
+    //    }
+    //}
 
     #endregion
 
@@ -177,7 +175,6 @@ public class InteractableBehaviour : BaseBehaviour
     }
 
     #endregion
-
 }
 
 [System.Serializable]
