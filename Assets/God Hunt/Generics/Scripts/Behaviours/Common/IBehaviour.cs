@@ -10,13 +10,18 @@ public interface IBehaviour
     /// <summary>
     /// True se il Behaviour è stato setuppato, false altrimenti
     /// </summary>
-    bool IsSetupped { get; }
+    bool isEnabled { get; }
 
     /// <summary>
     /// Setup del Behaviour
     /// </summary>
     /// <param name="_entity">Riferimento all'entitàche gestisce il Behaviour</param>
     void Setup(IEntity _entity);
+
+    /// <summary>
+    /// Behaviour's custom start.
+    /// </summary>
+    void OnStart();
 
     /// <summary>
     /// Behaviour's custom update.

@@ -122,7 +122,7 @@ public class ScanBehaviour : BaseBehaviour
 
     bool CanSeeTarget()
     {
-        if (!IsSetupped)
+        if (!isEnabled)
         {
             return false;
         }

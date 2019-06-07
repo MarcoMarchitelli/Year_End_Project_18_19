@@ -26,7 +26,7 @@ public class DamageDealerBehaviour : BaseBehaviour
     /// <param name="_receiver"></param>
     public void DealDamage(DamageReceiverBehaviour _receiver)
     {
-        if (!IsSetupped)
+        if (!isEnabled)
         {
             Debug.LogWarning(name + "'s damage dealer behaviour is not setupped!");
             return;
@@ -50,7 +50,7 @@ public class DamageDealerBehaviour : BaseBehaviour
 
     protected virtual void OnTriggerEnter(Collider other)
     {
-        if (!IsSetupped)
+        if (!isEnabled)
             return;
 
         if (dealsOnTrigger)
@@ -66,7 +66,7 @@ public class DamageDealerBehaviour : BaseBehaviour
 
     protected virtual void OnCollisionEnter(Collision collision)
     {
-        if (!IsSetupped)
+        if (!isEnabled)
             return;
 
         if (dealsOnCollision)

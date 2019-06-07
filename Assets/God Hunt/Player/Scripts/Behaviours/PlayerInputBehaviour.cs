@@ -74,7 +74,7 @@ public class PlayerInputBehaviour : BaseBehaviour
     Vector2 directionalInput;
     void ReadInputs()
     {
-        if (!IsSetupped || data.animatorProxy.IsDead)
+        if (!isEnabled || data.animatorProxy.IsDead)
         {
             return;
         }

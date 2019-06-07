@@ -57,7 +57,7 @@ public class DamageReceiverBehaviour : BaseBehaviour
     /// <param name="_value">Health to add (subtract if negative)/param>
     public bool SetHealth(int _value, bool _deal_through_invulnerability = false)
     {
-        if (!IsSetupped && !_deal_through_invulnerability)
+        if (!isEnabled && !_deal_through_invulnerability)
         {
             return false;
         }

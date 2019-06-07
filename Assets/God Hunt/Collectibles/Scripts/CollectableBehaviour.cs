@@ -13,7 +13,7 @@ public class CollectableBehaviour : BaseBehaviour
 
     public void Collect()
     {
-        if (!IsSetupped)
+        if (!isEnabled)
             return;
 
         playerData.playerCollectablesBehaviour.Collect();

@@ -49,7 +49,7 @@ public class EnemyPatrolBehaviour : BaseBehaviour
 
     public void StartPatrol()
     {
-        if (!IsSetupped)
+        if (!isEnabled)
         {
             Debug.LogWarning(name + "'s patrol behaviour is not setupped!");
             return;
@@ -63,7 +63,7 @@ public class EnemyPatrolBehaviour : BaseBehaviour
 
     public void ContinuePatrol()
     {
-        if (!IsSetupped)
+        if (!isEnabled)
         {
             Debug.LogWarning(name + "'s patrol behaviour is not setupped!");
             return;
@@ -73,7 +73,7 @@ public class EnemyPatrolBehaviour : BaseBehaviour
 
     public void StopPatrol()
     {
-        if (!IsSetupped)
+        if (!isEnabled)
         {
             Debug.LogWarning(name + "'s patrol behaviour is not setupped!");
             return;
@@ -88,7 +88,7 @@ public class EnemyPatrolBehaviour : BaseBehaviour
 
     public void ToggleRotationToWaypoint(bool _value)
     {
-        if (!IsSetupped)
+        if (!isEnabled)
         {
             Debug.LogWarning(name + "'s patrol behaviour is not setupped!");
             return;

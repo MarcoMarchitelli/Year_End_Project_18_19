@@ -1,5 +1,39 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &1399785968042621894
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2014387858448700844}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca2d7c429c395204aa607f6851fe0a97, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  camShake: 1
+  frequency: 1.5
+  amplitude: 0.4
+  duration: 0.2
+  freezeFrames: 1
+  time: 0.1
+  OnHealthChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityIntEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  OnHealthUpgraded:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityVoidEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  OnHealthDepleated:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityVoidEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  _maxHealth: 1
 --- !u!1001 &8311104079923990363
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15,12 +49,12 @@ PrefabInstance:
     - target: {fileID: 7539714301378599675, guid: 841b958cf291a5548ae40e766e37e5c7,
         type: 3}
       propertyPath: moveSpeed
-      value: 3
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7539714301378599675, guid: 841b958cf291a5548ae40e766e37e5c7,
         type: 3}
       propertyPath: turnSpeed
-      value: 180
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 7539714301378599675, guid: 841b958cf291a5548ae40e766e37e5c7,
         type: 3}
@@ -192,5 +226,16 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8226715719163002679, guid: 841b958cf291a5548ae40e766e37e5c7,
+        type: 3}
+      propertyPath: time
+      value: 5.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 841b958cf291a5548ae40e766e37e5c7, type: 3}
+--- !u!1 &2014387858448700844 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7539714301378599671, guid: 841b958cf291a5548ae40e766e37e5c7,
+    type: 3}
+  m_PrefabInstance: {fileID: 8311104079923990363}
+  m_PrefabAsset: {fileID: 0}
