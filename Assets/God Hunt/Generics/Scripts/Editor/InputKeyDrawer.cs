@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEditor;
+using InputTest;
 
 [CustomPropertyDrawer(typeof(InputKey))]
 public class InputKeyDrawer : PropertyDrawer
@@ -54,47 +55,47 @@ public class InputKeyDrawer : PropertyDrawer
             {
                 case (int)InputKeyButton.Horizontal:
                     isAxis.boolValue = true;
-                    keyString.stringValue = InputManager.CurrentInputDevice + "Horizontal";
+                    keyString.stringValue = TestInputManager.CurrentInputDevice + "Horizontal";
                     break;
                 case (int)InputKeyButton.Vertical:
                     isAxis.boolValue = true;
-                    keyString.stringValue = InputManager.CurrentInputDevice + "Vertrical";
+                    keyString.stringValue = TestInputManager.CurrentInputDevice + "Vertrical";
                     break;
                 case (int)InputKeyButton.Pause:
                     isAxis.boolValue = false;
-                    keyString.stringValue = InputManager.CurrentInputDevice + "Pause";
+                    keyString.stringValue = TestInputManager.CurrentInputDevice + "Pause";
                     break;
                 case (int)InputKeyButton.Map:
                     isAxis.boolValue = false;
-                    keyString.stringValue = InputManager.CurrentInputDevice + "Map";
+                    keyString.stringValue = TestInputManager.CurrentInputDevice + "Map";
                     break;
                 case (int)InputKeyButton.Inventory:
                     isAxis.boolValue = false;
-                    keyString.stringValue = InputManager.CurrentInputDevice + "Inventory";
+                    keyString.stringValue = TestInputManager.CurrentInputDevice + "Inventory";
                     break;
                 case (int)InputKeyButton.Jump:
                     isAxis.boolValue = false;
-                    keyString.stringValue = InputManager.CurrentInputDevice + "Jump";
+                    keyString.stringValue = TestInputManager.CurrentInputDevice + "Jump";
                     break;
                 case (int)InputKeyButton.Attack:
                     isAxis.boolValue = false;
-                    keyString.stringValue = InputManager.CurrentInputDevice + "Attack";
+                    keyString.stringValue = TestInputManager.CurrentInputDevice + "Attack";
                     break;
                 case (int)InputKeyButton.Dash:
                     isAxis.boolValue = false;
-                    keyString.stringValue = InputManager.CurrentInputDevice + "Dash";
+                    keyString.stringValue = TestInputManager.CurrentInputDevice + "Dash";
                     break;
                 case (int)InputKeyButton.Run:
                     isAxis.boolValue = false;
-                    keyString.stringValue = InputManager.CurrentInputDevice + "Run";
+                    keyString.stringValue = TestInputManager.CurrentInputDevice + "Run";
                     break;
                 case (int)InputKeyButton.Submit:
                     isAxis.boolValue = false;
-                    keyString.stringValue = InputManager.CurrentInputDevice + "Submit";
+                    keyString.stringValue = TestInputManager.CurrentInputDevice + "Submit";
                     break;
                 case (int)InputKeyButton.Cancel:
                     isAxis.boolValue = false;
-                    keyString.stringValue = InputManager.CurrentInputDevice + "Cancel";
+                    keyString.stringValue = TestInputManager.CurrentInputDevice + "Cancel";
                     break;
             }
 

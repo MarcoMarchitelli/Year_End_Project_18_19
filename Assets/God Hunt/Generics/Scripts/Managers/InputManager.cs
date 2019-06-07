@@ -1,160 +1,198 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.EventSystems;
+﻿using UnityEngine;
 
-public class InputManager : MonoBehaviour
+namespace GodHunt.Inputs
 {
-    public List<InputKey> InputKeys;
-
-    #region Vars
-
-    public static InputManager Instance;
-
-    public EventSystem eventSystem;
-    StandaloneInputModule inputModule;
-
-    string _currentInputDevice;
-    public static string CurrentInputDevice
+    [RequireComponent(typeof(InputChecker))]
+    public class InputManager : MonoBehaviour
     {
-        get
+        [SerializeField] GamePadBindings gamePadBindings;
+        [SerializeField] KeyboardBindings keyboardBindings;
+
+        public static InputDevice CurrentInputDevice;
+        public static System.Action<InputDevice> OnInputDeviceChange;
+
+        #region Buttons Events
+        public static System.Action OnJumpPressed;
+        public static System.Action OnJumpReleased;
+        public static System.Action OnRunPressed;
+        public static System.Action OnRunReleased;
+        public static System.Action OnAttackPressed;
+        public static System.Action OnAttackReleased;
+        public static System.Action OnDashPressed;
+        public static System.Action OnDashReleased;
+        public static System.Action OnMapPressed;
+        public static System.Action OnMapReleased;
+        public static System.Action OnInventoryPressed;
+        public static System.Action OnInventoryReleased;
+        public static System.Action OnPausePressed;
+        public static System.Action OnPauseReleased;
+        #endregion
+
+        #region Axes events
+        public static System.Action<Vector2> OnMovementInput;
+        #endregion
+
+        public void Setup()
         {
-            return Instance == null ? null : Instance._currentInputDevice;
+            InputChecker.OnGamepadConnected += HandleControllerConnection;
+            InputChecker.OnGamepadDisconnected += HandleControllerDisconnection;
+
+            CurrentInputDevice = InputDevice.keyboard;
         }
-        private set
+
+        #region GamePad events handlers
+        void HandleControllerConnection(IntellGamePad _gamePad)
         {
-            Instance._currentInputDevice = Instance == null ? null : value;
-        }
-    }
-    const string keyboard = "Keyboard ";
-    const string xboxController = "XBOX ";
-
-    string[] joyNames;
-
-    #endregion
-
-    #region Monos
-
-    private void Update()
-    {
-        CheckInputDevices();
-
-        if (Input.GetButtonDown(CurrentInputDevice + "Pause"))
-            GameManager.Instance.TogglePause();
-
-        if (Input.GetButtonDown(CurrentInputDevice + "Map"))
-            GameManager.Instance.ToggleMap();
-
-        if (Input.GetButtonDown(CurrentInputDevice + "Inventory"))
-            GameManager.Instance.ToggleInventory();
-    }
-
-    #endregion
-
-    #region Internals
-
-    void Singleton()
-    {
-        if (!Instance)
-            Instance = this;
-    }
-
-    void CheckInputDevices()
-    {
-        joyNames = Input.GetJoystickNames();
-
-        //if current device is keyboard and i detect a controller --> change to controller
-        if (CurrentInputDevice == keyboard && joyNames.Length > 0)
-            for (int i = 0; i < joyNames.Length; i++)
+            if (CurrentInputDevice == InputDevice.keyboard)
             {
-                if (joyNames[i].Length == 33)
-                    ChangeCurrentInputDevice(xboxController);
+                CurrentInputDevice = InputDevice.gamePad;
+                OnInputDeviceChange?.Invoke(CurrentInputDevice);
             }
-        //If current device is controller but i do not detect it anymore --> change to keyboard
-        else if (CurrentInputDevice == xboxController && joyNames.Length == 0)
-        {
-            ChangeCurrentInputDevice(keyboard);
-        }
-    }
 
-    void ChangeCurrentInputDevice(string _newInputDeviceName)
-    {
-        CurrentInputDevice = _newInputDeviceName;
-
-        //For menu navigation.
-        switch (CurrentInputDevice)
-        {
-            case keyboard:
-                inputModule.horizontalAxis = keyboard + "Horizontal";
-                inputModule.verticalAxis = keyboard + "Vertical";
-                inputModule.submitButton = keyboard + "Submit";
-                inputModule.cancelButton = keyboard + "Cancel";
-                break;
-            case xboxController:
-                inputModule.horizontalAxis = xboxController + "DPAD Horizontal";
-                inputModule.verticalAxis = xboxController + "DPAD Vertical";
-                inputModule.submitButton = xboxController + "Submit";
-                inputModule.cancelButton = xboxController + "Cancel";
-                break;
+            _gamePad.OnButtonPressed += HandleButtonPress;
+            _gamePad.OnButtonReleased += HandleButtonRelease;
+            _gamePad.OnLeftStickAxesChange += HandleLeftStickAxes;
         }
 
-        print(CurrentInputDevice);
-    }
-
-    #endregion
-
-    #region API
-
-    public void Setup()
-    {
-        Singleton();
-
-        eventSystem = FindObjectOfType<EventSystem>();
-        inputModule = FindObjectOfType<StandaloneInputModule>();
-
-        ChangeCurrentInputDevice(keyboard);
-        string[] joyNames = Input.GetJoystickNames();
-        if (joyNames.Length > 0)
-            for (int i = 0; i < joyNames.Length; i++)
+        void HandleControllerDisconnection(IntellGamePad _gamePad)
+        {
+            if (CurrentInputDevice == InputDevice.gamePad)
             {
-                if (joyNames[i].Length == 33)
-                    ChangeCurrentInputDevice(xboxController);
+                CurrentInputDevice = InputDevice.keyboard;
+                OnInputDeviceChange?.Invoke(CurrentInputDevice);
             }
+
+            _gamePad.OnButtonPressed -= HandleButtonPress;
+            _gamePad.OnButtonReleased -= HandleButtonRelease;
+            _gamePad.OnLeftStickAxesChange -= HandleLeftStickAxes;
+        }
+        #endregion
+
+        #region Buttons/Axes check
+        void HandleButtonPress(IntellGamePad _pad, IntellGamePad.Buttons _button)
+        {
+            if (_button == gamePadBindings.Attack)
+            {
+                OnAttackPressed?.Invoke();
+                return;
+            }
+
+            if (_button == gamePadBindings.Jump)
+            {
+                OnJumpPressed?.Invoke();
+                return;
+            }
+
+            if (_button == gamePadBindings.Dash)
+            {
+                OnDashPressed?.Invoke();
+                return;
+            }
+
+            if (_button == gamePadBindings.Run)
+            {
+                OnRunPressed?.Invoke();
+                return;
+            }
+
+            if (_button == gamePadBindings.Pause)
+            {
+                OnPausePressed?.Invoke();
+                return;
+            }
+
+            if (_button == gamePadBindings.Map)
+            {
+                OnMapPressed?.Invoke();
+                return;
+            }
+
+            if (_button == gamePadBindings.Inventory)
+            {
+                OnInventoryPressed?.Invoke();
+                return;
+            }
+        }
+
+        void HandleButtonRelease(IntellGamePad _pad, IntellGamePad.Buttons _button)
+        {
+            if (_button == gamePadBindings.Attack)
+            {
+                OnAttackReleased?.Invoke();
+                return;
+            }
+
+            if (_button == gamePadBindings.Jump)
+            {
+                OnJumpReleased?.Invoke();
+                return;
+            }
+
+            if (_button == gamePadBindings.Dash)
+            {
+                OnDashReleased?.Invoke();
+                return;
+            }
+
+            if (_button == gamePadBindings.Run)
+            {
+                OnRunReleased?.Invoke();
+                return;
+            }
+
+            if (_button == gamePadBindings.Pause)
+            {
+                OnPauseReleased?.Invoke();
+                return;
+            }
+
+            if (_button == gamePadBindings.Map)
+            {
+                OnMapReleased?.Invoke();
+                return;
+            }
+
+            if (_button == gamePadBindings.Inventory)
+            {
+                OnInventoryReleased?.Invoke();
+                return;
+            }
+        }
+
+        void HandleLeftStickAxes(IntellGamePad _pad, Vector2 _direction)
+        {
+            OnMovementInput?.Invoke(_direction);
+        }
+        #endregion
+
+        [System.Serializable]
+        public class GamePadBindings
+        {
+            public enum InputType { button, dpad, trigger, stick }
+
+            [Header("Game Pad")]
+            public IntellGamePad.Buttons Jump;
+            public IntellGamePad.Buttons Attack;
+            public IntellGamePad.Buttons Dash;
+            public IntellGamePad.Buttons Run;
+            public IntellGamePad.Buttons Pause;
+            public IntellGamePad.Buttons Map;
+            public IntellGamePad.Buttons Inventory;
+        }
+
+        [System.Serializable]
+        public class KeyboardBindings
+        {
+            [Header("Keyboard")]
+            public KeyCode Jump;
+            public KeyCode Attack;
+            public KeyCode Dash;
+            public KeyCode Run;
+            public KeyCode Pause;
+            public KeyCode Map;
+            public KeyCode Inventory;
+        }
     }
 
-    public void RemoveInputKey(int _index)
-    {
-        InputKeys.RemoveAt(_index);
-    }
-
-    public void AddInputKey()
-    {
-        InputKeys.Add(new InputKey());
-    }
-
-    #endregion
-
-}
-
-public enum InputKeyButton { Horizontal, Vertical, Pause, Map, Inventory, Jump, Attack, Dash, Run, Submit, Cancel }
-public enum InputType { Down, Up, Hold }
-
-[System.Serializable]
-public class InputKey
-{
-    public enum AxisTriggerMode { whileOverTreshold, onceOverTreshold }
-
-    public InputKeyButton Key = InputKeyButton.Submit;
-    //based on inputkeybutton settings
-    public string keyString;
-    public bool isAxis = false;
-    //if not axis
-    public InputType Interaction = InputType.Down;
-    //if inputtype hold
-    public bool TriggerWhileHolding;
-    //if not triggerWhileHolding
-    public float TimeToHold;
-    //if axis
-    [Range(-1, 1)] public float Treshold;
-    public AxisTriggerMode TriggerMode;
-
+    public enum InputDevice { gamePad, keyboard }
 }

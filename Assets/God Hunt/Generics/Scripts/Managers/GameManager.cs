@@ -1,10 +1,10 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections;
+using InputTest;
 
 public class GameManager : MonoBehaviour
 {
-
     [SerializeField] bool initPlayer;
     [SerializeField] bool initUIManager;
     [SerializeField] bool initRoomSystem;
@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour
     private UIManager uiManager;
     [HideInInspector] public PlayerEntity player;
     [HideInInspector] public RoomSystem roomSystem;
-    private InputManager inputManager;
+    private TestInputManager inputManager;
 
     bool isPaused = false;
     bool isMapOpen = false;
@@ -148,7 +148,7 @@ public class GameManager : MonoBehaviour
 
         if (initInputManager)
         {
-            inputManager = FindObjectOfType<InputManager>();
+            inputManager = FindObjectOfType<TestInputManager>();
             inputManager.Setup();
         }
 
@@ -193,5 +193,4 @@ public class GameManager : MonoBehaviour
     }
 
     #endregion
-
 }

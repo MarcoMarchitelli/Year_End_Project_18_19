@@ -2,6 +2,9 @@
 
 public abstract class BaseBehaviour : MonoBehaviour, IBehaviour
 {
+    public System.Action OnBehaviourEnable;
+    public System.Action OnBehaviourDisable;
+
     /// <summary>
     /// Riferimento all'entitià che controlla il Behaviour
     /// </summary>
@@ -18,6 +21,10 @@ public abstract class BaseBehaviour : MonoBehaviour, IBehaviour
     public virtual void Enable(bool _value)
     {
         IsSetupped = _value;
+        if (IsSetupped)
+            OnBehaviourEnable?.Invoke();
+        else
+            OnBehaviourDisable?.Invoke();
     }
 
     /// <summary>

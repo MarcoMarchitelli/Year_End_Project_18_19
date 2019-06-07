@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
-using UnityEngine;
+using InputTest;
 using UnityEditor;
 
-[CustomEditor(typeof(InputManager))]
+[CustomEditor(typeof(TestInputManager))]
 public class InputManagerInspector : Editor
 {
     public override void OnInspectorGUI()

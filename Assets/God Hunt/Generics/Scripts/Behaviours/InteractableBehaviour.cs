@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿using InputTest;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -54,10 +54,10 @@ public class InteractableBehaviour : BaseBehaviour
                 if (countTime)
                     timer += Time.deltaTime;
 
-                if (Input.GetButtonDown(InputManager.CurrentInputDevice + currentInteraction.Input))
+                if (Input.GetButtonDown(TestInputManager.CurrentInputDevice + currentInteraction.Input))
                     countTime = true;
 
-                if (Input.GetButtonUp(InputManager.CurrentInputDevice + currentInteraction.Input))
+                if (Input.GetButtonUp(TestInputManager.CurrentInputDevice + currentInteraction.Input))
                 {
                     countTime = false;
                     timer = 0;
@@ -80,7 +80,7 @@ public class InteractableBehaviour : BaseBehaviour
             }
             else
             {
-                if (Input.GetButtonDown(InputManager.CurrentInputDevice + currentInteraction.Input))
+                if (Input.GetButtonDown(TestInputManager.CurrentInputDevice + currentInteraction.Input))
                 {
                     currentInteraction.OnInteraction.Invoke();
                 }

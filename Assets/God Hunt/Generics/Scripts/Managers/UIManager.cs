@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using InputTest;
 
 public class UIManager : MonoBehaviour
 {
@@ -37,7 +38,7 @@ public class UIManager : MonoBehaviour
 
         if (_value == true && firstSelectedItem != null)
         {
-            InputManager.Instance.eventSystem.SetSelectedGameObject(firstSelectedItem);
+            TestInputManager.Instance.eventSystem.SetSelectedGameObject(firstSelectedItem);
         }
     }
 
@@ -60,7 +61,7 @@ public class UIManager : MonoBehaviour
 
         if ( _value == true && firstSelectedObject != null )
         {
-            InputManager.Instance.eventSystem.SetSelectedGameObject( firstSelectedObject );
+            TestInputManager.Instance.eventSystem.SetSelectedGameObject( firstSelectedObject );
         }
     }
 
@@ -87,5 +88,4 @@ public class UIManager : MonoBehaviour
     }
 
     #endregion
-
 }
