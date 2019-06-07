@@ -50,6 +50,7 @@ GameObject:
   - component: {fileID: 4195761923624202275}
   - component: {fileID: 4195761923624202273}
   - component: {fileID: 2688857634451540437}
+  - component: {fileID: 4841697703800857171}
   m_Layer: 13
   m_Name: Player_Homing Projectile
   m_TagString: Untagged
@@ -99,8 +100,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 5
   faceTarget: 0
-  turnSpeed: 200
-  startFollowingOnAwake: 1
+  turnSpeed: 300
+  startFollowingOnAwake: 0
 --- !u!114 &2356243885760796142
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -348,6 +349,44 @@ MonoBehaviour:
     m_TypeName: UnityVoidEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
   _maxHealth: 1
+--- !u!114 &4841697703800857171
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4195761923624202286}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3089c6b75d763e8499970135d0270ab2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  description: 
+  time: 1.5
+  countOnStart: 1
+  repeat: 0
+  OnTimerStart:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityVoidEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  OnTimerEnd:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4195761923624202274}
+        m_MethodName: StartFollow
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityVoidEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  timer: 0
 --- !u!1001 &3546415524676043182
 PrefabInstance:
   m_ObjectHideFlags: 0
