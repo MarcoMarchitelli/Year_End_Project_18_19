@@ -19,8 +19,8 @@ public class RandomizerBehaviour : BaseBehaviour
         }
     }
 
-    [ContextMenu("Test Randomize")]
-    public void RandomizeTest()
+    [ContextMenu("Test Randomize with descriptions")]
+    public void RandomizeTestDescriptions()
     {
         for (int i = 0; i < 100; i++)
         {
@@ -36,6 +36,26 @@ public class RandomizerBehaviour : BaseBehaviour
                     break;
                 }
             } 
+        }
+    }
+
+    [ContextMenu("Test Randomize with indexes")]
+    public void RandomizeTestIndexes()
+    {
+        for (int i = 0; i < 100; i++)
+        {
+            float rng = Random.value;
+            float currentProb = 0;
+            for (int j = 0; j < possibleOutcomes.Length; j++)
+            {
+                currentProb += possibleOutcomes[j].percentage;
+                if (rng <= currentProb)
+                {
+                    possibleOutcomes[j].onOutcomeRolled.Invoke();
+                    print(j.ToString());
+                    break;
+                }
+            }
         }
     }
 
