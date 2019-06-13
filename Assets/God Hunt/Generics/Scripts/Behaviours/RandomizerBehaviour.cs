@@ -4,6 +4,8 @@ public class RandomizerBehaviour : BaseBehaviour
 {
     public Outcome[] possibleOutcomes;
 
+    private Outcome lastOutcome;
+
     public void Randomize()
     {
         float rng = Random.value;
