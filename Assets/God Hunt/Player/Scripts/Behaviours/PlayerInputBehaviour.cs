@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using GodHunt.Inputs;
 
 [RequireComponent(typeof(PlayerGameplayBehaviour))]
 public class PlayerInputBehaviour : BaseBehaviour
@@ -50,12 +51,13 @@ public class PlayerInputBehaviour : BaseBehaviour
         SetJumpInput(true);
         ToggleDirectionalInput(true);
         AttackInputOn();
+
+        ToggleInputEventsSubscription(true);
     }
 
     public override void OnUpdate()
     {
         CountTime();
-        ReadInputs();
     }
 
     public override void Enable(bool _value)
@@ -75,10 +77,43 @@ public class PlayerInputBehaviour : BaseBehaviour
         {
             return;
         }
+    }
 
+    void ToggleInputEventsSubscription(bool _value)
+    {
+        if (_value)
+        {
+            InputManager.OnAttackPressed += HandleAttackPress;
+            InputManager.OnAttackReleased += HandleAttackRelease;
+            InputManager.OnDashPressed += HandleDashPress;
+            InputManager.OnDashPressed += HandleDashPress;
+            InputManager.OnRunPressed += HandleRunPress;
+            InputManager.OnRunPressed += HandleRunPress;
+            InputManager.OnJumpPressed += HandleJumpPress;
+            InputManager.OnJumpPressed += HandleJumpPress;
+
+            InputManager.OnMovementInput += HandleMovementInput;
+        }
+        else
+        {
+            InputManager.OnAttackPressed -= HandleAttackPress;
+            InputManager.OnAttackReleased -= HandleAttackRelease;
+            InputManager.OnDashPressed -= HandleDashPress;
+            InputManager.OnDashPressed -= HandleDashPress;
+            InputManager.OnRunPressed -= HandleRunPress;
+            InputManager.OnRunPressed -= HandleRunPress;
+            InputManager.OnJumpPressed -= HandleJumpPress;
+            InputManager.OnJumpPressed -= HandleJumpPress;
+
+            InputManager.OnMovementInput -= HandleMovementInput;
+        }
+    }
+
+    void HandleMovementInput(Vector2 _dir)
+    {
         if (canTurn)
         {
-            directionalInput = new Vector2(Input.GetAxisRaw(TestInputManager.CurrentInputDevice + "Horizontal"), Input.GetAxisRaw(TestInputManager.CurrentInputDevice + "Vertical"));
+            directionalInput = _dir;
         }
 
         data.cameraTarget.SetMoveDirection(directionalInput, data.playerGameplayBehaviour.accelerating);
@@ -101,8 +136,66 @@ public class PlayerInputBehaviour : BaseBehaviour
         }
         data.playerGameplayBehaviour.SetDirectionalInput(directionalInput);
         data.playerAttacksBehaviour.SetDirection(directionalInput);
+    }
 
-        if (canJump && Input.GetButtonDown(TestInputManager.CurrentInputDevice + "Jump"))
+    void HandleAttackPress()
+    {
+        if (canAttack)
+        {
+            isChargeing = true;
+            hasChargeAttacked = false;
+            countTime = true;
+            OnChargedStart.Invoke();
+        }
+    }
+
+    void HandleAttackRelease()
+    {
+        if (!hasChargeAttacked && canAttack && isChargeing)
+        {
+            isChargeing = false;
+            EvaluateAttackTime(directionalInput);
+        }
+    }
+
+    void HandleDashPress()
+    {
+        if (canDash)
+        {
+            isDashing = true;
+            data.playerGameplayBehaviour.HandleDashPress();
+        }
+    }
+
+    void HandleDashRelease()
+    {
+        if (canDash && isDashing)
+        {
+            isDashing = false;
+            data.playerGameplayBehaviour.HandleDashRelease();
+        }
+    }
+
+    void HandleRunPress()
+    {
+        if (canRun)
+        {
+            isRunning = true;
+            data.playerGameplayBehaviour.HandleSprintPress();
+        }
+    }
+
+    void HandleRunRelease()
+    {
+        if (isRunning)
+        {
+            data.playerGameplayBehaviour.HandleSprintRelease();
+        }
+    }
+
+    void HandleJumpPress()
+    {
+        if (canJump)
         {
             if (directionalInput.y == -1 && data.playerCollisionsBehaviour.CollidingWithTraversable)
             {
@@ -114,44 +207,14 @@ public class PlayerInputBehaviour : BaseBehaviour
                 IsPressingJump = true;
             }
         }
-        if (canJump && IsPressingJump && Input.GetButtonUp(TestInputManager.CurrentInputDevice + "Jump"))
+    }
+
+    void HandleJumpRelease()
+    {
+        if (canJump && IsPressingJump)
         {
             data.playerGameplayBehaviour.OnJumpInputUp();
             IsPressingJump = false;
-        }
-
-        if (canRun && Input.GetButtonDown(TestInputManager.CurrentInputDevice + "Run"))
-        {
-            isRunning = true;
-            data.playerGameplayBehaviour.HandleSprintPress();
-        }
-        if (isRunning && Input.GetButtonUp(TestInputManager.CurrentInputDevice + "Run"))
-        {
-            data.playerGameplayBehaviour.HandleSprintRelease();
-        }
-
-        if (canDash && Input.GetButtonDown(TestInputManager.CurrentInputDevice + "Dash"))
-        {
-            isDashing = true;
-            data.playerGameplayBehaviour.HandleDashPress();
-        }
-        if (canDash && isDashing && Input.GetButtonUp(TestInputManager.CurrentInputDevice + "Dash"))
-        {
-            isDashing = false;
-            data.playerGameplayBehaviour.HandleDashRelease();
-        }
-
-        if (canAttack && Input.GetButtonDown(TestInputManager.CurrentInputDevice + "Attack"))
-        {
-            isChargeing = true;
-            hasChargeAttacked = false;
-            countTime = true;
-            OnChargedStart.Invoke();
-        }
-        if (!hasChargeAttacked && canAttack && isChargeing && Input.GetButtonUp(TestInputManager.CurrentInputDevice + "Attack"))
-        {
-            isChargeing = false;
-            EvaluateAttackTime(directionalInput);
         }
     }
 
