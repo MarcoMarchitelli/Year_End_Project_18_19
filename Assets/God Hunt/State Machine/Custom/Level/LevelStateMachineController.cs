@@ -25,6 +25,7 @@
         public SceneFader sceneFader;
         public DeathScreen deathScreen;
         public PlayerHPUI playerHPUI;
+        public CustomButton backToMainMenuButton;
 
         public System.Action OnStateEnd;
     }

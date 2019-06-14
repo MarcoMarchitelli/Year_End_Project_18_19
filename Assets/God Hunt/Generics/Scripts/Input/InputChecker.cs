@@ -65,6 +65,7 @@ public class InputChecker : MonoBehaviour
                     IntellGamePad padToAdd = new IntellGamePad(testState, i);
                     Activegamepads.Add(padToAdd);
                     OnGamepadConnected?.Invoke(padToAdd);
+                    Debug.Log("CONTROLLER SIIII");
                 }
             }
             else
@@ -74,6 +75,7 @@ public class InputChecker : MonoBehaviour
                 {
                     Activegamepads.RemoveAt(i);
                     OnGamepadDisconnected?.Invoke(padToRemove);
+                    Debug.Log("TASTIERA SEEEE");
                 }
             }
         }

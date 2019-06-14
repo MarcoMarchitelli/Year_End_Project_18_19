@@ -6,6 +6,7 @@ public class CustomButtonsMenu : MonoBehaviour
     [SerializeField] CustomButton[] buttons;
     CustomButton currentlySelectedButton;
     int currentlySelectedButtonIndex;
+    bool subscribed;
 
     public void Setup()
     {
@@ -26,19 +27,26 @@ public class CustomButtonsMenu : MonoBehaviour
         ToggleEventsSubscriptions(false);
     }
 
+    private void OnEnable()
+    {
+        ToggleEventsSubscriptions(true);
+    }
+
     private void ToggleEventsSubscriptions(bool _value)
     {
-        if (_value)
+        if (_value && subscribed == false)
         {
             InputManager.OnSelectPressed += () => currentlySelectedButton.Click();
             InputManager.OnSelectionUpPressed += () => ChangeSelection(1);
             InputManager.OnSelectionDownPressed += () => ChangeSelection(-1);
+            subscribed = true;
         }
-        else
+        else if(subscribed == true)
         {
             InputManager.OnSelectPressed -= () => currentlySelectedButton.Click();
             InputManager.OnSelectionUpPressed -= () => ChangeSelection(1);
             InputManager.OnSelectionDownPressed -= () => ChangeSelection(-1);
+            subscribed = false;
         }
     }
 

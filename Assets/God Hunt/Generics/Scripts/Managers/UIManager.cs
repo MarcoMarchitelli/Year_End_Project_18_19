@@ -28,6 +28,8 @@ public class UIManager : MonoBehaviour
 
         playerHPUI.damageReceiver = playerData.damageReceiverBehaviour;
         playerHPUI.Setup();
+
+        pausePanel.SetActive(false);
     }
 
     public void ToggleInventoryPanel(bool _value)
