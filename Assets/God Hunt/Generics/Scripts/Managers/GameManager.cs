@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections;
-using InputTest;
+using GodHunt.Inputs;
 
 public class GameManager : MonoBehaviour
 {
@@ -14,21 +14,12 @@ public class GameManager : MonoBehaviour
     private UIManager uiManager;
     [HideInInspector] public PlayerEntity player;
     [HideInInspector] public RoomSystem roomSystem;
-    private TestInputManager inputManager;
+    private InputManager inputManager;
 
     bool isPaused = false;
     bool isMapOpen = false;
     bool isInInventory = false;
     bool isInCollectablesScreen = false;
-
-    #region MonoBehaviour Methods
-
-    private void Awake()
-    {
-        Setup();
-    }
-
-    #endregion
 
     #region API
 

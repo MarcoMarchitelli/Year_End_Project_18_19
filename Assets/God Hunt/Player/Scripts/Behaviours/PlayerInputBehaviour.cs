@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using InputTest;
 
 [RequireComponent(typeof(PlayerGameplayBehaviour))]
 public class PlayerInputBehaviour : BaseBehaviour
