@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections;
-using InputTest;
+using GodHunt.Inputs;
 
 public class GameManager : MonoBehaviour
 {
@@ -14,23 +14,77 @@ public class GameManager : MonoBehaviour
     private UIManager uiManager;
     [HideInInspector] public PlayerEntity player;
     [HideInInspector] public RoomSystem roomSystem;
-    private TestInputManager inputManager;
+    private InputManager inputManager;
+    private BaseEntity[] entities;
 
     bool isPaused = false;
     bool isMapOpen = false;
     bool isInInventory = false;
     bool isInCollectablesScreen = false;
 
-    #region MonoBehaviour Methods
-
-    private void Awake()
+    #region API
+    public void Init()
     {
-        Setup();
+        Singleton();
+
+        if (initInputManager)
+        {
+            inputManager = FindObjectOfType<InputManager>();
+        }
+
+        if (initPlayer)
+        {
+            player = FindObjectOfType<PlayerEntity>();
+        }
+
+        if (initUIManager)
+        {
+            uiManager = FindObjectOfType<UIManager>();
+        }
+
+        if (initCameraManager)
+        {
+            FindObjectOfType<CameraManager>().Init();
+        }
+
+        if (initRoomSystem)
+        {
+            roomSystem = FindObjectOfType<RoomSystem>();
+        }
+
+        entities = FindObjectsOfType<BaseEntity>();
     }
 
-    #endregion
+    public void Setup()
+    {
+        if (initInputManager)
+        {
+            inputManager.Setup();
+            InputManager.OnInventoryPressed += ToggleInventory;
+            InputManager.OnPausePressed += TogglePause;
+            InputManager.OnMapPressed += ToggleMap;
+        }
 
-    #region API
+        if (initPlayer)
+        {
+            player.SetUpEntity();
+        }
+
+        if (initUIManager)
+        {
+            uiManager.Setup();
+        }
+
+        if (initRoomSystem)
+        {
+            roomSystem.Setup();
+        }
+
+        foreach (BaseEntity entity in entities)
+        {
+            entity.SetUpEntity();
+        }
+    }
 
     public void ToggleInventory()
     {
@@ -141,41 +195,6 @@ public class GameManager : MonoBehaviour
     #endregion
 
     #region Internals
-
-    void Setup()
-    {
-        Singleton();
-
-        if (initInputManager)
-        {
-            inputManager = FindObjectOfType<TestInputManager>();
-            inputManager.Setup();
-        }
-
-        if (initPlayer)
-        {
-            player = FindObjectOfType<PlayerEntity>();
-            player.SetUpEntity();
-        }
-
-        if (initUIManager)
-        {
-            uiManager = FindObjectOfType<UIManager>();
-            uiManager.Setup();
-        }
-
-        if (initCameraManager)
-        {
-            FindObjectOfType<CameraManager>().Init();
-        }
-
-        if (initRoomSystem)
-        {
-            roomSystem = FindObjectOfType<RoomSystem>();
-            roomSystem.Setup();
-        }
-    }
-
     public static GameManager Instance;
     void Singleton()
     {
@@ -191,6 +210,5 @@ public class GameManager : MonoBehaviour
 
         Time.timeScale = 1;
     }
-
     #endregion
 }

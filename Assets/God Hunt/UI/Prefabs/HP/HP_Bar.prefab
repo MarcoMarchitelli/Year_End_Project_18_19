@@ -36,7 +36,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
   m_AnchoredPosition: {x: -142.5, y: -7.5}
-  m_SizeDelta: {x: 285, y: 283}
+  m_SizeDelta: {x: 279, y: 148}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &231719441223661384
 CanvasRenderer:
@@ -60,13 +60,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 834989884fa5dac44b3ffd7a88823a94, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 5dabea0040a93ac4aa86a79604ea3c20, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -131,7 +131,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 180.4, y: -112.7}
+  m_AnchoredPosition: {x: -83, y: -112.7}
   m_SizeDelta: {x: 32, y: 149.6}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &5824208530124521743
@@ -149,13 +149,13 @@ MonoBehaviour:
   setupOnStart: 1
   HPChunkPrefab: {fileID: 486857882409138031, guid: 127f8de233b4d3c4ba56b0702defba8d,
     type: 3}
-  HPChunkFull: {fileID: 21300000, guid: 6381f96902d88114b9b39b62027dd509, type: 3}
-  HPChunkEmpty: {fileID: 21300000, guid: 7099d97459ae9e641b17ca2fbbec4923, type: 3}
-  PlayerIconFull: {fileID: 21300000, guid: 834989884fa5dac44b3ffd7a88823a94, type: 3}
-  PlayerIconDamaged: {fileID: 21300000, guid: c1e9fae3c03c4be48a2e206e6f9aacbf, type: 3}
+  HPChunksFull:
+  - {fileID: 21300000, guid: a334258215f67f144891987ecd929edd, type: 3}
+  - {fileID: 21300000, guid: eabd8f344ba331f4181744725377304b, type: 3}
+  - {fileID: 21300000, guid: f18d81b1d1f3ccc4bb91361c6ba9b8cc, type: 3}
+  - {fileID: 21300000, guid: c23c4ba3dc0d32e4e82980f6306a08fd, type: 3}
+  HPChunkEmpty: {fileID: 21300000, guid: 6e285bf0659239e4c9c7b5b7ee3b1e53, type: 3}
   damageReceiver: {fileID: 0}
-  PlayerIcon: {fileID: 231719441223661385}
-  HPEnd: {fileID: 2936114415185260746, guid: eb193f1793654234c8efa31ac9048439, type: 3}
 --- !u!114 &5824208530124521742
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -174,7 +174,7 @@ MonoBehaviour:
     m_Top: 0
     m_Bottom: 0
   m_ChildAlignment: 3
-  m_Spacing: 0
+  m_Spacing: -53
   m_ChildForceExpandWidth: 0
   m_ChildForceExpandHeight: 0
   m_ChildControlWidth: 0

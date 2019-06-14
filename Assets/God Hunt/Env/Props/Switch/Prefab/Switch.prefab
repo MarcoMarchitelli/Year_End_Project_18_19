@@ -80,7 +80,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8157039ad57ca2b4695223e5ecab78ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  setupOnStart: 1
+  setupOnStart: 0
 --- !u!114 &5923477282196253125
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -194,7 +194,7 @@ MonoBehaviour:
   description: "Counts how much time the skull\nremains in the scene after it gets
     \ndeactivated."
   time: 2.5
-  countOnEnable: 0
+  countOnStart: 0
   repeat: 0
   OnTimerStart:
     m_PersistentCalls:
@@ -307,7 +307,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   description: Delay from input to action
   time: 0.2
-  countOnEnable: 0
+  countOnStart: 0
   repeat: 0
   OnTimerStart:
     m_PersistentCalls:

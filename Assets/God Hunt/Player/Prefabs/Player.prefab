@@ -283,7 +283,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c040a5cd83bb804b890a916e06743cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  setupOnStart: 1
+  setupOnStart: 0
 --- !u!114 &1186
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2069,26 +2069,6 @@ PrefabInstance:
       propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[1].inWeight
       value: 0.1057269
       objectReference: {fileID: 0}
-    - target: {fileID: 2089307908756615132, guid: 730f2eeee55c99b48b3cbde713b6be95,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5816595780366358380, guid: 730f2eeee55c99b48b3cbde713b6be95,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 48760604780351620, guid: 730f2eeee55c99b48b3cbde713b6be95,
-        type: 3}
-      propertyPath: playOnAwake
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4001176313531320195, guid: 730f2eeee55c99b48b3cbde713b6be95,
-        type: 3}
-      propertyPath: playOnAwake
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 730f2eeee55c99b48b3cbde713b6be95, type: 3}
 --- !u!1 &6754695312553613857 stripped
@@ -2265,11 +2245,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1098}
     m_Modifications:
-    - target: {fileID: 3347559691232039874, guid: b7ea6ea354c695844b92e05a7636bf42,
-        type: 3}
-      propertyPath: m_Name
-      value: Player_Graphic
-      objectReference: {fileID: 0}
     - target: {fileID: 5907574349735824129, guid: b7ea6ea354c695844b92e05a7636bf42,
         type: 3}
       propertyPath: OnDeathAnimEnd.m_PersistentCalls.m_Calls.Array.size
@@ -2279,6 +2254,11 @@ PrefabInstance:
         type: 3}
       propertyPath: playOnAwake
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3347559691232039874, guid: b7ea6ea354c695844b92e05a7636bf42,
+        type: 3}
+      propertyPath: m_Name
+      value: Player_Graphic
       objectReference: {fileID: 0}
     - target: {fileID: 738208850234466121, guid: b7ea6ea354c695844b92e05a7636bf42,
         type: 3}
@@ -2667,11 +2647,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8325329677792208214, guid: b7ea6ea354c695844b92e05a7636bf42,
         type: 3}
-      propertyPath: playOnAwake
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8325329677792208214, guid: b7ea6ea354c695844b92e05a7636bf42,
-        type: 3}
       propertyPath: startDelay.scalar
       value: 0
       objectReference: {fileID: 0}
@@ -2806,11 +2781,6 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 87fc2296d082f6b45aa91ee260962744, type: 2}
-    - target: {fileID: 6861730786037270033, guid: b7ea6ea354c695844b92e05a7636bf42,
-        type: 3}
-      propertyPath: playOnAwake
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 6861730786037270033, guid: b7ea6ea354c695844b92e05a7636bf42,
         type: 3}
       propertyPath: moveWithTransform

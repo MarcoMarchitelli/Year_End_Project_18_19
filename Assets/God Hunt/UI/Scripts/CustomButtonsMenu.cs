@@ -1,17 +1,80 @@
 ﻿using UnityEngine;
+using GodHunt.Inputs;
 
 public class CustomButtonsMenu : MonoBehaviour
 {
-    CustomButton[] buttons;
+    [SerializeField] CustomButton[] buttons;
     CustomButton currentlySelectedButton;
-
-    public void Init()
-    {
-        buttons = GetComponentsInChildren<CustomButton>();
-    }
+    int currentlySelectedButtonIndex;
+    bool subscribed;
 
     public void Setup()
     {
-        currentlySelectedButton = buttons[0];
+        foreach (CustomButton customButton in buttons)
+        {
+            customButton.Setup();
+        }
+
+        currentlySelectedButtonIndex = 0;
+        currentlySelectedButton = buttons[currentlySelectedButtonIndex];
+        currentlySelectedButton.Select();
+
+        ToggleEventsSubscriptions(true);
+    }
+
+    private void OnDisable()
+    {
+        ToggleEventsSubscriptions(false);
+    }
+
+    private void OnEnable()
+    {
+        ToggleEventsSubscriptions(true);
+    }
+
+    private void ToggleEventsSubscriptions(bool _value)
+    {
+        if (_value && subscribed == false)
+        {
+            InputManager.OnSelectPressed += () => currentlySelectedButton.Click();
+            InputManager.OnSelectionUpPressed += () => ChangeSelection(1);
+            InputManager.OnSelectionDownPressed += () => ChangeSelection(-1);
+            subscribed = true;
+        }
+        else if(subscribed == true)
+        {
+            InputManager.OnSelectPressed -= () => currentlySelectedButton.Click();
+            InputManager.OnSelectionUpPressed -= () => ChangeSelection(1);
+            InputManager.OnSelectionDownPressed -= () => ChangeSelection(-1);
+            subscribed = false;
+        }
+    }
+
+    //1 = up, -1 = down
+    private void ChangeSelection(int _dir)
+    {
+        switch (_dir)
+        {
+            case 1:
+                if (currentlySelectedButtonIndex == 0)
+                    currentlySelectedButtonIndex = buttons.Length - 1;
+                else
+                    currentlySelectedButtonIndex--;
+
+                currentlySelectedButton.Deselect();
+                currentlySelectedButton = buttons[currentlySelectedButtonIndex];
+                currentlySelectedButton.Select();
+                break;
+            case -1:
+                if (currentlySelectedButtonIndex == buttons.Length - 1)
+                    currentlySelectedButtonIndex = 0;
+                else
+                    currentlySelectedButtonIndex++;
+
+                currentlySelectedButton.Deselect();
+                currentlySelectedButton = buttons[currentlySelectedButtonIndex];
+                currentlySelectedButton.Select();
+                break;
+        }
     }
 }

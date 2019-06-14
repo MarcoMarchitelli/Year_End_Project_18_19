@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
-using System;
 
 public abstract class BaseEntity : MonoBehaviour, IEntity
 {
@@ -21,7 +20,7 @@ public abstract class BaseEntity : MonoBehaviour, IEntity
         if (setupOnStart)
             SetUpEntity();
 
-        if(isEnabled)
+        if (isEnabled)
             foreach (IBehaviour behaviour in Behaviours)
             {
                 behaviour.OnStart();

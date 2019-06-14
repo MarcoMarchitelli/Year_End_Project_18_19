@@ -8,23 +8,12 @@ public class PlayerHPUI : MonoBehaviour
     [SerializeField] bool setupOnStart;
     [Header("Prefabs")]
     [SerializeField] Image HPChunkPrefab;
-    [SerializeField] Sprite HPChunkFull;
+    [SerializeField] Sprite[] HPChunksFull;
     [SerializeField] Sprite HPChunkEmpty;
-    [SerializeField] Sprite PlayerIconFull;
-    [SerializeField] Sprite PlayerIconDamaged;
     [Header("References")]
     public DamageReceiverBehaviour damageReceiver;
-    [SerializeField] Image PlayerIcon;
-    [SerializeField] Image HPEnd;
 
     List<Image> HPChunks;
-    Image instHpEnd;
-
-    private void Start()
-    {
-        if (setupOnStart)
-            Setup();
-    }
 
     public void Setup()
     {
@@ -47,11 +36,10 @@ public class PlayerHPUI : MonoBehaviour
         for (int i = 0; i < damageReceiver.MaxHealth; i++)
         {
             Image hp = Instantiate(HPChunkPrefab, transform);
+            hp.sprite = HPChunksFull[i];
             hp.SetNativeSize();
             HPChunks.Add(hp);
         }
-        
-        instHpEnd = Instantiate(HPEnd, transform);
 
         UpdateUIAuto();
     }
@@ -63,21 +51,12 @@ public class PlayerHPUI : MonoBehaviour
 
     void UpdateUI(int _hp_value)
     {
-        if(_hp_value < damageReceiver.MaxHealth)
-        {
-            PlayerIcon.sprite = PlayerIconDamaged;
-        }
-        else
-        {
-            PlayerIcon.sprite = PlayerIconFull;
-        }
-
         for (int i = 0; i < damageReceiver.MaxHealth; i++)
         {
             //full hp
             if( i < _hp_value)
             {
-                HPChunks[i].sprite = HPChunkFull;
+                HPChunks[i].sprite = HPChunksFull[i];
             }
             else
             {
@@ -88,21 +67,12 @@ public class PlayerHPUI : MonoBehaviour
 
     void UpdateUI()
     {
-        if (0 < damageReceiver.MaxHealth)
-        {
-            PlayerIcon.sprite = PlayerIconDamaged;
-        }
-        else
-        {
-            PlayerIcon.sprite = PlayerIconFull;
-        }
-
         for (int i = 0; i < damageReceiver.MaxHealth; i++)
         {
             //full hp
             if (i < 0)
             {
-                HPChunks[i].sprite = HPChunkFull;
+                HPChunks[i].sprite = HPChunksFull[i];
             }
             else
             {

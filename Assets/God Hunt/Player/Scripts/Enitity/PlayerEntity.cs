@@ -15,7 +15,8 @@ public class PlayerEntity : BoxColliderEntity
             GetBehaviour<RespawnBehaviour>(),
             GetBehaviour<PlayerCameraTarget>(),
             GetBehaviour<PlayerCollectablesBehaviour>(),
-            GetBehaviour<PlayerKnockbackReceiverBehaviour>()
+            GetBehaviour<PlayerKnockbackReceiverBehaviour>(),
+            GetBehaviour<PlayerRoomInteractionBehaviour>()
             );
     }
 }
@@ -32,10 +33,11 @@ public class PlayerEntityData : BoxColliderEntityData
     public PlayerCameraTarget cameraTarget;
     public PlayerCollectablesBehaviour playerCollectablesBehaviour;
     public PlayerKnockbackReceiverBehaviour playerKnockbackReceiverBehaviour;
+    public PlayerRoomInteractionBehaviour playerRoomInteractionBehaviour;
 
     public PlayerEntityData(PlayerGameplayBehaviour _p, PlayerCollisionsBehaviour _c, PlayerInputBehaviour _pib, PlayerAttacksBehaviour _pab,
         BoxCollider _bc, PlayerAnimatorProxy _ap, DamageReceiverBehaviour _drb, RespawnBehaviour _rb, PlayerCameraTarget _pct, PlayerCollectablesBehaviour _pcb,
-        PlayerKnockbackReceiverBehaviour _pkrb)
+        PlayerKnockbackReceiverBehaviour _pkrb, PlayerRoomInteractionBehaviour _prib)
     {
         playerGameplayBehaviour = _p;
         playerCollisionsBehaviour = _c;
@@ -48,5 +50,6 @@ public class PlayerEntityData : BoxColliderEntityData
         cameraTarget = _pct;
         playerCollectablesBehaviour = _pcb;
         playerKnockbackReceiverBehaviour = _pkrb;
+        playerRoomInteractionBehaviour = _prib;
     }
 }
