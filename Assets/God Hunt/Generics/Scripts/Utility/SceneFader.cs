@@ -1,33 +1,41 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 
 public class SceneFader : MonoBehaviour
 {
-    public bool autoStart = true;
-    public Image fadeImage;
+    public enum State { FadedOut, FadedIn }
 
-    public void Awake()
+    private State _currentState;
+
+    public Image FadeImage;
+    public State CurrentState { get => _currentState; set => _currentState = value; }
+
+    public void StartFade(State _state, float _duration, System.Action _callback = null)
     {
-        if (autoStart)
+        CurrentState = _state;
+        switch (CurrentState)
         {
-            FadeIn(.5f);
+            case State.FadedOut:
+                FadeImage.DOColor(Color.black, _duration).onComplete += () => _callback?.Invoke();
+                break;
+            case State.FadedIn:
+                FadeImage.DOColor(Color.clear, _duration).onComplete += () => _callback?.Invoke();
+                break;
         }
     }
 
-    public void FadeIn(float _duration)
+    public void SetState(State _state)
     {
-        StartCoroutine(Fade(_duration, 0, 1));
-    }
-
-    public void FadeOut(float _duration)
-    {
-
-    }
-
-    IEnumerator Fade(float _duration, float _from, float _to)
-    {
-        yield return null;
+        CurrentState = _state;
+        switch (CurrentState)
+        {
+            case State.FadedOut:
+                FadeImage.color = Color.black;
+                break;
+            case State.FadedIn:
+                FadeImage.color = Color.clear;
+                break;
+        }
     }
 }

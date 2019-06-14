@@ -142,26 +142,23 @@ public class GameManager : MonoBehaviour
 
     #region Internals
 
-    void Setup()
+    public void Init()
     {
         Singleton();
 
         if (initInputManager)
         {
             inputManager = FindObjectOfType<TestInputManager>();
-            inputManager.Setup();
         }
 
         if (initPlayer)
         {
             player = FindObjectOfType<PlayerEntity>();
-            player.SetUpEntity();
         }
 
         if (initUIManager)
         {
             uiManager = FindObjectOfType<UIManager>();
-            uiManager.Setup();
         }
 
         if (initCameraManager)
@@ -172,6 +169,28 @@ public class GameManager : MonoBehaviour
         if (initRoomSystem)
         {
             roomSystem = FindObjectOfType<RoomSystem>();
+        }
+    }
+
+    public void Setup()
+    {
+        if (initInputManager)
+        {
+            inputManager.Setup();
+        }
+
+        if (initPlayer)
+        {
+            player.SetUpEntity();
+        }
+
+        if (initUIManager)
+        {
+            uiManager.Setup();
+        }
+
+        if (initRoomSystem)
+        {
             roomSystem.Setup();
         }
     }

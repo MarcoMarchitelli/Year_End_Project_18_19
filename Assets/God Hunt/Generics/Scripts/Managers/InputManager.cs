@@ -1,4 +1,6 @@
 ﻿using UnityEngine;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace GodHunt.Inputs
 {
@@ -10,6 +12,8 @@ namespace GodHunt.Inputs
 
         public static InputDevice CurrentInputDevice;
         public static System.Action<InputDevice> OnInputDeviceChange;
+
+        private List<CustomButtonsMenu> customButtonMenus;
 
         #region Buttons Events
         public static System.Action OnJumpPressed;
@@ -26,6 +30,10 @@ namespace GodHunt.Inputs
         public static System.Action OnInventoryReleased;
         public static System.Action OnPausePressed;
         public static System.Action OnPauseReleased;
+
+        public static System.Action OnSelectPressed;
+        public static System.Action OnSelectionUpPressed;
+        public static System.Action OnSelectionDownPressed;
         #endregion
 
         #region Axes events
@@ -34,10 +42,69 @@ namespace GodHunt.Inputs
 
         public void Setup()
         {
+            customButtonMenus = FindObjectsOfType<CustomButtonsMenu>().ToList();
+
             InputChecker.OnGamepadConnected += HandleControllerConnection;
             InputChecker.OnGamepadDisconnected += HandleControllerDisconnection;
 
             CurrentInputDevice = InputDevice.keyboard;
+
+            foreach (CustomButtonsMenu customButtonsMenu in customButtonMenus)
+            {
+                customButtonsMenu.Setup();
+            }
+        }
+
+        private void Update()
+        {
+            if(CurrentInputDevice == InputDevice.keyboard)
+            {
+                if (Input.GetKeyDown(keyboardBindings.Attack))
+                    OnAttackPressed?.Invoke();
+                if (Input.GetKeyUp(keyboardBindings.Attack))
+                    OnAttackReleased?.Invoke();
+
+                if (Input.GetKeyDown(keyboardBindings.Dash))
+                    OnDashPressed?.Invoke();        
+                if (Input.GetKeyUp(keyboardBindings.Dash))
+                    OnDashReleased?.Invoke();
+
+                if (Input.GetKeyDown(keyboardBindings.Run))
+                    OnRunPressed?.Invoke();        
+                if (Input.GetKeyUp(keyboardBindings.Run))
+                    OnRunReleased?.Invoke();
+
+                if (Input.GetKeyDown(keyboardBindings.Jump))
+                    OnJumpPressed?.Invoke();        
+                if (Input.GetKeyUp(keyboardBindings.Jump))
+                    OnJumpReleased?.Invoke();
+
+                if (Input.GetKeyDown(keyboardBindings.Pause))
+                    OnPausePressed?.Invoke();
+                if (Input.GetKeyUp(keyboardBindings.Pause))
+                    OnPauseReleased?.Invoke();
+
+                if (Input.GetKeyDown(keyboardBindings.Map))
+                    OnMapPressed?.Invoke();
+                if (Input.GetKeyUp(keyboardBindings.Map))
+                    OnMapReleased?.Invoke();
+
+                if (Input.GetKeyDown(keyboardBindings.Inventory))
+                    OnInventoryPressed?.Invoke();
+                if (Input.GetKeyUp(keyboardBindings.Inventory))
+                    OnInventoryReleased?.Invoke();
+
+                if (Input.GetKeyDown(keyboardBindings.SelectionUp))
+                    OnSelectionUpPressed?.Invoke();
+
+                if (Input.GetKeyDown(keyboardBindings.SelectionDown))
+                    OnSelectionDownPressed?.Invoke();
+
+                if (Input.GetKeyDown(keyboardBindings.Select))
+                    OnSelectPressed?.Invoke();
+
+                OnMovementInput?.Invoke(new Vector2(Input.GetAxisRaw(keyboardBindings.HorizontalAxis), Input.GetAxisRaw(keyboardBindings.VerticalAxis)));
+            }
         }
 
         #region GamePad events handlers
@@ -69,7 +136,7 @@ namespace GodHunt.Inputs
         #endregion
 
         #region Buttons/Axes check
-        void HandleButtonPress(IntellGamePad _pad, IntellGamePad.Buttons _button)
+        void HandleButtonPress(IntellGamePad _pad, Buttons _button)
         {
             if (_button == gamePadBindings.Attack)
             {
@@ -112,9 +179,27 @@ namespace GodHunt.Inputs
                 OnInventoryPressed?.Invoke();
                 return;
             }
+
+            if (_button == gamePadBindings.SelectionUp)
+            {
+                OnSelectionUpPressed?.Invoke();
+                return;
+            }
+
+            if (_button == gamePadBindings.SelectionDown)
+            {
+                OnSelectionDownPressed?.Invoke();
+                return;
+            }
+
+            if (_button == gamePadBindings.Select)
+            {
+                OnSelectPressed?.Invoke();
+                return;
+            }
         }
 
-        void HandleButtonRelease(IntellGamePad _pad, IntellGamePad.Buttons _button)
+        void HandleButtonRelease(IntellGamePad _pad, Buttons _button)
         {
             if (_button == gamePadBindings.Attack)
             {
@@ -171,13 +256,16 @@ namespace GodHunt.Inputs
             public enum InputType { button, dpad, trigger, stick }
 
             [Header("Game Pad")]
-            public IntellGamePad.Buttons Jump;
-            public IntellGamePad.Buttons Attack;
-            public IntellGamePad.Buttons Dash;
-            public IntellGamePad.Buttons Run;
-            public IntellGamePad.Buttons Pause;
-            public IntellGamePad.Buttons Map;
-            public IntellGamePad.Buttons Inventory;
+            public Buttons Jump;
+            public Buttons Attack;
+            public Buttons Dash;
+            public Buttons Run;
+            public Buttons Pause;
+            public Buttons Map;
+            public Buttons Inventory;
+            public Buttons Select;
+            public Buttons SelectionUp;
+            public Buttons SelectionDown;
         }
 
         [System.Serializable]
@@ -191,6 +279,11 @@ namespace GodHunt.Inputs
             public KeyCode Pause;
             public KeyCode Map;
             public KeyCode Inventory;
+            public KeyCode Select;
+            public KeyCode SelectionUp;
+            public KeyCode SelectionDown;
+            public string HorizontalAxis;
+            public string VerticalAxis;
         }
     }
 
