@@ -188,7 +188,7 @@ MonoBehaviour:
 
     a charge ended'
   time: 0
-  countOnSetup: 0
+  countOnStart: 0
   repeat: 0
   OnTimerStart:
     m_PersistentCalls:
@@ -409,7 +409,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d623a2f456d0ee54dbaac393bb54b445, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  setupOnStart: 1
+  setupOnStart: 0
   graphics: {fileID: 3264598926223625457}
 --- !u!114 &4236418526323848437
 MonoBehaviour:
@@ -1434,6 +1434,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3264598925554043709}
     m_Modifications:
+    - target: {fileID: 709706044518641299, guid: eba5ce2ebc8fcf442961ab1640d788f6,
+        type: 3}
+      propertyPath: m_Name
+      value: vfx_enemy_damage
+      objectReference: {fileID: 0}
+    - target: {fileID: 2089816642047459244, guid: eba5ce2ebc8fcf442961ab1640d788f6,
+        type: 3}
+      propertyPath: InitialModule.startSize.scalar
+      value: 1.5
+      objectReference: {fileID: 0}
     - target: {fileID: 3068749105188839745, guid: eba5ce2ebc8fcf442961ab1640d788f6,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1488,16 +1498,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2089816642047459244, guid: eba5ce2ebc8fcf442961ab1640d788f6,
-        type: 3}
-      propertyPath: InitialModule.startSize.scalar
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 709706044518641299, guid: eba5ce2ebc8fcf442961ab1640d788f6,
-        type: 3}
-      propertyPath: m_Name
-      value: vfx_enemy_damage
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: eba5ce2ebc8fcf442961ab1640d788f6, type: 3}
@@ -1594,6 +1594,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3264598925554043709}
     m_Modifications:
+    - target: {fileID: 709706044518641299, guid: eba5ce2ebc8fcf442961ab1640d788f6,
+        type: 3}
+      propertyPath: m_Name
+      value: vfx_enemy_damage (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2089816642047459244, guid: eba5ce2ebc8fcf442961ab1640d788f6,
+        type: 3}
+      propertyPath: InitialModule.startSize.scalar
+      value: 1.5
+      objectReference: {fileID: 0}
     - target: {fileID: 3068749105188839745, guid: eba5ce2ebc8fcf442961ab1640d788f6,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1653,16 +1663,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.x
       value: -1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2089816642047459244, guid: eba5ce2ebc8fcf442961ab1640d788f6,
-        type: 3}
-      propertyPath: InitialModule.startSize.scalar
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 709706044518641299, guid: eba5ce2ebc8fcf442961ab1640d788f6,
-        type: 3}
-      propertyPath: m_Name
-      value: vfx_enemy_damage (1)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: eba5ce2ebc8fcf442961ab1640d788f6, type: 3}

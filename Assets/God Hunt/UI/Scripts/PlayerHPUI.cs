@@ -20,12 +20,6 @@ public class PlayerHPUI : MonoBehaviour
     List<Image> HPChunks;
     Image instHpEnd;
 
-    private void Start()
-    {
-        if (setupOnStart)
-            Setup();
-    }
-
     public void Setup()
     {
         damageReceiver.OnHealthChanged.AddListener(UpdateUI);

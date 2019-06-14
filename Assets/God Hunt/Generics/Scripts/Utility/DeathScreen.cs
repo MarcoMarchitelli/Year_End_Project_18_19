@@ -18,7 +18,7 @@ public class DeathScreen : MonoBehaviour
     int fadesCount = 0;
     PlayerEntityData playerData;
 
-    private void Start()
+    public void Setup()
     {
         playerData = GameManager.Instance.player.Data as PlayerEntityData;
         if (playerData != null)

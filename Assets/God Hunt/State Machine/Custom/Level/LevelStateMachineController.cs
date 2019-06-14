@@ -2,14 +2,9 @@
 {
     using UnityEngine;
 
-    public class GameStateMachineController : BaseStateMachine
+    public class LevelStateMachineController : BaseStateMachine
     {
-        [SerializeField] GameStateMachineContext context;
-
-        protected override void CustomSetup()
-        {
-            DontDestroyOnLoad(this);
-        }
+        [SerializeField] LevelStateMachineContext context;
 
         protected override void ContextSetup()
         {
@@ -25,10 +20,11 @@
     }
 
     [System.Serializable]
-    public class GameStateMachineContext : IContext
+    public class LevelStateMachineContext : IContext
     {
         public SceneFader sceneFader;
-        public CustomButton mainMenuPlayButton;
+        public DeathScreen deathScreen;
+        public PlayerHPUI playerHPUI;
 
         public System.Action OnStateEnd;
     }

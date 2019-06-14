@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
     [HideInInspector] public PlayerEntity player;
     [HideInInspector] public RoomSystem roomSystem;
     private InputManager inputManager;
+    private BaseEntity[] entities;
 
     bool isPaused = false;
     bool isMapOpen = false;
@@ -161,6 +162,8 @@ public class GameManager : MonoBehaviour
         {
             roomSystem = FindObjectOfType<RoomSystem>();
         }
+
+        entities = FindObjectsOfType<BaseEntity>();
     }
 
     public void Setup()
@@ -183,6 +186,11 @@ public class GameManager : MonoBehaviour
         if (initRoomSystem)
         {
             roomSystem.Setup();
+        }
+
+        foreach (BaseEntity entity in entities)
+        {
+            entity.SetUpEntity();
         }
     }
 

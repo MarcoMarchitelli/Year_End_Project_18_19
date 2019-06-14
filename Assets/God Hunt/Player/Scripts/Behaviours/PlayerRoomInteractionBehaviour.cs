@@ -14,6 +14,9 @@ public class PlayerRoomInteractionBehaviour : BaseBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        if (!isEnabled)
+            return;
+
         Room r = other.GetComponent<Room>();
 
         if (r && r!= currentRoom)
