@@ -28,6 +28,7 @@
     public class GameStateMachineContext : IContext
     {
         public SceneFader sceneFader;
+        public CustomButton mainMenuPlayButton;
 
         public System.Action OnStateEnd;
     }

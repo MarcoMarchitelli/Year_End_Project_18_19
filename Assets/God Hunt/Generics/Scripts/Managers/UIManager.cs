@@ -34,11 +34,6 @@ public class UIManager : MonoBehaviour
     {
         if (inventoryPanel)
             inventoryPanel.SetActive(_value);
-
-        if (_value == true && firstSelectedItem != null)
-        {
-            TestInputManager.Instance.eventSystem.SetSelectedGameObject(firstSelectedItem);
-        }
     }
 
     public void ToggleCollectablesScreen(bool _value)
@@ -57,11 +52,6 @@ public class UIManager : MonoBehaviour
     {
         if ( pausePanel != null )
             pausePanel.SetActive( _value );
-
-        if ( _value == true && firstSelectedObject != null )
-        {
-            TestInputManager.Instance.eventSystem.SetSelectedGameObject( firstSelectedObject );
-        }
     }
 
     public void ToggleMapPanel(bool _value)

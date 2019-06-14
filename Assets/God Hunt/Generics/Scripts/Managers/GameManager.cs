@@ -139,7 +139,7 @@ public class GameManager : MonoBehaviour
 
         if (initInputManager)
         {
-            inputManager = FindObjectOfType<TestInputManager>();
+            inputManager = FindObjectOfType<InputManager>();
         }
 
         if (initPlayer)

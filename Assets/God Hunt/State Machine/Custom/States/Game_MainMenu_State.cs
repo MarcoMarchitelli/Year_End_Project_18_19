@@ -2,13 +2,13 @@
 {
     public class Game_MainMenu_State : GameStateBase
     {
-        //set buttons
-        //if click fade out
-
         public override void Enter()
         {
-            //GameManager.Instance.Setup();
-
+            context.mainMenuPlayButton.OnClick.AddListener(() =>
+                context.sceneFader.StartFade(SceneFader.State.FadedOut, 1f, () =>
+                    { GameManager.Instance.LoadScene("Tutorial"); context.OnStateEnd?.Invoke(); }
+                )
+            );
         }
     } 
 }
