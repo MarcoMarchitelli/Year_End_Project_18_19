@@ -2,7 +2,7 @@
 
 public class PlayerCollectablesBehaviour : BaseBehaviour
 {
-    const int COLLECTABLES_TO_UPGRADE = 2;
+    public int COLLECTABLES_TO_UPGRADE = 2;
 
     PlayerEntityData data;
     int collectablesCount;

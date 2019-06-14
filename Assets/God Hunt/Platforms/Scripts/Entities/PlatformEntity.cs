@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Refactoring
+namespace StateMachine
 {
     public class PlatformEntity : BoxColliderEntity
     {

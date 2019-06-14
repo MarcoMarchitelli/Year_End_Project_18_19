@@ -44,9 +44,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3183e799556c8b84a91c47f9289b26b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  defaultGamepadSettings:
-    rightStickDeadzone: 0
-    leftStickDeadzone: 0
 --- !u!114 &1610142618
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -67,6 +64,9 @@ MonoBehaviour:
     Pause: 7
     Map: 8
     Inventory: 4
+    Select: 1
+    SelectionUp: 13
+    SelectionDown: 12
   keyboardBindings:
     Jump: 32
     Attack: 106
@@ -75,3 +75,8 @@ MonoBehaviour:
     Pause: 27
     Map: 9
     Inventory: 105
+    Select: 13
+    SelectionUp: 273
+    SelectionDown: 274
+    HorizontalAxis: 
+    VerticalAxis: 

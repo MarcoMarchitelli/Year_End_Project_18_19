@@ -1,4 +1,6 @@
 ﻿using UnityEngine;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace GodHunt.Inputs
 {
@@ -10,6 +12,8 @@ namespace GodHunt.Inputs
 
         public static InputDevice CurrentInputDevice;
         public static System.Action<InputDevice> OnInputDeviceChange;
+
+        private List<CustomButtonsMenu> customButtonMenus;
 
         #region Buttons Events
         public static System.Action OnJumpPressed;
@@ -26,6 +30,10 @@ namespace GodHunt.Inputs
         public static System.Action OnInventoryReleased;
         public static System.Action OnPausePressed;
         public static System.Action OnPauseReleased;
+
+        public static System.Action OnSelectPressed;
+        public static System.Action OnSelectionUpPressed;
+        public static System.Action OnSelectionDownPressed;
         #endregion
 
         #region Axes events
@@ -34,10 +42,17 @@ namespace GodHunt.Inputs
 
         public void Setup()
         {
+            customButtonMenus = FindObjectsOfType<CustomButtonsMenu>().ToList();
+
             InputChecker.OnGamepadConnected += HandleControllerConnection;
             InputChecker.OnGamepadDisconnected += HandleControllerDisconnection;
 
             CurrentInputDevice = InputDevice.keyboard;
+
+            foreach (CustomButtonsMenu customButtonsMenu in customButtonMenus)
+            {
+                customButtonsMenu.Setup();
+            }
         }
 
         private void Update()
@@ -78,6 +93,15 @@ namespace GodHunt.Inputs
                     OnInventoryPressed?.Invoke();
                 if (Input.GetKeyUp(keyboardBindings.Inventory))
                     OnInventoryReleased?.Invoke();
+
+                if (Input.GetKeyDown(keyboardBindings.SelectionUp))
+                    OnSelectionUpPressed?.Invoke();
+
+                if (Input.GetKeyDown(keyboardBindings.SelectionDown))
+                    OnSelectionDownPressed?.Invoke();
+
+                if (Input.GetKeyDown(keyboardBindings.Select))
+                    OnSelectPressed?.Invoke();
 
                 OnMovementInput?.Invoke(new Vector2(Input.GetAxisRaw(keyboardBindings.HorizontalAxis), Input.GetAxisRaw(keyboardBindings.VerticalAxis)));
             }
@@ -155,6 +179,24 @@ namespace GodHunt.Inputs
                 OnInventoryPressed?.Invoke();
                 return;
             }
+
+            if (_button == gamePadBindings.SelectionUp)
+            {
+                OnSelectionUpPressed?.Invoke();
+                return;
+            }
+
+            if (_button == gamePadBindings.SelectionDown)
+            {
+                OnSelectionDownPressed?.Invoke();
+                return;
+            }
+
+            if (_button == gamePadBindings.Select)
+            {
+                OnSelectPressed?.Invoke();
+                return;
+            }
         }
 
         void HandleButtonRelease(IntellGamePad _pad, Buttons _button)
@@ -221,6 +263,9 @@ namespace GodHunt.Inputs
             public Buttons Pause;
             public Buttons Map;
             public Buttons Inventory;
+            public Buttons Select;
+            public Buttons SelectionUp;
+            public Buttons SelectionDown;
         }
 
         [System.Serializable]
@@ -234,6 +279,9 @@ namespace GodHunt.Inputs
             public KeyCode Pause;
             public KeyCode Map;
             public KeyCode Inventory;
+            public KeyCode Select;
+            public KeyCode SelectionUp;
+            public KeyCode SelectionDown;
             public string HorizontalAxis;
             public string VerticalAxis;
         }

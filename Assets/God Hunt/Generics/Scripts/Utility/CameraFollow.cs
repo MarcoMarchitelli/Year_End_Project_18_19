@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-namespace Refactoring
+namespace StateMachine
 {
     public class CameraFollow : MonoBehaviour
     {

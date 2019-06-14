@@ -21,15 +21,6 @@ public class GameManager : MonoBehaviour
     bool isInInventory = false;
     bool isInCollectablesScreen = false;
 
-    #region MonoBehaviour Methods
-
-    private void Awake()
-    {
-        Setup();
-    }
-
-    #endregion
-
     #region API
 
     public void ToggleInventory()
@@ -142,26 +133,53 @@ public class GameManager : MonoBehaviour
 
     #region Internals
 
-    void Setup()
+    /// <summary>
+    /// Sets up all references.
+    /// </summary>
+    public void Setup()
+    {
+        if (initInputManager)
+        {
+            inputManager.Setup();
+        }
+
+        if (initPlayer)
+        {
+            player.SetUpEntity();
+        }
+
+        if (initUIManager)
+        {
+            uiManager.Setup();
+        }
+
+        if (initRoomSystem)
+        {
+            roomSystem.Setup();
+        }
+    }
+
+    /// <summary>
+    /// Finds all references based on settings.
+    /// Singleton boi.
+    /// </summary>
+    public void Init()
     {
         Singleton();
 
         if (initInputManager)
         {
             inputManager = FindObjectOfType<InputManager>();
-            inputManager.Setup();
         }
 
         if (initPlayer)
         {
             player = FindObjectOfType<PlayerEntity>();
-            player.SetUpEntity();
         }
 
         if (initUIManager)
         {
             uiManager = FindObjectOfType<UIManager>();
-            uiManager.Setup();
         }
 
         if (initCameraManager)
@@ -172,7 +190,6 @@ public class GameManager : MonoBehaviour
         if (initRoomSystem)
         {
             roomSystem = FindObjectOfType<RoomSystem>();
-            roomSystem.Setup();
         }
     }
 

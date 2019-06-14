@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 
-namespace Refactoring
+namespace StateMachine
 {
     public class MovingPlatformBehaviour : RaycastController
     {

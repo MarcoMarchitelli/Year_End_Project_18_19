@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Refactoring
+namespace StateMachine
 {
     public class PushableObject : MonoBehaviour
     {

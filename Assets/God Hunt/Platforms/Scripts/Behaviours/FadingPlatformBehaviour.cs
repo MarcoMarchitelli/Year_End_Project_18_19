@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-namespace Refactoring
+namespace StateMachine
 {
     public class FadingPlatformBehaviour : RaycastController
     {
