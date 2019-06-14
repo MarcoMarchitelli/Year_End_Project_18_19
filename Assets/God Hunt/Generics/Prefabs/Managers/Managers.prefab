@@ -32,7 +32,7 @@ RectTransform:
   m_Children:
   - {fileID: 1784159044}
   m_Father: {fileID: 9185160112063989699}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -125,7 +125,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 9185160112063989699}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -323,7 +323,7 @@ MonoBehaviour:
       m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
         Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   delegates: []
---- !u!114 &7381427382807143832
+--- !u!114 &3259658545913653644
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -354,7 +354,7 @@ MonoBehaviour:
       m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
         Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   delegates: []
---- !u!114 &3259658545913653644
+--- !u!114 &7381427382807143832
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -644,6 +644,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Input Manager
       objectReference: {fileID: 0}
+    - target: {fileID: 1610142618, guid: c0718eb1e6f360c41a5d5047008f0f02, type: 3}
+      propertyPath: keyboardBindings.HorizontalAxis
+      value: Keyboard Horizontal
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c0718eb1e6f360c41a5d5047008f0f02, type: 3}
 --- !u!4 &1460808241497412418 stripped
@@ -900,6 +904,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_isInputParsingRequired
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4448841926816975747, guid: 9076459fddcad5642aa4622b21e21fd0,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -83
+      objectReference: {fileID: 0}
+    - target: {fileID: 4448841926816975747, guid: 9076459fddcad5642aa4622b21e21fd0,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9076459fddcad5642aa4622b21e21fd0, type: 3}

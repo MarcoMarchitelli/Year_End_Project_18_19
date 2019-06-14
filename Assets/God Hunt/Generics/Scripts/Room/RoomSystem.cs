@@ -17,6 +17,7 @@ public class RoomSystem : MonoBehaviour
         firstRoom.Discover();
         PlayerEntityData playerData = GameManager.Instance.player.Data as PlayerEntityData;
         playerData.respawnBehaviour.SetRespawnPoint(firstRoom.SpawnPoint.position);
+        playerData.playerRoomInteractionBehaviour.SetCurrentRoom(startingRoom);
     }
 
     public void OnRoomEnter(Room _room)

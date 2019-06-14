@@ -23,6 +23,68 @@ public class GameManager : MonoBehaviour
     bool isInCollectablesScreen = false;
 
     #region API
+    public void Init()
+    {
+        Singleton();
+
+        if (initInputManager)
+        {
+            inputManager = FindObjectOfType<InputManager>();
+        }
+
+        if (initPlayer)
+        {
+            player = FindObjectOfType<PlayerEntity>();
+        }
+
+        if (initUIManager)
+        {
+            uiManager = FindObjectOfType<UIManager>();
+        }
+
+        if (initCameraManager)
+        {
+            FindObjectOfType<CameraManager>().Init();
+        }
+
+        if (initRoomSystem)
+        {
+            roomSystem = FindObjectOfType<RoomSystem>();
+        }
+
+        entities = FindObjectsOfType<BaseEntity>();
+    }
+
+    public void Setup()
+    {
+        if (initInputManager)
+        {
+            inputManager.Setup();
+            InputManager.OnInventoryPressed += ToggleInventory;
+            InputManager.OnPausePressed += TogglePause;
+            InputManager.OnMapPressed += ToggleMap;
+        }
+
+        if (initPlayer)
+        {
+            player.SetUpEntity();
+        }
+
+        if (initUIManager)
+        {
+            uiManager.Setup();
+        }
+
+        if (initRoomSystem)
+        {
+            roomSystem.Setup();
+        }
+
+        foreach (BaseEntity entity in entities)
+        {
+            entity.SetUpEntity();
+        }
+    }
 
     public void ToggleInventory()
     {
@@ -133,67 +195,6 @@ public class GameManager : MonoBehaviour
     #endregion
 
     #region Internals
-
-    public void Init()
-    {
-        Singleton();
-
-        if (initInputManager)
-        {
-            inputManager = FindObjectOfType<InputManager>();
-        }
-
-        if (initPlayer)
-        {
-            player = FindObjectOfType<PlayerEntity>();
-        }
-
-        if (initUIManager)
-        {
-            uiManager = FindObjectOfType<UIManager>();
-        }
-
-        if (initCameraManager)
-        {
-            FindObjectOfType<CameraManager>().Init();
-        }
-
-        if (initRoomSystem)
-        {
-            roomSystem = FindObjectOfType<RoomSystem>();
-        }
-
-        entities = FindObjectsOfType<BaseEntity>();
-    }
-
-    public void Setup()
-    {
-        if (initInputManager)
-        {
-            inputManager.Setup();
-        }
-
-        if (initPlayer)
-        {
-            player.SetUpEntity();
-        }
-
-        if (initUIManager)
-        {
-            uiManager.Setup();
-        }
-
-        if (initRoomSystem)
-        {
-            roomSystem.Setup();
-        }
-
-        foreach (BaseEntity entity in entities)
-        {
-            entity.SetUpEntity();
-        }
-    }
-
     public static GameManager Instance;
     void Singleton()
     {
@@ -209,6 +210,5 @@ public class GameManager : MonoBehaviour
 
         Time.timeScale = 1;
     }
-
     #endregion
 }

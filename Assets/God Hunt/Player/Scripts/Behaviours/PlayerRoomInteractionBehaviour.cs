@@ -12,6 +12,14 @@ public class PlayerRoomInteractionBehaviour : BaseBehaviour
         roomSystem = GameManager.Instance.roomSystem;
     }
 
+    public void SetCurrentRoom(Room _room)
+    {
+        currentRoom = _room;
+        CameraManager.Instance.ChangeActiveCam(currentRoom.vCam);
+        data.respawnBehaviour.SetCheckPoint(currentRoom.SpawnPoint.position);
+        roomSystem.OnRoomEnter(currentRoom);
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (!isEnabled)
@@ -21,10 +29,7 @@ public class PlayerRoomInteractionBehaviour : BaseBehaviour
 
         if (r && r!= currentRoom)
         {
-            currentRoom = r;
-            CameraManager.Instance.ChangeActiveCam(currentRoom.vCam);
-            data.respawnBehaviour.SetCheckPoint(currentRoom.SpawnPoint.position);
-            roomSystem.OnRoomEnter(r);
+            SetCurrentRoom(r);
         }
     }
 }
