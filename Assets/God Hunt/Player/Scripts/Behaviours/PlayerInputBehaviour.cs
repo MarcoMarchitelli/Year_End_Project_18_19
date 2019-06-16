@@ -83,29 +83,35 @@ public class PlayerInputBehaviour : BaseBehaviour
     {
         if (_value)
         {
-            InputManager.OnAttackPressed += HandleAttackPress;
+            InputManager.OnAttackPressed  += HandleAttackPress;
             InputManager.OnAttackReleased += HandleAttackRelease;
-            InputManager.OnDashPressed += HandleDashPress;
-            InputManager.OnDashPressed += HandleDashPress;
-            InputManager.OnRunPressed += HandleRunPress;
-            InputManager.OnRunPressed += HandleRunPress;
-            InputManager.OnJumpPressed += HandleJumpPress;
-            InputManager.OnJumpPressed += HandleJumpPress;
 
-            InputManager.OnMovementInput += HandleMovementInput;
+            InputManager.OnDashPressed    += HandleDashPress;
+            InputManager.OnDashReleased   += HandleDashRelease;
+
+            InputManager.OnRunPressed     += HandleRunPress;
+            InputManager.OnRunReleased    += HandleRunRelease;
+
+            InputManager.OnJumpPressed    += HandleJumpPress;
+            InputManager.OnJumpReleased   += HandleJumpRelease;
+
+            InputManager.OnMovementInput  += HandleMovementInput;
         }
         else
         {
-            InputManager.OnAttackPressed -= HandleAttackPress;
+            InputManager.OnAttackPressed  -= HandleAttackPress;
             InputManager.OnAttackReleased -= HandleAttackRelease;
-            InputManager.OnDashPressed -= HandleDashPress;
-            InputManager.OnDashPressed -= HandleDashPress;
-            InputManager.OnRunPressed -= HandleRunPress;
-            InputManager.OnRunPressed -= HandleRunPress;
-            InputManager.OnJumpPressed -= HandleJumpPress;
-            InputManager.OnJumpPressed -= HandleJumpPress;
-
-            InputManager.OnMovementInput -= HandleMovementInput;
+                                          
+            InputManager.OnDashPressed    -= HandleDashPress;
+            InputManager.OnDashReleased   -= HandleDashRelease;
+                                          
+            InputManager.OnRunPressed     -= HandleRunPress;
+            InputManager.OnRunReleased    -= HandleRunRelease;
+                                          
+            InputManager.OnJumpPressed    -= HandleJumpPress;
+            InputManager.OnJumpReleased   -= HandleJumpRelease;
+                                          
+            InputManager.OnMovementInput  -= HandleMovementInput;
         }
     }
 
