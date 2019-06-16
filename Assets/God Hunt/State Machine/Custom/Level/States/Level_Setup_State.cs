@@ -7,6 +7,8 @@
             FindObjectOfType<GameManager>().Init();
             GameManager.Instance.Setup();
 
+            FindObjectOfType<InputChecker>().Setup();
+
             context.deathScreen.Setup();
 
             PlayerEntityData playerData = GameManager.Instance.player.Data as PlayerEntityData;

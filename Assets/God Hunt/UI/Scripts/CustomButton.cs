@@ -1,9 +1,10 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using GodHunt.Inputs;
+using UnityEngine.EventSystems;
 
 [RequireComponent(typeof(Image))]
-public class CustomButton : MonoBehaviour
+public class CustomButton : MonoBehaviour, IPointerDownHandler, IPointerEnterHandler, IPointerExitHandler, IPointerUpHandler
 {
     public enum State { mouse, controller }
 
@@ -11,9 +12,13 @@ public class CustomButton : MonoBehaviour
 
     private State currentState;
     private bool mouseDowned;
+    private CustomButtonsMenu menu;
 
-    public void Setup()
+    #region API
+    public void Setup(CustomButtonsMenu _menu = null)
     {
+        menu = _menu;
+
         InputChecker.OnGamepadConnected += HandleControllerConnection;
         InputChecker.OnGamepadDisconnected += HandleControllerDisonnection;
 
@@ -25,20 +30,10 @@ public class CustomButton : MonoBehaviour
         print(name + " setup");
     }
 
-    private void HandleControllerConnection(IntellGamePad _pad)
-    {
-        currentState = State.controller;
-    }
-
-    private void HandleControllerDisonnection(IntellGamePad _pad)
-    {
-        currentState = State.mouse;
-    }
-
     public void Select()
     {
+        menu?.DeselectAll();
         OnSelect.Invoke();
-        print(name + " selected");
     }
 
     public void Deselect()
@@ -49,15 +44,33 @@ public class CustomButton : MonoBehaviour
     public void Click()
     {
         OnClick.Invoke();
+    } 
+    #endregion
+
+    private void HandleControllerConnection(IntellGamePad _pad)
+    {
+        currentState = State.controller;
     }
 
-    private void OnMouseEnter()
+    private void HandleControllerDisonnection(IntellGamePad _pad)
+    {
+        currentState = State.mouse;
+    }
+
+    #region Pointer Events
+    public void OnPointerDown(PointerEventData eventData)
+    {
+        if (currentState == State.mouse)
+            mouseDowned = true;
+    }
+
+    public void OnPointerEnter(PointerEventData eventData)
     {
         if (currentState == State.mouse)
             Select();
     }
 
-    private void OnMouseExit()
+    public void OnPointerExit(PointerEventData eventData)
     {
         if (currentState == State.mouse)
         {
@@ -66,18 +79,13 @@ public class CustomButton : MonoBehaviour
         }
     }
 
-    private void OnMouseDown()
-    {
-        if (currentState == State.mouse)
-            mouseDowned = true;
-    }
-
-    private void OnMouseUp()
+    public void OnPointerUp(PointerEventData eventData)
     {
         if (currentState == State.mouse && mouseDowned)
         {
             mouseDowned = false;
             Click();
         }
-    }
+    } 
+    #endregion
 }

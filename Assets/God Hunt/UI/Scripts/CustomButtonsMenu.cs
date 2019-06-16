@@ -8,11 +8,12 @@ public class CustomButtonsMenu : MonoBehaviour
     int currentlySelectedButtonIndex;
     bool subscribed;
 
+    #region API
     public void Setup()
     {
         foreach (CustomButton customButton in buttons)
         {
-            customButton.Setup();
+            customButton.Setup(this);
         }
 
         currentlySelectedButtonIndex = 0;
@@ -22,6 +23,16 @@ public class CustomButtonsMenu : MonoBehaviour
         ToggleEventsSubscriptions(true);
     }
 
+    public void DeselectAll()
+    {
+        foreach (CustomButton button in buttons)
+        {
+            button.Deselect();
+        }
+    }
+    #endregion
+
+    #region Monos
     private void OnDisable()
     {
         ToggleEventsSubscriptions(false);
@@ -30,7 +41,8 @@ public class CustomButtonsMenu : MonoBehaviour
     private void OnEnable()
     {
         ToggleEventsSubscriptions(true);
-    }
+    } 
+    #endregion
 
     private void ToggleEventsSubscriptions(bool _value)
     {

@@ -60,9 +60,6 @@ public class GameManager : MonoBehaviour
         if (initInputManager)
         {
             inputManager.Setup();
-            InputManager.OnInventoryPressed += ToggleInventory;
-            InputManager.OnPausePressed += TogglePause;
-            InputManager.OnMapPressed += ToggleMap;
         }
 
         if (initPlayer)
@@ -73,6 +70,12 @@ public class GameManager : MonoBehaviour
         if (initUIManager)
         {
             uiManager.Setup();
+            if(initPlayer && initInputManager)
+            {
+                InputManager.OnInventoryPressed += ToggleInventory;
+                InputManager.OnPausePressed += TogglePause;
+                InputManager.OnMapPressed += ToggleMap;
+            }
         }
 
         if (initRoomSystem)

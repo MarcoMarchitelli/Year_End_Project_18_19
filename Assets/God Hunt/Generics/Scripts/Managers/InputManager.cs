@@ -48,6 +48,7 @@ namespace GodHunt.Inputs
             InputChecker.OnGamepadDisconnected += HandleControllerDisconnection;
 
             CurrentInputDevice = InputDevice.keyboard;
+            OnInputDeviceChange?.Invoke(CurrentInputDevice);
 
             foreach (CustomButtonsMenu customButtonsMenu in customButtonMenus)
             {

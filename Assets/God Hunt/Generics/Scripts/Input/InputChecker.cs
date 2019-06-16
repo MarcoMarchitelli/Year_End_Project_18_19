@@ -5,62 +5,54 @@ using UnityEngine;
 using XInputDotNetPure;
 using System.Linq;
 
-/// <summary>
-/// Classe che fornisce le informazioni sullo stato dei gamepad collegati.
-/// </summary>
 public class InputChecker : MonoBehaviour
 {
-    #region Delegates
     public static Action<IntellGamePad> OnGamepadConnected;
     public static Action<IntellGamePad> OnGamepadDisconnected;
-    #endregion
-
-    #region properties
-    /// <summary>
-    /// Lista dei gamepad attivi.
-    /// </summary>
-    public List<IntellGamePad> Activegamepads { get; protected set; }
-    #endregion
-
     public static InputChecker instance;
+
+    public List<IntellGamePad> Activegamepads = new List<IntellGamePad>();
 
     const float CONTROLLER_STATUS_CHECK_INTERVAL = .5f;
 
-    private void Awake()
+    public void Setup()
     {
         if (instance == null)
         {
             instance = this;
-            Activegamepads = new List<IntellGamePad>();
         }
 
         StartCoroutine("ControllerStatusCheckRoutine");
     }
 
+    private void Update()
+    {
+        UpdatePadsInputStatus();
+    }
+
     IEnumerator ControllerStatusCheckRoutine()
     {
-        DoCheckInput();
-        yield return new WaitForSecondsRealtime(CONTROLLER_STATUS_CHECK_INTERVAL);
+        while (true)
+        {
+            UpdatePadsConnectionStatus();
+            yield return new WaitForSecondsRealtime(CONTROLLER_STATUS_CHECK_INTERVAL);
+        }
     }
 
     /// <summary>
-    /// Aggiorna la lista dello stato dei gamepad (Activegamepads).
+    /// Updates pads connection and disconnection.
     /// </summary>
     /// <returns></returns>
-    private void DoCheckInput()
+    private void UpdatePadsConnectionStatus()
     {
         for (int i = 0; i < 4; ++i)
         {
-            PlayerIndex testPlayerIndex = (PlayerIndex)i;
-            GamePadState testState = GamePad.GetState(testPlayerIndex);
+            GamePadState testState = GamePad.GetState((PlayerIndex)i);
+
             if (testState.IsConnected)
             {
                 IntellGamePad newPad = Activegamepads.FirstOrDefault(gpad => gpad.ID == i);
-                if (newPad != null)
-                {
-                    newPad.CurrentGamePadState = testState;
-                }
-                else
+                if (newPad == null)
                 {
                     IntellGamePad padToAdd = new IntellGamePad(testState, i);
                     Activegamepads.Add(padToAdd);
@@ -78,6 +70,14 @@ public class InputChecker : MonoBehaviour
                     Debug.Log("TASTIERA SEEEE");
                 }
             }
+        }
+    }
+
+    private void UpdatePadsInputStatus()
+    {
+        foreach (IntellGamePad pad in Activegamepads)
+        {
+            pad.CurrentGamePadState = GamePad.GetState((PlayerIndex)pad.ID);
         }
     }
 }
