@@ -94,31 +94,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactionAgent: {fileID: 1188, guid: b44c7349678676347bc1e673cd602c2f, type: 3}
+  interactOnlyOnce: 1
   interactOnCollision: 0
   interactOnTrigger: 1
-  cycleInteractions: 0
-  resetOnAreaExit: 0
-  Interactions:
-  - RequiresInput: 1
-    RequiresTimer: 0
-    Input: Attack
-    Time: 0
-    OnInteraction:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 4331876989356660075}
-          m_MethodName: StartTimer
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-      m_TypeName: UnityVoidEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
+  inputAction: 4
+  OnInteraction:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4331876989356660075}
+        m_MethodName: StartTimer
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityVoidEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
 --- !u!135 &5923477282196253178
 SphereCollider:
   m_ObjectHideFlags: 0

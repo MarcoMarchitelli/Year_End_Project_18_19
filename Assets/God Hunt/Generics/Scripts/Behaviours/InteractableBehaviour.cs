@@ -1,91 +1,94 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using GodHunt.Inputs;
 
 public class InteractableBehaviour : BaseBehaviour
 {
-
     #region Serialized
 
     [SerializeField] MonoBehaviour interactionAgent;
+    [SerializeField] bool interactOnlyOnce = true;
     [SerializeField] bool interactOnCollision;
     [SerializeField] bool interactOnTrigger;
-    [SerializeField] bool cycleInteractions;
-    [SerializeField] bool resetOnAreaExit;
-    [SerializeField] List<Interaction> Interactions;
+    [SerializeField] GameInputActions inputAction;
+    [SerializeField] UnityVoidEvent OnInteraction;
 
     #endregion
 
     bool agentFound = false;
+    bool interactable = false;
     GameObject agent;
-    Interaction currentInteraction;
-    int currentInteractionIndex;
-    float timer = 0;
-    bool countTime = false;
+
+    private System.Action OnAgentFound;
 
     #region Overrides
 
     protected override void CustomSetup()
     {
-        if (Interactions.Count > 0)
+        switch (inputAction)
         {
-            currentInteractionIndex = 0;
-            currentInteraction = Interactions[currentInteractionIndex];
-
-            for (int i = 0; i < Interactions.Count; i++)
-            {
-                Interactions[i].OnInteraction.AddListener(GoToNextInteraction);
-            }
+            case GameInputActions.OnJumpPressed:
+                InputManager.OnJumpPressed += HandleInput;
+                break;
+            case GameInputActions.OnJumpReleased:
+                InputManager.OnJumpReleased += HandleInput;
+                break;
+            case GameInputActions.OnRunPressed:
+                InputManager.OnRunPressed += HandleInput;
+                break;
+            case GameInputActions.OnRunReleased:
+                InputManager.OnRunReleased += HandleInput;
+                break;
+            case GameInputActions.OnAttackPressed:
+                InputManager.OnAttackPressed += HandleInput;
+                break;
+            case GameInputActions.OnAttackReleased:
+                InputManager.OnAttackReleased += HandleInput;
+                break;
+            case GameInputActions.OnDashPressed:
+                InputManager.OnDashPressed += HandleInput;
+                break;
+            case GameInputActions.OnDashReleased:
+                InputManager.OnDashReleased += HandleInput;
+                break;
+            case GameInputActions.OnMapPressed:
+                InputManager.OnMapPressed += HandleInput;
+                break;
+            case GameInputActions.OnMapReleased:
+                InputManager.OnMapReleased += HandleInput;
+                break;
+            case GameInputActions.OnInventoryPressed:
+                InputManager.OnInventoryPressed += HandleInput;
+                break;
+            case GameInputActions.OnInventoryReleased:
+                InputManager.OnInventoryReleased += HandleInput;
+                break;
+            case GameInputActions.OnPausePressed:
+                InputManager.OnPausePressed += HandleInput;
+                break;
+            case GameInputActions.OnPauseReleased:
+                InputManager.OnPauseReleased += HandleInput;
+                break;
+            case GameInputActions.OnSelectPressed:
+                InputManager.OnSelectPressed += HandleInput;
+                break;
+            case GameInputActions.OnSelectionUpPressed:
+                InputManager.OnSelectionUpPressed += HandleInput;
+                break;
+            case GameInputActions.OnSelectionDownPressed:
+                InputManager.OnSelectionDownPressed += HandleInput;
+                break;
         }
     }
 
-    //public override void OnUpdate()
-    //{
-    //    if (agentFound)
-    //    {
-    //        if (!currentInteraction.RequiresTimer && !currentInteraction.RequiresInput)
-    //        {
-    //            currentInteraction.OnInteraction.Invoke();
-    //            return;
-    //        }
-    //        else
-    //        if (currentInteraction.RequiresTimer && currentInteraction.RequiresInput)
-    //        {
-    //            if (countTime)
-    //                timer += Time.deltaTime;
+    #endregion
 
-    //            if (Input.GetButtonDown(TestInputManager.CurrentInputDevice + currentInteraction.Input))
-    //                countTime = true;
+    #region API
 
-    //            if (Input.GetButtonUp(TestInputManager.CurrentInputDevice + currentInteraction.Input))
-    //            {
-    //                countTime = false;
-    //                timer = 0;
-    //            }
-
-    //            if (timer >= currentInteraction.Time)
-    //            {
-    //                currentInteraction.OnInteraction.Invoke();
-    //            }
-    //        }
-    //        else
-    //        if (currentInteraction.RequiresTimer && !currentInteraction.RequiresInput)
-    //        {
-    //            timer += Time.deltaTime;
-
-    //            if (timer >= currentInteraction.Time)
-    //            {
-    //                currentInteraction.OnInteraction.Invoke();
-    //            }
-    //        }
-    //        else
-    //        {
-    //            if (Input.GetButtonDown(TestInputManager.CurrentInputDevice + currentInteraction.Input))
-    //            {
-    //                currentInteraction.OnInteraction.Invoke();
-    //            }
-    //        }
-    //    }
-    //}
+    public void ToggleInteractability(bool _value)
+    {
+        interactable = _value;
+    }
 
     #endregion
 
@@ -111,9 +114,6 @@ public class InteractableBehaviour : BaseBehaviour
         if (agentFound && agent == other.gameObject)
         {
             agentFound = false;
-            timer = 0;
-            if (resetOnAreaExit)
-                currentInteraction = Interactions[0];
         }
     }
 
@@ -137,9 +137,6 @@ public class InteractableBehaviour : BaseBehaviour
         if (agent == collision.collider.gameObject)
         {
             agentFound = false;
-            timer = 0;
-            if (resetOnAreaExit)
-                currentInteraction = Interactions[0];
         }
     }
 
@@ -147,44 +144,36 @@ public class InteractableBehaviour : BaseBehaviour
 
     #region Internals
 
-    void GoToNextInteraction()
+    void HandleInput()
     {
-        if (currentInteractionIndex >= Interactions.Count - 1)
+        if (agentFound && interactable)
         {
-            if (!cycleInteractions)
-            {
-                OnInteractionsEnd();
-                return;
-            }
-            else
-            {
-                currentInteractionIndex = 0;
-            }
+            if (interactOnlyOnce)
+                ToggleInteractability(false);
+            OnInteraction.Invoke();
         }
-        else
-        {
-            currentInteractionIndex++;
-        }
-
-        currentInteraction = Interactions[currentInteractionIndex];
-        timer = 0;
-    }
-
-    void OnInteractionsEnd()
-    {
-
     }
 
     #endregion
-
 }
 
-[System.Serializable]
-public class Interaction
+public enum GameInputActions
 {
-    public bool RequiresInput;
-    public bool RequiresTimer;
-    public string Input;
-    public float Time;
-    public UnityVoidEvent OnInteraction;
+    OnJumpPressed,
+    OnJumpReleased,
+    OnRunPressed,
+    OnRunReleased,
+    OnAttackPressed,
+    OnAttackReleased,
+    OnDashPressed,
+    OnDashReleased,
+    OnMapPressed,
+    OnMapReleased,
+    OnInventoryPressed,
+    OnInventoryReleased,
+    OnPausePressed,
+    OnPauseReleased,   
+    OnSelectPressed,
+    OnSelectionUpPressed,
+    OnSelectionDownPressed
 }
