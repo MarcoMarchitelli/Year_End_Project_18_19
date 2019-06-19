@@ -79,6 +79,8 @@ public class InteractableBehaviour : BaseBehaviour
                 InputManager.OnSelectionDownPressed += HandleInput;
                 break;
         }
+
+        ToggleInteractability(true);
     }
 
     #endregion
