@@ -1,6 +1,7 @@
 ﻿namespace GodHunt.StateMachine
 {
     using UnityEngine;
+    using UnityEngine.UI;
 
     public class GameStateMachineController : BaseStateMachine
     {
@@ -23,7 +24,7 @@
     public class GameStateMachineContext : IContext
     {
         public SceneFader sceneFader;
-        public CustomButton mainMenuPlayButton;
+        public Button mainMenuPlayButton;
 
         public System.Action OnStateEnd;
     }

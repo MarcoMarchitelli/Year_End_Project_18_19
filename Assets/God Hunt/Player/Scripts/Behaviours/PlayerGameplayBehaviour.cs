@@ -458,7 +458,6 @@ public class PlayerGameplayBehaviour : BaseBehaviour
                 if(interpolationValue == 1)
                 {
                     OnAccelerationEnd.Invoke();
-                    print("OOOOH");
                 }
             }
             else
@@ -475,7 +474,6 @@ public class PlayerGameplayBehaviour : BaseBehaviour
                 if (interpolationValue == 0)
                 {
                     OnDecelerationEnd.Invoke();
-                    print("AAAAH");
                 }
             }
             else
