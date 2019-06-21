@@ -8,6 +8,10 @@ public class CustomButton : MonoBehaviour, IPointerDownHandler, IPointerEnterHan
 {
     public enum State { mouse, controller }
 
+    public Image image;
+    public bool ChangeImageColor;
+    public Color SelectedColor, UnselectedColor;
+
     public UnityVoidEvent OnSelect, OnDeselect, OnClick;
 
     private State currentState;
@@ -32,12 +36,24 @@ public class CustomButton : MonoBehaviour, IPointerDownHandler, IPointerEnterHan
 
     public void Select()
     {
+        print(name + " selected!");
+        if (ChangeImageColor)
+        {
+            image.color = SelectedColor;
+            image.SetAllDirty();
+        }
         menu?.DeselectAll();
         OnSelect.Invoke();
     }
 
     public void Deselect()
     {
+        print(name + " deselected!");
+        if (ChangeImageColor)
+        {
+            image.color = UnselectedColor;
+            image.SetAllDirty();
+        }
         OnDeselect.Invoke();
     }
 

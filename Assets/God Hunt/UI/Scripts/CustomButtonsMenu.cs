@@ -41,6 +41,10 @@ public class CustomButtonsMenu : MonoBehaviour
     private void OnEnable()
     {
         ToggleEventsSubscriptions(true);
+
+        currentlySelectedButtonIndex = 0;
+        currentlySelectedButton = buttons[currentlySelectedButtonIndex];
+        currentlySelectedButton.Select();
     } 
     #endregion
 
