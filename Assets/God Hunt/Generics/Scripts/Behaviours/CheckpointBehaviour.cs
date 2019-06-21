@@ -3,10 +3,12 @@
 public class CheckpointBehaviour : BaseBehaviour
 {
     PlayerEntityData playerData;
+    bool setupped;
 
     protected override void CustomSetup()
     {
         playerData = GameManager.Instance.player.Data as PlayerEntityData;
+        setupped = true;
     }
 
     /// <summary>
@@ -19,6 +21,9 @@ public class CheckpointBehaviour : BaseBehaviour
 
     public void SetCheckpoint(Transform _transform)
     {
+        if (!setupped)
+            return;
+
         playerData.respawnBehaviour.SetRespawnPoint(_transform.position);
     }
 }
