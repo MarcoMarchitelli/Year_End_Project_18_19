@@ -299,6 +299,7 @@ MonoBehaviour:
   doubleJump: 0
   sprint: 0
   dash: 0
+  sacrifice: 0
   verticalInputDeadzone: 0.8
   horizontalInputDeadzone: 0.2
   OnSideAttackInput:
@@ -739,6 +740,11 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+    m_TypeName: UnityVoidEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  OnSacrifice:
+    m_PersistentCalls:
+      m_Calls: []
     m_TypeName: UnityVoidEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
   canDoubleJump: 0
@@ -2255,11 +2261,6 @@ PrefabInstance:
       propertyPath: playOnAwake
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 3347559691232039874, guid: b7ea6ea354c695844b92e05a7636bf42,
-        type: 3}
-      propertyPath: m_Name
-      value: Player_Graphic
-      objectReference: {fileID: 0}
     - target: {fileID: 738208850234466121, guid: b7ea6ea354c695844b92e05a7636bf42,
         type: 3}
       propertyPath: m_IsActive
@@ -2334,6 +2335,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3347559691232039874, guid: b7ea6ea354c695844b92e05a7636bf42,
+        type: 3}
+      propertyPath: m_Name
+      value: Player_Graphic
       objectReference: {fileID: 0}
     - target: {fileID: 6548034062130119039, guid: b7ea6ea354c695844b92e05a7636bf42,
         type: 3}

@@ -47,6 +47,9 @@ public class PlayerGameplayBehaviour : BaseBehaviour
     public float fallingGravityMultiplier = 2f;
     [SerializeField] UnityVoidEvent OnDoubleJump;
 
+    [Header("Sacrifice")]
+    [SerializeField] UnityVoidEvent OnSacrifice;
+
     #endregion
 
     #region Vars
@@ -344,6 +347,11 @@ public class PlayerGameplayBehaviour : BaseBehaviour
         airDashesCount = 0;
         jumpsCount = 0;
         hasDoubleJumped = false;
+    }
+
+    public void HandleSacrificePress()
+    {
+        OnSacrifice.Invoke();
     }
 
     #endregion

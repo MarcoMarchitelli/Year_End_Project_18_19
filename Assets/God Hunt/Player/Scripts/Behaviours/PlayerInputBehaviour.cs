@@ -9,6 +9,7 @@ public class PlayerInputBehaviour : BaseBehaviour
     [SerializeField] bool doubleJump;
     [SerializeField] bool sprint;
     [SerializeField] bool dash;
+    [SerializeField] bool sacrifice;
 
     [Range(0, 1)]
     [SerializeField] float verticalInputDeadzone = .8f;
@@ -32,6 +33,7 @@ public class PlayerInputBehaviour : BaseBehaviour
     bool canJump = false;
     bool canAttack = false;
     bool canTurn = false;
+    bool canSacrifice = false;
     bool hasChargeAttacked = false;
     bool countTime = false;
     float timer;
@@ -46,6 +48,7 @@ public class PlayerInputBehaviour : BaseBehaviour
         data = Entity.Data as PlayerEntityData;
         SetSprintInput(sprint);
         SetDashInput(dash);
+        SetSacrificeInput(sacrifice);
         data.playerGameplayBehaviour.ToggleDoubleJump(doubleJump);
         SetJumpInput(true);
         ToggleDirectionalInput(true);
@@ -153,6 +156,11 @@ public class PlayerInputBehaviour : BaseBehaviour
             isChargeing = false;
             EvaluateAttackTime(directionalInput);
         }
+
+        if(canSacrifice && Input.GetButtonUp(TestInputManager.CurrentInputDevice + "Sacrifice"))
+        {
+            data.playerGameplayBehaviour.HandleSacrificePress();
+        }
     }
 
     bool hasCalledChargeEvent = false;
@@ -202,6 +210,11 @@ public class PlayerInputBehaviour : BaseBehaviour
     public void SetDashInput(bool _value)
     {
         canDash = _value;
+    }
+
+    public void SetSacrificeInput(bool _value)
+    {
+        canSacrifice = _value;
     }
 
     public void SetJumpInput(bool _value)

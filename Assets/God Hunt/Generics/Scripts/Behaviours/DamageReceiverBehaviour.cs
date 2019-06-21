@@ -22,7 +22,13 @@ public class DamageReceiverBehaviour : BaseBehaviour
     public int MaxHealth
     {
         get { return _maxHealth; }
-        private set { _maxHealth = value; }
+        private set {
+            _maxHealth = value;
+            if (_maxHealth < 0)
+                _maxHealth = 0;
+            if (CurrentHealth > _maxHealth)
+                CurrentHealth = _maxHealth;
+        }
     }
     int _currentHealth;
     public int CurrentHealth
@@ -74,11 +80,11 @@ public class DamageReceiverBehaviour : BaseBehaviour
         return true;
     }
 
-    //public void SetMaxHealth(int _value)
-    //{
-    //    MaxHealth = _value;
-    //    OnHealthUpgraded.Invoke();
-    //}
+    public void ReduceMaxHealth(int _value)
+    {
+        MaxHealth -= _value;
+        OnHealthUpgraded.Invoke();
+    }
 
     public void UpgradeHealth()
     {
