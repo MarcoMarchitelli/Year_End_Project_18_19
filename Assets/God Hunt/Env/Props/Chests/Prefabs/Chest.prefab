@@ -63,37 +63,42 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactionAgent: {fileID: 1188, guid: b44c7349678676347bc1e673cd602c2f, type: 3}
-  interactOnlyOnce: 1
   interactOnCollision: 0
   interactOnTrigger: 1
-  inputAction: 4
-  OnInteraction:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 3474417980741748760}
-        m_MethodName: UnlockSkill
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 6076324131199661038}
-        m_MethodName: SetTrigger
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: Open
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_TypeName: UnityVoidEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
+  cycleInteractions: 0
+  resetOnAreaExit: 0
+  Interactions:
+  - RequiresInput: 1
+    RequiresTimer: 0
+    Input: Attack
+    Time: 0
+    OnInteraction:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 3474417980741748760}
+          m_MethodName: UnlockSkill
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 6076324131199661038}
+          m_MethodName: SetTrigger
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: Open
+            m_BoolArgument: 0
+          m_CallState: 2
+      m_TypeName: UnityVoidEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
 --- !u!54 &5832331167706919678
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -218,6 +223,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4678659183346846203}
     m_Modifications:
+    - target: {fileID: 9500000, guid: b07bb3a1d82c2bd4da792f0082e9712a, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 49d41ebc8649b304c9e41305df7388c4, type: 2}
     - target: {fileID: 100000, guid: b07bb3a1d82c2bd4da792f0082e9712a, type: 3}
       propertyPath: m_Name
       value: Chest
@@ -266,10 +275,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 9500000, guid: b07bb3a1d82c2bd4da792f0082e9712a, type: 3}
-      propertyPath: m_Controller
-      value: 
-      objectReference: {fileID: 9100000, guid: 49d41ebc8649b304c9e41305df7388c4, type: 2}
     - target: {fileID: 13700000, guid: b07bb3a1d82c2bd4da792f0082e9712a, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
