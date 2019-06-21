@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
@@ -17,6 +18,19 @@ public class TestInputManager : MonoBehaviour
     StandaloneInputModule inputModule;
 
     bool setupped;
+    bool _padConnected;
+    bool PadConnected
+    {
+        get { return _padConnected; }
+        set
+        {
+            if (value != _padConnected)
+            {
+                _padConnected = value;
+                ChangeCurrentInputDevice(_padConnected ? XBOXCONTROLLER : KEYBOARD);
+            }
+        }
+    }
     string _currentInputDevice;
     public static string CurrentInputDevice
     {
@@ -29,8 +43,10 @@ public class TestInputManager : MonoBehaviour
             Instance._currentInputDevice = Instance == null ? null : value;
         }
     }
-    const string keyboard = "Keyboard ";
-    const string xboxController = "XBOX ";
+
+    const string KEYBOARD = "Keyboard ";
+    const string XBOXCONTROLLER = "XBOX ";
+    const float DEVICE_CHECK_INTERVAL = .5f;
 
     string[] joyNames;
 
@@ -42,8 +58,6 @@ public class TestInputManager : MonoBehaviour
     {
         if (!setupped)
             return;
-
-        CheckInputDevices();
 
         if (Input.GetButtonDown(CurrentInputDevice + "Pause"))
             GameManager.Instance.TogglePause();
@@ -69,18 +83,19 @@ public class TestInputManager : MonoBehaviour
     {
         joyNames = Input.GetJoystickNames();
 
-        //if current device is keyboard and i detect a controller --> change to controller
-        if (CurrentInputDevice == keyboard && joyNames.Length > 0)
-            for (int i = 0; i < joyNames.Length; i++)
+        if (joyNames.Length > 0)
+            foreach (string joyName in joyNames)
             {
-                if (joyNames[i].Length == 33)
-                    ChangeCurrentInputDevice(xboxController);
+                if (joyName.Contains("XBOX"))
+                {
+                    PadConnected = true;
+                    break;
+                }
+                else if (joyName.Length == 0)
+                {
+                    PadConnected = false;
+                }
             }
-        //If current device is controller but i do not detect it anymore --> change to keyboard
-        else if (CurrentInputDevice == xboxController && joyNames.Length == 0)
-        {
-            ChangeCurrentInputDevice(keyboard);
-        }
     }
 
     void ChangeCurrentInputDevice(string _newInputDeviceName)
@@ -90,21 +105,30 @@ public class TestInputManager : MonoBehaviour
         //For menu navigation.
         switch (CurrentInputDevice)
         {
-            case keyboard:
-                inputModule.horizontalAxis = keyboard + "Horizontal";
-                inputModule.verticalAxis = keyboard + "Vertical";
-                inputModule.submitButton = keyboard + "Submit";
-                inputModule.cancelButton = keyboard + "Cancel";
+            case KEYBOARD:
+                inputModule.horizontalAxis = KEYBOARD + "Horizontal";
+                inputModule.verticalAxis = KEYBOARD + "Vertical";
+                inputModule.submitButton = KEYBOARD + "Submit";
+                inputModule.cancelButton = KEYBOARD + "Cancel";
                 break;
-            case xboxController:
-                inputModule.horizontalAxis = xboxController + "DPAD Horizontal";
-                inputModule.verticalAxis = xboxController + "DPAD Vertical";
-                inputModule.submitButton = xboxController + "Submit";
-                inputModule.cancelButton = xboxController + "Cancel";
+            case XBOXCONTROLLER:
+                inputModule.horizontalAxis = XBOXCONTROLLER + "DPAD Horizontal";
+                inputModule.verticalAxis = XBOXCONTROLLER + "DPAD Vertical";
+                inputModule.submitButton = XBOXCONTROLLER + "Submit";
+                inputModule.cancelButton = XBOXCONTROLLER + "Cancel";
                 break;
         }
 
         print(CurrentInputDevice);
+    }
+
+    IEnumerator DeviceCheckRoutine()
+    {
+        while (true)
+        {
+            CheckInputDevices();
+            yield return new WaitForSecondsRealtime(DEVICE_CHECK_INTERVAL);
+        }
     }
 
     #endregion
@@ -118,17 +142,19 @@ public class TestInputManager : MonoBehaviour
         eventSystem = Instantiate(eventSystemPrefab);
         inputModule = eventSystem.GetComponent<StandaloneInputModule>();
 
-        if(firstSelected)
+        if (firstSelected)
             eventSystem.firstSelectedGameObject = firstSelected.gameObject;
 
-        ChangeCurrentInputDevice(keyboard);
-        string[] joyNames = Input.GetJoystickNames();
-        if (joyNames.Length > 0)
-            for (int i = 0; i < joyNames.Length; i++)
-            {
-                if (joyNames[i].Length == 33)
-                    ChangeCurrentInputDevice(xboxController);
-            }
+        ChangeCurrentInputDevice(KEYBOARD);
+        //string[] joyNames = Input.GetJoystickNames();
+        //if (joyNames.Length > 0)
+        //    for (int i = 0; i < joyNames.Length; i++)
+        //    {
+        //        if (joyNames[i].Length == 33)
+        //            ChangeCurrentInputDevice(xboxController);
+        //    }
+
+        StartCoroutine("DeviceCheckRoutine");
 
         setupped = true;
     }
