@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &692926701359730872
+--- !u!1 &1160057269180145663
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,9 +8,8 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 692926701359730871}
-  - component: {fileID: 1610142619}
-  - component: {fileID: 1610142618}
+  - component: {fileID: 1160057269180145662}
+  - component: {fileID: 1160057269180145661}
   m_Layer: 0
   m_Name: Input Manager
   m_TagString: Untagged
@@ -18,13 +17,13 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &692926701359730871
+--- !u!4 &1160057269180145662
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 692926701359730872}
+  m_GameObject: {fileID: 1160057269180145663}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -32,51 +31,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1610142619
+--- !u!114 &1160057269180145661
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 692926701359730872}
+  m_GameObject: {fileID: 1160057269180145663}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3183e799556c8b84a91c47f9289b26b4, type: 3}
+  m_Script: {fileID: 11500000, guid: 1f754a1ce7d37304b9f958525b267cdb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1610142618
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 692926701359730872}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 23349d835011550498e18885cfd15605, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gamePadBindings:
-    Jump: 1
-    Attack: 3
-    Dash: 5
-    Run: 6
-    Pause: 7
-    Map: 8
-    Inventory: 4
-    Select: 1
-    SelectionUp: 13
-    SelectionDown: 12
-  keyboardBindings:
-    Jump: 32
-    Attack: 106
-    Dash: 107
-    Run: 304
-    Pause: 27
-    Map: 9
-    Inventory: 105
-    Select: 13
-    SelectionUp: 273
-    SelectionDown: 274
-    HorizontalAxis: Horizontal
-    VerticalAxis: Vertical
+  InputKeys: []
+  eventSystemPrefab: {fileID: 4637336974052444581, guid: 20a54292d9ba6a945b68f4c48f58df52,
+    type: 3}
+  firstSelected: {fileID: 0}
+  eventSystem: {fileID: 0}
