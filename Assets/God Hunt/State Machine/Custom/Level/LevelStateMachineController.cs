@@ -1,6 +1,7 @@
 ﻿namespace GodHunt.StateMachine
 {
     using UnityEngine;
+    using UnityEngine.UI;
 
     public class LevelStateMachineController : BaseStateMachine
     {
@@ -25,7 +26,7 @@
         public SceneFader sceneFader;
         public DeathScreen deathScreen;
         public PlayerHPUI playerHPUI;
-        public CustomButton backToMainMenuButton;
+        public Button backToMainMenuButton;
 
         public System.Action OnStateEnd;
     }

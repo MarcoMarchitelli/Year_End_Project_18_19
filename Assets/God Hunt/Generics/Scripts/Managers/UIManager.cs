@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
@@ -19,6 +20,17 @@ public class UIManager : MonoBehaviour
     [SerializeField] GameObject collectablesScreen;
 
     bool controllerSchemeActive = true;
+    Button _firstSelectedPauseButton;
+    Button firstSelectedPauseButton
+    {
+        get
+        {
+            if (!_firstSelectedPauseButton)
+                _firstSelectedPauseButton = pausePanel.GetComponentInChildren<Button>();
+
+            return _firstSelectedPauseButton;
+        }
+    }
 
     #region API
 
@@ -52,8 +64,12 @@ public class UIManager : MonoBehaviour
 
     public void TogglePausePanel(bool _value)
     {
-        if ( pausePanel != null )
-            pausePanel.SetActive( _value );
+        if (pausePanel != null)
+        {
+            pausePanel.SetActive(_value);
+            if (_value)
+                firstSelectedPauseButton.Select();
+        }
     }
 
     public void ToggleMapPanel(bool _value)

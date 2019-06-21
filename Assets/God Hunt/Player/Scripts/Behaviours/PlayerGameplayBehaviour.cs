@@ -47,6 +47,9 @@ public class PlayerGameplayBehaviour : BaseBehaviour
     public float fallingGravityMultiplier = 2f;
     [SerializeField] UnityVoidEvent OnDoubleJump;
 
+    [Header("Sacrifice")]
+    [SerializeField] UnityVoidEvent OnSacrifice;
+
     #endregion
 
     #region Vars
@@ -346,6 +349,11 @@ public class PlayerGameplayBehaviour : BaseBehaviour
         hasDoubleJumped = false;
     }
 
+    public void HandleSacrificePress()
+    {
+        OnSacrifice.Invoke();
+    }
+
     #endregion
 
     #region Player Gameplay Methods
@@ -458,7 +466,6 @@ public class PlayerGameplayBehaviour : BaseBehaviour
                 if(interpolationValue == 1)
                 {
                     OnAccelerationEnd.Invoke();
-                    print("OOOOH");
                 }
             }
             else
@@ -475,7 +482,6 @@ public class PlayerGameplayBehaviour : BaseBehaviour
                 if (interpolationValue == 0)
                 {
                     OnDecelerationEnd.Invoke();
-                    print("AAAAH");
                 }
             }
             else

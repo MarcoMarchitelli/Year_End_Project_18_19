@@ -9,8 +9,6 @@
             FindObjectOfType<GameManager>().Init();
             GameManager.Instance.Setup();
 
-            FindObjectOfType<InputChecker>().Setup();
-
             context.sceneFader.StartFade(SceneFader.State.FadedIn, 1f, () => context.OnStateEnd?.Invoke());
         }
     } 

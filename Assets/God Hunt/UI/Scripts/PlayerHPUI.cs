@@ -36,7 +36,7 @@ public class PlayerHPUI : MonoBehaviour
         for (int i = 0; i < damageReceiver.MaxHealth; i++)
         {
             Image hp = Instantiate(HPChunkPrefab, transform);
-            hp.sprite = HPChunksFull[i];
+            hp.sprite = HPChunksFull[i > HPChunksFull.Length - 1 ? HPChunksFull.Length - 1 : i];
             hp.SetNativeSize();
             HPChunks.Add(hp);
         }
@@ -56,7 +56,7 @@ public class PlayerHPUI : MonoBehaviour
             //full hp
             if( i < _hp_value)
             {
-                HPChunks[i].sprite = HPChunksFull[i];
+                HPChunks[i].sprite = HPChunksFull[i > HPChunksFull.Length - 1 ? HPChunksFull.Length - 1 : i];
             }
             else
             {
@@ -72,7 +72,7 @@ public class PlayerHPUI : MonoBehaviour
             //full hp
             if (i < 0)
             {
-                HPChunks[i].sprite = HPChunksFull[i];
+                HPChunks[i].sprite = HPChunksFull[i > HPChunksFull.Length - 1 ? HPChunksFull.Length - 1 : i];
             }
             else
             {

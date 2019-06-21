@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections;
-using GodHunt.Inputs;
 
 public class GameManager : MonoBehaviour
 {
@@ -14,7 +13,7 @@ public class GameManager : MonoBehaviour
     private UIManager uiManager;
     [HideInInspector] public PlayerEntity player;
     [HideInInspector] public RoomSystem roomSystem;
-    private InputManager inputManager;
+    private TestInputManager inputManager;
     private BaseEntity[] entities;
 
     bool isPaused = false;
@@ -29,7 +28,7 @@ public class GameManager : MonoBehaviour
 
         if (initInputManager)
         {
-            inputManager = FindObjectOfType<InputManager>();
+            inputManager = FindObjectOfType<TestInputManager>();
         }
 
         if (initPlayer)
@@ -70,12 +69,6 @@ public class GameManager : MonoBehaviour
         if (initUIManager)
         {
             uiManager.Setup();
-            if(initPlayer && initInputManager)
-            {
-                InputManager.OnInventoryPressed += ToggleInventory;
-                InputManager.OnPausePressed += TogglePause;
-                InputManager.OnMapPressed += ToggleMap;
-            }
         }
 
         if (initRoomSystem)
