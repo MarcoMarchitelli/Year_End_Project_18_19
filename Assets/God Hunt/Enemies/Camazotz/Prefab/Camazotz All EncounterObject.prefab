@@ -4276,18 +4276,7 @@ MonoBehaviour:
   time: 0.1
   OnHealthChanged:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 5099493737656165269}
-        m_MethodName: 
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_TypeName: UnityIntEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
   OnHealthUpgraded:
@@ -4311,7 +4300,7 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityVoidEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
-  _maxHealth: 20
+  _maxHealth: 15
 --- !u!65 &5099493737656165270
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -14378,16 +14367,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5099493738271917364}
     m_Modifications:
-    - target: {fileID: 3452331635393649444, guid: 7e410c7889c702a49ab38d68f9dd3407,
-        type: 3}
-      propertyPath: m_Name
-      value: Camazotz_Charge_feedback
-      objectReference: {fileID: 0}
-    - target: {fileID: 3452331635393649444, guid: 7e410c7889c702a49ab38d68f9dd3407,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7917527226517564229, guid: 7e410c7889c702a49ab38d68f9dd3407,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -14442,6 +14421,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3452331635393649444, guid: 7e410c7889c702a49ab38d68f9dd3407,
+        type: 3}
+      propertyPath: m_Name
+      value: Camazotz_Charge_feedback
+      objectReference: {fileID: 0}
+    - target: {fileID: 3452331635393649444, guid: 7e410c7889c702a49ab38d68f9dd3407,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1571083700857174190, guid: 7e410c7889c702a49ab38d68f9dd3407,
         type: 3}
@@ -14541,16 +14530,6 @@ PrefabInstance:
       objectReference: {fileID: 9100000, guid: 966fe1489899d7f45afb7ee3fefa2697, type: 2}
     - target: {fileID: 2834948868678863061, guid: ddd79e402014781408c1b558cfac993d,
         type: 3}
-      propertyPath: m_AABB.m_Center.y
-      value: 1.640038
-      objectReference: {fileID: 0}
-    - target: {fileID: 2834948868678863061, guid: ddd79e402014781408c1b558cfac993d,
-        type: 3}
-      propertyPath: m_AABB.m_Extent.y
-      value: 3.037601
-      objectReference: {fileID: 0}
-    - target: {fileID: 2834948868678863061, guid: ddd79e402014781408c1b558cfac993d,
-        type: 3}
       propertyPath: m_AABB.m_Center.x
       value: 0
       objectReference: {fileID: 0}
@@ -14558,11 +14537,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AABB.m_Center.z
       value: -0.1642135
-      objectReference: {fileID: 0}
-    - target: {fileID: 2834948868678863061, guid: ddd79e402014781408c1b558cfac993d,
-        type: 3}
-      propertyPath: m_AABB.m_Extent.x
-      value: 2.787138
       objectReference: {fileID: 0}
     - target: {fileID: 2834948868678863061, guid: ddd79e402014781408c1b558cfac993d,
         type: 3}
@@ -14764,11 +14738,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5099493738271917364}
     m_Modifications:
-    - target: {fileID: 4170184285864895860, guid: 41618338f091bc64eba6941bfe991773,
-        type: 3}
-      propertyPath: m_Name
-      value: Teleport out black triangle
-      objectReference: {fileID: 0}
     - target: {fileID: 6695490657660804517, guid: 41618338f091bc64eba6941bfe991773,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -14823,6 +14792,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4170184285864895860, guid: 41618338f091bc64eba6941bfe991773,
+        type: 3}
+      propertyPath: m_Name
+      value: Teleport out black triangle
       objectReference: {fileID: 0}
     - target: {fileID: 2632611939796919420, guid: 41618338f091bc64eba6941bfe991773,
         type: 3}
