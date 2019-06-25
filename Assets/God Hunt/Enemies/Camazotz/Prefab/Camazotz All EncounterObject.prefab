@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   description: Tempo di stallo prima del random
-  time: 1.5
+  time: 1.75
   countOnStart: 0
   repeat: 0
   OnTimerStart:
@@ -435,7 +435,7 @@ Transform:
   - {fileID: 5099493737817639304}
   - {fileID: 7850784864432433279}
   m_Father: {fileID: 5099493737042273479}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1943028307806794545
 MonoBehaviour:
@@ -982,7 +982,7 @@ Transform:
   - {fileID: 6666187260445423891}
   - {fileID: 801259890429977489}
   m_Father: {fileID: 5099493737042273479}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &137813188012429020
 MonoBehaviour:
@@ -1285,7 +1285,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   description: Tempo di stallo prima del random
-  time: 1.5
+  time: 1.75
   countOnStart: 0
   repeat: 0
   OnTimerStart:
@@ -1532,6 +1532,17 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 5472295017949129883}
+        m_MethodName: ResetTrigger
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Laser Start
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityVoidEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
   OnTimerEnd:
@@ -1546,6 +1557,17 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 5472295017949129883}
+        m_MethodName: SetTrigger
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Laser End
           m_BoolArgument: 0
         m_CallState: 2
     m_TypeName: UnityVoidEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
@@ -2064,7 +2086,7 @@ Transform:
   - {fileID: 5099493738058455304}
   - {fileID: 5099493736984724063}
   m_Father: {fileID: 5099493737042273479}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5099493736956643662
 GameObject:
@@ -2436,6 +2458,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 5099493738510980054}
+  - {fileID: 8552382810450481878}
   - {fileID: 5099493738262548839}
   - {fileID: 1251173042711954449}
   - {fileID: 2949036451838685104}
@@ -3657,7 +3680,7 @@ Transform:
   - {fileID: 5099493737549275925}
   - {fileID: 5099493736872582354}
   m_Father: {fileID: 5099493737042273479}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5099493737363324127
 GameObject:
@@ -3703,7 +3726,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   description: Tempo di stallo prima del random
-  time: 1.5
+  time: 1.75
   countOnStart: 0
   repeat: 0
   OnTimerStart:
@@ -4312,8 +4335,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 2.866509, z: 1}
-  m_Center: {x: 0, y: 3.7428224, z: 0}
+  m_Size: {x: 1.1733694, y: 3.4526625, z: 1}
+  m_Center: {x: -0.020638943, y: 3.6726499, z: 0}
 --- !u!1 &5099493737686309603
 GameObject:
   m_ObjectHideFlags: 0
@@ -4880,7 +4903,7 @@ Transform:
   m_LocalScale: {x: 1, y: 0.33333334, z: 1}
   m_Children: []
   m_Father: {fileID: 5099493737042273479}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5099493737815419265
 GameObject:
@@ -5281,6 +5304,17 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 5472295017949129883}
+        m_MethodName: SetTrigger
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Laser Start
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityVoidEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
   OnTimerEnd:
@@ -5295,6 +5329,17 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 5472295017949129883}
+        m_MethodName: SetTrigger
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Laser End
           m_BoolArgument: 0
         m_CallState: 2
     m_TypeName: UnityVoidEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
@@ -5654,7 +5699,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   description: Tempo di stallo prima del random
-  time: 1.5
+  time: 1.75
   countOnStart: 0
   repeat: 0
   OnTimerStart:
@@ -6174,7 +6219,7 @@ Transform:
   - {fileID: 5099493737387737923}
   - {fileID: 5099493738530843212}
   m_Father: {fileID: 5099493737042273479}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5099493738271917371
 GameObject:
@@ -6724,6 +6769,17 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 5472295017949129883}
+        m_MethodName: SetTrigger
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Laser Start
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityVoidEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
   OnTimerEnd:
@@ -6738,6 +6794,17 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 5472295017949129883}
+        m_MethodName: SetTrigger
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Laser End
           m_BoolArgument: 0
         m_CallState: 2
     m_TypeName: UnityVoidEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
@@ -6777,7 +6844,7 @@ Transform:
   - {fileID: 5099493737230781757}
   - {fileID: 5099493736925043805}
   m_Father: {fileID: 5099493737042273479}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5099493738452506887
 GameObject:
@@ -11919,7 +11986,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   description: 
-  time: 3
+  time: 2
   countOnStart: 1
   repeat: 0
   OnTimerStart:
@@ -11930,7 +11997,7 @@ MonoBehaviour:
   OnTimerEnd:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 5511711404254082565}
+      - m_Target: {fileID: 8769012856933500255}
         m_MethodName: StartTimer
         m_Mode: 1
         m_Arguments:
@@ -12208,7 +12275,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   description: Tempo di stallo prima del random
-  time: 1.5
+  time: 1.75
   countOnStart: 0
   repeat: 0
   OnTimerStart:
@@ -12342,7 +12409,7 @@ Transform:
   - {fileID: 5099493738378939943}
   - {fileID: 5099493737523694177}
   m_Father: {fileID: 5099493737042273479}
-  m_RootOrder: 9
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5099493738666006604
 GameObject:
@@ -12784,7 +12851,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   description: Tempo di stallo prima del random
-  time: 1.5
+  time: 1.75
   countOnStart: 0
   repeat: 0
   OnTimerStart:
@@ -13023,7 +13090,7 @@ Transform:
   - {fileID: 5099493737430344970}
   - {fileID: 6849000333665835284}
   m_Father: {fileID: 5099493737042273479}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2404814539360457314
 MonoBehaviour:
@@ -13559,7 +13626,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   description: Tempo di stallo prima del random
-  time: 1.5
+  time: 1.75
   countOnStart: 0
   repeat: 0
   OnTimerStart:
@@ -13572,6 +13639,86 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1679594365938896280}
         m_MethodName: Randomize
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityVoidEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  timer: 0
+--- !u!1 &7868808534026203744
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8552382810450481878}
+  - component: {fileID: 8769012856933500255}
+  m_Layer: 13
+  m_Name: Animation Spawn
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8552382810450481878
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7868808534026203744}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5099493737042273479}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8769012856933500255
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7868808534026203744}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3089c6b75d763e8499970135d0270ab2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  description: 
+  time: 1
+  countOnStart: 0
+  repeat: 0
+  OnTimerStart:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5472295017949129883}
+        m_MethodName: Play
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Spawn
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityVoidEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  OnTimerEnd:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5511711404254082565}
+        m_MethodName: StartTimer
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -13710,6 +13857,17 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 5472295017949129883}
+        m_MethodName: SetTrigger
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Laser Start
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityVoidEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
   OnTimerEnd:
@@ -13724,6 +13882,17 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 5472295017949129883}
+        m_MethodName: SetTrigger
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Laser End
           m_BoolArgument: 0
         m_CallState: 2
     m_TypeName: UnityVoidEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
@@ -14185,6 +14354,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a677f9103067d87479868c3a0da1437a, type: 3}
+--- !u!4 &6981663148100474856 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6569890184409584545, guid: a677f9103067d87479868c3a0da1437a,
+    type: 3}
+  m_PrefabInstance: {fileID: 4309709499938751561}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1370184437808102809 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2939995721826843088, guid: a677f9103067d87479868c3a0da1437a,
@@ -14197,12 +14372,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3089c6b75d763e8499970135d0270ab2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!4 &6981663148100474856 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 6569890184409584545, guid: a677f9103067d87479868c3a0da1437a,
-    type: 3}
-  m_PrefabInstance: {fileID: 4309709499938751561}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5099493737049059993
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14367,6 +14536,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5099493738271917364}
     m_Modifications:
+    - target: {fileID: 3452331635393649444, guid: 7e410c7889c702a49ab38d68f9dd3407,
+        type: 3}
+      propertyPath: m_Name
+      value: Camazotz_Charge_feedback
+      objectReference: {fileID: 0}
+    - target: {fileID: 3452331635393649444, guid: 7e410c7889c702a49ab38d68f9dd3407,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7917527226517564229, guid: 7e410c7889c702a49ab38d68f9dd3407,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -14421,16 +14600,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3452331635393649444, guid: 7e410c7889c702a49ab38d68f9dd3407,
-        type: 3}
-      propertyPath: m_Name
-      value: Camazotz_Charge_feedback
-      objectReference: {fileID: 0}
-    - target: {fileID: 3452331635393649444, guid: 7e410c7889c702a49ab38d68f9dd3407,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1571083700857174190, guid: 7e410c7889c702a49ab38d68f9dd3407,
         type: 3}
@@ -14543,17 +14712,32 @@ PrefabInstance:
       propertyPath: m_AABB.m_Extent.z
       value: 0.00000031292439
       objectReference: {fileID: 0}
+    - target: {fileID: 2834948868678863061, guid: ddd79e402014781408c1b558cfac993d,
+        type: 3}
+      propertyPath: m_AABB.m_Center.y
+      value: 1.640038
+      objectReference: {fileID: 0}
+    - target: {fileID: 2834948868678863061, guid: ddd79e402014781408c1b558cfac993d,
+        type: 3}
+      propertyPath: m_AABB.m_Extent.x
+      value: 2.787138
+      objectReference: {fileID: 0}
+    - target: {fileID: 2834948868678863061, guid: ddd79e402014781408c1b558cfac993d,
+        type: 3}
+      propertyPath: m_AABB.m_Extent.y
+      value: 3.037601
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ddd79e402014781408c1b558cfac993d, type: 3}
---- !u!95 &5472295017949129883 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 951515000556168973, guid: ddd79e402014781408c1b558cfac993d,
-    type: 3}
-  m_PrefabInstance: {fileID: 5099493737875393430}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &8231987698118831802 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3817064270662100268, guid: ddd79e402014781408c1b558cfac993d,
+    type: 3}
+  m_PrefabInstance: {fileID: 5099493737875393430}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &5472295017949129883 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 951515000556168973, guid: ddd79e402014781408c1b558cfac993d,
     type: 3}
   m_PrefabInstance: {fileID: 5099493737875393430}
   m_PrefabAsset: {fileID: 0}
@@ -14626,12 +14810,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a677f9103067d87479868c3a0da1437a, type: 3}
---- !u!4 &2155529706762202781 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 6569890184409584545, guid: a677f9103067d87479868c3a0da1437a,
-    type: 3}
-  m_PrefabInstance: {fileID: 5099493738025319740}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &7929145700556457196 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2939995721826843088, guid: a677f9103067d87479868c3a0da1437a,
@@ -14644,6 +14822,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3089c6b75d763e8499970135d0270ab2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!4 &2155529706762202781 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6569890184409584545, guid: a677f9103067d87479868c3a0da1437a,
+    type: 3}
+  m_PrefabInstance: {fileID: 5099493738025319740}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5099493738205999098
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14713,12 +14897,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a677f9103067d87479868c3a0da1437a, type: 3}
---- !u!4 &2155529707646876763 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 6569890184409584545, guid: a677f9103067d87479868c3a0da1437a,
-    type: 3}
-  m_PrefabInstance: {fileID: 5099493738205999098}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &7929145700736095786 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2939995721826843088, guid: a677f9103067d87479868c3a0da1437a,
@@ -14731,6 +14909,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3089c6b75d763e8499970135d0270ab2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!4 &2155529707646876763 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6569890184409584545, guid: a677f9103067d87479868c3a0da1437a,
+    type: 3}
+  m_PrefabInstance: {fileID: 5099493738205999098}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5099493738343776018
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14738,6 +14922,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5099493738271917364}
     m_Modifications:
+    - target: {fileID: 4170184285864895860, guid: 41618338f091bc64eba6941bfe991773,
+        type: 3}
+      propertyPath: m_Name
+      value: Teleport out black triangle
+      objectReference: {fileID: 0}
     - target: {fileID: 6695490657660804517, guid: 41618338f091bc64eba6941bfe991773,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -14792,11 +14981,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4170184285864895860, guid: 41618338f091bc64eba6941bfe991773,
-        type: 3}
-      propertyPath: m_Name
-      value: Teleport out black triangle
       objectReference: {fileID: 0}
     - target: {fileID: 2632611939796919420, guid: 41618338f091bc64eba6941bfe991773,
         type: 3}
