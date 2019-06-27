@@ -23,7 +23,10 @@ public class TimerBehaviour : BaseBehaviour
         if (repeat)
             OnTimerEnd.AddListener(ResetTimer);
         else
+        {
             OnTimerEnd.AddListener(StopTimer);
+            print(name + " setup");
+        }
     }
 
     private void OnDisable()

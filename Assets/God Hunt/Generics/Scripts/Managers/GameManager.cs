@@ -78,7 +78,8 @@ public class GameManager : MonoBehaviour
 
         foreach (BaseEntity entity in entities)
         {
-            entity.SetUpEntity();
+            if(!entity.SetupOnStart)
+                entity.SetUpEntity();
         }
     }
 

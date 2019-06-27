@@ -4,7 +4,7 @@ using System.Linq;
 
 public abstract class BaseEntity : MonoBehaviour, IEntity
 {
-    [SerializeField] bool setupOnStart = false;
+    public bool SetupOnStart = false;
 
     /// <summary>
     /// List of IBehaviours that describe this Entity.
@@ -17,7 +17,7 @@ public abstract class BaseEntity : MonoBehaviour, IEntity
 
     private void Start()
     {
-        if (setupOnStart)
+        if (SetupOnStart)
             SetUpEntity();
 
         if (isEnabled)
