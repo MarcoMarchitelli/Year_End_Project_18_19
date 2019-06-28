@@ -252,6 +252,7 @@ public class PlayerInputBehaviour : BaseBehaviour
         isDashing = false;
         IsPressingJump = false;
         isRunning = false;
+        data.playerGameplayBehaviour.HandleSprintRelease();
 
         hasCalledChargeEvent = false;
         countTime = false;
