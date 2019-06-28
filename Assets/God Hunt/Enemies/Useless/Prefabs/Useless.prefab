@@ -94,7 +94,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1640311877}
+      - m_Target: {fileID: 8546332132612817349}
         m_MethodName: set_enabled
         m_Mode: 6
         m_Arguments:
@@ -121,7 +121,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 1640311877}
+      - m_Target: {fileID: 8546332132612817349}
         m_MethodName: set_enabled
         m_Mode: 6
         m_Arguments:
@@ -4959,8 +4959,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.60635304, y: 0.73920846, z: 1}
-  m_Center: {x: -0.00000011920929, y: 0.31737792, z: 0}
+  m_Size: {x: 0.5, y: 0.7, z: 1}
+  m_Center: {x: -0.020651609, y: 0.27378035, z: 0}
 --- !u!1 &3633661687163427949
 GameObject:
   m_ObjectHideFlags: 0
@@ -4978,7 +4978,7 @@ GameObject:
   - component: {fileID: 3633661687163427986}
   - component: {fileID: 3633661687163427991}
   - component: {fileID: 3633661687163427946}
-  - component: {fileID: 1640311877}
+  - component: {fileID: 8546332132612817349}
   m_Layer: 13
   m_Name: Useless
   m_TagString: Untagged
@@ -4994,7 +4994,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3633661687163427949}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.01, y: -0.051, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 3633661685740830374}
@@ -5250,7 +5250,7 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityVoidEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
-  _maxHealth: 3
+  _maxHealth: 2
 --- !u!65 &3633661687163427991
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5262,7 +5262,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.76873255, y: 0.7933347, z: 1}
+  m_Size: {x: 0.7, y: 0.7, z: 1}
   m_Center: {x: -0.022142768, y: 0.34444106, z: 0}
 --- !u!54 &3633661687163427946
 Rigidbody:
@@ -5280,7 +5280,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 122
   m_CollisionDetection: 0
---- !u!135 &1640311877
+--- !u!135 &8546332132612817349
 SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5292,7 +5292,7 @@ SphereCollider:
   m_Enabled: 0
   serializedVersion: 2
   m_Radius: 0.35
-  m_Center: {x: 0, y: 0.24, z: 0}
+  m_Center: {x: 0, y: 0.3, z: 0}
 --- !u!1 &3660289984401951822
 GameObject:
   m_ObjectHideFlags: 0
