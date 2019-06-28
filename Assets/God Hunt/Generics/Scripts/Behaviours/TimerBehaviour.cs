@@ -25,6 +25,7 @@ public class TimerBehaviour : BaseBehaviour
         else
         {
             OnTimerEnd.AddListener(StopTimer);
+            print(name + " setup");
         }
     }
 
