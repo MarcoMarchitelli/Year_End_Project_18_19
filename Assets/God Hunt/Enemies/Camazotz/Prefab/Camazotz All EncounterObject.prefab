@@ -4093,43 +4093,43 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnData:
-  - prefab: {fileID: 4288245258604101854, guid: 79874901f68737042882905e603122e0,
+  - prefab: {fileID: 4195761923624202286, guid: 6f5bd2e3923ee8347bab45fdbf7749b1,
       type: 3}
     spawnPoint: {fileID: 5099493737775520414}
     useSpawnRotation: 1
-  - prefab: {fileID: 4288245258604101854, guid: 79874901f68737042882905e603122e0,
+  - prefab: {fileID: 4195761923624202286, guid: 6f5bd2e3923ee8347bab45fdbf7749b1,
       type: 3}
     spawnPoint: {fileID: 5099493737036678017}
     useSpawnRotation: 1
-  - prefab: {fileID: 4288245258604101854, guid: 79874901f68737042882905e603122e0,
+  - prefab: {fileID: 4195761923624202286, guid: 6f5bd2e3923ee8347bab45fdbf7749b1,
       type: 3}
     spawnPoint: {fileID: 5099493736977733789}
     useSpawnRotation: 1
-  - prefab: {fileID: 4288245258604101854, guid: 79874901f68737042882905e603122e0,
+  - prefab: {fileID: 4195761923624202286, guid: 6f5bd2e3923ee8347bab45fdbf7749b1,
       type: 3}
     spawnPoint: {fileID: 5099493736783179478}
     useSpawnRotation: 1
-  - prefab: {fileID: 4288245258604101854, guid: 79874901f68737042882905e603122e0,
+  - prefab: {fileID: 4195761923624202286, guid: 6f5bd2e3923ee8347bab45fdbf7749b1,
       type: 3}
     spawnPoint: {fileID: 5099493738372850031}
     useSpawnRotation: 1
-  - prefab: {fileID: 4288245258604101854, guid: 79874901f68737042882905e603122e0,
+  - prefab: {fileID: 4195761923624202286, guid: 6f5bd2e3923ee8347bab45fdbf7749b1,
       type: 3}
     spawnPoint: {fileID: 5099493737272928710}
     useSpawnRotation: 1
-  - prefab: {fileID: 4288245258604101854, guid: 79874901f68737042882905e603122e0,
+  - prefab: {fileID: 4195761923624202286, guid: 6f5bd2e3923ee8347bab45fdbf7749b1,
       type: 3}
     spawnPoint: {fileID: 5099493737177172669}
     useSpawnRotation: 1
-  - prefab: {fileID: 4288245258604101854, guid: 79874901f68737042882905e603122e0,
+  - prefab: {fileID: 4195761923624202286, guid: 6f5bd2e3923ee8347bab45fdbf7749b1,
       type: 3}
     spawnPoint: {fileID: 5099493737053247510}
     useSpawnRotation: 1
-  - prefab: {fileID: 4288245258604101854, guid: 79874901f68737042882905e603122e0,
+  - prefab: {fileID: 4195761923624202286, guid: 6f5bd2e3923ee8347bab45fdbf7749b1,
       type: 3}
     spawnPoint: {fileID: 5099493736780345420}
     useSpawnRotation: 1
-  - prefab: {fileID: 4288245258604101854, guid: 79874901f68737042882905e603122e0,
+  - prefab: {fileID: 4195761923624202286, guid: 6f5bd2e3923ee8347bab45fdbf7749b1,
       type: 3}
     spawnPoint: {fileID: 5099493738587709319}
     useSpawnRotation: 1
@@ -4507,7 +4507,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8157039ad57ca2b4695223e5ecab78ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  setupOnStart: 1
+  SetupOnStart: 0
 --- !u!114 &5099493737702134244
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7081,7 +7081,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d623a2f456d0ee54dbaac393bb54b445, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  setupOnStart: 1
+  SetupOnStart: 1
   graphics: {fileID: 5099493737524705764}
 --- !u!114 &5099493738466748316
 MonoBehaviour:
@@ -11987,7 +11987,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   description: 
   time: 2
-  countOnStart: 1
+  countOnStart: 0
   repeat: 0
   OnTimerStart:
     m_PersistentCalls:
@@ -12000,6 +12000,17 @@ MonoBehaviour:
       - m_Target: {fileID: 8769012856933500255}
         m_MethodName: StartTimer
         m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 5099493738466748290}
+        m_MethodName: TeleportThisBehaviour
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -14536,16 +14547,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5099493738271917364}
     m_Modifications:
-    - target: {fileID: 3452331635393649444, guid: 7e410c7889c702a49ab38d68f9dd3407,
-        type: 3}
-      propertyPath: m_Name
-      value: Camazotz_Charge_feedback
-      objectReference: {fileID: 0}
-    - target: {fileID: 3452331635393649444, guid: 7e410c7889c702a49ab38d68f9dd3407,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7917527226517564229, guid: 7e410c7889c702a49ab38d68f9dd3407,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -14600,6 +14601,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3452331635393649444, guid: 7e410c7889c702a49ab38d68f9dd3407,
+        type: 3}
+      propertyPath: m_Name
+      value: Camazotz_Charge_feedback
+      objectReference: {fileID: 0}
+    - target: {fileID: 3452331635393649444, guid: 7e410c7889c702a49ab38d68f9dd3407,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1571083700857174190, guid: 7e410c7889c702a49ab38d68f9dd3407,
         type: 3}
@@ -14711,21 +14722,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AABB.m_Extent.z
       value: 0.00000031292439
-      objectReference: {fileID: 0}
-    - target: {fileID: 2834948868678863061, guid: ddd79e402014781408c1b558cfac993d,
-        type: 3}
-      propertyPath: m_AABB.m_Center.y
-      value: 1.640038
-      objectReference: {fileID: 0}
-    - target: {fileID: 2834948868678863061, guid: ddd79e402014781408c1b558cfac993d,
-        type: 3}
-      propertyPath: m_AABB.m_Extent.x
-      value: 2.787138
-      objectReference: {fileID: 0}
-    - target: {fileID: 2834948868678863061, guid: ddd79e402014781408c1b558cfac993d,
-        type: 3}
-      propertyPath: m_AABB.m_Extent.y
-      value: 3.037601
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ddd79e402014781408c1b558cfac993d, type: 3}
@@ -14922,11 +14918,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5099493738271917364}
     m_Modifications:
-    - target: {fileID: 4170184285864895860, guid: 41618338f091bc64eba6941bfe991773,
-        type: 3}
-      propertyPath: m_Name
-      value: Teleport out black triangle
-      objectReference: {fileID: 0}
     - target: {fileID: 6695490657660804517, guid: 41618338f091bc64eba6941bfe991773,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -14981,6 +14972,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4170184285864895860, guid: 41618338f091bc64eba6941bfe991773,
+        type: 3}
+      propertyPath: m_Name
+      value: Teleport out black triangle
       objectReference: {fileID: 0}
     - target: {fileID: 2632611939796919420, guid: 41618338f091bc64eba6941bfe991773,
         type: 3}
