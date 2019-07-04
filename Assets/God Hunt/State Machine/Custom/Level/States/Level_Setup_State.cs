@@ -14,7 +14,7 @@
             context.playerHPUI.damageReceiver = playerData.damageReceiverBehaviour;
             context.playerHPUI.Setup();
 
-            context.sceneFader.StartFade(SceneFader.State.FadedIn, 1f);
+            context.sceneFader.StartFade(SceneFader.State.FadedIn, 1f, () => context.OnStateEnd?.Invoke());
         }
     } 
 }

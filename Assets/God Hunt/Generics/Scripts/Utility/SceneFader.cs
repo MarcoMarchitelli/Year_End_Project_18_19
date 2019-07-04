@@ -17,10 +17,10 @@ public class SceneFader : MonoBehaviour
         switch (CurrentState)
         {
             case State.FadedOut:
-                FadeImage.DOColor(Color.black, _duration).onComplete += () => _callback?.Invoke();
+                FadeImage.DOColor(Color.black, _duration).SetUpdate(true).onComplete += () => _callback?.Invoke();
                 break;
             case State.FadedIn:
-                FadeImage.DOColor(Color.clear, _duration).onComplete += () => _callback?.Invoke();
+                FadeImage.DOColor(Color.clear, _duration).SetUpdate(true).onComplete += () => _callback?.Invoke();
                 break;
         }
     }
