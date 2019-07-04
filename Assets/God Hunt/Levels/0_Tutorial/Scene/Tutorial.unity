@@ -22122,12 +22122,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 469697751}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &471286638 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 854, guid: b44c7349678676347bc1e673cd602c2f,
-    type: 3}
-  m_PrefabInstance: {fileID: 2098300429}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &471960754
 GameObject:
   m_ObjectHideFlags: 0
@@ -81524,6 +81518,12 @@ PrefabInstance:
       propertyPath: m_textInfo.pageCount
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 274951910531154502, guid: 464c6f1108395ab45b9cf9013d43cd88,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 00872f5bba4d99a45b157b16cee19d2d,
+        type: 3}
     - target: {fileID: 3474417980741748760, guid: 464c6f1108395ab45b9cf9013d43cd88,
         type: 3}
       propertyPath: skillToUnlock
@@ -81539,12 +81539,6 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: -209
       objectReference: {fileID: 0}
-    - target: {fileID: 274951910531154502, guid: 464c6f1108395ab45b9cf9013d43cd88,
-        type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 00872f5bba4d99a45b157b16cee19d2d,
-        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 464c6f1108395ab45b9cf9013d43cd88, type: 3}
 --- !u!4 &1915120874 stripped
@@ -87709,12 +87703,12 @@ PrefabInstance:
     - target: {fileID: 6355674919080962671, guid: fcb1d587faf80d6459ef94c25fab82b2,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.453455
+      value: 0.08984566
       objectReference: {fileID: 0}
     - target: {fileID: 6355674919080962671, guid: fcb1d587faf80d6459ef94c25fab82b2,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -30.294071
+      value: -30.292526
       objectReference: {fileID: 0}
     - target: {fileID: 6355674919080962671, guid: fcb1d587faf80d6459ef94c25fab82b2,
         type: 3}
@@ -90302,6 +90296,12 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21635251441044690, guid: a7b25b21523e1da4aa798247f885e4e7,
         type: 2}
+    - target: {fileID: 274951910531154502, guid: 464c6f1108395ab45b9cf9013d43cd88,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 41485f94e249d8040942c7df11ea8529,
+        type: 3}
     - target: {fileID: 3474417980741748760, guid: 464c6f1108395ab45b9cf9013d43cd88,
         type: 3}
       propertyPath: skillToUnlock
@@ -90311,13 +90311,12 @@ PrefabInstance:
         type: 3}
       propertyPath: Interactions.Array.data[0].OnInteraction.m_PersistentCalls.m_Calls.Array.data[2].m_Target
       value: 
-      objectReference: {fileID: 471286638}
-    - target: {fileID: 274951910531154502, guid: 464c6f1108395ab45b9cf9013d43cd88,
+      objectReference: {fileID: 2124283858}
+    - target: {fileID: 6182049582152559258, guid: 464c6f1108395ab45b9cf9013d43cd88,
         type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 41485f94e249d8040942c7df11ea8529,
-        type: 3}
+      propertyPath: Interactions.Array.data[0].OnInteraction.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
+      value: Popup
+      objectReference: {fileID: 0}
     - target: {fileID: 6050855654189990589, guid: 464c6f1108395ab45b9cf9013d43cd88,
         type: 3}
       propertyPath: m_CullTransparentMesh
@@ -90331,6 +90330,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 2124283856}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2124283858 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4227438500466959643, guid: 464c6f1108395ab45b9cf9013d43cd88,
+    type: 3}
+  m_PrefabInstance: {fileID: 2124283856}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42cf9d2ecea75404887ad1c568a5bc23, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2130123266 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2150486906680989153, guid: 3b71d3abf5582dd4ab695f0267182148,
