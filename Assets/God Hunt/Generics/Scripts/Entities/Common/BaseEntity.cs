@@ -72,6 +72,21 @@ public abstract class BaseEntity : MonoBehaviour, IEntity
         return default(T);
     }
 
+    public List<T> GetBehaviours<T>() where T : IBehaviour
+    {
+        List<T> behavioursFound = new List<T>();
+
+        foreach (IBehaviour b in Behaviours)
+        {
+            if (b.GetType().IsAssignableFrom(typeof(T)))
+            {
+                behavioursFound.Add((T)b);
+            }
+        }
+
+        return behavioursFound;
+    }
+
     /// <summary>
     /// Behaviour's custom late update.
     /// </summary>

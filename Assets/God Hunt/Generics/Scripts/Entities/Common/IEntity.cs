@@ -31,6 +31,20 @@ public interface IEntity
     /// Entity's custom late update.
     /// </summary>
     void OnLateUpdate();
+
+    /// <summary>
+    /// Searches for the behaviour of type <typeparamref name="T"/> and returns the first one found.
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <returns></returns>
+    T GetBehaviour<T>() where T : IBehaviour;
+
+    /// <summary>
+    /// Searches for all the behaviours of type <typeparamref name="T"/> and returns a list.
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <returns></returns>
+    List<T> GetBehaviours<T>() where T : IBehaviour;
 }
 
 /// <summary>

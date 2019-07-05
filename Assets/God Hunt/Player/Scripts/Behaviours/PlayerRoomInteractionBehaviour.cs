@@ -18,6 +18,10 @@ public class PlayerRoomInteractionBehaviour : BaseBehaviour
         CameraManager.Instance.ChangeActiveCam(currentRoom.vCam);
         data.respawnBehaviour.SetCheckPoint(currentRoom.SpawnPoint.position);
         roomSystem.OnRoomEnter(currentRoom);
+        if (currentRoom.tag == "Boss")
+            data.inBossRoom = true;
+        else
+            data.inBossRoom = false;
     }
 
     private void OnTriggerEnter(Collider other)

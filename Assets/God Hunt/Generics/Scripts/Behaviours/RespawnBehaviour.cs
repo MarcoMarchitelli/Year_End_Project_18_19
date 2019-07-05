@@ -5,6 +5,7 @@ public class RespawnBehaviour : BaseBehaviour
     PlayerEntityData data;
 
     [SerializeField] UnityVoidEvent OnDeathRespawn;
+    [SerializeField] UnityVoidEvent OnBossDeathRespawn;
     [SerializeField] UnityVoidEvent OnCheckpointRespawn;
 
     Vector3 deathRespawnPoint;
@@ -33,6 +34,8 @@ public class RespawnBehaviour : BaseBehaviour
             Entity.gameObject.transform.position = deathRespawnPoint;
             data.animatorProxy.IsDead = false;
             OnDeathRespawn.Invoke();
+            if (data.inBossRoom)
+                OnBossDeathRespawn.Invoke();
         }
         else
         {

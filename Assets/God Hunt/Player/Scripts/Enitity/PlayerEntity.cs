@@ -23,6 +23,7 @@ public class PlayerEntity : BoxColliderEntity
 
 public class PlayerEntityData : BoxColliderEntityData
 {
+    public bool inBossRoom;
     public PlayerGameplayBehaviour playerGameplayBehaviour;
     public PlayerCollisionsBehaviour playerCollisionsBehaviour;
     public PlayerInputBehaviour playerInputBehaviour;
@@ -39,6 +40,7 @@ public class PlayerEntityData : BoxColliderEntityData
         BoxCollider _bc, PlayerAnimatorProxy _ap, DamageReceiverBehaviour _drb, RespawnBehaviour _rb, PlayerCameraTarget _pct, PlayerCollectablesBehaviour _pcb,
         PlayerKnockbackReceiverBehaviour _pkrb, PlayerRoomInteractionBehaviour _prib)
     {
+        inBossRoom = false;
         playerGameplayBehaviour = _p;
         playerCollisionsBehaviour = _c;
         playerInputBehaviour = _pib;
