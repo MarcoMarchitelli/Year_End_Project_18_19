@@ -68,7 +68,8 @@ public class PlayerCollisionsBehaviour : RaycastController
             VerticalCollisions(ref moveAmount);
         }
 
-        transform.Translate(moveAmount);
+        if(!float.IsNaN( moveAmount.x ) && !float.IsNaN( moveAmount.y ))
+            transform.Translate(moveAmount);
 
         if (standingOnPlatform)
         {
