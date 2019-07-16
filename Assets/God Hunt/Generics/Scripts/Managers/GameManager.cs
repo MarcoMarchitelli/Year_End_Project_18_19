@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
     private TestInputManager inputManager;
     private BaseEntity[] entities;
 
+    [HideInInspector] public bool isInOptions = false;
     bool isPaused = false;
     bool isMapOpen = false;
     bool isInInventory = false;
@@ -127,6 +128,12 @@ public class GameManager : MonoBehaviour
 
     public void TogglePause()
     {
+        if (isInOptions)
+        {
+            ToggleOptions();
+            uiManager.firstSelectedPauseButton.Select();
+            return;
+        }
         if (!isMapOpen && !isInInventory && !isInCollectablesScreen)
         {
             isPaused = !isPaused;
@@ -142,6 +149,22 @@ public class GameManager : MonoBehaviour
                 Time.timeScale = 1;
                 player.Enable(true);
                 uiManager.TogglePausePanel(false);
+            }
+        }
+    }
+
+    public void ToggleOptions()
+    {
+        if (isPaused && !isMapOpen && !isInInventory && !isInCollectablesScreen)
+        {
+            isInOptions = !isInOptions;
+            if (isInOptions)
+            {
+                uiManager.ToggleoptionsPanel(true);
+            }
+            else
+            {
+                uiManager.ToggleoptionsPanel(false);
             }
         }
     }

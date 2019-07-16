@@ -11,6 +11,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] GameObject firstSelectedObject;
     [SerializeField] GameObject controllerCommandsScheme;
     [SerializeField] GameObject keyboardCommandsScheme;
+    [Header("Options")]
+    [SerializeField] GameObject optionsPanel;
     [Header("Map")]
     [SerializeField] GameObject mapPanel;
     [Header("Inventory")]
@@ -19,9 +21,10 @@ public class UIManager : MonoBehaviour
     [Header("????")]
     [SerializeField] GameObject collectablesScreen;
 
+    Options options;
     bool controllerSchemeActive = true;
     Button _firstSelectedPauseButton;
-    Button firstSelectedPauseButton
+    public Button firstSelectedPauseButton
     {
         get
         {
@@ -40,6 +43,8 @@ public class UIManager : MonoBehaviour
 
         playerHPUI.damageReceiver = playerData.damageReceiverBehaviour;
         playerHPUI.Setup();
+
+        options = optionsPanel?.GetComponentInChildren<Options>();
 
         pausePanel.SetActive(false);
     }
@@ -69,6 +74,16 @@ public class UIManager : MonoBehaviour
             pausePanel.SetActive(_value);
             if (_value)
                 firstSelectedPauseButton.Select();
+        }
+    }
+
+    public void ToggleoptionsPanel(bool _value)
+    {
+        if (optionsPanel != null)
+        {
+            optionsPanel.SetActive(_value);
+            if (_value)
+                options.Open();
         }
     }
 

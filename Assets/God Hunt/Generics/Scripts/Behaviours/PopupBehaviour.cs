@@ -27,7 +27,10 @@ public class PopupBehaviour : BaseBehaviour
     public void Popup()
     {
         image.rectTransform.DOScale(1, animationDuration).SetEase(Ease.OutCubic);
-        text.rectTransform.DOScale(1, animationDuration).SetEase(Ease.OutCubic).onComplete += () => TimerGod.Timer(waitDuration, () => Popdown());
+        if (waitDuration <= 0)
+            text.rectTransform.DOScale(1, animationDuration).SetEase(Ease.OutCubic);
+        else
+            text.rectTransform.DOScale(1, animationDuration).SetEase(Ease.OutCubic).onComplete += () => TimerGod.Timer(waitDuration, () => Popdown());
     }
 
     public void Popdown()

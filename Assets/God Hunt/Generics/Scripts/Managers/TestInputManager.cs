@@ -59,6 +59,9 @@ public class TestInputManager : MonoBehaviour
         if (!setupped)
             return;
 
+        if(GameManager.Instance.isInOptions && Input.GetKeyDown(KeyCode.Joystick1Button1))
+            GameManager.Instance.TogglePause();
+
         if (Input.GetButtonDown(CurrentInputDevice + "Pause"))
             GameManager.Instance.TogglePause();
 
